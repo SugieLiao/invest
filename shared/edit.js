@@ -138,7 +138,7 @@
       });
 
       // 工具栏：保存到Github
-      addToolButton('__saveBtn', '☁️ 保存到Github', '#3182ce', saveToGithub);
+      addToolButton('__saveBtn', '☁️ 保存到云端', '#3182ce', saveToGithub);
 
       // 工具栏：导出HTML
       addToolButton('__exportBtn', '📥 导出HTML', '#d69e2e', exportHTML);
@@ -241,68 +241,83 @@
     }
   }
 
-  // ===== Github保存 =====
+  // ===== 云端保存（经服务端 /api/note-save 提交到 Github，token 不接触浏览器）=====
+
+  // 在 DOM 克隆体上移除编辑辅助 UI、解包图片容器，得到干净 HTML，不影响当前编辑页
+  function buildCleanHtml() {
+    const clone = document.documentElement.cloneNode(true);
+    const doc = clone.ownerDocument;
+
+    clone.querySelectorAll(
+      '#__editWrap, .text-insert-img-btn, .img-remove-btn, .img-insertafter-btn'
+    ).forEach(n => n.remove());
+
+    // 解开 .img-wrapper 包裹，把图片放回原始位置（丢弃删除/插入按钮）
+    clone.querySelectorAll('.img-wrapper').forEach(w => {
+      const frag = doc.createDocumentFragment();
+      Array.from(w.childNodes).forEach(ch => {
+        if (ch.nodeType === 1 && ch.classList &&
+            (ch.classList.contains('img-remove-btn') ||
+             ch.classList.contains('img-insertafter-btn'))) return;
+        frag.appendChild(ch);
+      });
+      w.parentNode.replaceChild(frag, w);
+    });
+
+    clone.querySelectorAll('[contenteditable]').forEach(n => {
+      n.removeAttribute('contenteditable');
+      n.style.outline = '';
+    });
+
+    return '<!DOCTYPE html>\n' + clone.outerHTML;
+  }
+
+  function currentRepoPath() {
+    let p = window.location.pathname.replace(/^\//, '').replace(/\/$/, '');
+    if (!/\.html$/.test(p)) p = p + '/index.html';
+    return p;
+  }
 
   function saveToGithub() {
-    const token = localStorage.getItem('github_token');
-    if (!token) {
-      const t = prompt('请输入你的Github Personal Access Token（需要repo权限，只会保存在你浏览器本地）：');
+    let key = localStorage.getItem('note_edit_key');
+    if (!key) {
+      const t = prompt('请输入编辑密钥 EDIT_KEY（只需输入一次，保存在本浏览器）：');
       if (!t) return;
-      localStorage.setItem('github_token', t.trim());
+      key = t.trim();
+      localStorage.setItem('note_edit_key', key);
     }
 
-    // 获取当前文件在仓库中的路径
-    let path = window.location.pathname;
-    // 去掉开头的/，去掉末尾的/（目录形式访问，对应index.html）
-    path = path.replace(/^\//, '').replace(/\/$/, '');
-    if (!path.endsWith('.html')) path = path + '/index.html';
-    if (!path) path = 'index.html';
+    const path = currentRepoPath();
+    if (!/^learn\//.test(path)) {
+      alert('当前页面不在可保存的笔记目录（learn/）内。');
+      return;
+    }
 
-    const repo = 'SugieLiao/invest';
-    const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+    const btn = document.getElementById('__saveBtn');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ 保存中…'; }
 
-    // 先获取当前文件的sha
-    fetch(apiUrl, {
-      headers: { 'Authorization': 'token ' + localStorage.getItem('github_token') }
+    fetch('/api/note-save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, path, content: buildCleanHtml() })
     })
     .then(r => r.json())
     .then(data => {
-      if (data.message && data.message !== 'Not Found') {
-        throw new Error(data.message);
-      }
-
-      // 获取当前页面HTML（去掉编辑状态）
-      document.querySelectorAll('.text-insert-img-btn, .img-remove-btn, .img-insertafter-btn').forEach(el => el.remove());
-      const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-      // 恢复编辑按钮（重新进入编辑模式）
-      const content = btoa(unescape(encodeURIComponent(html)));
-
-      const body = {
-        message: '更新笔记: ' + path,
-        content: content,
-        branch: 'main'
-      };
-      if (data.sha) body.sha = data.sha;
-
-      return fetch(apiUrl, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + localStorage.getItem('github_token'),
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      });
-    })
-    .then(r => r.json())
-    .then(data => {
-      if (data.commit) {
-        alert('已保存到Github！提交: ' + data.commit.sha.substring(0, 7) + '\nCloudflare Pages会自动部署，稍等1-2分钟线上即更新。');
+      if (data.unchanged) {
+        alert('内容没有变化，无需保存。');
+      } else if (data.ok) {
+        let msg = '已保存到云端！提交版本：' + data.commit;
+        if (data.images) msg += '\n新上传图片：' + data.images + ' 张';
+        msg += '\n内容已写入 Github 仓库，线上将在自动部署后更新（约 1-2 分钟）。';
+        alert(msg);
       } else {
-        throw new Error(data.message || '保存失败');
+        if (data.error === '编辑密钥错误') localStorage.removeItem('note_edit_key');
+        throw new Error(data.error || '保存失败');
       }
     })
-    .catch(err => {
-      alert('保存失败: ' + err.message + '\n请检查token是否正确、是否有repo权限。');
+    .catch(err => alert('保存失败：' + err.message))
+    .finally(() => {
+      if (btn) { btn.disabled = false; btn.textContent = '☁️ 保存到云端'; }
     });
   }
 

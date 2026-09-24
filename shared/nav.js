@@ -39,7 +39,8 @@
           match: ["/learn/macro"],
           children: [
             { label: "小邓老师", href: "/learn/macro/xiaodeng/", match: ["/learn/macro/xiaodeng"] },
-            { label: "陈鹏老师", href: "/learn/macro/chenpeng/", match: ["/learn/macro/chenpeng"] }
+            { label: "陈鹏老师", href: "/learn/macro/chenpeng/", match: ["/learn/macro/chenpeng"] },
+            { label: "陈晓丹", href: "/learn/macro/chenxiaodan/", match: ["/learn/macro/chenxiaodan"] }
           ]
         },
         {

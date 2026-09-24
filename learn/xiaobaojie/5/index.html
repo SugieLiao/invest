@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>250713货币政策第5期：政策利率的构成、传导与利率走廊</title>
+<script src="/shared/nav.js?v=20260924b" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header .meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.header .intro {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.toc {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.toc h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2329;
+}
+.toc ol {
+  padding-left: 20px;
+}
+.toc li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.toc a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2329;
+  border-left: 4px solid #2b6cb0;
+  padding-left: 12px;
+}
+.section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #2d3748;
+}
+.section p {
+  margin-bottom: 12px;
+  color: #374151;
+  font-size: 15px;
+}
+.section ul, .section ol {
+  margin: 12px 0 12px 24px;
+}
+.section li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 15px;
+}
+.highlight {
+  background: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+}
+.highlight p {
+  color: #744210;
+  margin-bottom: 0;
+}
+.key-point {
+  background: #eef4fb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.key-point p {
+  color: #2b4c7e;
+  margin-bottom: 0;
+}
+.slide-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>250713货币政策第5期：政策利率的构成、传导与利率走廊</h1>
+    <div class="meta">小爆姐宏观框架课 · 第5期 · 利率（2）</div>
+    <p class="intro">
+      本节课正式深入利率体系的核心——政策利率。系统拆解政策利率在贷款端与存款端的构成，
+      聚焦于最重要的核心——七天逆回购利率。详细阐述政策利率如何通过"无风险套利"机制传导至国债收益率，
+      并进一步影响到股票、保险、汇率等大类资产。最后引入"利率走廊"这一宏观审慎框架，
+      理解央行如何为市场利率设定"天花板"与"地板"。
+    </p>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">利率的上下游分类</a></li>
+      <li><a href="#ch2">政策利率的核心构成</a></li>
+      <li><a href="#ch3">七天逆回购利率：市场利率之锚</a></li>
+      <li><a href="#ch4">对国债收益率的传导机制</a></li>
+      <li><a href="#ch5">国债收益率对股票估值的影响</a></li>
+      <li><a href="#ch6">国债收益率对保险预定利率的影响</a></li>
+      <li><a href="#ch7">国债收益率对汇率的影响</a></li>
+      <li><a href="#ch8">利率走廊：市场利率的"护栏"</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section" id="ch1">
+    <h2>一、利率的上下游分类</h2>
+    <img src="assets/slides/slide_03.jpg" alt="利率的上下游分类" class="slide-img">
+
+    <h3>1.1 利率上游（政策利率）</h3>
+    <p>央行提供给金融机构的存贷款利率。它不直接面向居民和企业，是所有利率的源头。</p>
+
+    <h3>1.2 利率下游（市场利率）</h3>
+    <p>除政策利率外的一切利率。主要包括：</p>
+    <ul>
+      <li>货币市场利率（如银行间利率）</li>
+      <li>债券市场利率</li>
+      <li>贷款市场报价利率（LPR）</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>实践运用</strong>：资产价格变化的根源来自于政策利率的调整。作为投资者，我们的分析必须聚焦于上游的政策利率，而非下游的银行利率。银行降不降息，它自己说了不算，必须听从上游客政策利率的指导。</p>
+    </div>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section" id="ch2">
+    <h2>二、政策利率的核心构成</h2>
+    <img src="assets/slides/slide_06.jpg" alt="政策利率的构成" class="slide-img">
+
+    <h3>2.1 贷款端（央行借钱给银行）</h3>
+    <ol>
+      <li><strong>央行质押式逆回购</strong>：核心中的核心，是市场利率的锚</li>
+      <li><strong>常备借贷便利（SLF，俗称"酸辣粉"）</strong>：利率走廊的上限，最后的流动性"防火墙"</li>
+    </ol>
+
+    <h3>2.2 存款端（银行存钱在央行）</h3>
+    <ol>
+      <li><strong>法定存款准备金利率</strong>：为银行必须强制缴纳的准备金支付的利息</li>
+      <li><strong>超额存款准备金利率</strong>：为银行自愿多存的准备金支付的利息，构成利率走廊的下限</li>
+    </ol>
+
+    <div class="key-point">
+      <p><strong>实践运用</strong>：央行通过调控这几个关键利率，构建起一个完整的利率调控框架，从而引导整个市场的资金成本和流向。</p>
+    </div>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section" id="ch3">
+    <h2>三、七天逆回购利率：市场利率之锚</h2>
+    <img src="assets/slides/slide_08.jpg" alt="七天逆回购利率" class="slide-img">
+
+    <h3>3.1 定义</h3>
+    <p>央行借钱给大型银行等一级交易商的、为期七天的贷款利率。它是最主要的政策利率，占据了95%以上的主导地位，是市场利率之锚。</p>
+
+    <h3>3.2 直接决定的三件事</h3>
+    <div class="key-point">
+      <p>1. 短期国债的收益率</p>
+      <p>2. 银行给居民和企业的存款利率上限</p>
+      <p>3. 银行给居民和企业的贷款利率下限</p>
+    </div>
+
+    <div class="highlight">
+      <p><strong>实践运用</strong>：其他期限的逆回购（如隔夜、14天）多为流动性管理工具，用于跨节、跨季的短期"补丁"，与资产价格趋势无关，投资者无需过度关注。</p>
+    </div>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section" id="ch4">
+    <h2>四、对国债收益率的传导机制</h2>
+    <img src="assets/slides/slide_10.jpg" alt="传导机制" class="slide-img">
+
+    <h3>4.1 核心逻辑：无风险套利</h3>
+    <ul>
+      <li><strong>情景</strong>：当短期国债收益率 > 七天逆回购利率时</li>
+      <li><strong>操作</strong>：金融机构会通过逆回购从央行借入低成本资金，然后去市场上购买高收益的短期国债</li>
+      <li><strong>结果</strong>：购买国债的资金增多，导致国债价格上涨，收益率随之下跌</li>
+      <li><strong>终局</strong>：套利行为会持续，直到国债收益率 ≈ 七天逆回购利率时停止</li>
+    </ul>
+
+    <h3>4.2 传导至长期</h3>
+    <p>短期国债收益率的下降，会引导资金去追逐中长期国债，从而拉低中长期国债的收益率，最终影响整个国债收益率曲线。</p>
+
+    <div class="highlight">
+      <p><strong>实践运用</strong>：这是政策利率影响资产价格的第一环，也是最关键的一环。它无可辩驳地证明了，七天逆回购利率是债券资产价格变化的根本驱动力。做债券投资，必须紧盯此项指标。</p>
+    </div>
+  </div>
+
+  <!-- 第5章 -->
+  <div class="section" id="ch5">
+    <h2>五、国债收益率对股票估值的影响</h2>
+    <img src="assets/slides/slide_13.jpg" alt="对股票估值的影响" class="slide-img">
+
+    <h3>5.1 折现率效应（反向关系）</h3>
+    <p>国债收益率是股票估值模型中的核心折现率。收益率越低，未来现金流折现后的价值就越高，估值越高。</p>
+
+    <h3>5.2 比价效应</h3>
+    <p>国债收益率（无风险收益）越低，股票作为风险资产的相对吸引力就越强。</p>
+
+    <h3>5.3 企业成本效应</h3>
+    <p>国债收益率走高会推高企业借贷成本，拉低企业利润和业绩，拖累股票表现。</p>
+
+    <div class="key-point">
+      <p><strong>核心结论</strong>：国债收益率与股票估值呈反向关系——收益率下行，股票估值上行；收益率上行，股票估值承压。</p>
+    </div>
+  </div>
+
+  <!-- 第6章 -->
+  <div class="section" id="ch6">
+    <h2>六、国债收益率对保险预定利率的影响</h2>
+    <img src="assets/slides/slide_13.jpg" alt="对保险预定利率的影响" class="slide-img">
+
+    <h3>6.1 监管挂钩机制</h3>
+    <p>监管要求保险产品的预定利率必须挂钩十年期国债收益率等指标。因为保险资金的主要配置方向是国债等固收类资产，国债收益率下行，保险产品的新单收益率也必然下行。</p>
+
+    <h3>6.2 利差损风险</h3>
+    <p>近年保险预定利率持续下调，核心是监管为防控利差损风险。新规要求寿险预定利率按季度挂钩10年期国债收益率、5年期LPR、5年期定存加权计算调整。</p>
+
+    <div class="highlight">
+      <p><strong>核心结论</strong>：政策利率可传导影响三项指标（国债收益率、LPR、定存利率），进而联动保险预定利率。</p>
+    </div>
+  </div>
+
+  <!-- 第7章 -->
+  <div class="section" id="ch7">
+    <h2>七、国债收益率对汇率的影响</h2>
+    <img src="assets/slides/slide_13.jpg" alt="对汇率的影响" class="slide-img">
+
+    <h3>7.1 核心逻辑：利差套利</h3>
+    <ul>
+      <li>当本国国债收益率 > 外国国债收益率时，海外资金会流入购买本国国债，本币升值</li>
+      <li>反之，利差收窄或倒挂，资金会流出，本币贬值</li>
+    </ul>
+
+    <h3>7.2 实践意义</h3>
+    <p>国债收益率可看作人民币的温度计与指挥棒。这也解释了我国降息幅度偏谨慎的核心原因——出于稳汇率考量，降息是综合多要素权衡的技术活。</p>
+
+    <div class="key-point">
+      <p><strong>实践运用</strong>：国债收益率是串联起各大类资产的"中心枢纽"。理解了它与股票、保险、汇率之间的传导关系，就建立起了宏观大类资产配置的底层逻辑框架。</p>
+    </div>
+  </div>
+
+  <!-- 第8章 -->
+  <div class="section" id="ch8">
+    <h2>八、利率走廊：市场利率的"护栏"</h2>
+    <img src="assets/slides/slide_20.jpg" alt="利率走廊" class="slide-img">
+
+    <h3>8.1 背景</h3>
+    <p>七天逆回购作为"锚"，在非工作日或央行预判失误时可能"失灵"，导致银行间市场利率大幅波动。</p>
+
+    <h3>8.2 定义</h3>
+    <p>利率走廊是央行设定的一个范围，用于将银行间市场利率的波动约束在可控区间内。</p>
+
+    <h3>8.3 三大构成</h3>
+    <div class="key-point">
+      <p><strong>天花板（上限）</strong>：常备借贷便利（SLF）利率。当市场利率过高时，银行可以按此利率向央行借钱，从而为利率设定了上限。</p>
+      <p><strong>地板（下限）</strong>：超额存款准备金利率。当市场利率过低时，银行可以按此利率将多余资金存入央行，从而为利率托底。</p>
+      <p><strong>中枢（锚）</strong>：七天逆回购利率。</p>
+    </div>
+
+    <div class="highlight">
+      <p><strong>实践运用</strong>：利率走廊是一个宏观审慎管理工具，其存在本身就向市场传递了"利率不会失控"的稳定预期。通过"上限"和"下限"的管理，央行确保了银行间市场的利率能够紧密围绕政策利率"中枢"运行，从而保障了整个金融体系的稳定。</p>
+    </div>
+  </div>
+
+  <!-- 课程总结 -->
+  <div class="section">
+    <h2>课程总结</h2>
+    <p>本节课系统拆解了政策利率的构成与传导机制。我们确立了<strong>政策利率是市场利率的上游</strong>，而<strong>七天逆回购利率</strong>是上游中最重要的"锚"。</p>
+    <p>其核心传导路径为：通过<strong>无风险套利机制</strong>，七天逆回购利率直接决定了<strong>国债收益率</strong>，而国债收益率作为无风险利率的代表，又进一步传导影响到<strong>股票的估值、保险的定价和人民币的汇率</strong>。</p>
+    <p>最后，我们理解了由<strong>SLF利率（上限）</strong>和<strong>超额存款准备金利率（下限）</strong>构成的利率走廊，是央行约束市场利率波动的宏观管理框架。</p>
+    <p>掌握这套从源头到传导再到管控的完整逻辑，是理解一切资产价格波动的基石。</p>
+  </div>
+
+  <!-- 知识卡片（专业版） -->
+  <div class="section">
+    <h2>知识卡片（专业版）</h2>
+    <p>以下为课程配套的专业版知识卡片，汇总了本期核心知识点的完整框架。</p>
+    <img src="assets/knowledge-card-pro.png" alt="知识卡片专业版" class="slide-img" style="max-width: 100%; height: auto;">
+  </div>
+
+  <div class="footer">
+    小爆姐宏观框架课 · 第5期 · 内部学习资料
+  </div>
+</div>
+</body>
+</html>

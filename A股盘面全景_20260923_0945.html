@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盘面全景 9月23日（周三）：缩量分化、存储独强、传媒回吐</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #2c3e50; line-height: 1.7; padding: 24px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+  .banner { background: #fff8e6; border-left: 4px solid #e6a700; padding: 10px 14px; font-size: 13px; border-radius: 4px; margin-bottom: 20px; }
+  .tldr { background: #ffffff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .tldr h2 { font-size: 17px; margin-bottom: 10px; color: #1a5276; }
+  .tldr p { font-size: 14px; margin-bottom: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 12px; color: #7f8c8d; }
+  .kpi .val { font-size: 22px; font-weight: 700; margin-top: 2px; }
+  .kpi .note { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+  .kpi-split { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .kpi-split .half { padding: 12px 16px; }
+  .kpi-split .half + .half { border-top: 1px dashed #e3e6ea; background: #f8fbfd; }
+  .kpi-split .val { font-size: 20px; }
+  .kpi .val.est { color: #1a5276; }
+  .up { color: #c0392b; } .down { color: #1e8449; } .flat { color: #2c3e50; }
+  section { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  section h2 { font-size: 17px; margin-bottom: 12px; color: #1a5276; border-bottom: 1px solid #eef1f4; padding-bottom: 8px; }
+  section p { font-size: 14px; margin-bottom: 8px; }
+  .chart { width: 100%; height: 360px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th { background: #f0f3f6; text-align: left; padding: 8px 10px; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f4; }
+  .toggle-btn { background: #eef3f8; border: 1px solid #cfd8e3; border-radius: 4px; padding: 4px 14px; font-size: 12px; cursor: pointer; margin-bottom: 8px; }
+  .toggle-btn:hover { background: #dde7f0; }
+  .src { font-size: 11px; color: #95a5a6; margin-top: 10px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 10px 0; }
+  .chain .node { background: #f4f8fb; border: 1px solid #c9dbe8; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 200px; font-size: 13px; }
+  .chain .node b { color: #1a5276; display: block; margin-bottom: 4px; }
+  .chain .arrow { align-self: center; color: #7f8c8d; font-size: 18px; }
+  ul { padding-left: 20px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  .tag { display: inline-block; background: #fdecea; color: #c0392b; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .topnav { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; display: flex; gap: 8px; align-items: center; font-size: 14px; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .topnav .brand { font-weight: 700; color: #1a5276; text-decoration: none; margin-right: 12px; }
+  .topnav .grp { color: #95a5a6; font-size: 12px; margin-right: 4px; }
+  .topnav a { color: #2c3e50; text-decoration: none; padding: 3px 10px; border-radius: 5px; }
+  .topnav a:hover { background: #eef3f8; }
+  .topnav a.cur { background: #1a5276; color: #fff; }
+  .risk { background: #fdf3f3; border-left: 4px solid #c0392b; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+  .foot { font-size: 12px; color: #7f8c8d; border-top: 1px solid #e3e6ea; padding-top: 14px; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="brand cur" href="/a-overview/">A股盘中全景</a>
+    <span class="grp">A股复盘：</span>
+    <a href="/stock-a/">收盘版</a>
+    <a href="/stock-a/noon/">午间版</a>
+  </nav>
+  <h1>盘面全景 9月23日（周三）：缩量分化、存储独强、传媒回吐</h1>
+  <div class="sub">2026年9月23日（周三）· 盘面总结（开盘定调，数据截至 09:45 前后）</div>
+
+  <div class="banner">⚠️ 口径提示：本文为<strong>开盘盘中口径</strong>（行情与资金数据截至约 09:50，开盘后约 20 分钟），全部为盘中实时快照，后续走势存在较大变数，收盘结论以交易所最终披露为准。</div>
+
+  <div class="tldr">
+    <h2>30秒结论</h2>
+    <p><strong>分化开盘、快速回落、明显缩量</strong>：沪指平开微低开（-0.02%），深成指（+0.14%）、创业板指（+0.37%）、科创50（+0.40%）高开，但开盘后 20 分钟内主要指数集体回落翻绿，仅<span class="tag">科创50</span>凭存储/半导体逆势守住 +0.62%。个股普跌（跌 3384 家 vs 涨 1983 家，上涨占比仅 35%），情绪偏弱。</p>
+    <p><strong>结构上「高低切换」剧烈</strong>：昨日涨停潮的<span class="tag">传媒/AI应用</span>遭获利回吐（传媒 -2.14% 居申万跌幅第一、主力净流出 16.36 亿），资金回流<span class="tag">存储/半导体硬件</span>（电子主力净流入 21.02 亿居全行业第一、存储器概念净流入 23.46 亿）与<span class="tag">地产链</span>（房地产 +2.04% 居涨幅第一）。<strong>量能是最大隐患：开盘 20 分钟两市约 4743 亿，较昨日同期缩量约 1300 亿，预估全天成交约 1.85 万亿（区间 1.7~2.0 万亿）</strong>，对比昨日 2.15 万亿属明显缩量。中秋国庆双节临近（节前兑现压力大）＋中美元首会晤今日开启，日内博弈性上升。</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">上证指数（09:50）</div><div class="val down">3943.76<br>-0.21%</div><div class="note">低开 0.02% 后震荡走弱</div></div>
+    <div class="kpi"><div class="label">创业板指（09:50）</div><div class="val down">3394.27<br>-0.17%</div><div class="note">高开 0.37% 后回落翻绿</div></div>
+    <div class="kpi kpi-split">
+      <div class="half"><div class="label">两市成交额（截至当前时点）</div><div class="val flat">约4743亿</div><div class="note">较昨日同期缩量约 1300 亿</div></div>
+      <div class="half"><div class="label">预估全天成交额</div><div class="val est">≈1.85万亿</div><div class="note">区间 1.7~2.0 万亿 · 按昨日同期节奏外推（昨日全天 2.15 万亿）</div></div>
+    </div>
+    <div class="kpi"><div class="label">涨跌家数</div><div class="val up">1983 涨</div><div class="val down">3384 跌</div><div class="note">上涨占比约 35%，普跌格局</div></div>
+    <div class="kpi"><div class="label">涨停 / 跌停</div><div class="val"><span class="up">27 家</span> / <span class="down">6 家</span></div><div class="note">跌停含高位电力股闽东电力</div></div>
+  </div>
+
+  <section>
+    <h2>一、开盘定调：涨跌互现的开局，20 分钟内集体翻绿</h2>
+    <button class="toggle-btn" onclick="toggleView('idx')">图 / 表切换</button>
+    <div id="idx-chart" class="chart"></div>
+    <div id="idx-table" style="display:none;">
+      <table>
+        <tr><th>指数</th><th>代码</th><th>最新点位（09:50）</th><th>涨跌幅</th><th>开盘表现</th></tr>
+        <tr><td>上证指数</td><td>000001.SH</td><td>3943.76</td><td class="down">-0.21%</td><td class="down">低开 -0.02%（3951.37）</td></tr>
+        <tr><td>深证成指</td><td>399001.SZ</td><td>13699.34</td><td class="down">-0.18%</td><td class="up">高开 +0.14%（13742.55）</td></tr>
+        <tr><td>创业板指</td><td>399006.SZ</td><td>3394.27</td><td class="down">-0.17%</td><td class="up">高开 +0.37%（3412.53）</td></tr>
+        <tr><td>科创50</td><td>000688.SH</td><td>1675.29</td><td class="up">+0.62%</td><td class="up">高开 +0.40%（1671.77）</td></tr>
+        <tr><td>沪深300</td><td>000300.SH</td><td>4536.86</td><td class="down">-0.17%</td><td class="up">高开 +0.07%（4547.61）</td></tr>
+        <tr><td>中证500</td><td>000905.SH</td><td>7821.34</td><td class="down">-0.10%</td><td>—</td></tr>
+        <tr><td>中证1000</td><td>000852.SH</td><td>7751.30</td><td class="down">-0.10%</td><td>—</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>开盘定调判读</strong>：① <strong>开盘类型：分化开盘</strong>——沪指平开微低开（-0.02%），成长端（创业板 +0.37%、科创50 +0.40%）明显高开，隔夜纳指创新高、费城半导体大涨 2%+ 的映射集中体现在双创与半导体；② <strong>承接质量差</strong>——开盘后 20 分钟内除科创50 外全部翻绿，沪指全天高点即开盘价附近（3951.52），呈「高开低走、低开走弱」的统一弱势形态，昨日放量滞涨（2.15 万亿、指数平收）后的兑现压力在今晨直接兑现；③ <strong>科创50 独强 +0.62%</strong>（最高 +0.71%），存储/半导体是盘中唯一清晰的方向性力量。昨日沪指收 3952.13（+0.06%），上方压力 3958（9/9 高点）/3996，下方支撑 3910（MA5）/3880。</p>
+    <div class="src">数据来源：NeoData 统一行情（2026-09-23 09:50:08）、westock-data（09:49）、上海证券报/中新经纬/第一财经开盘播报（开盘口径，09:29–09:34）</div>
+  </section>
+
+  <section>
+    <h2>二、量能与涨跌分布：缩量开局 + 个股普跌</h2>
+    <div id="dist-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>量能</strong>：截至 09:50 沪深两市合计成交约 4743 亿（沪 2217 亿 + 深 2526 亿），较昨日同一时点<strong>缩量约 1300 亿</strong>（NeoData 两次快照分别 -1259 亿 / -1396 亿）。昨日全天 2.15 万亿已是放量滞涨，今晨开盘承接明显不足，节前资金离场观望特征清晰。按「昨日同期差额 + 剩余时段按昨日节奏」外推，预估全天约 2.0 万亿；按「开盘占比」外推约 1.66 万亿，综合判断<strong>全天约 1.7~2.0 万亿、中值约 1.85 万亿</strong>，较昨日缩量 1500~4500 亿。</p>
+    <p><strong>涨跌分布</strong>：涨 1983 家（涨停 27）/ 跌 3384 家（跌停 6）/ 平 201 家，上涨占比仅 35%。下跌侧集中在 -2%~0% 区间（2696 家），跌超 5% 的仅 100 家左右——<strong>指数微跌 + 个股普跌的阴跌结构，赚钱效应明显收敛</strong>。跌停股含高位电力股闽东电力（-10.00%）与次新股 C 中塑（-21.48%），高位股与次新的兑现压力突出。新股凯达重工（N凯达）北交所首日开盘大涨 580.75%（年内最低发行价 4.26 元），纯情绪博弈。开盘瞬间口径（Wind，09:30）为涨 1879 / 跌 2617，20 分钟内跌家数继续扩大，说明抛压在盘中延续而非仅竞价兑现。</p>
+    <div class="src">数据来源：NeoData 大盘市场宽度统计（2026-09-23 09:50:00 / 09:50:09 两次快照）、搜狐财经援引 Wind（开盘口径）</div>
+  </section>
+
+  <section>
+    <h2>三、热点板块：存储/半导体独强、地产脉冲、传媒退潮</h2>
+    <button class="toggle-btn" onclick="toggleView('sec')">图 / 表切换</button>
+    <div id="sec-chart" class="chart"></div>
+    <div id="sec-table" style="display:none;">
+      <table>
+        <tr><th>申万一级行业</th><th>涨跌幅（09:50）</th><th>主力资金净流入</th></tr>
+        <tr><td>房地产</td><td class="up">+2.04%</td><td class="up">+6.25 亿</td></tr>
+        <tr><td>电子</td><td class="up">+0.98%</td><td class="up">+21.02 亿（第一）</td></tr>
+        <tr><td>建筑材料</td><td class="up">+0.30%</td><td class="up">+2.14 亿</td></tr>
+        <tr><td>食品饮料</td><td class="up">+0.29%</td><td class="up">+2.32 亿</td></tr>
+        <tr><td>医药生物</td><td class="up">+0.11%</td><td class="down">-8.66 亿</td></tr>
+        <tr><td>石油石化</td><td class="down">-0.87%</td><td class="down">-1.79 亿</td></tr>
+        <tr><td>商贸零售</td><td class="down">-0.93%</td><td class="down">-1.51 亿</td></tr>
+        <tr><td>煤炭</td><td class="down">-1.07%</td><td class="down">-1.72 亿</td></tr>
+        <tr><td>国防军工</td><td class="down">-1.19%</td><td class="down">-4.71 亿</td></tr>
+        <tr><td>计算机</td><td class="down">-1.22%</td><td class="down">-21.80 亿（流出第一）</td></tr>
+        <tr><td>农林牧渔</td><td class="down">-1.35%</td><td class="down">-2.85 亿</td></tr>
+        <tr><td>传媒</td><td class="down">-2.14%</td><td class="down">-16.36 亿</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>概念层面</strong>：领涨——黄酒 +5.46%（古越龙山 +10.01%）、玻璃基板封装 +3.28%（沃格光电 +10.00%，催化：京东方宣布未来五年研发投入超 800 亿、锁定玻璃基封装载板量产线）、昨日连板 +2.84%（梯队仍在晋级）、太空光伏 +2.60%（帝尔激光 +9.66%）、富勒烯 +2.03%、CPU 概念 +1.75%、租售同权 +1.69%（世联行 +10.00%）。领跌——影视动漫制作 -3.00%（中视传媒 -7.19%）、影视院线 -2.88%、数字媒体 -2.70%、焦炭 -2.00%（云煤能源 -5.04%）、旅游 -0.83%。</p>
+    <p><strong>个股动态</strong>：万科A +7.87%（地产政策线）、哈药股份 +6.83%、江淮汽车 +7.65%、华瓷股份 6 连板涨停（+10.01%）、中石科技 +10.52%、富信科技 +11.39%；权重端宁德时代 -1.28%、中国长城 -1.95%（昨日一字板今日分歧）、蓝色光标 -3.35%、寒武纪 -0.36%。半导体中军长鑫科技 +2.97%、澜起科技 +3.19%、京东方A +2.67%、兆易创新 +1.14%。</p>
+    <div class="src">数据来源：NeoData / 东方财富行情指标（申万行业与概念涨跌、主力资金，2026-09-23 09:50 前后）；中新经纬、金融界开盘播报</div>
+  </section>
+
+  <section>
+    <h2>四、资金行为：TMT 高位获利了结 → 电子/地产低位承接</h2>
+    <div id="flow-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>方向上的「日内反转」</strong>：昨日全天主力净流入第一的计算机（+34.36 亿）与传媒（约 +30 亿）今晨双双转为净流出前二（计算机 -21.80 亿、传媒 -16.36 亿），通信 -20.32 亿紧随；而净流入前三为电子（+21.02 亿）、房地产（+6.25 亿）、食品饮料（+2.32 亿）。<strong>资金从前日强势的 AI 应用/软件侧获利了结，切回半导体硬件与地产政策线</strong>——高低切换从昨日盘中的「隔日」提档为「日内」。</p>
+    <p><strong>概念资金印证</strong>：净流入居前的是存储器 +23.46 亿、OLED +16.47 亿、先进封装 Chiplet +16.32 亿、玻璃基板封装 +15.69 亿、触摸屏 +15.54 亿、MicroLED +13.79 亿、半导体产业 +11.07 亿——<strong>电子板块内部资金高度聚焦「存储 + 先进封装 + 面板/玻璃基板」</strong>，与隔夜美股存储大涨（美光 +5%、闪迪 +6.82%、SK 海力士 +3.45%）及京东方、佰维存储的产业公告形成闭环。流出端高价股概念 -12.25 亿，高位股兑现仍在继续。注：主力资金按大中小单拆分属统计推断，参考意义有限。</p>
+    <div class="src">数据来源：NeoData / 东方财富行情指标（板块主力资金，2026-09-23 09:50 前后）；财联社「昨日行情回顾」为昨日收盘口径</div>
+  </section>
+
+  <section>
+    <h2>五、消息面归因：什么在驱动今晨的盘面</h2>
+    <div class="chain">
+      <div class="node"><b>催化① 海外存储/半导体映射（盘中最强方向）</b>隔夜纳指 +0.45% 再创新高、费城半导体指数涨超 2%，存储股大涨：美光 +5%、闪迪 +6.82%、SK 海力士 +3.45%；苹果市值盘中破 5 万亿美元；Omdia 数据 2026Q2 全球半导体营收 4250 亿美元创新高 → <strong>科创50 独强、电子主力净流入 21 亿居首、存储器概念净流入第一</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>催化② 国土空间规划新政（地产脉冲）</b>9 月 22 日国新办发布会：自然资源部将出台支持城市更新和产业发展的规划新政，「时空经济」概念发酵；叠加住建部「十五五」城市更新表述、9 月上半月一线城市新房成交同比 +20% → <strong>房地产 +2.04% 居申万涨幅第一、万科A +7.87%、租售同权/房地产开发概念走强</strong></div>
+    </div>
+    <div class="chain">
+      <div class="node"><b>催化③ 产业公告密集（硬件线续力）</b>京东方：未来五年研发投入超 800 亿、采购支出超 8000 亿，锁定玻璃基钙钛矿与玻璃基封装载板两条量产线 → 玻璃基板封装概念 +3.28%；佰维存储拟 45 亿投建晶圆级先进封测三期；粤芯半导体定价 12.01 元/股（9/24 申购）；阿里真武 V900 + 海光 CPU 1000 发布 → <strong>半导体设备/材料、先进封装概念全线上涨</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>压制① 昨日放量滞涨 + 节前效应</b>昨日 2.15 万亿成交但指数平收、超 3000 股下跌，高位承接乏力信号明确；今日为中秋国庆双节前倒数第二个交易日（9/25–27 休市），三季度末机构考核 + 跨长假风险溢价 → <strong>开盘缩量约 1300 亿、高位股/次新股兑现（闽东电力跌停、C中塑 -21%）</strong></div>
+    </div>
+    <div class="chain">
+      <div class="node"><b>压制② 传媒/AI 应用分歧</b>出版业「十五五」规划（9/21 印发）昨日掀起传媒涨停潮（+3.15%、8 股涨停），今日高标内蒙新华（5 板）低开 -4.9%，板块 -2.14% 居跌幅第一 → <strong>典型的「利好兑现 + 涨停潮次日分歧」，AI 应用端 Meta Muse 海外映射未能对冲获利回吐</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>事件③ 中美元首会晤开启</b>习主席 9/23–25 对美国进行国事访问（今日正式开启）；隔夜 AI 模型价格战（Anthropic Claude Opus 5.5 成本降 40%、OpenAI GPT-6 Sol/Luna 再降 50%）；国际油价大跌 2.73%（美伊缓和）→ <strong>消息面多空交织：油价下跌压制石油石化/煤炭，会晤预期支撑整体风险偏好不至失控</strong></div>
+    </div>
+    <ul>
+      <li>央行公开市场今日开展 80 亿元 7 天期逆回购（利率 1.40%），当日 1100 亿元逆回购到期，单日净回笼 1020 亿，资金面中性偏收敛；</li>
+      <li>两融：昨日两市融资余额 +34.22 亿至 26178.69 亿，杠杆情绪温和；</li>
+      <li>人民币对美元中间价 6.7468，调贬 9 个基点；</li>
+      <li>机构观点：中银证券「短期震荡筑底、四季度有望反弹」；光大证券「节前震荡轮动的结构性行情或难改」——与盘面缩量分化互为印证。</li>
+    </ul>
+    <div class="src">来源：腾讯新闻/陆家嘴财经早餐（2026-09-23）、东方财富【今日投资机会】、财联社昨日行情回顾、上海证券报、每日经济新闻、同花顺投顾早参；媒体类为非一手来源，规划全文以官方发布为准</div>
+  </section>
+
+  <section>
+    <h2>六、开盘定调研判：缩量分歧日，主线候选「存储硬件」，谨慎追高</h2>
+    <p><strong>当日定性</strong>：这是一个<strong>「缩量 + 普跌 + 结构高低切」的分歧市</strong>，而非趋势性下跌——指数跌幅均不到 0.25%，跌停仅 6 家，真正的信息在结构里：昨日最强（传媒/AI 应用）今晨最弱，昨日滞涨的半导体硬件/地产今晨最强。<strong>节前倒数第二个交易日 + 会晤窗口，缩量分歧是基准情形</strong>。</p>
+    <p><strong>主线预判</strong>：</p>
+    <ul>
+      <li><strong>真主线候选——存储/半导体硬件链</strong>：海外存储大涨 + 京东方/佰维/粤芯产业公告 + 概念资金净流入第一（存储器 +23.5 亿）三重共振，且板块位置经过上周调整后不算极端，是今晨唯一「方向清晰 + 资金验证」的方向；持续性看午后续量与龙头（长鑫科技、澜起科技、兆易创新）能否守住分时均线；</li>
+      <li><strong>政策脉冲——地产链</strong>：「时空经济」城市更新叙事 + 成交数据边际改善，万科A 大涨但板块历史套利盘沉重，暂按博弈性反弹对待，不追高；</li>
+      <li><strong>分歧退潮——传媒/AI 应用</strong>：昨日涨停潮今日高标低开，属利好兑现的正常节奏；若午后再无承接则短线退潮确认，等待缩量回踩后的二波机会；</li>
+      <li><strong>纯脉冲题材</strong>：黄酒、太空光伏、富勒烯、金刚石等为一日游概率高，不参与。</li>
+    </ul>
+    <p><strong>当日后续观察清单</strong>：</p>
+    <ul>
+      <li>① <strong>量能</strong>：全天成交落在 1.7~2.0 万亿哪个位置——若跌破 1.7 万亿，节前存量博弈、指数区间震荡（3910–3996）判断强化；若午后显著放量收复 2.1 万亿，则分歧转一致、强度上修；</li>
+      <li>② <strong>科创50 / 存储线</strong>：能否全天独立红盘并带动创业板翻红，验证「换主线」而非「无主线」；</li>
+      <li>③ <strong>传媒高标承接</strong>：内蒙新华（5 板）、新华文轩（3 板）分歧后的承接力度，决定短线情绪周期是「分歧」还是「退潮」；</li>
+      <li>④ <strong>涨跌家数能否修复</strong>：目前 35% 上涨占比，若午后回升至 45% 以上则赚钱效应修复；持续低于 35% 则控制仓位；</li>
+      <li>⑤ <strong>事件窗</strong>：中美元首会晤相关增量消息（关税、科技管制表态）可能引发盘中跳变；隔夜油价大跌对石化/煤炭/航运链的压制是否扩散。</li>
+    </ul>
+    <div class="risk"><strong>风险提示</strong>：① 本文全部数据为 09:50 前后的盘中快照，午后与收盘存在重大变数；② 双节长假前仅剩两个交易日，兑现压力与流动性收缩风险上升，国庆期间海外市场不停盘，重仓持股过节风险高；③ 三季报业绩预告窗口临近，无业绩支撑的高位题材股估值回归压力大；④ 主力资金流为统计推断口径，仅供参考。</div>
+  </section>
+
+  <div class="foot">
+    数据时点：2026-09-23 09:49–09:50（开盘盘中口径，开盘后约 20 分钟）· 行情来源：NeoData、westock-data、腾讯自选股；新闻来源：上海证券报、中新经纬、第一财经、每日经济新闻、金融界、界面新闻、财联社、陆家嘴财经早餐、同花顺 · 免责声明：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+function toggleView(key) {
+  var c = document.getElementById(key + '-chart');
+  var t = document.getElementById(key + '-table');
+  if (c.style.display === 'none') { c.style.display = 'block'; t.style.display = 'none'; }
+  else { c.style.display = 'none'; t.style.display = 'block'; }
+}
+
+var UP = '#c0392b';
+var DOWN = '#1e8449';
+
+var idxNames = ['上证指数', '深证成指', '创业板指', '科创50', '沪深300', '中证500', '中证1000'];
+var idxVals = [-0.21, -0.18, -0.17, 0.62, -0.17, -0.10, -0.10];
+echarts.init(document.getElementById('idx-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+  grid: { left: 50, right: 30, top: 30, bottom: 40 },
+  xAxis: { type: 'category', data: idxNames, axisLabel: { interval: 0, rotate: 20 } },
+  yAxis: { type: 'value', name: '涨跌幅(%)' },
+  series: [{ type: 'bar', barWidth: '55%',
+    data: idxVals.map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'top', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var distNames = ['涨停', '+7%以上', '5~7%', '2~5%', '0~2%', '平盘', '-2~0%', '-5~-2%', '-5~-7%', '-7%以下', '跌停'];
+var distVals = [27, 36, 47, 293, 1580, 201, 2696, 624, 37, 21, 6];
+var distColors = [UP, UP, UP, UP, UP, '#95a5a6', DOWN, DOWN, DOWN, DOWN, DOWN];
+echarts.init(document.getElementById('dist-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 家' },
+  grid: { left: 60, right: 30, top: 30, bottom: 60 },
+  xAxis: { type: 'category', data: distNames, axisLabel: { interval: 0, rotate: 35 } },
+  yAxis: { type: 'value', name: '家数' },
+  series: [{ type: 'bar',
+    data: distVals.map(function (v, i) { return { value: v, itemStyle: { color: distColors[i] } }; }),
+    label: { show: true, position: 'top', color: '#2c3e50' } }]
+});
+
+var secNames = ['房地产', '电子', '建筑材料', '食品饮料', '医药生物', '石油石化', '商贸零售', '煤炭', '国防军工', '计算机', '农林牧渔', '传媒'];
+var secVals = [2.04, 0.98, 0.30, 0.29, 0.11, -0.87, -0.93, -1.07, -1.19, -1.22, -1.35, -2.14];
+echarts.init(document.getElementById('sec-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+  grid: { left: 90, right: 50, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '涨跌幅(%)' },
+  yAxis: { type: 'category', data: secNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: secVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var flowNames = ['电子', '房地产', '食品饮料', '建筑材料', '银行', '医药生物', '有色金属', '电力设备', '传媒', '通信', '计算机'];
+var flowVals = [21.02, 6.25, 2.32, 2.14, -7.06, -8.66, -7.47, -10.01, -16.36, -20.32, -21.80];
+echarts.init(document.getElementById('flow-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 亿元' },
+  grid: { left: 90, right: 50, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '主力净流入(亿元)' },
+  yAxis: { type: 'category', data: flowNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: flowVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}', color: '#2c3e50' } }]
+});
+</script>
+</body>
+</html>

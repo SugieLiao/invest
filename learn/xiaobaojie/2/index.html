@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>货币政策第2期：货币（2）</title>
+<script src="/shared/nav.js?v=20260924b" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  line-height: 1.8;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #c0392b; }
+.header .subtitle { color: #e67e22; font-size: 16px; margin-bottom: 12px; font-weight: 600; }
+.header .meta { color: #86868b; font-size: 14px; }
+.header .meta a { color: #0066cc; text-decoration: none; }
+.toc { background: #fff; border-radius: 12px; padding: 24px 30px; margin-bottom: 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.toc h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+.toc ol { list-style: none; counter-reset: toc; }
+.toc li { counter-increment: toc; padding: 6px 0; font-size: 14px; }
+.toc li::before { content: counter(toc) ". "; color: #86868b; margin-right: 8px; }
+.toc a { color: #0066cc; text-decoration: none; }
+.chapter { background: #fff; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.chapter h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: #c0392b; }
+.chapter .time { color: #86868b; font-size: 13px; margin-bottom: 20px; }
+.chapter img { width: 100%; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.chapter h3 { font-size: 17px; font-weight: 600; margin: 24px 0 12px; color: #2c3e50; }
+.chapter h4 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: #e67e22; }
+.chapter ul, .chapter ol { margin-left: 20px; margin-bottom: 16px; }
+.chapter li { margin-bottom: 8px; font-size: 15px; }
+.chapter p { font-size: 15px; margin-bottom: 12px; }
+.chapter strong { font-weight: 600; color: #c0392b; }
+.highlight { background: #fff8e1; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+.callout { background: #fff3e0; border-left: 4px solid #e67e22; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.callout p { margin-bottom: 0; }
+.callout-blue { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.callout-blue p { margin-bottom: 0; }
+.callout-green { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.callout-green p { margin-bottom: 0; }
+.footer { text-align: center; color: #86868b; font-size: 13px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; }
+.knowledge-card { background: #fff; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
+.knowledge-card h2 { font-size: 20px; margin-bottom: 20px; color: #c0392b; }
+.knowledge-card img { max-width: 100%; border-radius: 8px; }
+@media (max-width: 600px) {
+  .container { padding: 20px 12px; }
+  .chapter { padding: 20px; }
+  .header h1 { font-size: 22px; }
+}
+</style>
+<script src="/shared/nav.js" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>货币政策第2期：货币（2）</h1>
+  <div class="subtitle">基础货币的发行机制与调节工具</div>
+  <div class="meta">
+    爆姐硬核财富观 · 宏观框架课 · 2025年5月29日<br>
+    飞书妙记：<a href="https://ycnh1a1mbep0.feishu.cn/minutes/obcn715ey838266884or7s7d" target="_blank">查看逐字稿</a>
+  </div>
+</div>
+
+<div class="toc">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#ch1">基础货币从哪里来：三大发行机制</a></li>
+    <li><a href="#ch2">知识点1：外汇占款</a></li>
+    <li><a href="#ch3">知识点2：金融机构再贷款</a></li>
+    <li><a href="#ch4">知识点3：央行购买国债</a></li>
+    <li><a href="#ch5">三种发行方式对比总结</a></li>
+    <li><a href="#ch6">知识点4：调节工具的分类与甄别</a></li>
+    <li><a href="#ch7">知识点5：如何识别结构性工具的"含金量"</a></li>
+    <li><a href="#ch8">课程总结</a></li>
+    <li><a href="#ch9">配套知识卡片</a></li>
+  </ol>
+</div>
+
+<div class="chapter" id="ch1">
+  <h2>一、基础货币从哪里来：三大发行机制</h2>
+  <div class="time">约 0-10 分钟</div>
+  <img src="assets/slides/slide_03.jpg" alt="基础货币三大发行机制">
+  <p>上节课我们知道了基础货币是央行直接发行的"源头之水"。这节课我们深入拆解：<strong>央行到底通过什么渠道发行基础货币？</strong></p>
+  <p>主要有三大渠道：<strong>外汇占款、金融机构再贷款、购买国债</strong>。</p>
+  <p><strong>核心数据：</strong>2024年末央行总资产约 <span class="highlight">44万亿</span>，≈ 实际发行的全部基础货币总量。</p>
+</div>
+
+<div class="chapter" id="ch2">
+  <h2>二、知识点1：发行机制一：外汇占款</h2>
+  <div class="time">约 10-25 分钟</div>
+  <h4>【核心内容】</h4>
+  <ul>
+    <li><strong>定义：</strong>外汇占款（或称外汇结汇）指央行收购外汇并相应投放本国基础货币。</li>
+  </ul>
+  <h4>运作流程</h4>
+  <ol>
+    <li><strong>外汇流入：</strong>企业通过出口贸易、外商直接投资（FDI）或海外汇款等方式获得外汇</li>
+    <li><strong>银行结汇：</strong>企业将外汇卖给商业银行，换取人民币</li>
+    <li><strong>央行购汇：</strong>商业银行再将外汇出售给央行，央行印出等额的基础货币支付给商业银行</li>
+  </ol>
+  <img src="assets/slides/slide_06.jpg" alt="外汇占款">
+  <h4>历史演变</h4>
+  <ul>
+    <li><strong>2001-2014年：黄金期</strong>，外汇占款从1.89万亿攀升至2014年5月峰值 <span class="highlight">27.3万亿</span>，占基础货币90%以上</li>
+    <li><strong>2014年后：</strong>受贸易顺差收窄和2015年"811汇改"影响，占比逐步下滑</li>
+    <li><strong>当前：</strong>2024年末外汇占款约 <span class="highlight">22万亿</span>，占央行总资产约50%，仍是第一大发行来源</li>
+  </ul>
+  <div class="callout-blue">
+    <p><strong>实践运用：</strong>外汇占款模式的<strong>致命缺陷</strong>在于，基础货币的发行高度依赖外部环境。一旦出口受阻或外资流出，即使国内经济自身需要流动性支持，央行也无法通过此渠道投放货币，容易导致经济与货币供给的错配。任何博主用"外汇储备/M2"来论证人民币超发，都是犯了将"源头之水"（基础货币）与"派生之水"（M2）混淆的常识性错误。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch3">
+  <h2>三、知识点2：发行机制二：金融机构再贷款</h2>
+  <div class="time">约 25-40 分钟</div>
+  <h4>【核心内容】</h4>
+  <ul>
+    <li><strong>定义：</strong>商业银行将其持有的信贷资产（债权）抵押给央行，央行按一定比例（通常为100%）向其提供基础货币贷款。</li>
+    <li><strong>运作逻辑：</strong>本质上是<strong>信贷派生的再抵押</strong>。商业银行通过"存款-贷款"循环创造出信用和债权，再用这些债权从央行换取新的基础货币，实现"钱生钱"。</li>
+  </ul>
+  <img src="assets/slides/slide_09.jpg" alt="金融机构再贷款">
+  <h4>优劣势分析</h4>
+  <ul>
+    <li><strong>优点：</strong>在经济上行期，此模式能让基础货币的发行与经济活力<strong>高度匹配</strong>，不易造成货币滥发和通货膨胀。</li>
+    <li><strong>缺点：</strong>在经济下行期，企业和居民贷款意愿降低，信贷派生受阻，"抵押物"减少，导致央行<strong>"想放水也放不出去"</strong>，货币政策传导失灵。</li>
+  </ul>
+  <p><strong>当前规模：</strong>2024年末约 <span class="highlight">15.6万亿</span>，占央行总资产约35%，是第二大发行来源。</p>
+  <div class="callout-blue">
+    <p><strong>实践运用：</strong>理解其顺周期的特性，就能明白为何在经济下行压力大时，央行单纯依靠降息等传统工具效果有限，因为"马（企业）不愿到河边喝水（贷款）"，货币传导的第一个环节就已中断。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch4">
+  <h2>四、知识点3：发行机制三：央行购买国债</h2>
+  <div class="time">约 40-55 分钟</div>
+  <h4>【核心内容】</h4>
+  <ul>
+    <li><strong>定义：</strong>央行直接下场，在二级市场或一级市场购买由财政部发行的国债，从而向市场注入基础货币。</li>
+    <li><strong>核心特征：</strong><strong>无锚印钞</strong>。与前两种需要"外汇"或"信贷资产"作为锚定物不同，此模式是央行的<strong>主动放水行为</strong>，不依赖任何经济活动，具有极高的灵活性。</li>
+    <li><strong>中美模式差异：</strong>这是美联储等发达国家央行的<strong>主要货币发行方式</strong>，占比通常在90%以上。而在中国，此方式占比极低，仅 <span class="highlight">约6%</span>（约2.8万亿），更多是作为前两种方式失灵时的"灵活补丁"存在。</li>
+  </ul>
+  <img src="assets/slides/slide_12.jpg" alt="央行购买国债">
+  <div class="callout-green">
+    <p><strong>实践运用：</strong>央行购买国债是<strong>最直接、最有效的放水方式</strong>。任何关于中国开始"无锚印钞"的言论都是夸大其词，忽视了其极低占比的现实。但正因其高效，一旦央行开始在二级市场连续、规模性地购买国债，这便是<strong>最强级别的宽松信号</strong>，对资产价格的提振作用也最大。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch5">
+  <h2>五、三种发行方式对比总结</h2>
+  <div class="time">约 55-60 分钟</div>
+  <img src="assets/slides/slide_14.jpg" alt="三种发行方式对比">
+  <table style="width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
+    <thead>
+      <tr style="background: #f5f5f7;">
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">发行方式</th>
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">当前规模</th>
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">占比</th>
+        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">特点</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 10px; border: 1px solid #ddd;">外汇占款</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">~22万亿</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">~50%</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">被动，依赖外部环境</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px; border: 1px solid #ddd;">金融机构再贷款</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">~15.6万亿</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">~35%</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">顺周期，经济差时放不出去</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px; border: 1px solid #ddd;">购买国债</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">~2.8万亿</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">~6%</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">主动，最强放水信号</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chapter" id="ch6">
+  <h2>六、知识点4：调节工具的分类与甄别</h2>
+  <div class="time">约 60-70 分钟</div>
+  <h4>【核心内容】</h4>
+  <p>央行的货币工具可分为两大类：</p>
+  <h4>1. 调节流动性工具</h4>
+  <ul>
+    <li><strong>目的：</strong>管理<strong>存量资金</strong>，目的是"维稳"</li>
+    <li><strong>作用：</strong>通过吸收或释放短期流动性，平滑金融机构间的资金波动</li>
+    <li><strong>特点：</strong>这类工具通常<strong>不带来投资机会</strong></li>
+    <li><strong>代表工具：</strong>MLF（中期借贷便利）、SLF（常备借贷便利）、逆回购等</li>
+  </ul>
+  <h4>2. 注入增量资金工具</h4>
+  <ul>
+    <li><strong>目的：</strong>创造<strong>新增基础货币</strong>，目的是"放水"</li>
+    <li><strong>作用：</strong>直接扩大央行资产负债表</li>
+    <li><strong>特点：</strong>是<strong>重大投资机会的来源</strong></li>
+    <li><strong>代表工具：</strong>央行购买国债、结构性再贷款工具（如PSL、股东回购增持再贷款）等</li>
+  </ul>
+  <img src="assets/slides/slide_16.jpg" alt="流动性调节vs增量放水">
+  <div class="callout-blue">
+    <p><strong>实践运用：</strong>投资者必须学会甄别这两类工具。当新闻中出现MLF、逆回购等操作时，应理解为央行在进行日常的"流动性管理"，对资产价格影响有限。而当出现新型结构性再贷款工具，或央行开始购买国债时，才是需要高度关注的"放水"信号。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch7">
+  <h2>七、知识点5：如何识别结构性工具的"含金量"</h2>
+  <div class="time">约 70-81 分钟</div>
+  <h4>【核心内容】</h4>
+  <ul>
+    <li><strong>数据来源：</strong>中国人民银行官网 → 货币政策 → 货币政策工具 → <strong>结构性货币政策工具情况表</strong>（季度更新）</li>
+    <li><strong>核心甄别标准：</strong>判断资金的<strong>最终用途</strong>。</li>
+  </ul>
+  <img src="assets/slides/slide_18.jpg" alt="结构性货币工具">
+  <h4>1. 高含金量（直接作用于资产）</h4>
+  <ul>
+    <li>工具的设计目标是引导资金<strong>直接购买特定资产</strong></li>
+    <li>这类政策传导链条最短，效果最直接，对资产价格形成强力支撑</li>
+    <li><strong>案例：</strong>PSL（资金用于拆迁户买房）、股东回购增持再贷款（资金用于上市公司回购股票）</li>
+  </ul>
+  <h4>2. 低含金量（间接作用于经营）</h4>
+  <ul>
+    <li>工具的目标是扶持某个行业或领域，通过<strong>降本增效</strong>来改善其经营</li>
+    <li>这类政策对资产价格的影响是间接的、不确定的</li>
+    <li><strong>案例：</strong>碳减排支持工具、设备更新改造专项再贷款等</li>
+  </ul>
+  <div class="callout-green">
+    <p><strong>实践运用：</strong>分析结构性货币工具时，不能只看名称和规模，<strong>必须穿透到资金的最终用途</strong>。只有那些直接注入买盘、创造需求的工具，才是真正能带来确定性投资机会的"王炸"级政策。央行资产负债表（月更）和结构性工具表（季更）的交叉验证，是专业投资者进行宏观择时的必备功课。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch8">
+  <h2>八、课程总结</h2>
+  <div class="time">约 81 分钟</div>
+  <div class="callout-green">
+    <p>
+      本节课系统梳理了央行发行基础货币的三大渠道及其演变，明确了<strong>"外汇占款"的被动性</strong>、<strong>"金融机构再贷款"的顺周期性</strong>，以及<strong>"购买国债"的主动性和高效性</strong>。<br><br>
+      更重要的是，我们建立了一套识别货币政策"含金量"的实战框架：<br>
+      1. 首先，区分"调节流动性"和"注入增量资金"两类工具，将注意力聚焦于后者；<br>
+      2. 其次，在"注入增量资金"的工具中，通过分析资金的最终用途，进一步甄别其是"直接作用于资产"还是"间接作用于经营"。<br><br>
+      <strong>掌握这套层层递进的分析方法，我们就能穿透政策迷雾，在央行行动时，第一时间判断其对资产价格的真实影响，从而抓住由"水"驱动的核心投资机会。</strong>
+    </p>
+  </div>
+</div>
+
+<div class="knowledge-card" id="ch9">
+  <h2>配套知识卡片（专业版）</h2>
+  <img src="assets/知识卡片_专业版.jpg" alt="知识卡片专业版">
+</div>
+
+<div class="footer">
+  货币政策第2期：货币（2） · 爆姐硬核财富观<br>
+  笔记由视频课程 + 配套PPT + 知识卡片 综合生成
+</div>
+
+</div>
+</body>
+</html>

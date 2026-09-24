@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投资学习 - 苏奇投研平台</title>
+<script src="/shared/nav.js?v=20260924b" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.7;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header p {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.section-group {
+  margin-bottom: 40px;
+}
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-left: 12px;
+  border-left: 4px solid #2b6cb0;
+  color: #1f2329;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  transition: all .2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+}
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  transform: translateY(-2px);
+}
+.card .card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1f2329;
+}
+.card p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.card .card-meta {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #9ca3af;
+  display: flex;
+  gap: 12px;
+}
+.card .external-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #eef4fb;
+  color: #1366d6;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* 小模块样式 */
+.sub-group {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  margin-bottom: 16px;
+}
+.sub-group h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #2d3748;
+}
+.sub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.sub-link {
+  background: #f3f4f6;
+  color: #374151;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all .15s;
+}
+.sub-link:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>投资学习</h1>
+    <p>系统学习宏观框架、行业研究与交易体系，建立完整的投研知识体系</p>
+  </div>
+
+  <!-- 宏观框架 -->
+  <div class="section-group">
+    <div class="section-title">宏观框架</div>
+    <div class="card-grid">
+      <a href="/learn/xiaobaojie/" class="card">
+        <div class="card-icon">📊</div>
+        <h3>小爆姐宏观框架课</h3>
+        <p>从货币政策到利率传导，建立宏观分析的底层框架，理解央行如何影响资产价格。</p>
+        <div class="card-meta">
+          <span>6 节课</span>
+          <span>持续更新</span>
+        </div>
+      </a>
+
+      <a href="/learn/macro/xiaodeng/" class="card">
+        <div class="card-icon">🎯</div>
+        <h3>小邓老师</h3>
+        <p>宏观经济与市场分析课程。</p>
+        <div class="card-meta">
+          <span>课程中</span>
+        </div>
+      </a>
+
+      <a href="/learn/macro/chenpeng/" class="card">
+        <div class="card-icon">📈</div>
+        <h3>陈鹏老师</h3>
+        <p>宏观经济与投资策略课程。</p>
+        <div class="card-meta">
+          <span>课程中</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 行业研究 -->
+  <div class="section-group">
+    <div class="section-title">行业研究</div>
+    <div class="card-grid">
+      <a href="/learn/industry/semiconductor/" class="card">
+        <div class="card-icon">🔬</div>
+        <h3>半导体</h3>
+        <p>半导体行业产业链与投资逻辑。</p>
+        <div class="card-meta">
+          <span>课程中</span>
+        </div>
+      </a>
+
+      <a href="/learn/industry/pharma/" class="card">
+        <div class="card-icon">💊</div>
+        <h3>医药</h3>
+        <p>医药行业研究框架与投资机会。</p>
+        <div class="card-meta">
+          <span>课程中</span>
+        </div>
+      </a>
+
+      <a href="/learn/industry/electric-new/" class="card">
+        <div class="card-icon">⚡</div>
+        <h3>电新</h3>
+        <p>新能源与电力设备行业研究。</p>
+        <div class="card-meta">
+          <span>课程中</span>
+        </div>
+      </a>
+
+      <a href="/learn/industry/consumer/" class="card">
+        <div class="card-icon">🛒</div>
+        <h3>消费</h3>
+        <p>消费行业数据解读与投资前瞻。</p>
+        <div class="card-meta">
+          <span>1 篇笔记</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 交易体系 -->
+  <div class="section-group">
+    <div class="section-title">交易体系</div>
+    <div class="card-grid">
+      <a href="https://dijingang.liaohao.cc" target="_blank" rel="noopener noreferrer" class="card">
+        <span class="external-badge">外部</span>
+        <div class="card-icon">🏔️</div>
+        <h3>地金刚体系</h3>
+        <p>系统化的交易体系教材，涵盖从入门到进阶的完整交易方法论。</p>
+        <div class="card-meta">
+          <span>22 个章节</span>
+        </div>
+      </a>
+
+      <a href="https://beast.liaohao.cc" target="_blank" rel="noopener noreferrer" class="card">
+        <span class="external-badge">外部</span>
+        <div class="card-icon">🐅</div>
+        <h3>猛兽体系</h3>
+        <p>猛兽交易体系课程。</p>
+        <div class="card-meta">
+          <span>课程中</span>
+        </div>
+      </a>
+
+      <a href="https://sheyi.liaohao.cc" target="_blank" rel="noopener noreferrer" class="card">
+        <span class="external-badge">外部</span>
+        <div class="card-icon">☯️</div>
+        <h3>舍一体系</h3>
+        <p>舍一交易体系，128篇系统化交易文章。</p>
+        <div class="card-meta">
+          <span>128 篇文章</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    苏奇投研平台 · 投资学习中心
+  </div>
+</div>
+</body>
+</html>

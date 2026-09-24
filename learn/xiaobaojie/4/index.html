@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>250709货币政策第4期：M2、存款准备金率与无风险利率</title>
+<script src="/shared/nav.js?v=20260924b" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header .meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.header .intro {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.toc {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.toc h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2329;
+}
+.toc ol {
+  padding-left: 20px;
+}
+.toc li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.toc a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2329;
+  border-left: 4px solid #2b6cb0;
+  padding-left: 12px;
+}
+.section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #2d3748;
+}
+.section p {
+  margin-bottom: 12px;
+  color: #374151;
+  font-size: 15px;
+}
+.section ul, .section ol {
+  margin: 12px 0 12px 24px;
+}
+.section li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 15px;
+}
+.highlight {
+  background: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+}
+.highlight p {
+  color: #744210;
+  margin-bottom: 0;
+}
+.key-point {
+  background: #eef4fb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.key-point p {
+  color: #2b4c7e;
+  margin-bottom: 0;
+}
+.slide-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>250709货币政策第4期：M2、存款准备金率与无风险利率</h1>
+    <div class="meta">小爆姐宏观框架课 · 第4期 · 86分钟</div>
+    <p class="intro">
+      本节课完成货币供给量主题的最后拼图，深入剖析广义货币M2与存款准备金率（RRR）的内在逻辑，
+      并正式开启利率这一核心板块的学习。重点辨析M1与M2增速差异的宏观意义，
+      澄清市场对M2的普遍误解，并最终落脚于所有资产定价的基石——"无风险利率"与"风险溢价"。
+    </p>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">广义货币M2的构成与分析</a></li>
+      <li><a href="#ch2">M2的派生逻辑与派生过程</a></li>
+      <li><a href="#ch3">M2变大的原因及反映的经济现状</a></li>
+      <li><a href="#ch4">通过M1与M2同比增速差判断经济活力</a></li>
+      <li><a href="#ch5">辨析关于M2超300万亿的两类常见财经言论</a></li>
+      <li><a href="#ch6">存款准备金率（RRR）的基础概念</a></li>
+      <li><a href="#ch7">我国存款准备金率的趋势及政策逻辑</a></li>
+      <li><a href="#ch8">无风险利率：所有资产的"定价之锚"</a></li>
+      <li><a href="#ch9">风险溢价：高收益的真实来源</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section" id="ch1">
+    <h2>一、广义货币M2的构成与分析</h2>
+    <img src="assets/slides/slide_03.jpg" alt="M2的构成" class="slide-img">
+
+    <h3>1.1 M2的定义</h3>
+    <p>M2，也叫广义货币，它不仅包含M1，还包含企业和居民的定期存款。公式为：</p>
+    <div class="key-point">
+      <p><strong>M2 = 新M1 + 企业定期存款 + 居民定期存款</strong></p>
+    </div>
+    <p>其中新M1 = M0 + 企业活期存款 + 个人活期存款 + 非银支付机构客户备付金。</p>
+
+    <h3>1.2 M1与M2的区别</h3>
+    <ul>
+      <li><strong>M1（活钱）</strong>：代表社会上现实的购买力，对市场和经济的判断最为直接</li>
+      <li><strong>M2（全量）</strong>：代表未来潜在的购买力，因为定存的钱流动性较差</li>
+    </ul>
+
+    <h3>1.3 M2的总量与结构</h3>
+    <p>截至2024年底，我国M2总量约313.53万亿。其中定存占比远高于活期。</p>
+    <div class="highlight">
+      <p><strong>关键认知</strong>：M2里定存和活期的占比不是固定的，会随经济活力和资本市场情况变动。</p>
+    </div>
+    <ul>
+      <li><strong>经济回暖</strong>：企业把定存拿出来投资扩产 → 企业活期变多</li>
+      <li><strong>资本市场火热</strong>：居民把定存拿出来炒股 → 个人活期变多，定存变少</li>
+    </ul>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section" id="ch2">
+    <h2>二、M2的派生逻辑与派生过程</h2>
+    <img src="assets/slides/slide_05.jpg" alt="M2派生逻辑" class="slide-img">
+
+    <h3>2.1 派生公式</h3>
+    <p>M2的派生逻辑和M1完全相同，都是通过银行存贷关系和货币乘数创造出来的：</p>
+    <div class="key-point">
+      <p><strong>最大可派生M2 = 基础货币 ÷ 存款准备金率</strong></p>
+      <p>或：<strong>M2 = 基础货币 × 货币乘数</strong>（货币乘数 = 1 ÷ 存款准备金率）</p>
+    </div>
+
+    <h3>2.2 举例说明</h3>
+    <p>假设商业银行从央行获得基础货币1亿元，存款准备金率10%：</p>
+    <ul>
+      <li>货币乘数 = 1 ÷ 10% = 10倍</li>
+      <li>最大可派生M2 = 1亿 × 10 = 10亿</li>
+    </ul>
+
+    <h3>2.3 关键要点</h3>
+    <ul>
+      <li>M2是银行存贷派生的货币，不是基础货币</li>
+      <li>存款准备金率越低，派生能力越强</li>
+      <li>提现的钱脱离银行体系，无法参与派生</li>
+    </ul>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section" id="ch3">
+    <h2>三、M2变大的原因及反映的经济现状</h2>
+    <img src="assets/slides/slide_08.jpg" alt="M2变大的原因" class="slide-img">
+
+    <p>M2变大只有两种可能：</p>
+
+    <h3>3.1 M1变大（好事）</h3>
+    <p>代表企业和居民的经营活力在增加，账面上的活钱变多了。</p>
+
+    <h3>3.2 定存变大（坏事）</h3>
+    <p>企业和居民把钱存成定期，原因通常是：</p>
+    <ul>
+      <li><strong>企业经营不好</strong>：不买原材料、不投资扩产，存定期赚利息</li>
+      <li><strong>居民收入不稳定</strong>：不想消费、不想投资，存定期躺着赚利息</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>当前现状</strong>：我国M2持续走高，主要是定存增长导致的，侧面反映经济相对低迷承压。</p>
+    </div>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section" id="ch4">
+    <h2>四、通过M1与M2同比增速差判断经济活力</h2>
+    <img src="assets/slides/slide_10.jpg" alt="M1-M2剪刀差" class="slide-img">
+
+    <h3>4.1 为什么要对比M1和M2的增速？</h3>
+    <p>单看M2增速不足以判断经济活力，必须对比M1和M2的同比增速关系，才能判断资金在哪里运转。</p>
+
+    <h3>4.2 两种情况</h3>
+    <div class="key-point">
+      <p><strong>M1增速 > M2增速</strong>：活钱占比提升，经营活力向好，资金脱虚向实</p>
+    </div>
+    <div class="highlight">
+      <p><strong>M2增速 > M1增速</strong>（形成"剪刀差"）：定存增加，经济活力走弱，资金在金融体系空转，未流向实体经济</p>
+    </div>
+
+    <div class="highlight">
+      <p><strong>重要提醒</strong>：千万不能孤立看某一个数字就下结论。数字本身是孤立的，必须结合不同数字辩证比对，才能看出真实的市场情况。</p>
+    </div>
+  </div>
+
+  <!-- 第5章 -->
+  <div class="section" id="ch5">
+    <h2>五、辨析关于M2超300万亿的两类常见财经言论</h2>
+    <img src="assets/slides/slide_12.jpg" alt="M2超发论辨析" class="slide-img">
+
+    <h3>5.1 言论一："M2超300万亿就是货币超发、通胀来了"</h3>
+    <p><strong>这个说法不一定对</strong>，原因：</p>
+    <ul>
+      <li>货币超发通常指基础货币发行超过经济增速</li>
+      <li>M2是派生货币，不是基础货币，和基础货币没有直接关系</li>
+      <li>如果是定存推高的M2，根本不会引发通胀——因为钱在金融体系空转，没有流向实体和资产</li>
+    </ul>
+
+    <h3>5.2 言论二："3万亿美元外汇储备对比300多万亿M2，论证货币超发"</h3>
+    <p><strong>这个逻辑完全错误</strong>：</p>
+    <ul>
+      <li>外汇储备属于基础货币</li>
+      <li>M2属于派生货币</li>
+      <li>二者分属不同层次，对比口径完全不一致</li>
+    </ul>
+
+    <div class="key-point">
+      <p><strong>正确判断方法</strong>：分析M2是否推高通胀，要看M1增速是否超过名义GDP增速。</p>
+    </div>
+  </div>
+
+  <!-- 第6章 -->
+  <div class="section" id="ch6">
+    <h2>六、存款准备金率（RRR）的基础概念</h2>
+    <img src="assets/slides/slide_15.jpg" alt="存款准备金率" class="slide-img">
+
+    <h3>6.1 定义</h3>
+    <p>存款准备金，是商业银行按规定必须缴存到央行的资金。缴存金额占存款总额的比例，就是存款准备金率。</p>
+
+    <h3>6.2 举例说明</h3>
+    <p>用户存100元到银行，银行不能全额放贷，必须先计提10元缴存央行，这10元就是存款准备金，准备金率就是10%。</p>
+
+    <h3>6.3 法定准备金 vs 超额准备金</h3>
+    <ul>
+      <li><strong>法定存款准备金</strong>：央行强制要求缴纳的部分</li>
+      <li><strong>超额准备金</strong>：超出规定比例多存的部分</li>
+    </ul>
+    <p>存款准备金是有利息的，法定准备金利率比超额准备金利率稍高。</p>
+  </div>
+
+  <!-- 第7章 -->
+  <div class="section" id="ch7">
+    <h2>七、我国存款准备金率的趋势及政策逻辑</h2>
+    <img src="assets/slides/slide_18.jpg" alt="存款准备金率趋势" class="slide-img">
+
+    <h3>7.1 变动趋势</h3>
+    <ul>
+      <li>2007年起升准</li>
+      <li>2008年中段短暂降准后再度回升至2011年5月</li>
+      <li>2011年之后一路下调</li>
+      <li>2025年5月降准后达到2007年以来最低</li>
+    </ul>
+
+    <h3>7.2 核心作用</h3>
+    <div class="key-point">
+      <p><strong>降准（降低RRR）</strong>：货币乘数变大，银行可贷资金增多，向市场提供流动性</p>
+      <p><strong>升准（提高RRR）</strong>：货币乘数变小，银行可贷资金减少，从市场回收流动性</p>
+    </div>
+
+    <h3>7.3 对资产价格的影响</h3>
+    <div class="highlight">
+      <p><strong>重要认知</strong>：降准对资产价格的影响非常有限。它只是为资产价格提供了"不跌"的理由，但并非"必涨"的核心驱动力。资产价格上涨的核心驱动力是基础货币的增加（央行扩表放水）。</p>
+    </div>
+    <p>中国RRR从2011年高点至今一路下行，更多反映了货币政策框架的长期演变和对冲外汇占款下降的需求，而非持续的强刺激。</p>
+  </div>
+
+  <!-- 第8章 -->
+  <div class="section" id="ch8">
+    <h2>八、无风险利率：所有资产的"定价之锚"</h2>
+    <img src="assets/slides/slide_22.jpg" alt="无风险利率" class="slide-img">
+
+    <h3>8.1 定义</h3>
+    <p>无需承担任何风险即可获得的回报。在实践中，主要指：</p>
+    <ul>
+      <li><strong>国债收益率</strong></li>
+      <li><strong>50万元以内的银行存款利率</strong>（受存款保险保障）</li>
+    </ul>
+
+    <h3>8.2 核心地位</h3>
+    <div class="key-point">
+      <p>无风险利率是所有风险资产的<strong>定价基石</strong>，也被称为<strong>"定价之锚"</strong>或<strong>"资金的重力"</strong>。</p>
+      <p>任何风险资产的预期回报率，都必须高于无风险利率，才具备投资吸引力。</p>
+    </div>
+
+    <h3>8.3 与资产价格的关系（反向关系）</h3>
+    <ul>
+      <li><strong>利率过高</strong>：资金涌向无风险资产，风险资产（股票、房产）因缺乏买盘而价格受压</li>
+      <li><strong>利率过低</strong>：资金从无风险资产流出，追逐更高回报的风险资产，刺激资产价格上涨</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>实践运用</strong>：理解无风险利率的"锚"定作用，是进行大类资产配置的逻辑起点。央行调控利率的根本目的之一，就是稳定这个"锚"，从而稳定整个金融市场的资产定价体系。</p>
+    </div>
+  </div>
+
+  <!-- 第9章 -->
+  <div class="section" id="ch9">
+    <h2>九、风险溢价：高收益的真实来源</h2>
+    <img src="assets/slides/slide_25.jpg" alt="风险溢价" class="slide-img">
+
+    <h3>9.1 定义</h3>
+    <p>风险资产的回报率超出无风险利率的部分，是投资者因承担额外风险而要求获得的补偿。</p>
+
+    <div class="key-point">
+      <p><strong>公式：资产预期回报率 = 无风险利率 + 风险溢价</strong></p>
+    </div>
+
+    <h3>9.2 风险溢价的构成</h3>
+    <ol>
+      <li><strong>信用风险溢价</strong>：对借款人可能违约的补偿</li>
+      <li><strong>流动性溢价</strong>：对资产不易变现的补偿</li>
+      <li><strong>期限溢价</strong>：对持有长期资产所面临的不确定性（通胀、利率波动）的补偿</li>
+      <li><strong>波动溢价</strong>：对资产价格大幅波动的补偿（主要针对权益类资产）</li>
+    </ol>
+
+    <div class="highlight">
+      <p><strong>实践运用</strong>：市场上没有无缘无故的高收益，所有超过无风险利率的回报，都是对上述一种或多种风险的定价。在评估任何投资产品时，都应主动分析其高收益背后对应的风险溢价来源，并判断该风险是否在自己的承受范围之内。</p>
+    </div>
+  </div>
+
+  <!-- 课程总结 -->
+  <div class="section">
+    <h2>课程总结</h2>
+    <p>本节课厘清了关于M2和存款准备金率的常见误区，确立了<strong>M1-M2增速差</strong>作为判断经济活力和资金流向的关键指标，并明确了<strong>降准</strong>作为流动性管理工具的真实作用。</p>
+    <p>在此基础上，引入了整个利率体系的基石——<strong>无风险利率</strong>和<strong>风险溢价</strong>。无风险利率是所有资产的"定价之锚"，其高低直接决定了市场的整体估值水平。而风险溢价则是高收益的本质来源，是我们为承担额外风险所应得的补偿。</p>
+    <p>深刻理解这对概念，是理性分析和评估一切金融产品价值的根本前提。</p>
+  </div>
+
+  <!-- 知识卡片（专业版） -->
+  <div class="section">
+    <h2>知识卡片（专业版）</h2>
+    <p>以下为课程配套的专业版知识卡片，汇总了本期核心知识点的完整框架。</p>
+    <img src="assets/knowledge-card-pro.png" alt="知识卡片专业版" class="slide-img" style="max-width: 100%; height: auto;">
+  </div>
+
+  <div class="footer">
+    小爆姐宏观框架课 · 第4期 · 内部学习资料
+  </div>
+</div>
+</body>
+</html>

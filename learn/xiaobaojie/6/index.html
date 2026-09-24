@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>250725宏观框架课第六期：货币工具分类与互换便利</title>
+<script src="/shared/nav.js?v=20260924b" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header .meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.header .intro {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.toc {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.toc h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2329;
+}
+.toc ol {
+  padding-left: 20px;
+}
+.toc li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.toc a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2329;
+  border-left: 4px solid #2b6cb0;
+  padding-left: 12px;
+}
+.section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #2d3748;
+}
+.section p {
+  margin-bottom: 12px;
+  color: #374151;
+  font-size: 15px;
+}
+.section ul, .section ol {
+  margin: 12px 0 12px 24px;
+}
+.section li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 15px;
+}
+.highlight {
+  background: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+}
+.highlight p {
+  color: #744210;
+  margin-bottom: 0;
+}
+.key-point {
+  background: #eef4fb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.key-point p {
+  color: #2b4c7e;
+  margin-bottom: 0;
+}
+.slide-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>250725宏观框架课第六期：货币工具分类与互换便利</h1>
+    <div class="meta">小爆姐宏观框架课 · 第6期 · 利率（2）</div>
+    <p class="intro">
+      本节课是政策利率的第二部分。首先明确政策利率的核心特征——必须是固定利率，否则无法起到"利率锚"的作用。
+      然后系统梳理央行货币工具的三大分类：价格型、数量型、结构型。最后重点拆解"互换便利"这一创新性的结构性工具，
+      理解央行如何打通资金直接支持股市的通道，以及如何看懂宏观政策文件背后的资产影响。
+    </p>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">政策利率的核心特征：为什么必须是固定利率？</a></li>
+      <li><a href="#ch2">哪些不是政策利率？买断式逆回购与MLF</a></li>
+      <li><a href="#ch3">央行货币工具的三大分类（补充）</a></li>
+      <li><a href="#ch4">价格型货币工具：先定利率，再定数量</a></li>
+      <li><a href="#ch5">数量型货币工具：先定数量，再定利率</a></li>
+      <li><a href="#ch6">流动性调节：为什么央行要频繁操作？</a></li>
+      <li><a href="#ch7">结构型货币工具：定向放水的精准武器</a></li>
+      <li><a href="#ch8">哪些工具跟投资有关系？</a></li>
+      <li><a href="#ch9">互换便利（SFISF）详解：打通央行到股市的通道</a></li>
+      <li><a href="#ch10">实战：如何看懂宏观政策文件</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section" id="ch1">
+    <h2>一、政策利率的核心特征：为什么必须是固定利率？</h2>
+    <img src="assets/slides/slide_01.jpeg" alt="如何分辨政策利率" class="slide-img">
+
+    <h3>1.1 政策利率的定义特征</h3>
+    <p>判断一个货币工具是不是政策利率，核心看一个特征：<strong>是不是固定利率</strong>。</p>
+
+    <div class="key-point">
+      <p><strong>政策利率 = 固定利率 + 数量招标</strong></p>
+      <p>央行把利率定死，金融机构通过招标决定自己要多少量。</p>
+    </div>
+
+    <h3>1.2 举例：7天质押式逆回购</h3>
+    <p>以2025年7月21日央行1707亿元逆回购操作为例：</p>
+    <ul>
+      <li><strong>操作利率</strong>：1.40%（固定不变）</li>
+      <li><strong>投标量/中标量</strong>：1707亿元（金融机构招标决定）</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>为什么必须固定利率？</strong> 因为政策利率是市场利率的"锚"。如果它自己都变来变去，市场利率就不知道该锚定什么了。锚的作用就是稳定预期，所以它必须是固定的。</p>
+    </div>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section" id="ch2">
+    <h2>二、哪些不是政策利率？买断式逆回购与MLF</h2>
+    <img src="assets/slides/slide_03.jpeg" alt="买断式逆回购是不是政策利率" class="slide-img">
+
+    <h3>2.1 买断式逆回购：不是政策利率</h3>
+    <p>买断式逆回购的招标方式是<strong>数量固定、利率招标</strong>——和政策利率正好反过来。</p>
+
+    <div class="key-point">
+      <p><strong>政策利率</strong>：利率固定，数量招标（利率定死，你要多少量自己抢）</p>
+      <p><strong>买断式逆回购</strong>：数量固定，利率招标（额度定死，你出多少利率自己报）</p>
+    </div>
+
+    <h3>2.2 MLF（麻辣粉）：曾经是，现在不是了</h3>
+    <p>中期借贷便利（MLF），俗称"麻辣粉"。历史上它曾经是政策利率，但2025年3月起，央行取消了统一的中标利率，改成纯粹的<strong>数量型货币工具</strong>。</p>
+
+    <div class="highlight">
+      <p><strong>重要认知</strong>：货币工具的定位不是一成不变的。央行会根据货币政策框架的演变，动态调整工具的定位。比如MLF从政策利率降级为数量型工具，7天逆回购则被推到更核心的位置。</p>
+    </div>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section" id="ch3">
+    <h2>三、央行货币工具的三大分类（补充）</h2>
+    <img src="assets/slides/slide_05.jpeg" alt="央行对货币工具的分类" class="slide-img">
+
+    <p>央行并没有官方公布的统一分类表。以下分类是根据央行公开口径总结的，全网独一份：</p>
+
+    <div class="key-point">
+      <p><strong>三大类型</strong>：</p>
+      <p>1. 价格型货币工具</p>
+      <p>2. 数量型货币工具</p>
+      <p>3. 结构型（结构性）货币工具</p>
+    </div>
+
+    <h3>3.1 为什么要分类？</h3>
+    <ul>
+      <li>把零散的货币工具"排排站、对号入座"，便于归纳总结</li>
+      <li>不同类型的工具，作用机制和投资含义完全不同</li>
+      <li>不要过度纠结具体工具的归类——工具的类型是会动态变化的</li>
+    </ul>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section" id="ch4">
+    <h2>四、价格型货币工具：先定利率，再定数量</h2>
+    <img src="assets/slides/slide_08.jpeg" alt="价格型货币工具" class="slide-img">
+
+    <h3>4.1 定义</h3>
+    <p>央行先确定货币的价格（也就是利率），让市场自己来决定货币需求的数量。</p>
+
+    <div class="key-point">
+      <p><strong>价格型 = 利率固定，数量可变</strong></p>
+      <p>央行把利率定好，金融机构要用钱就按这个利率申请，用多少自己报。</p>
+    </div>
+
+    <h3>4.2 包含哪些工具？</h3>
+    <ol>
+      <li><strong>质押式逆回购</strong>：市场利率之锚（7天逆回购是核心）</li>
+      <li><strong>常备借贷便利（SLF，酸辣粉）</strong>：利率走廊的上限</li>
+      <li><strong>法定存款准备金利率</strong>：央行给金融机构的法定存款利率</li>
+      <li><strong>超额存款准备金利率</strong>：利率走廊的下限</li>
+    </ol>
+
+    <h3>4.3 每个工具的作用</h3>
+    <ul>
+      <li><strong>质押式逆回购</strong>：让银行间利率围绕7天逆回购利率窄幅震荡</li>
+      <li><strong>SLF（酸辣粉）</strong>：央行给金融机构的最高贷款利率，极度缺钱时才用</li>
+      <li><strong>法定准备金利率</strong>：强制缴纳的准备金给的利息</li>
+      <li><strong>超额准备金利率</strong>：金融机构过剩流动性的"蓄水池"，利率走廊下限</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>关键结论</strong>：所有政策利率都是价格型货币工具。因为政策利率必须固定利率，而价格型的特征就是利率固定、数量可变。</p>
+    </div>
+  </div>
+
+  <!-- 第5章 -->
+  <div class="section" id="ch5">
+    <h2>五、数量型货币工具：先定数量，再定利率</h2>
+    <img src="assets/slides/slide_12.jpeg" alt="数量型货币工具有哪些" class="slide-img">
+
+    <h3>5.1 定义</h3>
+    <p>央行先确定货币的数量，然后让市场自行决定货币的价格（利率）。</p>
+
+    <div class="key-point">
+      <p><strong>数量型 = 数量固定，利率可变</strong></p>
+      <p>央行把额度定好，金融机构通过招标决定利率，谁出的价高谁先得。</p>
+    </div>
+
+    <h3>5.2 包含哪些工具？</h3>
+    <ol>
+      <li><strong>买断式逆回购</strong>：期限3-6个月，主要用于季末、税收季的流动性投放</li>
+      <li><strong>中期借贷便利（MLF，麻辣粉）</strong>：期限1年，中期流动性投放</li>
+      <li><strong>央行国债买卖</strong>：没有固定期限，随时可以发起</li>
+      <li><strong>存款准备金率</strong>：不是存款准备金利率！一字之差，完全不同</li>
+    </ol>
+
+    <div class="highlight">
+      <p><strong>存款准备金率 vs 存款准备金利率</strong>：</p>
+      <p>- 存款准备金率：银行每笔存款计提多少比例到央行（调节货币乘数）</p>
+      <p>- 存款准备金利率：存在央行的准备金，央行给你多少利息</p>
+      <p>千万别搞混了！</p>
+    </div>
+
+    <h3>5.3 各工具的目的</h3>
+    <ul>
+      <li><strong>央行买卖国债</strong>：特殊，目的是调节国债收益率，让它落在合理范围（不是调节流动性）</li>
+      <li><strong>其他工具（买断式逆回购、MLF、降准）</strong>：调节金融机构的流动性</li>
+    </ul>
+  </div>
+
+  <!-- 第6章 -->
+  <div class="section" id="ch6">
+    <h2>六、流动性调节：为什么央行要频繁操作？</h2>
+
+    <h3>6.1 什么是流动性调节？</h3>
+    <p>央行通过公开市场操作，在不改变货币政策的前提下，让银行间利率稳定在政策利率附近，贴着它走。</p>
+
+    <div class="key-point">
+      <p><strong>核心目的</strong>：让银行间市场利率围绕7天逆回购利率窄幅波动。</p>
+      <p>水多了收一收，水少了放一放。</p>
+    </div>
+
+    <h3>6.2 银行流动性为什么会短缺？90%是这三个原因</h3>
+
+    <h3>原因一：财政收支时间错位</h3>
+    <p>税收收上来的时候，钱先存到央行（政府存款），等花钱的时候再逐步从央行拿出来。这个"收上来、存央行、再逐步花"的过程，会阶段性地把市场上的钱回收掉，导致银行间利率上升。</p>
+
+    <h3>原因二：季节性波动</h3>
+    <ul>
+      <li>春节：大家都要取现金发红包</li>
+      <li>季末缴税：企业集中交税</li>
+      <li>年底分红：机构集中派发红利</li>
+    </ul>
+
+    <h3>原因三：大额工具到期或外部波动</h3>
+    <ul>
+      <li><strong>工具到期</strong>：MLF、逆回购到期要连本带息还给央行，钱从金融机构流回央行</li>
+      <li><strong>结汇波动</strong>：外贸企业集中结汇 → 人民币供给增加 → 银行流动性过剩</li>
+      <li><strong>利润汇出</strong>：外企分红、海外上市公司派息 → 换成美元汇出 → 银行流动性吃紧</li>
+    </ul>
+  </div>
+
+  <!-- 第7章 -->
+  <div class="section" id="ch7">
+    <h2>七、结构型货币工具：定向放水的精准武器</h2>
+    <img src="assets/slides/slide_16.jpeg" alt="结构型货币工具" class="slide-img">
+
+    <h3>7.1 什么是结构性货币工具？</h3>
+    <p>一种特殊的类型：里边有的属于价格型，有的属于数量型。央行之所以把它"单列"，是因为它有很强的<strong>定向性</strong>。</p>
+
+    <div class="key-point">
+      <p><strong>本质</strong>：通过再贷款或资金激励的方式，给特定行业和领域加大贷款投放。</p>
+    </div>
+
+    <h3>7.2 为什么要用结构性工具？</h3>
+    <ul>
+      <li><strong>精准滴灌</strong>：把水放到想去的地方，不再大水漫灌</li>
+      <li><strong>避免资产泡沫</strong>：大水漫灌只会推高资产价格，有钱人更赚钱，实体经济没受益</li>
+      <li><strong>定向支持</strong>：新能源、制造业、农业、普惠小微等领域</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>趋势</strong>：未来你会越来越少看到"放4万亿、几万亿"的大水漫灌，全部都是定向的结构性工具。结构性工具是准财政工具，和财政目的高度勾稽。</p>
+    </div>
+  </div>
+
+  <!-- 第8章 -->
+  <div class="section" id="ch8">
+    <h2>八、哪些工具跟投资有关系？</h2>
+
+    <p>学了这么多货币工具，到底哪些跟你手里的资产有关系？结论很简单：<strong>大多数工具都是调节银行流动性的，跟资产关系不大。只有三个工具会直接影响资产价格。</strong></p>
+
+    <div class="key-point">
+      <p><strong>跟投资有关系的三个工具：</strong></p>
+      <p>1. 7天逆回购利率（政策利率的核心）</p>
+      <p>2. 央行买卖国债</p>
+      <p>3. 结构性货币工具（但要看是不是直接作用于资产）</p>
+    </div>
+
+    <h3>8.1 三个工具分别影响什么？</h3>
+    <ul>
+      <li><strong>7天逆回购利率</strong>：直接影响债券，间接影响股票和大宗商品</li>
+      <li><strong>央行买卖国债</strong>：直接影响债券收益率和价格（买债→收益率降、价格涨；卖债→收益率升、价格跌）</li>
+      <li><strong>结构性工具</strong>：只有直接作用于资产的才会带来上涨（比如互换便利→直接作用于股票）</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>减少噪音</strong>：那些调节银行流动性的工具（买断式逆回购、MLF、降准等等），除非你是做债券交易的，否则不需要关注。学会过滤噪音，只盯对你资产价格有影响的信号。</p>
+    </div>
+  </div>
+
+  <!-- 第9章 -->
+  <div class="section" id="ch9">
+    <h2>九、互换便利（SFISF）详解：打通央行到股市的通道</h2>
+    <img src="assets/slides/slide_20.jpeg" alt="互换便利结构性工具" class="slide-img">
+
+    <h3>9.1 背景：为什么要创设互换便利？</h3>
+    <p>核心问题：央行对非银机构（券商、基金、保险）的流动性支持不足。</p>
+
+    <p>为什么央行以前没法直接支持股市？</p>
+    <ul>
+      <li><strong>借钱要质押</strong>：央行借钱给金融机构，必须有合格质押品（主要是国债）</li>
+      <li><strong>券商手里没国债</strong>：券商手里拿的是股票、ETF，不是国债</li>
+      <li><strong>股票不能质押给央行</strong>：央行不认股票作为质押品</li>
+      <li><strong>所以</strong>：券商没法从央行借到钱，央行也就没法直接给股市放水</li>
+    </ul>
+
+    <h3>9.2 互换便利怎么运作？</h3>
+    <div class="key-point">
+      <p><strong>流程</strong>：</p>
+      <p>1. 券商/基金/保险 → 把手里的股票ETF、沪深300成分股等 → 质押给央行</p>
+      <p>2. 央行 → 换出高流动性的国债/央票 → 给这些机构</p>
+      <p>3. 机构 → 拿国债去回购市场质押 → 融到钱</p>
+      <p>4. 机构 → 拿融到的钱 → 去股市增持股票</p>
+    </div>
+
+    <h3>9.3 关键参数</h3>
+    <ul>
+      <li><strong>总额</strong>：5000亿元</li>
+      <li><strong>期限</strong>：1年（可滚动续作）</li>
+      <li><strong>费率</strong>：市场招标确定</li>
+      <li><strong>目标</strong>：稳定股市</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>为什么924行情那么猛？</strong> 两个原因：第一，预期打得很满；第二，央行真的出了新工具——互换便利，而且是直接作用于股市的结构性工具。市场发现国家不是喊口号，是真的把从央行到股市的通道打通了，群情激奋。</p>
+    </div>
+
+    <h3>9.4 投资启示</h3>
+    <ul>
+      <li>一旦央行推出新的结构性工具，<strong>先看是不是作用于资产的</strong></li>
+      <li>如果是作用于生产效率的（比如新能源设备更新），对资产影响很小</li>
+      <li>如果是直接作用于某类资产的（比如互换便利→股票），那类资产大概率会重估、大涨</li>
+    </ul>
+  </div>
+
+  <!-- 第10章 -->
+  <div class="section" id="ch10">
+    <h2>十、实战：如何看懂宏观政策文件</h2>
+
+    <h3>10.1 宏观+利率共同决定投资周期</h3>
+    <div class="key-point">
+      <p><strong>周期与资产的对应关系</strong>：</p>
+      <p>- 衰退期（失速期）：央行降息 → 适合做债券</p>
+      <p>- 复苏期：央行停止降息 → 适合做股票</p>
+      <p>- 过热期：央行关注通胀、加息 → 适合做大宗商品（债券跌、股票进入牛市尾升期）</p>
+      <p>- 滞胀期：央行加息初期 → 万物皆跌，躺平；加息末期 → 适合做黄金</p>
+    </div>
+
+    <h3>10.2 案例：解读924政策文件</h3>
+    <p>以2024年9月24日的政策文件为例，学习如何快速解读：</p>
+
+    <ul>
+      <li><strong>"降低存款准备金率"</strong> = 要降准了，释放银行流动性</li>
+      <li><strong>"降低政策利率"</strong> = 7天逆回购利率很快要降 → 直接利好债券</li>
+      <li><strong>"创立新的货币政策工具，支持股票市场稳定发展"</strong> = 要出专门给股市的结构性工具 → 喊话定向放水股市 → 股市大概率大涨</li>
+      <li><strong>"政策利率调整带动各类市场基准利率调整"</strong> = 政策利率是上游，市场利率是下游，上游动下游必动</li>
+      <li><strong>"LPR下调0.2-0.25个百分点"</strong> = 企业融资成本降、个人还贷压力小 → 间接利好股市</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>学习的意义</strong>：看到政策文件，不光要知道它说的是什么，还要马上反映出来——它对哪类资产有什么影响？是直接影响还是间接影响？这样你才能在第一时间做出布局。</p>
+    </div>
+  </div>
+
+  <!-- 课程总结 -->
+  <div class="section">
+    <h2>课程总结</h2>
+    <p>本节课完成了政策利率的第二部分内容。核心收获：</p>
+    <p><strong>第一</strong>，政策利率的本质特征是<strong>固定利率</strong>——只有固定利率才能起到"锚"的作用。买断式逆回购、MLF都不是政策利率，因为它们是利率招标、数量固定。</p>
+    <p><strong>第二</strong>，央行货币工具分三大类：<strong>价格型</strong>（先定利率）、<strong>数量型</strong>（先定数量）、<strong>结构型</strong>（定向放水）。大多数工具都是调节银行流动性的，跟你投资没关系。</p>
+    <p><strong>第三</strong>，只有三个工具真正影响资产价格：<strong>7天逆回购利率、央行买卖国债、直接作用于资产的结构性工具</strong。</p>
+    <p><strong>第四</strong>，互换便利是里程碑式的创新——它第一次打通了从央行到股市的直接通道，是结构性工具直接作用于资产的典型案例。</p>
+    <p>掌握这套框架，你就能看懂宏观政策文件背后的资产含义，而不是被市场上的小道消息牵着走。</p>
+  </div>
+
+  <!-- 知识卡片（专业版） -->
+  <div class="section">
+    <h2>知识卡片（专业版）</h2>
+    <p>以下为课程配套的专业版知识卡片，汇总了本期核心知识点的完整框架。</p>
+    <img src="assets/knowledge-card-pro.png" alt="知识卡片专业版" class="slide-img" style="max-width: 100%; height: auto;">
+  </div>
+
+  <div class="footer">
+    小爆姐宏观框架课 · 第6期 · 内部学习资料
+  </div>
+</div>
+</body>
+</html>

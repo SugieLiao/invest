@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盘面全景 9月21日（周一）：指数冲高回落、医药独舞、强弱分化</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #2c3e50; line-height: 1.7; padding: 24px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+  .banner { background: #fff8e6; border-left: 4px solid #e6a700; padding: 10px 14px; font-size: 13px; border-radius: 4px; margin-bottom: 20px; }
+  .tldr { background: #ffffff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .tldr h2 { font-size: 17px; margin-bottom: 10px; color: #1a5276; }
+  .tldr p { font-size: 14px; margin-bottom: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 12px; color: #7f8c8d; }
+  .kpi .val { font-size: 22px; font-weight: 700; margin-top: 2px; }
+  .kpi .note { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+  .kpi-split { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .kpi-split .half { padding: 12px 16px; }
+  .kpi-split .half + .half { border-top: 1px dashed #e3e6ea; background: #f8fbfd; }
+  .kpi-split .val { font-size: 20px; }
+  .kpi .val.est { color: #1a5276; }
+  .up { color: #c0392b; } .down { color: #1e8449; } .flat { color: #2c3e50; }
+  section { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  section h2 { font-size: 17px; margin-bottom: 12px; color: #1a5276; border-bottom: 1px solid #eef1f4; padding-bottom: 8px; }
+  section p { font-size: 14px; margin-bottom: 8px; }
+  .chart { width: 100%; height: 360px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th { background: #f0f3f6; text-align: left; padding: 8px 10px; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f4; }
+  .toggle-btn { background: #eef3f8; border: 1px solid #cfd8e3; border-radius: 4px; padding: 4px 14px; font-size: 12px; cursor: pointer; margin-bottom: 8px; }
+  .toggle-btn:hover { background: #dde7f0; }
+  .src { font-size: 11px; color: #95a5a6; margin-top: 10px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 10px 0; }
+  .chain .node { background: #f4f8fb; border: 1px solid #c9dbe8; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 200px; font-size: 13px; }
+  .chain .node b { color: #1a5276; display: block; margin-bottom: 4px; }
+  .chain .arrow { align-self: center; color: #7f8c8d; font-size: 18px; }
+  ul { padding-left: 20px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  .tag { display: inline-block; background: #fdecea; color: #c0392b; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .topnav { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 10px 16px; margin-bottom: 20px; display: flex; gap: 8px; align-items: center; font-size: 14px; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .topnav .brand { font-weight: 700; color: #1a5276; text-decoration: none; margin-right: 12px; }
+  .topnav .grp { color: #95a5a6; font-size: 12px; margin-right: 4px; }
+  .topnav a { color: #2c3e50; text-decoration: none; padding: 3px 10px; border-radius: 5px; }
+  .topnav a:hover { background: #eef3f8; }
+  .topnav a.cur { background: #1a5276; color: #fff; }
+  .risk { background: #fdf3f3; border-left: 4px solid #c0392b; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+  .foot { font-size: 12px; color: #7f8c8d; border-top: 1px solid #e3e6ea; padding-top: 14px; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="brand cur" href="/a-overview/">A股盘中全景</a>
+    <span class="grp">A股复盘：</span>
+    <a href="/stock-a/">收盘版</a>
+    <a href="/stock-a/noon/">午间版</a>
+  </nav>
+  <h1>盘面全景 9月21日（周一）：指数冲高回落、医药独舞、强弱分化</h1>
+  <div class="sub">2026年9月21日（周一）· 盘面总结（午后开盘观察，数据截至 13:30 前后）</div>
+
+  <div class="banner">⚠️ 口径提示：本文为<strong>盘中口径</strong>，行情与涨跌家数为 13:31 前后盘中快照（非收盘价），行业与个股主力资金为午间至 13:00 前后统计口径；午后及收盘数据可能变化，最终以交易所收盘披露为准。A 股颜色约定：涨红跌绿。</div>
+
+  <div class="tldr">
+    <h2>30秒结论</h2>
+    <p><strong>午后基调：承接转弱、高位回吐</strong>。午休开盘后指数涨幅全面收窄——沪指 +0.46%（午间 +0.55%）尚稳，<span class="tag">创业板指</span>涨幅由 +0.93% 收窄至 +0.10%，<span class="tag">科创50</span>由 +0.35% <strong>翻绿至 -0.45%</strong>；上涨家数由 4359 家降至 4103 家，但涨停反而由 83 家增至 87 家——<strong>普涨收敛、资金向强势股集中</strong>。</p>
+    <p><strong>结构层面医药与地产链是绝对主线</strong>：医疗服务 +3.70%、化学制药 +3.47%、房地产服务 +5.58%，创新药/CRO 涨停潮延续（诺禾致源、近岸蛋白 20cm，南华生物 3 连板）；贵金属 -1.62% 全场最弱，家电、保险、半导体（封测/中芯概念）承压，典型<strong>存量高低切换</strong>而非增量进攻。<strong>成交 13:31 累计约 1.52 万亿（较昨日同期缩约 266 亿），午后首半小时较昨日同期缩量约 360 亿，预估全天约 2.0 万亿</strong>（区间 1.95~2.10 万亿，当前累计 + 昨日 13:31 后段外推并按午后量能折减）——量能回软是午后最大软肋，指数冲关 3935 上方需要量能配合。</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">上证指数（13:31）</div><div class="val up">3929.79<br>+0.46%</div><div class="note">午间 3933.37 · +0.55%，午后小幅回吐</div></div>
+    <div class="kpi"><div class="label">创业板指（13:31）</div><div class="val up">3376.04<br>+0.10%</div><div class="note">午间 +0.93%，涨幅大幅收窄</div></div>
+    <div class="kpi kpi-split">
+      <div class="half"><div class="label">两市成交额（截至当前时点）</div><div class="val flat">1.52万亿</div><div class="note">较昨日同期缩量约 266 亿（13:31 口径）</div></div>
+      <div class="half"><div class="label">预估全天成交额</div><div class="val est">≈2.0万亿</div><div class="note">区间 1.95~2.10 万亿 · 当前累计+昨日同期后段外推，按午后量能折减</div></div>
+    </div>
+    <div class="kpi"><div class="label">涨跌家数</div><div class="val up">4103 涨</div><div class="val down">1320 跌</div><div class="note">上涨占比约 73%，午间为 4359/1066</div></div>
+    <div class="kpi"><div class="label">涨停 / 跌停</div><div class="val"><span class="up">87 家</span> / <span class="down">2 家</span></div><div class="note">午间为 83/1，涨停不降反增</div></div>
+  </div>
+
+  <section>
+    <h2>一、午后方向变化：开盘定基调——回吐为主、沪指相对扛跌</h2>
+    <button class="toggle-btn" onclick="toggleView('idx')">图 / 表切换</button>
+    <div id="idx-chart" class="chart"></div>
+    <div id="idx-table" style="display:none;">
+      <table>
+        <tr><th>指数</th><th>代码</th><th>13:31 点位</th><th>13:31 涨跌幅</th><th>午间 11:30 涨跌幅</th><th>变化</th></tr>
+        <tr><td>上证指数</td><td>000001.SH</td><td>3929.79</td><td class="up">+0.46%</td><td class="up">+0.55%</td><td>小幅收窄</td></tr>
+        <tr><td>深证成指</td><td>399001.SZ</td><td>13655.54</td><td class="up">+0.11%</td><td class="up">+0.57%</td><td>明显收窄</td></tr>
+        <tr><td>创业板指</td><td>399006.SZ</td><td>3376.04</td><td class="up">+0.10%</td><td class="up">+0.93%</td><td>大幅收窄</td></tr>
+        <tr><td>科创50</td><td>000688.SH</td><td>1645.21</td><td class="down">-0.45%</td><td class="up">+0.35%</td><td><strong>由涨转跌</strong></td></tr>
+        <tr><td>沪深300</td><td>000300.SH</td><td>4514.65</td><td class="up">+0.16%</td><td class="up">+0.42%</td><td>收窄</td></tr>
+        <tr><td>上证50</td><td>000016.SH</td><td>2869.39</td><td class="up">+0.30%</td><td class="up">+0.44%</td><td>收窄</td></tr>
+        <tr><td>中证500</td><td>399905.SZ</td><td>7815.13</td><td class="up">+0.20%</td><td class="up">+0.54%</td><td>收窄</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>午后承接判定：回吐 &gt; 承接</strong>。三大指数当日均为高开冲高回落形态，创业板指开盘 3403.90、最高 3429.27，现已回落至 3373.93 一线，早盘涨幅几乎回吐殆尽；科创50 完整翻绿（-0.45%），是主要指数中唯一收跌者，反映科技板块（半导体/封测）午后承压加剧、与医药形成资金「跷跷板」。上证指数全天运行于 3918.13~3935.89 窄幅区间（振幅仅 0.45%），权重（上证50 +0.30%）相对扛跌。<strong>风格上「价值稳、成长吐」</strong>，与午间「成长领涨」的格局逆转。</p>
+    <div class="src">数据来源：腾讯自选股行情接口（westock-data，2026-09-21 13:31 快照）、NeoData 统一行情（2026-09-21 13:31:10）；午间数据引自证券时报/新浪财经午评（2026-09-21 11:30）</div>
+  </section>
+
+  <section>
+    <h2>二、指数与广度：普涨收敛，赚钱效应向头部集中</h2>
+    <div id="dist-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>广度变化（13:31 vs 午间 11:30）</strong>：上涨 4103 家（-256）、下跌 1320 家（+254）、平盘 142 家，上涨占比由 78% 降至 73%——午后半小时约 250 余只个股翻绿，普涨面明显收敛。但<strong>涨停由 83 家增至 87 家、跌停仅由 1 家增至 2 家</strong>，且涨超 7% 个股 98 家 vs 跌超 7% 仅 9 家，下跌尾部极轻——<strong>赚钱效应并未消失，而是在向强势股头部集中</strong>（昨日连板概念 +5.30% 居概念涨幅首位即为印证）。</p>
+    <p>涨跌幅分布呈右侧厚尾：涨 2% 以上合计 1658 家，跌 2% 以上合计 265 家；跌停 2 家中含监管降温下的次新股（C沈鼓一度大跌 48% 触发二次临停）。融资余额 26002.77 亿元（环比 -0.05%）、两融差额低于 20 日均值，杠杆资金做多情绪一般，普涨→收敛的演变与存量资金行为一致。</p>
+    <div class="src">数据来源：NeoData 大盘市场宽度统计（2026-09-21 13:31:34）；午间口径引自证券时报数据宝（2026-09-21 11:30）</div>
+  </section>
+
+  <section>
+    <h2>三、热点板块梯队：真主线医药、次级地产链与消费、脉冲题材散点</h2>
+    <button class="toggle-btn" onclick="toggleView('sec')">图 / 表切换</button>
+    <div id="sec-chart" class="chart"></div>
+    <div id="sec-table" style="display:none;">
+      <table>
+        <tr><th>板块</th><th>涨幅</th><th>领涨股</th><th>领涨股涨幅</th></tr>
+        <tr><td>房地产服务</td><td class="up">+5.58%</td><td>世联行 002285（3连板）</td><td class="up">+10.03%</td></tr>
+        <tr><td>专业连锁Ⅱ</td><td class="up">+3.72%</td><td>天音控股 000829</td><td class="up">+10.02%</td></tr>
+        <tr><td>医疗服务</td><td class="up">+3.70%</td><td>诺禾致源 688315</td><td class="up">+20.00%</td></tr>
+        <tr><td>房地产开发</td><td class="up">+3.48%</td><td>绿地控股 600606</td><td class="up">+10.34%</td></tr>
+        <tr><td>化学制药</td><td class="up">+3.47%</td><td>华仁药业 300110</td><td class="up">+20.07%</td></tr>
+        <tr><td>航海装备Ⅱ</td><td class="up">+3.24%</td><td>松发股份 603268</td><td class="up">+5.56%</td></tr>
+        <tr><td>医药生物（一级）</td><td class="up">+2.89%</td><td>板块掀涨停潮</td><td>—</td></tr>
+        <tr><td>通信设备</td><td class="up">+0.86%</td><td>中际旭创 300308</td><td>资金第一流入股</td></tr>
+        <tr><td>贵金属</td><td class="down">-1.62%</td><td>山金国际、赤峰黄金领跌</td><td class="down">跌幅扩大</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>梯队划分</strong>：</p>
+    <ul>
+      <li><strong>真主线——医药生物全链</strong>：医疗服务 +3.70%、化学制药 +3.47%、生物制品 +3.06%、医药生物（一级）+2.89%；概念端细胞免疫治疗 +4.01%、肿瘤治疗 +4.00%、AI医疗 +3.96%、维生素 +3.95%、CRO +3.91%、单抗 +3.64%、创新药 +3.61%、减肥药 +3.52%。涨停梯队清晰（诺禾致源/近岸蛋白/华仁药业 20cm，南华生物 3 连板、百花医药 3 天 2 板、哈药股份/新华制药/神奇制药等十余股涨停），主力净流入 +57.82 亿居全行业第一，量价资金三验证；</li>
+      <li><strong>次级热点——地产链 + 大消费</strong>：房地产服务 +5.58%（20 日 +18.41%）、房地产开发 +3.48%，世联行 3 连板、绿地控股涨停；影视院线（华智数媒 20cm）、旅游酒店（大连圣亚涨停）、零售（新华百货涨停、国芳集团 2 连板）跟涨，属「政策预期 + 双节消费」的轮动扩散；</li>
+      <li><strong>高位分化——AI 算力链</strong>：通信设备 +0.86% 温和（光模块龙头获主力大幅净买入），但半导体/封测/中芯概念走弱拖累科创50 翻绿，属主线内部「换结构」而非整体撤退；</li>
+      <li><strong>脉冲题材</strong>：黄酒 +4.06%（会稽山 5 天 4 板）、主题公园 +4.30%、冰雪经济、养老概念等散点活跃，持续性存疑；</li>
+      <li><strong>领跌方向</strong>：贵金属 -1.62% 全场最弱（山金国际、赤峰黄金、湖南黄金下挫，同步国际金价回落）、家电（小家电仅 +0.59% 明显跑输）、保险（午间 -0.26%）、银行/货币金融服务微调、激光通信、电池箔、煤炭、油气开采。</li>
+    </ul>
+    <div class="src">数据来源：NeoData / westock-data 板块涨跌排行（2026-09-21 13:31:40）；财联社、证券时报、21世纪经济报道午间报道（2026-09-21）</div>
+  </section>
+
+  <section>
+    <h2>四、资金行为：医药+通信双极吸金，电子单行业失血居首</h2>
+    <div id="flow-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>行业层面（申万一级，午间至 13:00 前后口径）</strong>：医药生物 +57.82 亿一骑绝尘（唯一超 50 亿），通信 +22.78 亿为资金第二极，建筑材料 +13.05 亿、房地产 +8.67 亿、基础化工 +7.75 亿、汽车 +6.64 亿跟涨；净流出端电子 -60.48 亿居首，有色金属 -23.06 亿、电力设备 -18.35 亿、机械设备 -13.53 亿——<strong>资金从科技硬件与周期资源向「医药+地产链+通信」搬家</strong>，与盘面「医药强、半导体弱」的跷跷板完全互证。</p>
+    <p><strong>个股层面</strong>：主力净买入前四为光模块双雄与医药/玻纤——中际旭创（300308）+11.3 亿、新易盛（300502）+9.7 亿、中材科技（002080）+8.4 亿、哈药股份（600664）+7.5 亿（另有长光华芯 +6.7 亿、远东股份 +6.6 亿）；净卖出端天孚通信（300394）-12.1 亿居首、华天科技（002185）-10.4 亿、长电科技（600584）-7.4 亿、C沈鼓 -7.3 亿。<strong>关键背离</strong>：同属光模块链，中际旭创/新易盛大额净流入而天孚通信净流出第一，说明资金在主线内部做结构性调仓而非整体加仓；封测（华天、长电）是电子行业失血的主要出口。</p>
+    <p><strong>信号解读</strong>：北向资金早盘净流出超 45 亿元（减仓白酒与权重金融），主力 10/20 日累计仍偏弱，今日属于<strong>事件催化下的存量再配置</strong>——医药政策线吸金与算力内部换仓叠加，而非增量全面进攻；午后涨停家数不降反增（87 家）说明短线资金仍聚焦强势方向接力。</p>
+    <div class="src">数据来源：NeoData 申万一级行业资金表（2026-09-21，午间至13:00前后口径）；个股主力净买卖为 westock-data 结构化核对口径（与金融界/财联社盯盘数据方向一致、绝对值因时点略有差异）；北向为财联社口径。注：主力资金按单笔拆分属统计推断，参考意义有限。</div>
+  </section>
+
+  <section>
+    <h2>五、消息面归因：政策与事件的传导链</h2>
+    <div class="chain">
+      <div class="node"><b>催化① 医药"十五五"规划 + 出海尾部风险解除（真主线）</b>9月18日工信部等十部门印发《医药工业发展"十五五"规划》：2030 年规上医药工业营收超 3.5 万亿、首创新药占全球 25% 以上、创新药规模年均增速 20%+，明确发展 CRO/CDMO；叠加国常会部署医疗康复护理扩容工程、路透报道美国对华生物医药投资新规审查范围收窄至病原体/武器化生物技术（创新药授权出海主通道保持畅通）→ <strong>医药生物全链涨停潮、主力净流入 57.8 亿居首</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>催化② 地产政策叙事延续（次级热点）</b>新修订《住房公积金管理条例》9月20日施行（装修、物业费可提取）；住建部表态现房销售是大势所趋、二手房交易占比今年前8月达52%；上周五地产涨停潮（万科A、绿地控股）惯性 → <strong>房地产服务 +5.58%、房地产开发 +3.48%</strong></div>
+    </div>
+    <div class="chain">
+      <div class="node"><b>催化③ AI 算力硬件景气（高位分化）</b>长鑫科技 9月20日晚公告第五代 DRAM 平台正式量产（单片晶圆产出 +50%）；韩国 9 月前 20 天芯片出口同比 +259%；MLCC 因 AI 服务器需求"一天一价"（部分型号月涨 7-8 倍）；新易盛表态 1.6T 光模块持续放量 → <strong>光模块/PCB 局部强（广合科技涨停），但封测/中芯概念兑现回落、科创50 翻绿——高位兑现与产业逻辑并存</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>催化④ 外围与风偏（背景板）</b>9月20日中美经贸团队纽约磋商（9月24日中美元首会晤预期，路透：房地产、医疗保健领涨）；美联储 9月16日加息落地后"利空出尽"；央行今日开展 1650 亿 7 天逆回购、人民币中间价 6.7487 调升 → <strong>全球风险偏好回补支撑 A 股高开，但增量有限</strong></div>
+    </div>
+    <ul>
+      <li><strong>午间新消息</strong>：国新办上午发布会，国家药监局介绍今年以来已批准 59 个创新药、51 个创新医疗器械上市，强化医药政策密度；国家粮储局："十五五"粮食产业年工业总产值有望超 4.5 万亿元（粮食概念午后回落，未发酵）；</li>
+      <li>监管降温信号：上交所对 C沈鼓异常交易投资者暂停账户交易，次新股炒作情绪快速退潮（C沈鼓盘中一度 -48% 二次临停）；</li>
+      <li>标普将中国证券业锚定评级由"bb"上调至"bb+"，广发证券升至 BBB+/稳定（券商板块温和）；</li>
+      <li>LPR 连续 16 个月不变（1 年期 3.00%、5 年期以上 3.50%），流动性友好但无边际催化；市场监管总局"反内卷"升级（加快修订《价格法》）。</li>
+    </ul>
+    <div class="src">来源：工信部规划（2026-09-18 印发，一手政策文件）、国常会（2026-09-18）、路透社（2026-09-18/21）、新华社（中美磋商，2026-09-20）、腾讯自选股热榜与金十数据（2026-09-21 盘中）；媒体类为非一手来源，政策全文以官方发布为准</div>
+  </section>
+
+  <section>
+    <h2>六、综合研判与尾盘观察清单</h2>
+    <p><strong>行情定性</strong>：早盘普涨修复 + 午后高位回吐的「冲高回落」结构。利好（政策催化 + 外围缓和）在高开时已被大部分定价，午后缺乏增量承接——成交较昨日同期不增反缩、北向早盘净流出、两融低于均值，均指向<strong>存量博弈下的结构性行情</strong>。指数层面沪指 3935 上方为 9 月 10 日前高与套牢区叠加压力（3948~3955），午后量能回软背景下，尾盘大概率维持 3915~3940 窄幅震荡，收红无虞、冲关乏力。</p>
+    <p><strong>主线研判</strong>：医药是今日唯一「价格 + 涨停梯队 + 资金净流入」三验证的真主线，持续性看明日能否续力（政策纲领级催化通常有 2-3 日以上的发酵期）；地产链为政策预期的博弈性反弹，持续性待验证；AI 算力属主线内换龙头（存储/封测 → 光模块/PCB），产业逻辑未破；脉冲题材不追。</p>
+    <p><strong>尾盘观察三个核心变量</strong>：</p>
+    <ul>
+      <li><strong>① 医药涨停家数与净流入</strong>：午后涨停能否守住 80+、医药生物净流入能否从 57.8 亿继续放大——若尾盘涨停家数回落至 70 以下，说明获利盘开始兑现主线；</li>
+      <li><strong>② 创业板指 3373 一线支撑</strong>：创业板指已回吐至日内低点 3373.93 附近，尾盘若守住 3370 则回吐有界、跌破则确认冲高回落日（连带压制明日情绪）；</li>
+      <li><strong>③ 全天成交能否守住 2 万亿</strong>：午后首半小时较昨日同期缩量约 360 亿，若全天缩至 1.95 万亿以下，确认节前存量休整模式，指数区间震荡（3900~3950）概率上升；反之若尾盘放量抢筹医药，则明日有惯性冲高动能。</li>
+    </ul>
+    <div class="risk"><strong>风险提示</strong>：① 本周四（9月24日）为中秋假期前最后交易日、9月25-27日休市，长假前资金面趋保守；② 10 月底 FOMC 会议（点阵偏鹰，10 月再加息定价约 53%）为外部扰动；③ 三季报预告陆续披露，高位科技股业绩不及预期风险；④ 本文全部为盘中快照数据，午后及收盘存在变数；⑤ 次新股监管风险（C沈鼓案例）。</div>
+  </section>
+
+  <div class="foot">
+    数据时点：2026-09-21 13:31（行情/涨跌家数盘中快照）/ 11:30-13:00 前后（行业与个股主力资金）· 行情来源：腾讯自选股（westock-data）、NeoData；新闻来源：工信部、国常会、新华社、路透社、证券时报、财联社、新浪财经、21世纪经济报道、金十数据 · 盘中口径提示：以上内容为午后开盘观察版，非收盘结论 · 免责声明：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+function toggleView(key) {
+  var c = document.getElementById(key + '-chart');
+  var t = document.getElementById(key + '-table');
+  if (c.style.display === 'none') { c.style.display = 'block'; t.style.display = 'none'; }
+  else { c.style.display = 'none'; t.style.display = 'block'; }
+}
+
+var UP = '#c0392b';
+var DOWN = '#1e8449';
+
+var idxNames = ['上证指数', '深证成指', '创业板指', '科创50', '沪深300', '上证50', '中证500'];
+var idxNoon = [0.55, 0.57, 0.93, 0.35, 0.42, 0.44, 0.54];
+var idxNow = [0.46, 0.10, 0.12, -0.45, 0.16, 0.30, 0.20];
+echarts.init(document.getElementById('idx-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}<br/>{a0}: {c0}%<br/>{a1}: {c1}%' },
+  legend: { data: ['午间 11:30', '13:31 盘中'], top: 0 },
+  grid: { left: 50, right: 30, top: 40, bottom: 40 },
+  xAxis: { type: 'category', data: idxNames, axisLabel: { interval: 0, rotate: 20 } },
+  yAxis: { type: 'value', name: '涨跌幅(%)' },
+  series: [
+    { name: '午间 11:30', type: 'bar', barWidth: '30%',
+      data: idxNoon.map(function (v) { return { value: v, itemStyle: { color: '#f0b27a' } }; }),
+      label: { show: true, position: 'top', formatter: '{c}%', color: '#b9770e', fontSize: 10 } },
+    { name: '13:31 盘中', type: 'bar', barWidth: '30%',
+      data: idxNow.map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+      label: { show: true, position: 'top', formatter: '{c}%', color: '#2c3e50', fontSize: 10 } }
+  ]
+});
+
+var distNames = ['涨停', '+7%以上', '5~7%', '2~5%', '0~2%', '平盘', '-2~0%', '-5~-2%', '-7~-5%', '-7%以下', '跌停'];
+var distVals = [87, 98, 194, 1279, 2445, 142, 1053, 239, 17, 9, 2];
+var distColors = [UP, UP, UP, UP, UP, '#95a5a6', DOWN, DOWN, DOWN, DOWN, DOWN];
+echarts.init(document.getElementById('dist-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 家' },
+  grid: { left: 60, right: 30, top: 30, bottom: 60 },
+  xAxis: { type: 'category', data: distNames, axisLabel: { interval: 0, rotate: 35 } },
+  yAxis: { type: 'value', name: '家数' },
+  series: [{ type: 'bar',
+    data: distVals.map(function (v, i) { return { value: v, itemStyle: { color: distColors[i] } }; }),
+    label: { show: true, position: 'top', color: '#2c3e50' } }]
+});
+
+var secNames = ['房地产服务', '专业连锁Ⅱ', '医疗服务', '房地产开发', '化学制药', '航海装备Ⅱ', '医药生物(一级)', '通信设备', '贵金属'];
+var secVals = [5.58, 3.72, 3.70, 3.48, 3.47, 3.24, 2.89, 0.86, -1.62];
+echarts.init(document.getElementById('sec-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+  grid: { left: 110, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '涨跌幅(%)' },
+  yAxis: { type: 'category', data: secNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: secVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var flowNames = ['医药生物', '通信', '建筑材料', '房地产', '基础化工', '汽车', '传媒', '银行', '非银金融', '电力设备', '有色金属', '电子'];
+var flowVals = [57.82, 22.78, 13.05, 8.67, 7.75, 6.64, 4.54, 4.12, -6.51, -18.35, -23.06, -60.48];
+echarts.init(document.getElementById('flow-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 亿元' },
+  grid: { left: 90, right: 50, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '主力净流入(亿元)' },
+  yAxis: { type: 'category', data: flowNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: flowVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}', color: '#2c3e50' } }]
+});
+</script>
+</body>
+</html>

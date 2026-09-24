@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>货币政策第1期：货币（1）</title>
+<script src="/shared/nav.js?v=20260924b" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  line-height: 1.8;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #c0392b; }
+.header .subtitle { color: #e67e22; font-size: 16px; margin-bottom: 12px; font-weight: 600; }
+.header .meta { color: #86868b; font-size: 14px; }
+.header .meta a { color: #0066cc; text-decoration: none; }
+.toc { background: #fff; border-radius: 12px; padding: 24px 30px; margin-bottom: 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.toc h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+.toc ol { list-style: none; counter-reset: toc; }
+.toc li { counter-increment: toc; padding: 6px 0; font-size: 14px; }
+.toc li::before { content: counter(toc) ". "; color: #86868b; margin-right: 8px; }
+.toc a { color: #0066cc; text-decoration: none; }
+.chapter { background: #fff; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.chapter h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: #c0392b; }
+.chapter .time { color: #86868b; font-size: 13px; margin-bottom: 20px; }
+.chapter img { width: 100%; border-radius: 8px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.chapter h3 { font-size: 17px; font-weight: 600; margin: 24px 0 12px; color: #2c3e50; }
+.chapter h4 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: #e67e22; }
+.chapter ul, .chapter ol { margin-left: 20px; margin-bottom: 16px; }
+.chapter li { margin-bottom: 8px; font-size: 15px; }
+.chapter p { font-size: 15px; margin-bottom: 12px; }
+.chapter strong { font-weight: 600; color: #c0392b; }
+.highlight { background: #fff8e1; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+.callout { background: #fff3e0; border-left: 4px solid #e67e22; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.callout p { margin-bottom: 0; }
+.callout-blue { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.callout-blue p { margin-bottom: 0; }
+.callout-green { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.callout-green p { margin-bottom: 0; }
+.footer { text-align: center; color: #86868b; font-size: 13px; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; }
+.knowledge-card { background: #fff; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
+.knowledge-card h2 { font-size: 20px; margin-bottom: 20px; color: #c0392b; }
+.knowledge-card img { max-width: 100%; border-radius: 8px; }
+@media (max-width: 600px) {
+  .container { padding: 20px 12px; }
+  .chapter { padding: 20px; }
+  .header h1 { font-size: 22px; }
+}
+</style>
+<script src="/shared/nav.js" defer></script>
+<script src="/shared/edit.js?v=20260924g" defer></script>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>货币政策第1期：货币（1）</h1>
+  <div class="subtitle">基础货币的构成、来源与观察方法</div>
+  <div class="meta">
+    爆姐硬核财富观 · 宏观框架课 · 2025年5月22日<br>
+    飞书妙记：<a href="https://ycnh1a1mbep0.feishu.cn/minutes/obcn71993f286iu984935g4o" target="_blank">查看逐字稿</a>
+  </div>
+</div>
+
+<div class="toc">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#ch1">为什么要了解货币政策？</a></li>
+    <li><a href="#ch2">案例复盘：2015年PSL如何引爆房地产行情</a></li>
+    <li><a href="#ch3">知识点1：PSL的定义与政策背景</a></li>
+    <li><a href="#ch4">知识点2：PSL的资金流转闭环与政策效果</a></li>
+    <li><a href="#ch5">知识点3：基础货币的定义与核心地位</a></li>
+    <li><a href="#ch6">知识点4：如何观察基础货币——央行资产负债表</a></li>
+    <li><a href="#ch7">课程总结</a></li>
+    <li><a href="#ch8">配套知识卡片</a></li>
+  </ol>
+</div>
+
+<div class="chapter" id="ch1">
+  <h2>一、为什么要了解货币政策？</h2>
+  <div class="time">约 22-25 分钟</div>
+  <img src="assets/slides/slide_02.jpg" alt="为什么要了解货币政策">
+  <p>宏观框架课分为三大类：<strong>货币政策 → 美林时钟（经济周期）→ 大类资产</strong>。货币政策排在第一位，因为它是影响金融资产<strong>最直接</strong>的因素。</p>
+  <div class="callout-green">
+    <p><strong>学习目的：</strong>不是为了长知识，而是为了判断资产涨跌、做财富配置。央行放水流向哪里，哪里的资产就会涨。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch2">
+  <h2>二、案例复盘：2015年PSL如何引爆房地产行情</h2>
+  <div class="time">约 24-30 分钟</div>
+  <img src="assets/slides/slide_04.jpg" alt="什么是PSL">
+  <p>用2015年PSL棚改货币化这个经典案例，直观感受货币政策对资产价格的决定性影响。</p>
+</div>
+
+<div class="chapter" id="ch3">
+  <h2>三、知识点1：PSL的定义与政策背景</h2>
+  <div class="time">约 24-35 分钟</div>
+  <h4>【核心内容】</h4>
+  <ul>
+    <li><strong>定义：</strong>抵押补充贷款（PSL），是一种央行<strong>结构性政策工具</strong>，兼具<strong>基础货币投放</strong>和<strong>定向贷款支持</strong>两大功能。</li>
+    <li><strong>政策背景（2015年）：</strong>房地产投资增速下滑至 <span class="highlight">1%</span>，库存高企，房企不拿地，导致上下游产业链（钢筋、水泥、建材等）全面受创，工业增加值增速大幅下滑。</li>
+  </ul>
+  <h4>恶性连锁反应</h4>
+  <ol>
+    <li><strong>房企端：</strong>库存积压，无力拿地盖新房</li>
+    <li><strong>政府端：</strong>土地卖不掉，财政收入（土地出让金）锐减</li>
+    <li><strong>经济端：</strong>传统调控方式（降息、降准）失灵，陷入"库存越高、越不敢卖地、经济越差"的<strong>死循环</strong></li>
+  </ol>
+  <img src="assets/slides/slide_06.jpg" alt="恶性连锁反应">
+  <div class="callout">
+    <p><strong>数据验证：</strong>2015年工业增加值增速从 <span class="highlight">8.3%</span> 断崖式下跌到 <span class="highlight">6.2%</span>，对当时经济增长形成显著拖累。</p>
+  </div>
+  <div class="callout-blue">
+    <p><strong>实践运用：</strong>2015年的困局表明，当传统总量工具失效时，央行会启用结构性工具进行精准干预。PSL正是在此背景下，为解决房地产库存问题、为"棚改货币化安置"提供长期低成本资金而推出的。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch4">
+  <h2>四、知识点2：PSL的资金流转闭环与政策效果</h2>
+  <div class="time">约 35-45 分钟</div>
+  <img src="assets/slides/slide_08.jpg" alt="PSL运作机理">
+  <h4>【核心内容】</h4>
+  <h4>资金流转闭环</h4>
+  <ol>
+    <li><strong>源头：</strong>央行通过PSL向国开行<strong>投放基础货币</strong></li>
+    <li><strong>传导：</strong>国开行将资金借给地方政府（棚改专项贷款）</li>
+    <li><strong>落地：</strong>地方政府将资金作为拆迁补偿款（货币化）发给拆迁户</li>
+    <li><strong>去库存：</strong>拆迁户（刚需）拿钱涌入楼市，迅速消化房企库存</li>
+    <li><strong>循环再生：</strong>房企回款后向地方政府拿地盖新房；地方政府获得土地出让金后偿还国开行贷款，国开行再还央行</li>
+  </ol>
+  <h4>政策效果</h4>
+  <ul>
+    <li><strong>正面：</strong>房屋销售面积陡增，库存快速下降，房地产产业链被盘活</li>
+    <li><strong>副作用：</strong>房价暴涨。央行通过PSL工具释放的 <span class="highlight">4万亿</span> 基础货币，精准地流向了房地产这一资产，直接导致了全国范围内的房价飞涨</li>
+  </ul>
+  <img src="assets/slides/slide_10.jpg" alt="棚改货币化带来房价暴涨">
+  <div class="callout-green">
+    <p><strong>实践运用：</strong>PSL案例是理解货币政策与资产价格关系的绝佳范本。它无可辩驳地证明了：<strong>只有央行的水（基础货币），精准地流到了哪个资产上，哪个资产才会上涨。</strong>没有"水"的配合，再多的行业利好政策也难以驱动价格。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch5">
+  <h2>五、知识点3：基础货币的定义与核心地位</h2>
+  <div class="time">约 45-65 分钟</div>
+  <img src="assets/slides/slide_13.jpg" alt="统计货币发行量指标">
+  <h4>【核心内容】</h4>
+  <ul>
+    <li><strong>定义：</strong>基础货币（又称储备货币），指由<strong>央行直接发行</strong>的、在同一时点上流通的货币。它是最原始的"钱"，是所有后续货币创造的源头。</li>
+    <li><strong>与M2的区别：</strong>市场上广为流传的M2（广义货币）是"<strong>滚出来的</strong>"，是基础货币通过银行体系的信贷活动<strong>派生</strong>出来的，并非央行实际印的钱。</li>
+    <li><strong>核心判断标准：</strong>基础货币供给量的增加，才是我们通常所说的"印钱"、"扩表"或"放水"，它对资产价格的影响最为直接。</li>
+  </ul>
+  <h4>四类货币统计指标</h4>
+  <ul>
+    <li><strong>基础货币</strong>（央行发行的）</li>
+    <li><strong>M0</strong>——流通中的现金</li>
+    <li><strong>M1（狭义货币）</strong>——M0 + 企业活期存款</li>
+    <li><strong>M2（广义货币）</strong>——M1 + 居民储蓄 + 企业定期存款</li>
+  </ul>
+  <div class="callout-blue">
+    <p><strong>实践运用：</strong>分析货币政策时，必须穿透M2等派生指标的迷雾，直击源头——基础货币的变动。一个博主如果用M2的增长来论证"央行在大放水"，可以直接将其拉黑。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch6">
+  <h2>六、知识点4：如何观察基础货币——央行资产负债表</h2>
+  <div class="time">约 65-89 分钟</div>
+  <img src="assets/slides/slide_15.jpg" alt="基础货币关键问题">
+  <h4>【核心内容】</h4>
+  <ul>
+    <li><strong>数据来源：</strong>中国人民银行官网 → 调查统计 → 货币统计概览 → <strong>货币当局资产负债表</strong></li>
+    <li><strong>核心观察项：</strong>负债端的"<strong>储备货币</strong>"项，即为基础货币</li>
+    <li><strong>分析方法：</strong>不能只看"储备货币"的总量变化，因为它是一个加总项，具有迷惑性。真正的关键在于分析其<strong>子项的结构性变化</strong>，判断"水"的具体流向。</li>
+  </ul>
+  <img src="assets/slides/slide_17.jpg" alt="货币当局资产负债表">
+  <h4>资产端三大子项的解读</h4>
+  <ol>
+    <li><strong>对政府债权增加：</strong>意味着央行下场购买国债，<span class="highlight">水流向了债市</span></li>
+    <li><strong>对其他金融机构债权增加：</strong>意味着央行向券商、保险公司等机构投放流动性，<span class="highlight">水流向了股市</span></li>
+    <li><strong>对其他存款性公司债权减少：</strong>通常意味着银行信贷需求不振，央行在从银行体系<span class="highlight">回收流动性</span></li>
+  </ol>
+  <div class="callout-green">
+    <p><strong>实践运用：</strong>央行资产负债表是透视货币政策意图的最强工具。例如，2023年虽然储备货币总量曲线起伏，但其子项显示，央行在持续增持国债、向非银金融机构放水，同时从银行体系收水。这清晰地揭示了<strong>结构性宽松</strong>的真实图景，并准确对应了同年<strong>债市和股市特定板块</strong>的行情。</p>
+  </div>
+</div>
+
+<div class="chapter" id="ch7">
+  <h2>七、课程总结</h2>
+  <div class="time">约 89-94 分钟</div>
+  <div class="callout-green">
+    <p>
+      <strong>核心框架：</strong>资产价格的上涨，根本上是由央行的"水"（基础货币）驱动的。<br><br>
+      我们学习了如何穿透M2等派生指标，找到真正的"源头之水"——央行资产负债表中的"储备货币"项。<br><br>
+      更重要的是，我们掌握了比观察总量更核心的分析方法：通过解构"对政府债权"、"对其他金融机构债权"等关键子项，判断央行的水究竟流向了哪个资产类别。<br><br>
+      <strong>只有精准地识别出水的流向，我们才能在纷繁的政策信号中，抓住真正的投资机会。</strong>
+    </p>
+  </div>
+</div>
+
+<div class="knowledge-card" id="ch8">
+  <h2>配套知识卡片（专业版）</h2>
+  <img src="assets/知识卡片_专业版.png" alt="知识卡片专业版">
+</div>
+
+<div class="footer">
+  货币政策第1期：货币（1） · 爆姐硬核财富观<br>
+  笔记由视频课程 + 配套PPT + 知识卡片 综合生成
+</div>
+
+</div>
+</body>
+</html>

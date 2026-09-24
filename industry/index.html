@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>势宫行研 · 少耗如常宫</title>
+<script src="/shared/nav.js" defer></script>
+<style>
+:root{
+  --bg:#0d1117; --card:#161b22; --bd:#30363d; --fg:#e6edf3; --mut:#8b949e;
+  --acc:#58a6ff; --ok:#3fb950; --warn:#d29922; --err:#f85149;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,sans-serif;}
+a{color:var(--acc);text-decoration:none}
+#app{display:flex;height:calc(100vh - 52px);margin-top:52px}
+
+/* 侧栏 */
+#side{width:290px;flex:0 0 290px;background:var(--card);border-right:1px solid var(--bd);
+  overflow-y:auto;padding:14px 0}
+#side h1{font-size:15px;margin:0 16px 4px;color:var(--fg);letter-spacing:.5px}
+#side .sub{font-size:11px;color:var(--mut);margin:0 16px 12px}
+#side .search{margin:0 12px 12px;position:relative}
+#side .search::before{content:"🔍";position:absolute;left:9px;top:50%;transform:translateY(-50%);
+  font-size:12px;opacity:.7;pointer-events:none}
+#side .search input{width:100%;padding:8px 9px 8px 30px;border-radius:8px;border:1px solid #484f58;
+  background:rgba(110,118,129,.14);color:var(--fg);font-size:12.5px;outline:none;
+  transition:border-color .15s,box-shadow .15s,background .15s}
+#side .search input::placeholder{color:#7d8590}
+#side .search input:focus{border-color:var(--acc);background:rgba(110,118,129,.22);
+  box-shadow:0 0 0 3px rgba(88,166,255,.18)}
+#side .hint{font-size:11px;color:var(--mut);margin:-4px 14px 10px;line-height:1.5}
+/* 搜索空态：必须给出可点的恢复入口，不能让目录"整列消失" */
+#side .empty{padding:12px 16px;font-size:12px;color:var(--mut);line-height:1.7}
+#side .empty button{margin-top:8px;width:100%;padding:7px 9px;border-radius:7px;cursor:pointer;
+  border:1px solid #484f58;background:rgba(110,118,129,.14);color:var(--fg);font-size:12px}
+#side .empty button:hover{border-color:var(--acc);color:var(--acc)}
+.item{padding:7px 16px;cursor:pointer;border-left:3px solid transparent;font-size:13px;line-height:1.4}
+.item:hover{background:#1c2129}
+.item.active{background:#1f6feb22;border-left-color:var(--acc);color:#fff}
+.item .num{color:var(--mut);font-size:11px;display:block}
+.item .nm{display:block;margin-top:1px}
+#sum{font-size:11px;color:var(--mut);margin:0 16px 8px;min-height:14px}
+.item .snip{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  font-size:11.5px;color:var(--mut);line-height:1.5;margin-top:3px}
+.item .cnt{float:right;font-size:10.5px;color:var(--mut);margin-left:6px}
+.item mark{background:#5a4a00;color:#ffd33d;padding:0 1px;border-radius:2px}
+#doc .hit{background:#5a4a00;color:#ffd33d;border-radius:2px;box-shadow:0 0 0 1px #7a6400}
+#doc .hit.cur{background:#9e7b00;color:#fff;box-shadow:0 0 0 2px #d9a800}
+#hitbox{display:none;align-items:center;gap:4px;font-size:11.5px;color:var(--mut)}
+#hitbox.on{display:inline-flex}
+#hitbox .mini{padding:2px 8px;border-radius:5px;border:1px solid var(--bd);background:#21262d;
+  color:var(--fg);cursor:pointer;font-size:12px;line-height:1.5}
+#hitbox .mini:hover{border-color:var(--acc);color:var(--acc)}
+
+/* 主区 */
+#main{flex:1;min-width:0;overflow-y:auto;padding:22px 30px 80px;position:relative}
+#bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+#bar .t{font-size:20px;font-weight:600;flex:1;min-width:200px}
+.btn{padding:5px 13px;border-radius:6px;border:1px solid var(--bd);background:#21262d;
+  color:var(--fg);cursor:pointer;font-size:12.5px}
+.btn:hover{border-color:var(--acc);color:var(--acc)}
+.btn.pri{background:#238636;border-color:#2ea043;color:#fff}
+.btn.pri:hover{background:#2ea043;color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+#tip{font-size:12.5px;padding:6px 11px;border-radius:6px;display:none}
+#tip.ok{display:block;background:#0f2913;color:var(--ok);border:1px solid #2ea043}
+#tip.err{display:block;background:#2b1416;color:var(--err);border:1px solid #f85149}
+
+/* 正文 */
+#doc{max-width:960px;font-size:14.5px;line-height:1.75}
+#doc h1{font-size:24px;border-bottom:1px solid var(--bd);padding-bottom:8px;margin-top:6px}
+#doc h2{font-size:19px;margin-top:30px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+#doc h3{font-size:16px;margin-top:22px;color:#c9d1d9}
+#doc h4{font-size:14.5px;margin-top:16px;color:var(--mut)}
+#doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:13px;display:block;overflow-x:auto}
+#doc th,#doc td{border:1px solid var(--bd);padding:7px 10px;text-align:left}
+#doc th{background:#1c2129}
+#doc tr:nth-child(even) td{background:#12171d}
+#doc code{background:#1c2129;padding:2px 5px;border-radius:4px;font-size:12.5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+#doc pre{background:#161b22;border:1px solid var(--bd);border-radius:8px;padding:12px;
+  overflow-x:auto;line-height:1.5}
+#doc pre code{background:none;padding:0}
+#doc blockquote{border-left:3px solid var(--acc);margin:14px 0;padding:4px 14px;
+  color:var(--mut);background:#12171d}
+#doc hr{border:0;border-top:1px solid var(--bd);margin:26px 0}
+#doc ul,#doc ol{padding-left:24px}
+#doc li{margin:4px 0}
+#doc mark{background:#5a4a00;color:#ffd33d;padding:0 2px}
+.mermaid{background:#fff;border-radius:8px;padding:12px;margin:16px 0;text-align:center}
+.mermaid svg{max-width:100%}
+
+/* 编辑器 */
+#editor{display:none;width:100%;height:calc(100vh - 210px);background:#0b0f14;color:var(--fg);
+  border:1px solid var(--bd);border-radius:8px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:13px;line-height:1.6;outline:none;resize:vertical}
+#meta{font-size:11.5px;color:var(--mut);margin-bottom:8px}
+#mask{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:99}
+#mask .box{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:20px;width:330px}
+#mask .box h3{margin:0 0 8px;font-size:15px}
+#mask .box p{margin:0 0 12px;font-size:12.5px;color:var(--mut)}
+#mask input{width:100%;padding:8px;border-radius:6px;border:1px solid var(--bd);
+  background:var(--bg);color:var(--fg);outline:none;margin-bottom:12px}
+/* 侧栏可见性：宽屏靠 .side-fold 折叠，窄屏靠 .side-open 抽屉。
+   「☰ 目录 / 🔍 搜索」两个按钮在所有屏宽常驻——任何情况下都能把侧栏找回，绝不出现入口消失。 */
+#app.side-fold #side{display:none}
+#scrim{position:fixed;left:0;right:0;top:52px;bottom:0;background:rgba(0,0,0,.45);
+  display:none;z-index:55}
+#app.side-open #scrim{display:block}
+@media(max-width:760px){
+  #side{position:fixed;top:52px;left:0;bottom:0;width:272px;z-index:60;flex:none;
+    transform:translateX(-102%);transition:transform .18s ease;box-shadow:6px 0 24px rgba(0,0,0,.5)}
+  #app.side-open #side{transform:translateX(0)}
+  #app.side-fold #side{display:block}   /* 窄屏由抽屉 transform 控制，fold 不生效 */
+  #main{padding:16px}
+}
+/* 手机：nav.js 的菜单栏高度收窄到 44px，随之对齐 */
+@media(max-width:560px){
+  #app{height:calc(100vh - 44px);margin-top:44px}
+  #side,#scrim{top:44px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="side">
+    <h1>势宫行研</h1>
+    <p class="sub">产业研究所 · Node 笔记</p>
+    <!-- 防浏览器自动填充（Edge/Chrome 会把保存的邮箱塞进普通输入框，一塞进来就触发搜索、目录变空）：
+         ① readonly 直到首次交互（见 unlock()）；② 诱饵隐藏字段吃掉 autofill；
+         ③ autocomplete=off + type=search；④ 加载后兜底清空 -->
+    <div class="search">
+      <form autocomplete="off" onsubmit="return false" style="margin:0">
+        <input type="text" name="username" tabindex="-1" aria-hidden="true"
+               autocomplete="username" style="display:none">
+        <input id="q" type="search" name="q" readonly autocomplete="off"
+               autocorrect="off" autocapitalize="off" spellcheck="false"
+               placeholder="搜索全文（空格分隔多词）">
+      </form>
+    </div>
+    <div class="hint">全文检索 · 空格分隔多词（AND）· Enter 打开首条 · Esc 清空</div>
+    <div id="sum"></div>
+    <div id="list"></div>
+  </aside>
+  <main id="main">
+    <div id="bar">
+      <button class="btn" id="btnDir" title="目录">☰ 目录</button>
+      <button class="btn" id="btnSearch" title="搜索">🔍 搜索</button>
+      <div class="t" id="title">载入中…</div>
+      <button class="btn" id="btnEdit">编辑</button>
+      <button class="btn pri" id="btnSave" style="display:none">保存回宫</button>
+      <button class="btn" id="btnCancel" style="display:none">取消</button>
+      <span id="hitbox"><span id="hitInfo"></span><button class="mini" id="hitPrev" title="上一处">‹</button><button class="mini" id="hitNext" title="下一处">›</button></span>
+      <span id="tip"></span>
+    </div>
+    <div id="meta"></div>
+    <div id="doc"></div>
+    <textarea id="editor" spellcheck="false"></textarea>
+  </main>
+</div>
+<div id="scrim"></div>
+
+<div id="mask"><div class="box">
+  <h3>编辑密钥</h3>
+  <p>保存会直接提交到 GitHub 仓库（SugieLiao/shaohao-ruchang），请输入编辑密钥。</p>
+  <input type="password" id="keyInput" placeholder="EDIT_KEY">
+  <div style="display:flex;gap:8px;justify-content:flex-end">
+    <button class="btn" id="keyCancel">取消</button>
+    <button class="btn pri" id="keyOk">确定</button>
+  </div>
+</div></div>
+
+<script src="/industry/assets/marked.min.js"></script>
+<script src="/industry/assets/mermaid.min.js"></script>
+<script>
+const API='/api/industry-save';
+let NOTES=[], cur=null, editing=false;
+
+function key(){return localStorage.getItem('industry_edit_key')||''}
+function tip(m,ok){const t=document.getElementById('tip');t.textContent=m;t.className=ok?'ok':'err';
+  if(m)setTimeout(()=>{t.className='';t.textContent=''},5000)}
+
+/* Obsidian 语法轻量预处理 */
+function pre(md){
+  return md
+    .replace(/^(\s*>\s*)\[!(\w+)\][+-]?\s*/gm,'$1')       // Obsidian callout → 普通引用块
+    .replace(/==([^=\n]+)==/g,'<mark>$1</mark>')          // 高亮
+    .replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(m,a,b)=>b||a) // 双链
+    .replace(/%%[\s\S]*?%%/g,'');                          // 注释
+}
+function render(md){
+  const html=marked.parse(pre(md));
+  const d=document.getElementById('doc');
+  d.innerHTML=html;
+  d.querySelectorAll('pre>code.language-mermaid').forEach(c=>{
+    const div=document.createElement('div');
+    div.className='mermaid'; div.textContent=c.textContent;
+    c.closest('pre').replaceWith(div);
+  });
+  d.querySelectorAll('.mermaid').forEach((el,i)=>{
+    try{
+      const svg=mermaid.render('mm'+(Date.now()+i),el.textContent);
+      if(svg&&svg.then) svg.then(r=>{el.innerHTML=r.svg}).catch(()=>{});
+      else if(svg) el.innerHTML=svg;
+    }catch(e){el.innerHTML='<pre style="color:#888;text-align:left">'+el.textContent+'</pre>'}
+  });
+  highlightDoc(curKw);          // 渲染后重建搜索命中高亮（若有关键词）
+}
+/* ---------- 即时全文搜索 ---------- */
+let curKw='', hitIdx=-1;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function toks(kw){return kw.toLowerCase().split(/\s+/).filter(Boolean)}
+function countHits(hay,ts){let c=0;ts.forEach(t=>{let i=0,p=0;while((i=hay.indexOf(t,p))>=0){c++;p=i+t.length}});return c}
+function allHit(hay,ts){return ts.every(t=>hay.indexOf(t)>=0)}
+/* 把 ``` 围栏块（含 mermaid 源码）整行抹成空格——长度与位置严格不变，
+   于是搜索、计数、片段预览都天然跳过代码块，且不会因反引号奇偶错位而漏判 */
+function maskCode(c){
+  if(!c)return'';
+  let inCode=false;
+  return c.split('\n').map(line=>{
+    if(/^\s*```/.test(line)){ inCode=!inCode; return ' '.repeat(line.length); }
+    return inCode?' '.repeat(line.length):line;
+  }).join('\n');
+}
+/* 命中片段预览：取关键词前后文（已是去代码块文本），最多 n 段 */
+function snips(plain,kw,n){
+  const low=plain.toLowerCase(), k=kw.toLowerCase(), out=[]; let pos=0,g=0;
+  while(out.length<n&&g++<80){
+    const i=low.indexOf(k,pos); if(i<0)break;
+    const s=Math.max(0,i-30), e=Math.min(plain.length,i+k.length+50);
+    const t=plain.slice(s,e).replace(/\|/g,' ').replace(/[#*`>]/g,'').replace(/\s+/g,' ').trim();
+    out.push((s>0?'…':'')+t+(e<plain.length?'…':''));
+    pos=i+k.length;
+  }
+  return out;
+}
+function mark(s,ts){let h=esc(s);ts.forEach(t=>{h=h.replace(new RegExp('('+reEsc(t)+')','gi'),'<mark>$1</mark>')});return h}
+/* 正文命中高亮（不影响 mermaid svg / 代码块结构） */
+function highlightDoc(kw){
+  const doc=document.getElementById('doc');
+  doc.querySelectorAll('.hit').forEach(el=>{const p=el.parentNode;p.replaceChild(document.createTextNode(el.textContent),el);p.normalize()});
+  const ts=toks(kw); if(!ts.length){updateHitbox();return}
+  const reG=new RegExp('('+ts.map(reEsc).join('|')+')','gi');
+  const reT=new RegExp('('+ts.map(reEsc).join('|')+')','i');
+  const w=document.createTreeWalker(doc,NodeFilter.SHOW_TEXT,{acceptNode(nd){
+    if(!nd.nodeValue||!reT.test(nd.nodeValue))return NodeFilter.FILTER_REJECT;
+    const pe=nd.parentElement; if(!pe)return NodeFilter.FILTER_REJECT;
+    // 跳过 svg / 脚本 / 样式 / 块级代码（与搜索计数口径一致：代码块不计入命中）
+    if(pe.closest('svg')||pe.closest('script')||pe.closest('style')||pe.closest('pre')||pe.closest('.hit'))return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;}});
+  const nodes=[];let x;while(x=w.nextNode())nodes.push(x);
+  nodes.forEach(nd=>{
+    const parts=nd.nodeValue.split(reG); const frag=document.createDocumentFragment();
+    // 带捕获组的 split：奇数索引即命中片段
+    parts.forEach((p,i)=>{ if(!p)return;
+      if(i%2===1){const m=document.createElement('span');m.className='hit';m.textContent=p;frag.appendChild(m);}
+      else frag.appendChild(document.createTextNode(p)); });
+    nd.parentNode.replaceChild(frag,nd);
+  });
+  hitIdx=-1; updateHitbox();
+}
+function hits(){return Array.prototype.slice.call(document.querySelectorAll('#doc .hit'))}
+function updateHitbox(){
+  const box=document.getElementById('hitbox'), h=hits();
+  if(!h.length){box.classList.remove('on');document.getElementById('hitInfo').textContent='';return}
+  box.classList.add('on');
+  document.getElementById('hitInfo').textContent=(hitIdx<0?h.length+' 处':'第 '+(hitIdx+1)+'/'+h.length+' 处');
+}
+function jump(d){
+  const h=hits(); if(!h.length)return;
+  h.forEach(e=>e.classList.remove('cur'));
+  hitIdx = d===0 ? 0 : (hitIdx+d+h.length)%h.length;
+  h[hitIdx].classList.add('cur');
+  h[hitIdx].scrollIntoView({block:'center',behavior:'smooth'});
+  updateHitbox();
+}
+
+function load(n,scrollHit){
+  cur=n; editing=false;
+  document.getElementById('title').textContent=n.title;
+  document.getElementById('meta').textContent=n.path+' · '+n.size+' 字节 · 更新 '+n.updated;
+  document.getElementById('doc').style.display='';
+  document.getElementById('editor').style.display='none';
+  document.getElementById('btnEdit').style.display='';
+  document.getElementById('btnSave').style.display='none';
+  document.getElementById('btnCancel').style.display='none';
+  render(n.content);
+  refresh(n);
+  location.hash=encodeURIComponent(n.id);
+  if(scrollHit&&curKw)jump(0);
+  // 注意：选中笔记后【不要】自动收起侧栏/抽屉——用户明确反馈"点一下目录就没了"。
+  // 收起只由用户主动触发：点「☰ 目录」或点遮罩。
+}
+/* 先渲染构建期快照（秒开），再向 GitHub 拉最新内容覆盖——保证线上编辑后刷新即见 */
+function refresh(n){
+  fetch('/api/industry-doc?path='+encodeURIComponent(n.path))
+    .then(r=>r.json())
+    .then(j=>{
+      if(!j.ok||typeof j.content!=='string'||j.content===n.content)return;
+      n.content=j.content;
+      n.size=new Blob([j.content]).size;
+      if(cur===n&&!editing){render(n.content);document.getElementById('meta').textContent=
+        n.path+' · '+n.size+' 字节 · 已同步仓库最新'}
+    })
+    .catch(()=>{});
+}
+function startEdit(){
+  if(!key()){askKey(startEdit);return}
+  editing=true;
+  document.getElementById('doc').style.display='none';
+  const ed=document.getElementById('editor');
+  ed.style.display='block'; ed.value=cur.content;
+  document.getElementById('btnEdit').style.display='none';
+  document.getElementById('btnSave').style.display='';
+  document.getElementById('btnCancel').style.display='';
+}
+function cancelEdit(){
+  if(editing&&!confirm('放弃未保存的修改？'))return;
+  load(cur);
+}
+async function save(){
+  const ed=document.getElementById('editor');
+  const btn=document.getElementById('btnSave');
+  btn.disabled=true; tip('正在提交到 GitHub…',true);
+  try{
+    const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({key:key(),path:cur.path,content:ed.value,
+        message:'docs(industry): 线上编辑 '+cur.title})});
+    const j=await r.json();
+    if(!r.ok||!j.ok) throw new Error(j.error||('HTTP '+r.status));
+    if(j.unchanged){ tip('内容无变化，未提交',true); load(cur); return }
+    cur.content=ed.value; cur.size=new Blob([ed.value]).size;
+    tip('已提交到 GitHub：'+j.commit+'（本地 Obsidian 拉到该提交后即同步）',true);
+    load(cur);
+  }catch(e){ tip('保存失败：'+e.message,false) }
+  finally{ btn.disabled=false }
+}
+function askKey(cb){
+  const m=document.getElementById('mask'); m.style.display='flex';
+  const inp=document.getElementById('keyInput'); inp.value=''; inp.focus();
+  document.getElementById('keyOk').onclick=()=>{
+    localStorage.setItem('industry_edit_key',inp.value.trim());
+    m.style.display='none'; cb&&cb();
+  };
+  document.getElementById('keyCancel').onclick=()=>{m.style.display='none'};
+  inp.onkeydown=e=>{if(e.key==='Enter')document.getElementById('keyOk').click()};
+}
+/* kw 为空 → 目录；非空 → 搜索结果（带命中片段预览，按命中数排序） */
+function paint(kw){
+  const box=document.getElementById('list'), sum=document.getElementById('sum');
+  box.innerHTML=''; kw=(kw||'').trim(); curKw=kw;
+  const ts=toks(kw);
+
+  if(!ts.length){
+    sum.textContent='';
+    highlightDoc('');                 // 清空搜索时撤销正文高亮与命中计数
+    NOTES.forEach(n=>{
+      const d=document.createElement('div');
+      d.className='item'+(cur&&n.id===cur.id?' active':'');
+      d.innerHTML=(n.id===n.title?'':'<span class="num">'+n.id+'</span>')
+                 +'<span class="nm">'+esc(n.title)+'</span>';
+      d.onclick=()=>load(n);
+      box.appendChild(d);
+    });
+    return;
+  }
+
+  const res=[];
+  NOTES.forEach(n=>{
+    const plain=n._plain||(n._plain=maskCode(n.content||''));   // 去代码块正文（懒计算并缓存）
+    const hay=(n.title+'\n'+plain).toLowerCase();
+    if(!allHit(hay,ts))return;
+    res.push({n:n,c:countHits(hay,ts),sn:snips(plain,ts[0],2)});
+  });
+  res.sort((a,b)=>b.c-a.c);
+  const total=res.reduce((s,x)=>s+x.c,0);
+  sum.textContent=res.length?('命中 '+res.length+' 篇 · '+total+' 处'):'';
+  // 空态：目录不能"整列消失"，给出说明 + 一键恢复全部
+  if(!res.length){
+    const e=document.createElement('div');
+    e.className='empty';
+    e.innerHTML='<div>没有匹配「'+esc(kw)+'」的笔记</div>'
+      +'<button id="btnClearQ">清空搜索 · 显示全部 '+NOTES.length+' 篇</button>';
+    box.appendChild(e);
+    document.getElementById('btnClearQ').onclick=()=>{
+      document.getElementById('q').value=''; paint('');
+    };
+    return;
+  }
+
+  res.forEach(r=>{
+    const d=document.createElement('div');
+    d.className='item'+(cur&&r.n.id===cur.id?' active':'');
+    d.innerHTML=(r.n.id===r.n.title?'':'<span class="num">'+esc(r.n.id)+'</span>')
+      +'<span class="nm">'+mark(r.n.title,ts)+'<span class="cnt">'+r.c+' 处</span></span>'
+      + r.sn.map(s=>'<span class="snip">'+mark(s,ts)+'</span>').join('');
+    d.onclick=()=>load(r.n,true);
+    box.appendChild(d);
+  });
+}
+(async function(){
+  mermaid.initialize({startOnLoad:false,theme:'default',securityLevel:'loose',
+    flowchart:{curve:'basis',useMaxWidth:true}});
+  const r=await fetch('/industry/notes.json'); NOTES=await r.json();
+  const q=document.getElementById('q'); let tm=null;
+  /* ── 防浏览器自动填充（Edge/Chrome 会把保存的邮箱塞进任何普通输入框，
+        填进来会立刻触发搜索、把目录过滤成 0 条——宫主已两次踩到）──
+     三重防御：
+       ① 输入框初始 readonly，任何交互（点/聚焦/按键）才解锁 → 自动填充不会写入；
+       ② 只有「用户真的敲过键 / 粘贴过 / 输入法组合过」才允许触发搜索（userTyped）；
+       ③ 加载完成后若发现框里已非空且用户没输入过 → 直接清掉。 */
+  // 一旦人碰过这个框（点/聚焦/Tab），就完全信任后续输入——中文输入法、软键盘、粘贴
+  // 都可能不派发可打印键值的 keydown，不能靠"是否敲过键"来判断
+  let userTyped=false, unlockAt=0, pasteAt=0, prevLen=0;
+  const unlock=()=>{ userTyped=true; if(!unlockAt)unlockAt=Date.now();
+                     if(q.hasAttribute('readonly')) q.removeAttribute('readonly'); };
+  q.addEventListener('pointerdown',unlock,{once:true});
+  q.addEventListener('focus',unlock,{once:true});
+  q.addEventListener('keydown',e=>{
+    unlock();
+    if(e.key==='Escape'){q.value='';clearTimeout(tm);paint('')}
+    if(e.key==='Enter'){clearTimeout(tm);paint(q.value);const f=document.querySelector('.item');if(f)f.click()}
+  });
+  q.addEventListener('compositionstart',unlock);
+  q.addEventListener('paste',()=>{ pasteAt=Date.now(); unlock() });
+  q.addEventListener('input',e=>{
+    const now=Date.now(), v=q.value;
+    // 「点击/聚焦后 300ms 内被一次性灌入 6 个以上字符」= 浏览器自动填充（真人打不了这么快，粘贴另有 paste 时间戳豁免）
+    const autoFill = prevLen===0 && v.length>=6 && (now-unlockAt)<300 && (now-pasteAt)>800;
+    if(!userTyped || autoFill){ q.value=''; prevLen=0; paint(''); return; }
+    prevLen=v.length;
+    clearTimeout(tm); tm=setTimeout(()=>paint(e.target.value),140);   // 输入即搜（防抖）
+  });
+  const scrub=()=>{ if(!userTyped&&q.value){ q.value=''; paint(''); } };
+  setTimeout(scrub,400); setTimeout(scrub,1500);
+  document.getElementById('hitPrev').onclick=()=>jump(-1);
+  document.getElementById('hitNext').onclick=()=>jump(1);
+  const app=document.getElementById('app');
+  const narrow=()=>window.matchMedia('(max-width:760px)').matches;
+  document.getElementById('btnDir').onclick=()=>{
+    if(narrow()) app.classList.toggle('side-open');
+    else app.classList.toggle('side-fold');
+  };
+  // 顶部「搜索」：展开侧栏并聚焦输入框（宽屏若被折叠则先展开）
+  document.getElementById('btnSearch').onclick=()=>{
+    if(!narrow()) app.classList.remove('side-fold');
+    app.classList.add('side-open');
+    setTimeout(()=>{q.focus();q.select()},220);
+  };
+  document.getElementById('scrim').onclick=()=>
+    document.getElementById('app').classList.remove('side-open');
+  document.getElementById('btnEdit').onclick=startEdit;
+  document.getElementById('btnCancel').onclick=cancelEdit;
+  document.getElementById('btnSave').onclick=save;
+  window.addEventListener('hashchange',()=>{
+    const h=decodeURIComponent(location.hash.replace(/^#/,''));
+    const t=NOTES.find(x=>x.id===h);
+    if(t&&cur&&t.id!==cur.id&&!editing)load(t);
+  });
+  paint('');
+  const h=decodeURIComponent(location.hash.replace(/^#/,''));
+  load(NOTES.find(n=>n.id===h)||NOTES[0]);
+})();
+</script>
+</body>
+</html>

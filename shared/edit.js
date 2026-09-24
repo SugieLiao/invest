@@ -258,7 +258,7 @@
     if (!path.endsWith('.html')) path = path + '/index.html';
     if (!path) path = 'index.html';
 
-    const repo = 'SugieLiao/stock-a';
+    const repo = 'SugieLiao/invest';
     const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
 
     // 先获取当前文件的sha

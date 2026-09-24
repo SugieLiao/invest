@@ -43,6 +43,13 @@ function unb64(b64str) {
   return new TextDecoder().decode(bytes);
 }
 
+function b64ToBytes(b64str) {
+  const bin = atob((b64str || "").replace(/\s/g, ""));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
   let body;
@@ -187,6 +194,19 @@ export async function onRequestPost(context) {
     const updJ = await updResp.json();
     if (!updResp.ok)
       return json({ ok: false, error: `更新分支失败 (${updResp.status}) ${updJ.message || ""}` }, 502);
+
+    // 8) 同步写入 KV：保存后秒级即时显示，无需重新部署
+    //    KV 写入失败不影响已完成的 GitHub 存档（下次部署后线上仍会更新）
+    if (env.NOTE_KV) {
+      try {
+        await env.NOTE_KV.put(path, finalHtml);
+        for (const im of images) {
+          await env.NOTE_KV.put(im.repoPath, b64ToBytes(im.data));
+        }
+      } catch (kvErr) {
+        // 忽略：GitHub 已权威存档
+      }
+    }
 
     return json({
       ok: true,

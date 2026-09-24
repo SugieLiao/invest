@@ -306,10 +306,12 @@
       if (data.unchanged) {
         alert('内容没有变化，无需保存。');
       } else if (data.ok) {
-        let msg = '已保存到云端！提交版本：' + data.commit;
-        if (data.images) msg += '\n新上传图片：' + data.images + ' 张';
-        msg += '\n内容已写入 Github 仓库，线上将在自动部署后更新（约 1-2 分钟）。';
+        let msg = '已保存！';
+        if (data.images) msg += ' 新上传图片 ' + data.images + ' 张。';
+        msg += '\n正在刷新以显示最新内容…';
         alert(msg);
+        // KV 即时覆盖已写入，刷新后立即展示最新版本，无需等待部署
+        setTimeout(() => location.reload(), 500);
       } else {
         if (data.error === '编辑密钥错误') localStorage.removeItem('note_edit_key');
         throw new Error(data.error || '保存失败');

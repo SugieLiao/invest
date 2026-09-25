@@ -577,7 +577,7 @@ body {
   <!-- 第7章 -->
   <div class="section" id="ch7">
     <h2 style="outline-offset: 2px; position: relative;">七、算电协同：电力优势能否转化为算力优势</h2>
-    <img src="assets/slides/slide_090min.jpg" alt="算电协同" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+    <img src="assets/slides/slide_090m_suanxietongdong.jpg" alt="算电协同：打通电源、网络、负荷与储能" class="slide-img" title="双击替换图片" style="cursor: pointer;">
 
     <h3 style="outline-offset: 2px; position: relative;">7.1 电力的"不可能四角"</h3>
     <p style="outline-offset: 2px; position: relative;">传统电力受"稳定/经济/绿色"不可能三角约束，AIDC时代再加一项"充沛"，变成不可能四角。</p>
@@ -590,15 +590,21 @@ body {
     </div>
 
     <h3 style="outline-offset: 2px; position: relative;">7.2 东数西算在智算时代还有价值吗？</h3>
-    <p style="outline-offset: 2px; position: relative;"><strong>仍然有价值</strong>，因为经济重心在东、能源土地重心在西的格局没有本质变化。</p>
-
-    <p style="outline-offset: 2px; position: relative;"><strong>但要区分业务类型</strong>：</p>
+    <img src="assets/slides/slide_095m_dongshuxisuan.jpg" alt="东数西算仍有价值，任务特征决定选址边界" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+    <p style="outline-offset: 2px; position: relative;"><strong>仍然有价值</strong>，因为经济重心在东、能源土地重心在西的格局没有本质变化。但任务特征决定选址边界：</p>
     <ul>
-      <li style="outline-offset: 2px; position: relative;"><strong>训练、仿真等非实时业务</strong>：放西部，冷数据训练完后一次性镜像到东部（甚至用硬盘运输）</li>
-      <li style="outline-offset: 2px; position: relative;"><strong>实时推理业务</strong>：对时延要求高，网络传输成本会抵消电价优势，更靠近用户</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>适合东数西算</strong>：数据存储与备份（冷/温数据、灾备、归档）、离线分析与训练（大模型训练、批处理计算）——带宽需求低、对网络不敏感、计算密集型</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>不适合东数西算</strong>：实时推理与在线服务（在线交易、实时推荐）——网络延迟高、影响用户体验，需就近部署</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>政策约束</strong>：国家枢纽节点新建数据中心PUE原则上≤1.25，最高上限1.30</li>
     </ul>
+    <ul>
+      
 
-    <h3 style="outline-offset: 2px; position: relative;">7.3 中国电力优势到底是什么？</h3>
+    <h3 style="outline-offset: 2px; position: relative;">7.3 跨境电力提供参照，算力变现仍需单独验证</h3>
+    <img src="assets/slides/slide_100m_kuajingdianli.jpg" alt="跨境电力：老挝100MW→泰国→马来西亚200MW→新加坡" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+    <p style="outline-offset: 2px; position: relative;">东南亚跨境电力合作已经跑通：老挝100MW→泰国→马来西亚200MW→新加坡，到2035年区域互联电网目标6GW。这说明电力跨境输送是可行的，但算力变现路径和电力输送不同，仍需单独验证。</p>
+
+    <h3 style="outline-offset: 2px; position: relative;">7.4 中国电力优势到底是什么？</h3>
     <div class="key-point" style="outline-offset: 2px; position: relative;">
       <p style="outline-offset: 2px; position: relative;"><strong>不是电价便宜这么简单，核心是"能马上供得上"</strong></p>
       <p style="outline-offset: 2px; position: relative;">美国最大的问题不是成本，而是扩容跟不上——有需求了、有卡了、机柜立起来了，供配电两年后才能到位，只能自建燃气轮机，但燃气轮机交期也很长。</p>
@@ -614,12 +620,16 @@ body {
     <p style="outline-offset: 2px; position: relative;">计算、网络、存储、供配电、散热，再加上运营管理。任何一段堵住，整套系统的吞吐和能耗效率都上不去。</p>
 
     <h3 style="outline-offset: 2px; position: relative;">8.2 成本构成（以200亿AIDC项目为例）</h3>
+    <img src="assets/slides/slide_105m_yusuan.jpg" alt="100MW项目预算：先看配置再谈造价，200亿元拆解" class="slide-img" title="双击替换图片" style="cursor: pointer;">
     <ul>
-      <li style="outline-offset: 2px; position: relative;"><strong>计算（GPU）</strong>：占比最大</li>
-      <li style="outline-offset: 2px; position: relative;"><strong>电（运营成本）</strong>：约10%占比</li>
-      <li style="outline-offset: 2px; position: relative;"><strong>土建</strong>：约7.5%</li>
-      <li style="outline-offset: 2px; position: relative;">其他：网络、存储、散热、供配电等</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>计算（GPU）</strong>：120亿，占60%——最大头</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>网络与共享存储</strong>：30亿，占15%</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>供配电</strong>：20亿，占10%</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>土建</strong>：15亿，占7.5%</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>散热</strong>：10亿，占5%</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>软件调试及预备费</strong>：5亿，占2.5%</li>
     </ul>
+    <p style="outline-offset: 2px; position: relative; color:#6b7280; font-size:13px;">注：不含融资与外部电源工程，不能直接套用到其他芯片配置。</p>
 
     <h3 style="outline-offset: 2px; position: relative;">8.3 三个核心运营指标</h3>
     <ul>
@@ -634,6 +644,59 @@ body {
       <li style="outline-offset: 2px; position: relative;"><strong>数据安全/合规要求</strong>：行业合规要求或心理上的数据安全感</li>
       <li style="outline-offset: 2px; position: relative;"><strong>自用量足够大</strong>：自用算力的量达到"账算得过来"的规模，因为最大成本不在建设而在运营维护（要养团队、持续花钱）<div><br></div></li>
     </ol>
+
+    <h3 style="outline-offset: 2px; position: relative;">8.5 供配电升级：交流、混合架构与800V直流并行</h3>
+    <img src="assets/slides/slide_115m_gongpeidian.jpg" alt="供配电升级：交流→混合→800V直流三代架构" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+    <p style="outline-offset: 2px; position: relative;">供配电架构正在三代并行迭代：</p>
+    <ul>
+      <li style="outline-offset: 2px; position: relative;"><strong>现有交流架构（已部署）</strong>：电网→交流配电→UPS/整流→IT机柜</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>混合架构（2026下半年供应）</strong>：交流转800V直流，逐步过渡</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>原生直流架构（预计2027年）</strong>：高压直流转换与配电，直接供800V负载</li>
+    </ul>
+
+    <h3 style="outline-offset: 2px; position: relative;">8.6 现场发电与储能，解决不同时间尺度的问题</h3>
+    <img src="assets/slides/slide_120m_fadianchunan.jpg" alt="现场发电与储能：电网接入/现场燃气/UPS/电池储能分层" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+    <p style="outline-offset: 2px; position: relative;">不同时间尺度的供电需求由不同方式解决：</p>
+    <ul>
+      <li style="outline-offset: 2px; position: relative;"><strong>电网接入</strong>：持续供能（长期稳定）</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>现场燃气轮机</strong>：可调度供电（RBC估算2025年底燃气轮机订单约100GW，年制造能力约60-70GW）</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>UPS</strong>：短时保供（秒级）</li>
+      <li style="outline-offset: 2px; position: relative;"><strong>电池储能</strong>：负荷平滑与调节（AI负荷快速波动→电池储能平滑缓冲）</li>
+    </ul>
+
+    <h3 style="outline-offset: 2px; position: relative;">8.7 模块化交付：缩短工期，仍须等电等设备</h3>
+    <img src="assets/slides/slide_125m_mokuaifu.jpg" alt="模块化交付：30天工厂生产+50天安装+20天调试=100天" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+    <p style="outline-offset: 2px; position: relative;">以阿里云CUBE 5.0为例：30天工厂生产与现场准备 + 50天安装 + 20天调试 = 100天（起点须具备厂房交付条件）。预制并行化减少现场串行施工，但供电、部件到货和最终验收仍可能制约进度。</p>
+  </div>
+
+  <!-- 第9章 -->
+  <div class="section" id="ch9">
+    <h2 style="outline-offset: 2px; position: relative;">九、还要建多久，会不会重蹈光伏覆辙？</h2>
+    <img src="assets/slides/slide_126m_section4.jpg" alt="第四部分：需求增长、结构分化、资产风险" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+
+    <h3 style="outline-offset: 2px; position: relative;">9.1 现在是全面过剩，还是结构性短缺？</h3>
+    <img src="assets/slides/slide_130m_guoshengduanque.jpg" alt="全面过剩还是结构性短缺：高端紧缺vs低端过剩" class="slide-img" title="双击替换图片" style="cursor: pointer;">
+    <p style="outline-offset: 2px; position: relative;">把中国现场的数字摆在一起，答案很清楚：<strong>结构性分化</strong>。</p>
+
+    <div class="highlight" style="outline-offset: 2px; position: relative;">
+      <p style="outline-offset: 2px; position: relative;"><strong>一边是高端紧缺</strong>：</p>
+      <p style="outline-offset: 2px; position: relative;">- H100缺口约43万张</p>
+      <p style="outline-offset: 2px; position: relative;">- 头部智算中心上架率超90%</p>
+      <p style="outline-offset: 2px; position: relative;">- B200价格高位</p>
+    </div>
+
+    <div class="highlight" style="outline-offset: 2px; position: relative;">
+      <p style="outline-offset: 2px; position: relative;"><strong>一边是低端过剩</strong>：</p>
+      <p style="outline-offset: 2px; position: relative;">- 全国智算中心平均使用率约30%</p>
+      <p style="outline-offset: 2px; position: relative;">- 有测算称二季度平均上架率41.3%</p>
+      <p style="outline-offset: 2px; position: relative;">- 西部部分地区不到20%</p>
+      <p style="outline-offset: 2px; position: relative;">- 超500个在用智算中心里，可能有两三百座难以覆盖成本</p>
+    </div>
+
+    <div class="key-point" style="outline-offset: 2px; position: relative;">
+      <p style="outline-offset: 2px; position: relative;"><strong>结论：「过剩」这个词要加限定语</strong></p>
+      <p style="outline-offset: 2px; position: relative;">现在缺的是「可交付的高性能集群」，多的是「不匹配任务的通用机房」。头部客户需要高性能、稳定、可规模化交付的集群，部分地方项目却缺少匹配订单；闲置设备未必满足紧缺任务的技术、区位和交付要求，所以这两种现象可以同时成立。</p>
+    </div>
   </div>
 
   <!-- 课程总结 -->
@@ -645,6 +708,8 @@ body {
     <p style="outline-offset: 2px; position: relative;"><strong>第四</strong>，旧通算中心很难改造成AIDC，承重、供电、液冷都不匹配，大多数只能当冗余。</p>
     <p style="outline-offset: 2px; position: relative;"><strong>第五</strong>，没有英伟达最先进的卡，靠系统工程可以弥补大部分：基础设施（液冷供电）、集群调度、模型创新（MoE、蒸馏）、先进封装。但先进制程和原生大模型能力仍有差距。</p>
     <p style="outline-offset: 2px; position: relative;"><strong>第六</strong>，中国电力优势的核心不是便宜，而是"能马上供得上"。东数西算在智算时代仍然有价值，但要区分训练（放西部）和推理（靠近用户）。</p>
+    <p style="outline-offset: 2px; position: relative;"><strong>第七</strong>，100MW智算中心约200亿初始投入，GPU占60%。供配电正从交流向800V直流演进，模块化交付可压缩到100天，但供电和部件到货仍是瓶颈。</p>
+    <p style="outline-offset: 2px; position: relative;"><strong>第八</strong>，当前是结构性分化而非全面过剩：高端H100缺口43万张、头部上架率90%，低端全国使用率仅30%、西部不到20%。缺的是可交付的高性能集群，多的是不匹配任务的通用机房。</p>
   </div>
 
   <div class="footer">

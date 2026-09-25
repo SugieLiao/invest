@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>260206芯片涨价的底层逻辑与展望</title>
+<script src="/shared/nav.js?v=20260924c" defer></script>
+<script src="/shared/edit.js?v=20260925a" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f6f8; color: #1f2329; line-height: 1.8; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #1f2329; }
+.header .meta { color: #6b7280; font-size: 14px; margin-bottom: 16px; }
+.header .intro { color: #4b5563; font-size: 15px; line-height: 1.8; max-width: 700px; margin: 0 auto; }
+.toc { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 40px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.toc h3 { font-size: 16px; font-weight: 600; margin-bottom: 14px; color: #1f2329; }
+.toc ol { padding-left: 20px; }
+.toc li { margin-bottom: 6px; font-size: 14px; }
+.toc a { color: #2b6cb0; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.section { background: #fff; border-radius: 12px; padding: 30px 32px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.section h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #1f2329; border-left: 4px solid #2b6cb0; padding-left: 12px; }
+.section h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; color: #2d3748; }
+.section p { margin-bottom: 12px; color: #374151; font-size: 15px; }
+.section ul, .section ol { margin: 12px 0 12px 24px; }
+.section li { margin-bottom: 8px; color: #374151; font-size: 15px; }
+.highlight { background: #fffaf0; border-left: 4px solid #ed8936; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+.highlight p { color: #744210; margin-bottom: 0; }
+.key-point { background: #eef4fb; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.key-point p { color: #2b4c7e; margin-bottom: 0; }
+.slide-img { width: 100%; border-radius: 8px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.footer { text-align: center; padding: 30px 0; color: #9ca3af; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>260206芯片涨价的底层逻辑与展望</h1>
+    <div class="meta">行业知识圈儿 · 半导体 · 约129分钟 · 2026-02-06</div>
+    <p class="intro">
+      本轮半导体涨价由存储芯片需求暴增引发，沿"产能倾斜→晶圆代工/封测涨价→设计公司涨价"层层传导。
+      本期讲清涨价的底层逻辑、如何辨别真正能把利润留在体内的环节（寡头供应+低端品类），
+      以及存储、利基存储、晶圆厂、封测、功率、模拟、CPU 等各环节的涨价现状与持续性。
+    </p>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">涨价的核心传导逻辑</a></li>
+      <li><a href="#ch2">怎么找真正受益的环节</a></li>
+      <li><a href="#ch3">存储：本轮涨价的核心引擎</a></li>
+      <li><a href="#ch4">各环节涨价现状：晶圆/封测/功率/模拟/CPU</a></li>
+      <li><a href="#ch5">策略总结与确定性排序</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="ch1">
+    <h2>一、涨价的核心传导逻辑</h2>
+    <p>这轮涨价的起点是<b>AI 对数据存储的需求暴增</b>，存储芯片供不应求。整个传导链条如下：</p>
+    <img class="slide-img" src="assets/slide_01_logic.jpg" alt="涨价的核心逻辑传导链">
+    <ul>
+      <li><b>第一步</b>：存储需求暴增 → 晶圆厂/封测把产能向存储倾斜 → <b>晶圆代工、封装测试涨价</b>（中芯稼动率 95.8%、华虹 109.5%，日月光封测涨价 5%–20%）。</li>
+      <li><b>第二步</b>：芯片制造成本上升 → 模拟、功率、逻辑等成熟制程设计公司纷纷跟着发涨价函。</li>
+      <li><b>第三步（风险）</b>：原材料再涨 → 压力传到消费终端（手机/电脑/汽车），但终端需求疲软不敢跟涨——这就是"涨价能否持续"的问号。</li>
+    </ul>
+    <div class="highlight"><p>关键提醒：<b>不能看到公司发涨价函就以为股价要涨</b>。如果只是被动把上游成本涨价转给下游、自己毛利率不变，那它并没有把利润留在体内，不是真正受益者。真正的好需求来自 AI（存储），消费电子/汽车等终端需求弱，涨价传导下去反而可能抑制需求、卖不动。</p></div>
+  </div>
+
+  <div class="section" id="ch2">
+    <h2>二、怎么找真正受益的环节</h2>
+    <p>研究员给出三条选股标准：</p>
+    <ol>
+      <li><b>确定性排序</b>：存储 &gt; 功率（服务器电源用中低压 MOSFET）。AI 需求最直接的是存储，功率次之；像车规 IGBT 产能完全过剩、汽车又拉垮，不要去找。</li>
+      <li><b>绕不开的环节</b>：晶圆代工、封测是涨价绕不开的。但要选"更纯"的标的——中芯/华虹/长电/通富里含先进制程/先进封装逻辑，不纯是涨价链；纯成熟制程的弹性更大。</li>
+      <li><b>寡头供应 + 低端品类</b>：只有两三家、能联合做庄涨价的细分最好；下游是小客户（白牌/消费类）议价能力弱，涨价能被接受。下游是大客户则不敢涨，怕得罪客户、丢市占率。</li>
+    </ol>
+    <div class="key-point"><p><b>最核心的一条</b>：这轮涨价的矛盾根源是存储供需失衡，而解决矛盾的唯一办法是<b>存储扩产</b>——也就是长鑫长存的扩产链，以及对应的<b>半导体设备材料</b>。扩产是持续的、不受终端需求波动影响的，这才是"炒涨价"绕不开、最确定的方向。</p></div>
+  </div>
+
+  <div class="section" id="ch3">
+    <h2>三、存储：本轮涨价的核心引擎</h2>
+    <p>存储约占全球半导体市场 30%，其中 DRAM 约占 55–60%、NAND 约占 40%，NOR Flash 是第三大（约 3%）。分两类玩家：</p>
+    <img class="slide-img" src="assets/slide_02_storage.jpg" alt="主流型存储情况：全球半导体结构与存储芯片分类">
+    <ul>
+      <li><b>主流型</b>（DRAM/NAND）：五大家——美光、海力士、三星，加上国内长鑫、长存。吃制程微缩（DRAM 挤牙膏到 10nm 级）或 3D 堆叠层数（NAND 已 256 层、600 层前无瓶颈），都不用 EUV。</li>
+      <li><b>利基型</b>（小容量 NAND/SLC/QLC、NOR Flash、DDR3/4）：国内设计公司主战场，如兆易创新、旺宏、普冉、东芯等。</li>
+    </ul>
+    <h3>为什么 NAND/SSD 涨得最疯</h3>
+    <p>过去机械硬盘 HDD 库存少、供给少，AI 服务器爆发后用 SSD（NAND）平替，数据中心 SSD 需求暴涨约 35%，而产能跟不上，供给严重失衡。叠加 HBF（GPU 与 NAND 融合的新产品）等新技术，NAND 需求爆炸。云厂 CAPEX 疯狂上修（谷歌 2026 年资本开支近 1800 亿美金、翻倍以上）。</p>
+    <img class="slide-img" src="assets/slide_03_price.jpg" alt="主流型存储价格明细：企业级/手机/消费类">
+    <ul>
+      <li><b>企业级</b>：DDR5 微涨（全球产能不缺），SSD 平均涨 10%；<b>DDR4 涨疯了</b>——长鑫退出 DDR4、海外大厂也退出，但工业/通信仍有需求，Q1/Q2/Q3 报价从 4.2→4.6→12 美金，四季度可能继续大涨。</li>
+      <li><b>利基存储跟涨</b>：去年 Q4 NOR Flash 环比涨约 20%、DDR3 涨 40%、DDR4 4GB 以上涨 40%；今年 Q1 小容量 NOR Flash 预计再涨约 50%（华邦/旺宏/兆易转做大容量，小容量只剩普冉、恒烁、武汉新芯、聚辰四家联合涨价），NAND Q1 预计涨 40–50%、全年翻倍。</li>
+    </ul>
+    <div class="highlight"><p>存储交易的是"价格的边界"——只要价格持续上涨，股价理论上就持续上升。利润更多留在<b>芯片设计公司</b>体内（不是模组厂，模组厂靠库存赚的钱会随库存消化而消失）。闪迪已跌了十几个季度、才刚反转两个季度，这轮周期持续性可能还很长。</p></div>
+  </div>
+
+  <div class="section" id="ch4">
+    <h2>四、各环节涨价现状</h2>
+    <ul>
+      <li><b>晶圆厂</b>：台积电退出成熟制程留下缺口，中芯稼动率 95.8%、华虹 109.5%，订单饱满下纷纷涨价；华虹成熟制程扩产停滞，供给有限。</li>
+      <li><b>封测</b>：日月光宣布涨价 5%–20%（超此前预期近一倍），核心是存储需求旺 + 化工材料/大宗气体成本上涨。</li>
+      <li><b>功率</b>：英飞凌发涨价函。车规 IGBT 产能完全过剩（2021 年扩太多、汽车销量又差）涨不动；能涨的是<b>中低压 MOSFET</b>（服务器电源、储能拉货快），华润微、芯联集成、捷捷微电、新洁能、扬杰科技相继发涨价函。</li>
+      <li><b>模拟</b>：TI/ADI 涨价，但模拟料号极多（TI 有 20 多万种）、国内能做的一堆，整体难涨；只有 LED driver、电源类等寡头格局（富满微、美芯晟、英集芯）好涨。</li>
+      <li><b>CPU</b>：英特尔/AMD 涨价 10%–20%（英特尔 3/7 纳米产线转服务器、消费交付下滑，服务器厂恐慌性囤货）。短期持续性不强（英特尔稼动率 Q1 见底后会爬坡），但<b>AI Agent</b> 让 CPU 从"一股脑丢任务的搬运工"变成"反复与 GPU 调度反馈的大管家"，核利用率从不足 20% 拉到接近满载，长期 CPU 数量、以及交换芯片/内存接口芯片（如 Rambus）需求将爆发。</li>
+      <li><b>MCU/SoC</b>：中微半导、国科微等发涨价函——SoC 里嵌了 NOR/SRAM、MCU 用的 EFlash 与存储共线，存储涨价 + 厂商惜售带动。</li>
+    </ul>
+  </div>
+
+  <div class="section" id="ch5">
+    <h2>五、策略总结与确定性排序</h2>
+    <div class="key-point"><p><b>确定性从高到低</b>：① 存储（最核心、持续性最强）；② 解决矛盾的存储扩产链——半导体设备材料（最确定，不受终端需求波动影响）；③ 功率里的中低压 MOSFET；④ 寡头供应+低端品类、能把利润留在体内的设计公司。</p></div>
+    <ul>
+      <li>避开：车规 IGBT（产能过剩）、竞争分散的通用模拟（涨不动）、只被动传导成本而毛利率不变的环节。</li>
+      <li>不要盲目"见涨价函就买"：要分辨需求是 AI（可持续）还是消费/汽车（疲软、传导会反噬）。</li>
+    </ul>
+    <p>（结尾小爆姐补充宏观策略：本轮核心资产上涨是"货币超发+国家复苏+短期博弈"三层逻辑，市场倾向慢牛、波动收窄；投资者要做的是"在车上"跟上核心资产，而非猜顶猜底。）</p>
+  </div>
+
+  <div class="footer">
+    笔记由视频课程自动整理 · 配图取自课程课件截图 · 仅供学习交流，不构成投资建议
+  </div>
+</div>
+</body>
+</html>

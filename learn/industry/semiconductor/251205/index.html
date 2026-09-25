@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>251205AI算力自主可控的全景蓝图</title>
+<script src="/shared/nav.js?v=20260924c" defer></script>
+<script src="/shared/edit.js?v=20260925a" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f6f8; color: #1f2329; line-height: 1.8; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #1f2329; }
+.header .meta { color: #6b7280; font-size: 14px; margin-bottom: 16px; }
+.header .intro { color: #4b5563; font-size: 15px; line-height: 1.8; max-width: 700px; margin: 0 auto; }
+.toc { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 40px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.toc h3 { font-size: 16px; font-weight: 600; margin-bottom: 14px; color: #1f2329; }
+.toc ol { padding-left: 20px; }
+.toc li { margin-bottom: 6px; font-size: 14px; }
+.toc a { color: #2b6cb0; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.section { background: #fff; border-radius: 12px; padding: 30px 32px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.section h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #1f2329; border-left: 4px solid #2b6cb0; padding-left: 12px; }
+.section h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; color: #2d3748; }
+.section p { margin-bottom: 12px; color: #374151; font-size: 15px; }
+.section ul, .section ol { margin: 12px 0 12px 24px; }
+.section li { margin-bottom: 8px; color: #374151; font-size: 15px; }
+.highlight { background: #fffaf0; border-left: 4px solid #ed8936; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+.highlight p { color: #744210; margin-bottom: 0; }
+.key-point { background: #eef4fb; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.key-point p { color: #2b4c7e; margin-bottom: 0; }
+.slide-img { width: 100%; border-radius: 8px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.footer { text-align: center; padding: 30px 0; color: #9ca3af; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>251205AI算力自主可控的全景蓝图</h1>
+    <div class="meta">行业知识圈儿 · 半导体年度展望 · 陈老师 · 约130分钟 · 2025-12-05</div>
+    <p class="intro">
+      2025 年底对整个 AI 相关半导体板块做的年度展望。核心是把国产 AI 产业链分成三个层次——
+      先炒算力/存力/运力/电力芯片，再炒晶圆厂封测（AI 底座），最后是设备材料/EDA/IP。
+      2026 年是国产半导体"AI 化元年"，主线明确，关键看二季度起的业绩兑现。
+    </p>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">年度框架：国产 AI 产业链三阶段</a></li>
+      <li><a href="#ch2">AI 算力芯片：分档与政策三阶段</a></li>
+      <li><a href="#ch3">运力：交换芯片与 Scale-up 互联</a></li>
+      <li><a href="#ch4">存力：NAND 超级周期与长鑫长存产业链</a></li>
+      <li><a href="#ch5">AI 电力：800V/HVDC 与 SST 碳化硅</a></li>
+      <li><a href="#ch6">AI 底座与设备材料/EDA/IP</a></li>
+      <li><a href="#ch7">2026 展望：业绩兑现节奏</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="ch1">
+    <h2>一、年度框架：国产 AI 产业链三阶段</h2>
+    <p>从 2024–2025 年开始，半导体投资主线已<b>全面转向与 AI 强相关</b>——不绑 AI 的细分只有弱复苏空间。据弗若斯特沙利文预测，中国 AI 芯片市场规模将从 2024 年约 1425 亿元增至 2029 年约 13368 亿元；政策要求明年 AI 芯片国产化率干到 40%（过去不足 10%）。</p>
+    <img class="slide-img" src="assets/slide_01_framework.jpg" alt="年度展望：AI算力自主可控的全景蓝图——国产AI产业链三层次">
+    <ul>
+      <li><b>第一阶段（芯片）</b>：算力、存力、运力、电力等相关芯片自主可控。今年节奏——8/9 月炒 AI 芯片（中芯 7 月跑通 7nm、N+2 量产）、10 月炒存储、10–11 月炒 AI 电力；运力因标的少跟涨。</li>
+      <li><b>第二阶段（AI 底座）</b>：晶圆厂（中芯/华虹、即将上市的长鑫/长存）、封测厂（CoWoS 先进封装、HBM/3D NAND 封测）。</li>
+      <li><b>第三阶段（底层硬科技）</b>：设备、材料、EDA、IP——随晶圆厂新制程扩产、两长扩产、先进封装扩产而核心受益。</li>
+    </ul>
+    <div class="key-point"><p>当前（2025 年底）的状态：AI 芯片、存储都已炒过一波预期；<b>2026 年是业绩兑现年</b>——炒的不再是预期，而是业绩是否超预期、国产算力闭环是否验证。</p></div>
+  </div>
+
+  <div class="section" id="ch2">
+    <h2>二、AI 算力芯片：分档与政策三阶段</h2>
+    <h3>政策封锁三阶段</h3>
+    <ul>
+      <li><b>初始期（2022 底）</b>：华为、中科曙光进实体清单，A100/H100 出口禁令，寒武纪上桌。</li>
+      <li><b>升级期（2023–2024）</b>：断供 EUV 等先进设备，排查进口规避；寒武纪、海光拿到订单但业绩未爆发。</li>
+      <li><b>彻底反击期（2025）</b>：1 月 AI 扩散管制框架、2 月 BIS 封测封锁（白手套）、特朗普上台后禁售 H20——国内干脆"阉割版都不要"，倒逼全面国产化。</li>
+    </ul>
+    <h3>国产 AI 芯片分档</h3>
+    <ul>
+      <li><b>第一档（领先一代）</b>：华为、寒武纪。华为最强但与部分云厂（阿里、字节有业务冲突）天然失份额，主打政府；字节绑定寒武纪。</li>
+      <li><b>互联网大厂自研</b>：阿里平头哥、百度昆仑芯——自用为主，对外卖不动，研发投入受限。</li>
+      <li><b>第二档</b>：海光（DCU+CPU+曙光服务器一体化平台，"南华为北海光"）。</li>
+      <li><b>第三档</b>：摩尔线程、沐曦（GPU 路线兼容 CUDA）；加上燧原等，明年约 11 家有竞争力的 AI 芯片公司。</li>
+    </ul>
+    <p>业绩上：寒武纪从去年约 10 亿营收今年做到约 70 亿。端侧 SoC（晶晨/瑞芯微等）今年受存储涨价压制毛利率走弱，靠豆包手机、AI 眼镜等新品催化开始反弹。</p>
+  </div>
+
+  <div class="section" id="ch3">
+    <h2>三、运力：交换芯片与 Scale-up 互联</h2>
+    <p>单卡性能边际递减后，提升服务器整体性能靠的是<b>GPU 之间的高速互联</b>。超节点（华为 384、8000 卡集群）把过去 8 卡服务器变成几百上千卡组网，GPU 间互联需求爆发——基本上一颗 GPU 就要配一颗 Scale-up 交换芯片。</p>
+    <img class="slide-img" src="assets/slide_02_switch.jpg" alt="交换芯片：国产Scale-up/scale-out硬件商业化提速">
+    <ul>
+      <li><b>空间</b>：Scale-up 交换芯片到 2030 年全球市场近 180 亿美元，2022–2030 CAGR 约 28%。</li>
+      <li><b>格局</b>：博通、Marvell 占全球商用交换芯片 90% 以上，国产化率极低，是下一个高赔率国产替代方向。</li>
+      <li><b>国产进展</b>：数渡科技 PCIe 5.0 交换芯片已量产导入客户；盛科通信 Arctic 系列 2023 年底送样。</li>
+    </ul>
+  </div>
+
+  <div class="section" id="ch4">
+    <h2>四、存力：NAND 超级周期与长鑫长存产业链</h2>
+    <p>A 股存储本质盯美股（美光/闪迪）同一周期。这轮由减产 + 云厂资本开支提升 + AI 新需求（HDD 缺货→SSD/NAND 替代、HBM/DRAM、AI SSD、HBF）驱动，经销商囤货放大涨幅。9 月浪潮已在扫货买不到 SSD。谁有 NAND/SSD 谁涨得最猛。</p>
+    <img class="slide-img" src="assets/slide_03_storage.jpg" alt="存储投资地图：AI存储涨价扩产 + 长鑫长存上市产业链">
+    <p>下一阶段的重点不是老的模组涨价逻辑，而是<b>长鑫、长存上市后的扩产产业链</b>：</p>
+    <ul>
+      <li><b>Logic Die（逻辑晶圆）外协</b>：HBM/NAND 与处理器互联需要定制 Logic Die，长鑫/长存自己产能不足，外包给地方逻辑厂——<b>晶合集成是长鑫的小弟</b>（合肥）、<b>华润微是长存的小弟</b>（长存董事长出身华润微）。</li>
+      <li><b>设备</b>：两长扩产不受 EUV 光刻机限制（存储靠 3D 堆叠），扩产可能每月各加 15 万片级，带动拓荆、中微、华海清科、精智达、北方华创等。</li>
+      <li><b>封测外协</b>：深科技（沛顿）、汇成（兴锋）紧邻长鑫做封测，封测占产业链价值量约 20–30%。</li>
+    </ul>
+    <div class="highlight"><p>长期看点：存储不受先进制程制裁限制，国产存储"做到世界最强"是有可能的——两长供应链是最核心方向。新技术 3D DRAM（Chiplet 叠 DDR4 + SoC）因当前 DDR4 涨价短期推迟，但后年是趋势（兆易、君正、瑞芯微、华邦合作）。</p></div>
+  </div>
+
+  <div class="section" id="ch5">
+    <h2>五、AI 电力：800V/HVDC 与 SST 碳化硅</h2>
+    <p>英伟达绕饼（Rubin）方案功率极大，功率大→电流大易击穿，因此服务器供电电压从 415V 升到 <b>800V HVDC</b>，终局是 SST（固态变压器）——一个器件把市电 13.8kV 直降到 800V。2–3 年内全换，主要是美国缺电/电价贵驱动（中国短期用不上，因买不到 Rubin 服务器且不缺电）。</p>
+    <ul>
+      <li><b>碳化硅</b>：SST 成本 50% 以上是碳化硅功率半导体，衬底（天岳等）和 SiC MOS 模块受益；目前是英飞凌/安森美/美系主导，国产像 2021 年光伏功率那样有机会卷进去（SST 本就是 Made in China）。</li>
+      <li><b>多相电源 + DrMOS</b>：服务器电压要求提高，杰华特、圣邦、思瑞浦等模拟设计做 DrMOS（全球大几十亿市场，难度高、单价贵）。</li>
+    </ul>
+  </div>
+
+  <div class="section" id="ch6">
+    <h2>六、AI 底座与设备材料/EDA/IP</h2>
+    <h3>晶圆厂产能测算（乐观假设）</h3>
+    <p>中芯国际 7nm AI 芯片产能：2025 年约 8000 片/月 → 2026 年约 1.8 万片 → 后年 3–4 万片；华虹明年扩到约 5000 片/月。稳态看 AI 芯片使中芯扩到约 7 万片、华虹约 5 万片/月（合计约 12 万片）即饱和，按每片 10 万元对应约 1400–1500 亿收入。封测（CoWoS）增量对应约 400 亿收入空间，测试厂（利扬等）也受益。</p>
+    <h3>设备材料/EDA/IP</h3>
+    <ul>
+      <li><b>设备</b>：过去 9–11 月是采购海外设备囤货高峰，明年落到国产先进制程设备采购；<b>干法刻蚀、薄膜沉积、CMP</b> 是未来四年国产化率快速提升的领域；光刻、量检测、离子注入、涂胶显影逐步突破。</li>
+      <li><b>材料</b>：与设备高度联动（一起涨），光刻胶是中美/中日对抗最爱炒的环节（鼎龙、安集等）。</li>
+      <li><b>EDA/IP</b>：炒的是情绪和政策（类光刻机但弱一些，多作补涨），公司靠并购扩张；IP（如芯原）是国产化重中之重但估值极贵、泡沫化严重。</li>
+    </ul>
+    <div class="key-point"><p>跟踪信号：① 中芯少数股东权益增长（中芯南方放量→先进制程扩产加速→设备材料拉动）；② 长鑫长存上市后的扩产规划——两长对国产设备包容度极高（不像中芯有 70% 用海外），且不受 EUV 限制。</p></div>
+  </div>
+
+  <div class="section" id="ch7">
+    <h2>七、2026 展望：业绩兑现节奏</h2>
+    <p>主线无疑是 AI 半导体，但现在涨不动的原因是"该炒的预期都轮到一遍了"，且 AI 占电子板块日成交约 40%、市场缩量。<b>2026 年关键词是"兑现"</b>：</p>
+    <ul>
+      <li><b>最先兑现</b>：AI 芯片（寒武纪/海光）——直接出产品、无需前期重资本开支；若明年对不了线，国产闭环逻辑就不成立。</li>
+      <li><b>晚一些</b>：晶圆代工（要折旧）、设备（要吃订单）、存储模组（涨价利润）。</li>
+      <li><b>关键节点</b>：<b>二季度</b>——不一定等到完整业绩，只要有新品推出、有"变化"就能催化；明年 7–8 月是验证主线地位的重要窗口。</li>
+    </ul>
+    <div class="highlight"><p>一句话：政策有了、供给需求摆着，2026 年就看国产 AI 闭环能否兑现业绩；中报/二季度见分晓。</p></div>
+  </div>
+
+  <div class="footer">
+    笔记由视频课程自动整理 · 配图取自课程配套 PDF 课件 · 仅供学习交流，不构成投资建议
+  </div>
+</div>
+</body>
+</html>

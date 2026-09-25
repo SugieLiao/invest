@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>260606韬定律下的先进工艺+涨价浪潮下的成熟制程</title>
+<script src="/shared/nav.js?v=20260924c" defer></script>
+<script src="/shared/edit.js?v=20260925a" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f6f8; color: #1f2329; line-height: 1.8; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #1f2329; }
+.header .meta { color: #6b7280; font-size: 14px; margin-bottom: 16px; }
+.header .intro { color: #4b5563; font-size: 15px; line-height: 1.8; max-width: 700px; margin: 0 auto; }
+.toc { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 40px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.toc h3 { font-size: 16px; font-weight: 600; margin-bottom: 14px; color: #1f2329; }
+.toc ol { padding-left: 20px; }
+.toc li { margin-bottom: 6px; font-size: 14px; }
+.toc a { color: #2b6cb0; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.section { background: #fff; border-radius: 12px; padding: 30px 32px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.section h2 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #1f2329; border-left: 4px solid #2b6cb0; padding-left: 12px; }
+.section h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; color: #2d3748; }
+.section p { margin-bottom: 12px; color: #374151; font-size: 15px; }
+.section ul, .section ol { margin: 12px 0 12px 24px; }
+.section li { margin-bottom: 8px; color: #374151; font-size: 15px; }
+.highlight { background: #fffaf0; border-left: 4px solid #ed8936; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+.highlight p { color: #744210; margin-bottom: 0; }
+.key-point { background: #eef4fb; border-radius: 8px; padding: 16px 20px; margin: 16px 0; }
+.key-point p { color: #2b4c7e; margin-bottom: 0; }
+.slide-img { width: 100%; border-radius: 8px; margin: 16px 0; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.footer { text-align: center; padding: 30px 0; color: #9ca3af; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>260606韬定律下的先进工艺+涨价浪潮下的成熟制程</h1>
+    <div class="meta">行业知识圈儿 · 半导体 · 约144分钟 · 2026-06-06</div>
+    <p class="intro">
+      本期两条主线：一是华为"韬定律"（逻辑折叠）如何用 3D 堆叠绕开没有 EUV 的瓶颈、直接利好晶圆厂；
+      二是成熟制程涨价潮全面开启。同时梳理了国产算力新变化（CPU 数量爆发、PCIe Switch）、
+      长鑫长存扩产链，以及模拟、功率、分销等成熟制程环节的量价机会。
+    </p>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">韬定律：设计阶段的逻辑折叠，绕开 EUV 瓶颈</a></li>
+      <li><a href="#ch2">国产算力新变化：CPU 数量爆发与 PCIe Switch</a></li>
+      <li><a href="#ch3">成熟制程涨价潮：代工资源全面紧缺</a></li>
+      <li><a href="#ch4">存储：长鑫长存扩产链是核心</a></li>
+      <li><a href="#ch5">模拟与功率：AI 带来的量价齐升</a></li>
+      <li><a href="#ch6">后市判断：没有跑到头的细分</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="ch1">
+    <h2>一、韬定律：设计阶段的逻辑折叠，绕开 EUV 瓶颈</h2>
+    <p>韬定律（逻辑折叠）走的是与传统封装不同的路径：<b>不是在封装阶段把多个独立芯片叠起来，而是在设计阶段就把一颗芯片内部的电路，下沉到逻辑门和触发器级别，垂直堆叠到多层晶圆中</b>。原本一颗芯片只需一颗 die，现在需要 2–3 颗甚至更多（SRAM、内存控制器等），意味着先进逻辑晶圆的需求成倍提升。</p>
+    <img class="slide-img" src="assets/slide_01_tao.jpg" alt="韬定律：设计阶段逻辑折叠，外协制程晶圆需求汇总测算">
+    <div class="key-point"><p><b>谁最受益（市场误区澄清）：</b>最直接利好的是<b>晶圆厂（Fab）</b>，而不是封测厂。HP Pitch 在 2μm 以下大概率由 Fab 厂承担，参考台积电 Corvus/CoWoS 模式——先进封装在设计阶段就由晶圆厂完成，传统 OSAT（日月光等）只能吃到 Foundry 做不完的残羹剩饭。AI 时代唯一主动拿到 AI 订单的封测环节是<b>测试厂</b>（台积电不做测试，所有 AI 芯片测试都给了京元电）。</p></div>
+    <p>测算显示：加上逻辑折叠后，远期（2026–2027 年起）晶圆需求市场空间成倍增加（外协制程晶圆需求从 2024 年约 109 万片/月增至 2029 年约 568 万片/月）。这直接打破了国内"没有 EUV 就做不了先进制程 AI 芯片"的瓶颈，拉动晶圆厂新制程扩产，以及混合键合设备、检测测试设备等新型增量。</p>
+  </div>
+
+  <div class="section" id="ch2">
+    <h2>二、国产算力新变化：CPU 数量爆发与 PCIe Switch</h2>
+    <p>AI 负载从训练转向推理，CPU 从"发号施令的指挥家"变成"反复与 GPU 沟通的保姆"（任务拆解、分步反馈、调试修改）。智能体（Agent）需要动态规划、工具调用、任务编排，过去 CPU 里 64 个核有 70% 闲着，未来每个核都要高速运转。</p>
+    <img class="slide-img" src="assets/slide_02_cpu.jpg" alt="CPU数量大幅增加：CPU:GPU配比从1:4向4:1演进">
+    <ul>
+      <li><b>配比跃迁</b>：传统 AI 训练 CPU:GPU = 1:4~1:8；推理主导期 1:1~1:2；智能体密集场景 1:1~4:1。单台服务器 CPU 用量相对 GPU 提升 <b>4–32 倍</b>。</li>
+      <li><b>逻辑链条</b>：AI 推理需求↑ → 每台服务器 CPU 数量/性能↑ → CPU 所需 PCIe Lane↑ → <b>PCIe Switch 交换芯片</b>用量↑。一颗 CPU 外围只有约 16 条 PCIe 通道，需用 Switch 芯片（如博通 PEX8796，96 通道）拓宽到几百条，每个 CPU 旁配两颗。</li>
+    </ul>
+    <div class="highlight"><p>需求佐证：字节今年 AI 资本开支上调到 <b>700 亿美元</b>、明年上修到 <b>1000 亿美元</b>，未来三年合计 2.1 万亿人民币以上（半年前还以为只有 1 万亿出头）。CPU、内存接口芯片、Switch 芯片等配套器件需求同步"加个零"。</p></div>
+  </div>
+
+  <div class="section" id="ch3">
+    <h2>三、成熟制程涨价潮：代工资源全面紧缺</h2>
+    <p>国内成熟代工处于结构性高景气、周期上行中段：头部满产、AI+汽车双驱动、国产替代加速扩产，海外芯片厂"China for China"（卖给中国的货必须在中国制造）纷纷找国内晶圆厂代工。</p>
+    <img class="slide-img" src="assets/slide_03_mature.jpg" alt="成熟制程景气度：中芯/华虹一季报，产能满产、毛利率上行">
+    <ul>
+      <li><b>中芯国际（村龙一）</b>：营收 176.17 亿（+8.07%），产能利用率 93.1%，月产能 107.83 万片；指引 2026Q2 营收环比 +14~16%、毛利率 20~22%。</li>
+      <li><b>华虹（村龙二）</b>：营收 46.25 亿（+18.22%），归母净利同比暴增 513%，稼动率 99.7%，12 英寸占比 62.7%；Fab9 二阶段进场，2026Q3 完成阶段性满产。</li>
+    </ul>
+    <div class="key-point"><p>毛利率上行的本质是<b>代工资源紧缺、代工价格上涨</b>。下游只要沾 AI/服务器需求，"有没有价格不重要，有货就行"，成本顺畅传导。研究员判断：代工价格上行意味着<b>半导体全面涨价周期已经开始</b>——不仅先进制程供给失衡，存储景气还会带动成熟制程芯片价格触底反弹，像多米诺骨牌逐轮推动。成熟制程的核心就看价格（国产化率已高，利润靠涨价释放）。</p></div>
+  </div>
+
+  <div class="section" id="ch4">
+    <h2>四、存储：长鑫长存扩产链是核心</h2>
+    <p>主流存储分两类：<b>DRAM</b>（断电丢失数据，与 GPU/CPU 交换数据，代表是 HBM，国内长鑫）和 <b>NAND Flash</b>（持久存海量数据，国内长江存储）。两者都<b>不吃先进制程、不依赖 EUV</b>，光刻机无法卡脖子，扩产没有技术阻挠，因此背负国家级扩产重任。</p>
+    <img class="slide-img" src="assets/slide_04_memory.jpg" alt="主流型存储情况：DRAM挤牙膏迭代、NAND 3D堆叠进入2xx层时代">
+    <ul>
+      <li><b>利润体量</b>：长鑫今年一季度利润已近 300 亿，全年有望 1800 亿以上（约等于 2 个宁德时代）；长存不考虑新厂折旧的净现金流增量在 2000 亿以上。2027 年预计长鑫约 3000 亿、长存约 4000 亿利润——给 10 倍 PE 就是 4 万亿市值。</li>
+      <li><b>扩产空间</b>：全球晶圆产能现约 250 万片/月，2030 年要扩到 500 万片；中国规划存储产能占全球 30%（约 150 万片），目前长鑫约 35 万、长存约 10 万片，远期需大幅扩张。</li>
+    </ul>
+    <div class="highlight"><p>重点：长鑫长存上市后不是"炒一波就结束"——它们募资有限，后续要靠定增从二级市场借钱扩产，每一笔定增都是数百亿上千亿。<b>必须重视两长的扩产链</b>：长鑫（合肥）产业链已较透明，长存（武汉）配套仍有大量想象空间。存储周期短期 1–3 年内看不到结束——只要价格敢跌就有人敢囤货补库。</p></div>
+  </div>
+
+  <div class="section" id="ch5">
+    <h2>五、模拟与功率：AI 带来的量价齐升</h2>
+    <h3>模拟芯片（两大高景气料号）</h3>
+    <ul>
+      <li><b>光模块里的模拟芯片</b>：400G→800G→1.6T 升级，模拟芯片价值量每代提升约 30%。过去用德州仪器/ADI，因贸易供给不稳，光模块厂开始切国产。一个 800G 光模块里模拟芯片价值量约 50–100 元，国内市场约 100 亿（不含 DSP）。难点在光转电的 TIA 和 DSP，真正放量的国产还没有，替代空间大。</li>
+      <li><b>DrMOS（驱动+功率 MOS）</b>：服务器三级电源（220V→48V→12V→GPU 侧约 1V）的关键器件。英伟达 Rubin 架构单 GPU 需配约 80 颗 DrMOS、CPU 旁再配约 20 颗；华为昇腾服务器对应市场从 25 亿向 100 亿膨胀，且海外明年起断供，份额瞬间给国内绑定深的厂商。</li>
+    </ul>
+    <h3>功率半导体</h3>
+    <p>国内厂商提价、英飞凌等跟进，主流产品涨 10%–25%，中低压 MOS 已涨 20%–30%。原因：库存降到低位、8 寸产能收缩、闻泰被 ST 留下汽车功率缺口、存储厂把功率产能转产；需求侧 AI 服务器（中低压 MOS）、储能爆量。服务器供电电压从 415V 升到 800V 以降低电流损耗，终局 SST（智能固态变压器）直接把 13.8kV 降到 GPU 侧 1V，带动<b>碳化硅</b>需求（2030 年约 2000 万片、约 160 亿利润增量、支撑约 2000 亿市值增量）。</p>
+    <h3>分销公司</h3>
+    <p>海外分销股竖涨（如艾睿电子上一轮模拟周期净利率从 1% 干到 4%）。分销逻辑是"傍原厂规模"而非囤货涨价：长鑫长存、村田（MLCC）等原厂收入扩大，分销商业绩同步放大；位置和估值都便宜，是景气度β的低估值配置。</p>
+  </div>
+
+  <div class="section" id="ch6">
+    <h2>六、后市判断：没有跑到头的细分</h2>
+    <p>被问到"哪个细分已经跑到头/证伪"，研究员的回答是：<b>没有任何一个细分跑到头，也没有出现证伪逻辑</b>。</p>
+    <ul>
+      <li><b>为什么没走完</b>：① 新逻辑不断涌现——韬定律让国内先进制程可对标台积电给估值，还新增加一笔设备/键合扩产需求；② 涨价才刚开始——现在涨的是过去最惨的环节（功率），AI 相关涨价刚起头，硅片、化学品材料等还没轮到，是多米诺骨牌。</li>
+      <li><b>节奏特点</b>：半导体空间足但向下估值边界低，一旦涨快了就要调一段时间才出第二波（如寒武纪调了一年）；行业内部喜欢"高切低"——设备涨完涨晶圆厂、再拉低位板块，脉冲式上涨但拉长线都涨。</li>
+      <li><b>最看好方向</b>：晶圆厂（同时代表先进制程工艺与成熟制程景气，两长上市后市值差距会带动整个行业估值重估）、成熟制程里最先放利润的公司、以及两长扩产链。</li>
+    </ul>
+    <div class="highlight"><p><b>一句话总结</b>：韬定律解决"做不出先进制程"的问题，成熟制程涨价解决"赚不到钱"的问题；AI 远未走完，半导体各细分脉冲式轮动，但拉长线都向上。</p></div>
+  </div>
+
+  <div class="footer">
+    笔记由视频课程自动整理 · 配图取自课程课件截图 · 仅供学习交流，不构成投资建议
+  </div>
+</div>
+</body>
+</html>

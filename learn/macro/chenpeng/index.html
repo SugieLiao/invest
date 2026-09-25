@@ -3,20 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宏观</title>
-<script src="/shared/nav.js" defer></script>
+<title>陈鹏 · 宏观</title>
+<script src="/shared/nav.js?v=20260924c" defer></script>
 <script src="/shared/edit.js?v=20260925a" defer></script>
 <style>
-body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;color:#1f2329;margin:0;padding:40px 20px}
-.wrap{max-width:800px;margin:0 auto;text-align:center;padding-top:60px}
-h1{font-size:28px;margin-bottom:12px}
-p{color:#888;font-size:15px}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.7;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+.header p { color: #6b7280; font-size: 15px; }
+.course-list { display: flex; flex-direction: column; gap: 16px; }
+.course-card {
+  background: #fff; border-radius: 12px; padding: 24px 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06); transition: all .2s;
+  text-decoration: none; color: inherit; display: block;
+}
+.course-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); transform: translateY(-2px); }
+.course-card .course-num {
+  display: inline-block; background: #eef4fb; color: #1366d6;
+  font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; margin-bottom: 10px;
+}
+.course-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.course-card p { color: #6b7280; font-size: 14px; line-height: 1.6; }
+.course-card .course-meta { margin-top: 12px; display: flex; gap: 16px; font-size: 13px; color: #9ca3af; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>宏观</h1>
-  <p>内容准备中，敬请期待...</p>
+<div class="container">
+  <div class="header">
+    <h1>陈鹏 · 趋势知识圈儿</h1>
+    <p>北京溪谷资产 · 宏观周期与货币信用</p>
+  </div>
+  <div class="course-list">
+    <a href="260915/" class="course-card">
+      <span class="course-num">第1期</span>
+      <h2>260915讲讲通胀——供求与货币的循环</h2>
+      <p>弗里德曼说通胀是货币现象，但前提是供给端稳定。当逆全球化让供给从隐藏变量变成灰犀牛，传统框架失效——货币是肉体，供求失衡才是灵魂。</p>
+      <div class="course-meta">
+        <span>2026-09-15</span>
+        <span>约 13 分钟</span>
+      </div>
+    </a>
+  </div>
 </div>
 </body>
 </html>

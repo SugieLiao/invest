@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>250817宏观框架课第七期：政策利率与市场利率</title>
+<script src="/shared/nav.js?v=5" defer=""></script>
+<script src="/shared/edit.js?v=20260925a" defer=""></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header .meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.header .intro {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.toc {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.toc h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2329;
+}
+.toc ol {
+  padding-left: 20px;
+}
+.toc li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.toc a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2329;
+  border-left: 4px solid #2b6cb0;
+  padding-left: 12px;
+}
+.section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #2d3748;
+}
+.section p {
+  margin-bottom: 12px;
+  color: #374151;
+  font-size: 15px;
+}
+.section ul, .section ol {
+  margin: 12px 0 12px 24px;
+}
+.section li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 15px;
+}
+.highlight {
+  background: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+}
+.highlight p {
+  color: #744210;
+  margin-bottom: 0;
+}
+.key-point {
+  background: #eef4fb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.key-point p {
+  color: #2b4c7e;
+  margin-bottom: 0;
+}
+.slide-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+</style>
+<style>.invest-nav{position:sticky;top:0;z-index:2147483000;width:100%;background:rgba(255,255,255,.9);border-bottom:1px solid rgba(0,0,0,.08);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;}.invest-nav .nav-inner{max-width:1140px;margin:0 auto;padding:0 18px;height:48px;display:flex;align-items:center;gap:2px}.invest-nav .nav-brand{font-size:18px;font-weight:700;color:#1f2329;margin-right:18px;letter-spacing:.5px;white-space:nowrap}.invest-nav a{color:#1f2329;text-decoration:none;font-size:14.5px;font-weight:500;padding:7px 13px;border-radius:8px;line-height:1;transition:background .15s,color .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}.invest-nav a:hover{background:rgba(0,0,0,.05);text-decoration:none}.invest-nav a.cur{color:#1366d6;font-weight:600}.invest-nav .nav-item{position:relative}.invest-nav .caret{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid currentColor;opacity:.55;margin-left:2px}.invest-nav .drop{position:absolute;left:0;top:calc(100% + 6px);min-width:132px;background:rgba(255,255,255,.98);border:1px solid rgba(0,0,0,.08);border-radius:10px;box-shadow:0 4px 16px rgba(15,23,42,.08);padding:6px;display:none;flex-direction:column;gap:2px}.invest-nav .drop::before{content:'';position:absolute;top:-10px;left:0;right:0;height:10px;background:transparent}.invest-nav .nav-item.open .drop,.invest-nav .nav-item:hover .drop{display:flex}.invest-nav .drop a{font-size:14px;padding:8px 12px;border-radius:7px}.invest-nav .drop .has-sub{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%}.invest-nav .drop .has-sub .sub-caret{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:4px solid currentColor;opacity:.55;margin-left:8px}.invest-nav .drop .sub-drop{position:absolute;left:calc(100% + 4px);top:-6px;min-width:120px;background:rgba(255,255,255,.98);border:1px solid rgba(0,0,0,.08);border-radius:10px;box-shadow:0 4px 16px rgba(15,23,42,.08);padding:6px;display:none;flex-direction:column;gap:2px}.invest-nav .drop .has-sub:hover .sub-drop{display:flex}@media(max-width:560px){.invest-nav .nav-inner{height:44px;padding:0 10px;gap:0}.invest-nav .nav-brand{display:none}.invest-nav a{padding:6px 9px;font-size:13.5px}}</style>
+</head>
+<body><nav class="invest-nav" data-nav-theme="light"><div class="nav-inner"><span class="nav-brand">苏奇投研平台</span><div class="nav-item"><a href="/a-overview/">盘面全景</a></div><div class="nav-item"><a href="/stock-a/">A股复盘<span class="caret"></span></a><div class="drop"><a href="/stock-a/">收盘版</a><a href="/stock-a/noon/">午间版</a></div></div><div class="nav-item"><a href="/macro-cn/">宏观看板</a></div><div class="nav-item"><a href="/industry/">势宫行研</a></div><div class="nav-item"><a href="/learn/" class="cur">投资学习<span class="caret"></span></a><div class="drop"><a href="/learn/xiaobaojie/" class="cur">小爆姐宏观框架课</a><div class="has-sub"><a href="/learn/macro/">宏观</a><span class="sub-caret"></span><div class="sub-drop"><a href="/learn/macro/xiaodeng/">小邓老师</a><a href="/learn/macro/chenpeng/">陈鹏老师</a><a href="/learn/macro/chenxiaodan/">陈晓丹</a></div></div><div class="has-sub"><a href="/learn/industry/">行业课</a><span class="sub-caret"></span><div class="sub-drop"><a href="/learn/industry/semiconductor/">半导体</a><a href="/learn/industry/pharma/">医药</a><a href="/learn/industry/electric-new/">电新</a><a href="/learn/industry/consumer/">消费</a></div></div><a href="https://dijingang.liaohao.cc" target="_blank" rel="noopener noreferrer">地金刚体系</a><a href="https://beast.liaohao.cc" target="_blank" rel="noopener noreferrer">猛兽体系</a><a href="https://sheyi.liaohao.cc" target="_blank" rel="noopener noreferrer">舍一体系</a></div></div></div></nav>
+<div class="container">
+  <div class="header">
+    <h1>250817宏观框架课第七期：政策利率与市场利率</h1>
+    <div class="meta">小爆姐宏观框架课 · 第7期 · 利率（4）</div>
+    <p class="intro">
+      本节课是利率部分的第四讲，系统拆解市场利率的构成与传导机制。首先明确市场利率的定义与两大独立市场（金融机构市场/实体部门市场），
+      然后用"无风险套利"逻辑讲清政策利率如何通过银行间市场逐步传导到 LPR、国债收益率、企业债收益率。重点详解 LPR 的形成机制、与日常贷款利率的关系，
+      以及社会融资规模（社融）的经济含义。最后落到资产端——三类核心市场利率（贷款利率、利率债收益率、信用债收益率）分别如何影响股债价格。
+    </p>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">什么是市场利率：央行定义与两大关键词</a></li>
+      <li><a href="#ch2">"市场"指哪个市场：金融机构市场 vs 实体部门市场</a></li>
+      <li><a href="#ch3">政策利率不是直接传导：两步走传导路径图</a></li>
+      <li><a href="#ch4">利率走廊：银行间利率如何锚定7天逆回购</a></li>
+      <li><a href="#ch5">从银行间到实体：贷款路径与债券路径</a></li>
+      <li><a href="#ch6">LPR是什么：定义、形成机制与期限分类</a></li>
+      <li><a href="#ch7">LPR与日常贷款利率：加点、存量与新增</a></li>
+      <li><a href="#ch8">LPR的三大作用与对经济的五大影响</a></li>
+      <li><a href="#ch9">什么是社融：定义、查询路径与辩证看待</a></li>
+      <li><a href="#ch10">金融体系向实体提供资金的五种方式与三大核心利率</a></li>
+      <li><a href="#ch11">贷款利率对资产的影响：间接影响股价</a></li>
+      <li><a href="#ch12">利率债与信用债收益率对资产的影响</a></li>
+      <li><a href="#ch13">本章小结：利率政策的本质与中美差异</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section" id="ch1">
+    <h2>一、什么是市场利率：央行定义与两大关键词</h2>
+    <img src="assets/slides/slide_03.jpeg" alt="利率——政策利率+市场利率" class="slide-img" title="双击替换图片">
+    <img src="assets/slides/slide_04.jpeg" alt="什么是市场利率" class="slide-img" title="双击替换图片">
+
+    <p>央行对市场利率的官方定义是：<strong>市场利率是指因金融市场资金供求关系自由变动而形成的利率</strong>。</p>
+
+    <p>这句话字都认识但听不懂，用人话翻译拆开来看，关键字有两组：</p>
+    <ul>
+      <li><strong>"供需"</strong>：利率由市场上资金的供给和需求决定，不是央行拍脑袋定的。</li>
+      <li><strong>"自由"</strong>：利率是自由交易出来的，不是被央行引导或行政规定的。</li>
+    </ul>
+
+    <div class="key-point">
+      <p><strong>市场利率 = 由市场供需关系自由决定的资金价格。</strong></p>
+      <p>它和政策利率最本质的区别：政策利率是央行定死的固定利率（"锚"），市场利率是市场交易出来的价格。</p>
+    </div>
+
+    <p>回顾前两节课：政策利率是市场利率之锚，它会向下传导并影响市场利率。本节课就讲清楚这个传导过程。</p>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section" id="ch2">
+    <h2>二、"市场"指哪个市场：金融机构市场 vs 实体部门市场</h2>
+    <img src="assets/slides/slide_05.jpeg" alt="市场利率里的市场指哪个市场" class="slide-img" title="双击替换图片">
+
+    <p>市场利率里说的"市场"不是一个市场，而是<strong>两个独立的市场</strong>：</p>
+
+    <h3>2.1 金融机构市场（主要指"银行间"）</h3>
+    <p>参与融资的全部都是金融机构，其中绝大部分是银行。关键判定条件：</p>
+    <ul>
+      <li>这个市场里<strong>只能是金融机构来借钱，别人不能借</strong>；</li>
+      <li>借这个钱的利率必须是供需关系自由决定的。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>易错点：</strong>银行去找央行借钱（比如再贷款、逆回购）的利率<strong>不是</strong>金融机构市场利率——因为那是央行定的政策利率，不是市场供需自由决定的。</p>
+    </div>
+
+    <h3>2.2 实体部门市场（即"实体经济"）</h3>
+    <p>"实体部门"是外资常用说法，央行官方叫"实体经济"。指的就是企业和居民融资的市场，其利率构成了实体经济的资金成本。</p>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section" id="ch3">
+    <h2>三、政策利率不是直接传导：两步走传导路径图</h2>
+    <img src="assets/slides/slide_07.jpeg" alt="市场利率传导路径" class="slide-img" title="双击替换图片">
+
+    <p>一个关键问题：央行的政策利率是直接传导给实体部门市场利率的吗？</p>
+    <div class="highlight">
+      <p><strong>答案：不是！</strong>政策利率必须先传导到金融机构市场（银行间），再由金融机构市场传导到实体部门市场。这是一个"两步走"的过程。</p>
+    </div>
+
+    <p>PPT 上这张图把整个传导链路画得很清楚：</p>
+    <ul>
+      <li><strong>橘红色块 = 政策利率</strong>：7天逆回购（最重要的政策利率）。</li>
+      <li><strong>绿色块 = 金融部门（银行间）</strong>：政策利率传导的第一站。</li>
+      <li><strong>蓝色块 = 实体部门</strong>：金融部门利率传导的第二站。</li>
+    </ul>
+
+    <p>横着看是两条传导线：</p>
+    <ul>
+      <li><strong>贷款利率线</strong>：7天逆回购 → 银行间利率 → LPR（基准）→（银行/非银）贷款利率</li>
+      <li><strong>债券利率线</strong>：7天逆回购 → 银行间利率 → 国债收益率 → 企业债收益率</li>
+    </ul>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section" id="ch4">
+    <h2>四、利率走廊：银行间利率如何锚定7天逆回购</h2>
+    <img src="assets/slides/slide_08.jpeg" alt="中国利率走廊" class="slide-img" title="双击替换图片">
+
+    <p>第一步传导：政策利率如何影响银行间市场利率？看这张"中国-利率走廊"图。</p>
+
+    <p>图中粉色框住的密密麻麻的红线（DR007）和绿线（Shibor7D）就是银行间市场利率，它们围绕着中间那根黄色的线——<strong>7天逆回购利率</strong>——在窄幅波动。</p>
+
+    <h3>4.1 无风险套利机制</h3>
+    <p>为什么银行间利率会紧贴7天逆回购利率？用一个例子讲清楚：</p>
+    <ul>
+      <li>假设7天逆回购利率从 1.8% 下调到 1.7%，但银行间市场利率还停在 1.8%。</li>
+      <li>大型银行会跑到央行以 1.7% 的成本借钱，转手在银行间市场以 1.8% 借出去，<strong>赚 0.1% 的无风险差价</strong>。</li>
+      <li>参与套利的银行多了，银行间资金供给超过需求，利率就会被压下去。</li>
+      <li>一直压到银行间利率贴近 1.7% 为止——没有利差可套了。</li>
+    </ul>
+
+    <div class="key-point">
+      <p><strong>结论：</strong>长期来看，银行间市场利率（DR007、Shibor7D）会向7天逆回购利率收拢。这就是"利率走廊"的运作机制——上限是SLF利率（7天期），下限是超额准备金利率，中间是7天逆回购利率。</p>
+    </div>
+
+    <h3>4.2 中美流动性管理差异</h3>
+    <ul>
+      <li><strong>中国</strong>：央行调节流动性只针对银行（给银行放钱/收钱），再由银行通过放贷向实体传导。银行内部利率（如DR007）对资产影响有限，最多影响债券市场（银行是债市重要参与者）。</li>
+      <li><strong>美国</strong>：美联储直接下场买卖国债，直接影响一线市场流动性，直接影响股债价格。所以做美国资产必须紧盯美联储流动性操作。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>实操提示：</strong>银行内部利率只需要关注 <strong>DR007</strong>（银行7天质押式回购利率），它最能真实反映银行流动性。其他银行间利率用不上、不影响资产，不需要掌握。</p>
+    </div>
+  </div>
+
+  <!-- 第5章 -->
+  <div class="section" id="ch5">
+    <h2>五、从银行间到实体：贷款路径与债券路径</h2>
+    <img src="assets/slides/slide_11.jpeg" alt="从银行间到实体部门的传导" class="slide-img" title="双击替换图片">
+
+    <p>第二步传导：银行间利率如何传导到实体部门利率？还是两条线，先讲简单的债券路径。</p>
+
+    <h3>5.1 债券路径：银行间利率 → 国债收益率 → 企业债收益率</h3>
+    <p>同样用无风险套利逻辑：</p>
+    <ul>
+      <li>银行间利率从 1.8% 降到 1.7%，但同期限国债收益率还在 1.8%。</li>
+      <li>银行从银行间以 1.7% 借钱，转手买 1.8% 的国债，套 0.1% 无风险利差。</li>
+      <li>大家都买国债 → 国债需求 > 供给 → 国债价格上涨 → 收益率下降。</li>
+      <li>一直降到国债收益率贴近银行间利率为止。</li>
+    </ul>
+    <p>国债收益率是所有债券的定价之锚，国债收益率变了，企业债收益率在国债基础上加信用利差，也会跟着变。</p>
+
+    <h3>5.2 贷款路径：银行间利率 → LPR → 实体贷款利率</h3>
+    <p>传导逻辑（通过银行的"逐利"行为间接完成）：</p>
+    <ul>
+      <li>银行间利率降到 1.7%，国债还在 1.8% → 银行觉得买国债比放贷划算（国债无坏账风险）。</li>
+      <li>银行都去买国债 → 国债价格上涨、收益率下跌 → 国债没什么赚头了。</li>
+      <li>资金转向贷款市场找机会 → 贷款市场钱多了 → 银行为了竞争，把 LPR（贷款利率基准）往下调。</li>
+      <li>LPR 作为实体贷款利率的基准下调 → 实体部门贷款利率跟着下调。</li>
+    </ul>
+  </div>
+
+  <!-- 第6章 -->
+  <div class="section" id="ch6">
+    <h2>六、LPR是什么：定义、形成机制与期限分类</h2>
+    <img src="assets/slides/slide_17.jpeg" alt="LPR是什么" class="slide-img" title="双击替换图片">
+
+    <h3>6.1 LPR的定义</h3>
+    <p>LPR（Loan Prime Rate，贷款市场报价利率）是<strong>中国银行体系的市场化基准利率</strong>，用于指导银行贷款利率定价。</p>
+
+    <h3>6.2 形成机制</h3>
+    <ul>
+      <li>由 <strong>18家代表性银行</strong>（国有大行、股份制银行、外资银行等）共同报价；</li>
+      <li>每月 <strong>20号</strong> 报价（遇节假日顺延），报的是各行给最优质客户的贷款利率；</li>
+      <li>剔除一个最高价、一个最低价，剩余取算术平均值——类似体操/跳水打分规则。</li>
+    </ul>
+
+    <h3>6.3 期限类型与用途</h3>
+    <ul>
+      <li><strong>1年期 LPR</strong>：用于短期贷款，如车贷、消费贷；</li>
+      <li><strong>5年期以上 LPR</strong>：用于中长期贷款，如房贷。</li>
+    </ul>
+
+    <div class="key-point">
+      <p><strong>两个特点要记住：</strong></p>
+      <p>① 1年期和5年期 LPR 各调各的，不一定同步；② LPR 以月为单位报价，对政策利率的反应有<strong>滞后性</strong>——不像银行间利率那样交易出来马上就动。</p>
+    </div>
+
+    <h3>6.4 历史沿革</h3>
+    <p>以前央行直接定"贷款基准利率"（固定不变、与市场脱节）。2013年开始试点 LPR，2019年8月正式改革，由 LPR 取代旧的贷款基准利率。早年办过房贷的都经历过银行打电话让你"换成 LPR 定价"。</p>
+  </div>
+
+  <!-- 第7章 -->
+  <div class="section" id="ch7">
+    <h2>七、LPR与日常贷款利率：加点、存量与新增</h2>
+    <img src="assets/slides/slide_21.jpeg" alt="LPR和日常贷款利率的关系" class="slide-img" title="双击替换图片">
+
+    <h3>7.1 银行实际贷款定价 = LPR + 加点/减点</h3>
+    <p>银行不会直接用 LPR 给客户，通常在 LPR 基础上加点：</p>
+    <ul>
+      <li>1年期 LPR = 3.65%，银行加 0.5% → 企业实际贷款利率 4.15%；</li>
+      <li>5年期 LPR = 4.3%，银行加 0.5% → 房贷利率 4.8%。</li>
+    </ul>
+    <p>经济下行期，很多银行对存量房做 LPR <strong>下浮</strong>（如 LPR 3.5% 下浮 0.5% → 3%），目的是减轻还贷压力、刺激消费。</p>
+
+    <h3>7.2 存量贷款 vs 新增贷款</h3>
+    <ul>
+      <li><strong>存量贷款</strong>：每年调整一次（按合同约定的重定价日，通常是每年1月1日，按上一年12月的 LPR 重新计算）。不是 LPR 这个月调了，你下个月房贷就降——必须等到重定价日。</li>
+      <li><strong>新增贷款</strong>：直接用最新 LPR 作基准，银行根据客户信用状况、首套/二套等加点。</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>为什么银行调 LPR 很谨慎？</strong>因为 LPR 下调会同时影响存量贷款（要重新算利息），银行必须先降存款端成本、再降贷款端 LPR，才能保住净息差。实际操作中是<strong>先降存款利率、后降 LPR</strong>——存款降息往往是 LPR 下调的前奏。</p>
+    </div>
+  </div>
+
+  <!-- 第8章 -->
+  <div class="section" id="ch8">
+    <h2>八、LPR的三大作用与对经济的五大影响</h2>
+    <img src="assets/slides/slide_24.jpeg" alt="LPR的作用" class="slide-img" title="双击替换图片">
+
+    <h3>8.1 LPR的三大作用</h3>
+    <ol>
+      <li><strong>影响贷款成本</strong>：LPR 是银行贷款利率的锚，LPR 降 → 贷款利息减少 → 企业/居民还款负担减轻。</li>
+      <li><strong>传导货币政策</strong>：央行政策利率 → 银行间利率 → LPR → 实体贷款利率，整条链路通过 LPR 贯通。</li>
+      <li><strong>与房贷利率挂钩</strong>：房贷锚定5年期 LPR，车贷锚定1年期 LPR。</li>
+    </ol>
+
+    <h3>8.2 LPR降低对经济五类人群的影响</h3>
+    <img src="assets/slides/slide_25.jpeg" alt="LPR影响经济哪些方面" class="slide-img" title="双击替换图片">
+    <ul>
+      <li><strong>有房贷人群</strong>：存量房贷月供减少，省下来的钱用于消费 → 资金流向实体经济。</li>
+      <li><strong>有消费贷人群</strong>：车贷等利率下降 → 消费意愿提升 → 贷款买车、装修等消费起来。</li>
+      <li><strong>有贷款企业</strong>：财务成本下降 → 利润上升 → 实体经济改善。</li>
+      <li><strong>有存款人群</strong>：贷款端降 → 银行为保持息差降存款利率 → 存款收益太低 → 部分人取钱消费。</li>
+      <li><strong>政府</strong>：更多存款转消费 → 增加消费税等财政税收（目前个人利息税免征）。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>抽象总结：</strong>LPR 降低一方面增加消费可能性，另一方面增加企业利润——两者都是对经济非常直接的刺激。这就是市场如此关注 LPR 的原因。</p>
+    </div>
+  </div>
+
+  <!-- 第9章 -->
+  <div class="section" id="ch9">
+    <h2>九、什么是社融：定义、查询路径与辩证看待</h2>
+    <img src="assets/slides/slide_27.jpeg" alt="什么是社融" class="slide-img" title="双击替换图片">
+
+    <h3>9.1 社融的定义</h3>
+    <p><strong>社会融资规模（社融）= 金融体系给社会上所有实体部门提供的融资（贷款）总额。</strong></p>
+    <ul>
+      <li><strong>社融存量</strong>：截至某一时点的融资余额；</li>
+      <li><strong>社融增量</strong>：当月新增的融资额。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>关键判定：</strong>必须是<strong>从金融体系出来、直接给到实体部门</strong>的钱才算社融。银行借给你算，我借给你不算（我不是金融机构）。银行间市场内部的钱也不算社融。</p>
+    </div>
+
+    <h3>9.2 社融到哪里查</h3>
+    <img src="assets/slides/slide_29.jpeg" alt="社融数据查询路径" class="slide-img" title="双击替换图片">
+    <p>路径：<strong>中国人民银行官网 → 首页 → 调查统计 → 当年统计数据 → 社会融资规模</strong>，即可看到每月社融存量/增量数据表。</p>
+
+    <h3>9.3 社融是不是越高越好？</h3>
+    <img src="assets/slides/slide_30.jpeg" alt="社融数据是不是越高越好" class="slide-img" title="双击替换图片">
+    <div class="highlight">
+      <p><strong>不是！只有"适度"才是最好的。</strong></p>
+    </div>
+    <p>社融本质反映的是<strong>实体经济对资金的需求</strong>和<strong>金融机构的资金供给</strong>。</p>
+    <ul>
+      <li><strong>社融过高的风险</strong>：可能不是经济繁荣，而是债务扩张或政策刺激导致；资金"脱实向虚"（如炒房）；杠杆过高积累金融风险；容易催生资产泡沫。</li>
+      <li><strong>社融过低的信号</strong>：①需求不足、信心不足（企业居民不愿借钱）；②金融供给受阻（银行惜贷、监管收紧、坏账担忧）；③政策传导失效——"宽货币、紧信用"（央行放水但资金沉淀在金融体系空转，银行去炒国债，央行下场打击）。</li>
+    </ul>
+
+    <div class="key-point">
+      <p><strong>2025年7月案例：</strong>7月社融存量比6月少了499亿，增量为0——这是<strong>20年来首次社融负增长</strong>（上一次是2005年）。说明企业和居民都不愿借钱，投资信心不足、消费意愿低迷，经济增长动力不足。</p>
+    </div>
+
+    <p><strong>看社融的正确姿势：</strong>不仅看总量，更要看<strong>结构和投向</strong>——钱流向了科技制造等高效率领域，还是房地产、旧经济模式？<strong>社融的质量远比数量重要。</strong></p>
+  </div>
+
+  <!-- 第10章 -->
+  <div class="section" id="ch10">
+    <h2>十、金融体系向实体提供资金的五种方式与三大核心利率</h2>
+    <img src="assets/slides/slide_35.jpeg" alt="金融体系向实体提供资金的方式" class="slide-img" title="双击替换图片">
+
+    <h3>10.1 五种融资方式</h3>
+    <ol>
+      <li><strong>银行表内融资</strong>：人民币贷款、外币贷款（记在银行资产负债表内）；</li>
+      <li><strong>银行表外融资</strong>：委托贷款、信托贷款、未贴现银行承兑汇票等；</li>
+      <li><strong>直接融资</strong>：政府债券、企业债券、股票融资；</li>
+      <li><strong>贷款核销</strong>：坏账贷款从表内抠掉，但仍计入社融（避免社融统计缺损）；</li>
+      <li><strong>其他</strong>：占比很低或未披露的项目。</li>
+    </ol>
+
+    <h3>10.2 三大核心利率（占社融90%）</h3>
+    <img src="assets/slides/slide_37.jpeg" alt="市场利率最需要关注哪几个" class="slide-img" title="双击替换图片">
+    <p>虽然融资方式很多，但<strong>人民币贷款、政府债券、企业债券三项合计约占社融余额的90%</strong>（其中人民币贷款约占62%）。对应的，市场利率里只需要关注三个：</p>
+    <ul>
+      <li><strong>① 贷款利率</strong>（对应人民币贷款）；</li>
+      <li><strong>② 利率债收益率（主要看国债收益率）</strong>（对应政府债券，含国债、专项债、地方政府债，最该关注国债）；</li>
+      <li><strong>③ 信用债收益率</strong>（对应企业债券）。</li>
+    </ul>
+  </div>
+
+  <!-- 第11章 -->
+  <div class="section" id="ch11">
+    <h2>十一、贷款利率对资产的影响：间接影响股价</h2>
+    <img src="assets/slides/slide_38.jpeg" alt="贷款利率对资产的影响" class="slide-img" title="双击替换图片">
+
+    <p>贷款利率（LPR）高低对上市公司股价是<strong>间接影响</strong>。通过三条链路传导：</p>
+
+    <h3>11.1 企业贷款利率下降 → 股价上升</h3>
+    <ul>
+      <li><strong>链路一（经济预期）</strong>：LPR 降 → 企业居民融资成本降 → 投资消费需求上升 → 经济预期改善 → 龙头企业盈利预期上调 → 股价上涨动力。</li>
+      <li><strong>链路二（财务成本）</strong>：LPR 降 → 存量贷款利息少还 + 新增贷款成本降低 → 企业净利润上升 → 估值修复 → 股价支撑。
+        <br>举例：企业有10亿贷款，LPR 下调1% → 一年利息少还1000万 → 直接变成利润。前几年企业贷款利率从6-7%降到3%几，等于很多上市公司凭空多出几千万利润。</li>
+      <li><strong>链路三（风险偏好）</strong>：LPR 降 → 市场预期后续还有降息 → 资金加仓债券 → 国债价格上涨、收益率下降 → 股票预期回报率（=股票收益率-无风险利率）相对变高 → 资金从债市流向股市。</li>
+    </ul>
+
+    <h3>11.2 个人存量贷款利率下降 → 消费增加 → 企业利润 → 股价</h3>
+    <p>房贷月供每月少还500元，大概率会花掉而不是存起来 → 消费增加 → 买企业的东西 → 上市公司净利润上升 → 股价上升。</p>
+
+    <h3>11.3 个人新增贷款利率下降 → 贷款意愿上升 → 消费增加 → 股价</h3>
+    <p>利率便宜了，贷款买车装修等增加 → 消费增加 → 同上链路。</p>
+
+    <div class="highlight">
+      <p><strong>重要提醒：</strong>贷款利率下降对股市是"利好"，但<strong>不是确定性上涨因素</strong>。股价还受经济基本面、政策、外部风险、情绪面等多重因素影响。如果市场认为宽松是因为经济不行导致的，可能出现"股强债更强"。资产判断不是简单线性逻辑，需要多条件共振。</p>
+    </div>
+  </div>
+
+  <!-- 第12章 -->
+  <div class="section" id="ch12">
+    <h2>十二、利率债与信用债收益率对资产的影响</h2>
+    <img src="assets/slides/slide_44.jpeg" alt="利率债收益率对资产的影响" class="slide-img" title="双击替换图片">
+
+    <h3>12.1 国债收益率（利率债）的三个影响</h3>
+    <ul>
+      <li><strong>对国债价格：直接影响</strong>（双生关系：价格涨→收益率跌，价格跌→收益率涨）；</li>
+      <li><strong>对企业债收益率：直接影响</strong>（企业债收益率 = 国债收益率 + 信用利差，信用利差含评级、违约风险补偿、流动性溢价）；</li>
+      <li><strong>对股票估值：间接影响</strong>（资产是比价逻辑——国债收益率下降=无风险利率下降，投资人觉得无风险收益太少，愿意去买股票这种风险资产）。</li>
+    </ul>
+
+    <img src="assets/slides/slide_46.jpeg" alt="企业债收益率对资产的影响" class="slide-img" title="双击替换图片">
+
+    <h3>12.2 企业债收益率（信用债）的两个影响</h3>
+    <ul>
+      <li><strong>对企业债价格：直接影响</strong>（价格与收益率反向）；</li>
+      <li><strong>对上市公司股价：间接影响</strong>——企业债收益率下降 → 企业新融资成本下降 → 净利润上升 → 股价上涨。</li>
+    </ul>
+  </div>
+
+  <!-- 第13章 -->
+  <div class="section" id="ch13">
+    <h2>十三、本章小结：利率政策的本质与中美差异</h2>
+    <img src="assets/slides/slide_47.jpeg" alt="利率本章小结" class="slide-img" title="双击替换图片">
+
+    <h3>13.1 三个核心结论</h3>
+    <ol>
+      <li><strong>央行利率政策的目的本质上是"调节/改善经济"</strong>，不是为资产服务。经济过热时加息，经济过冷时降息。资产价格波动是调节经济过程中产生的"副作用"。</li>
+      <li><strong>利率是"资产定价之锚"</strong>。它影响资产价格，是因为货币政策在调节经济时附带产生的效果。</li>
+      <li><strong>政策利率向实体市场传导，中间必须经过金融机构市场</strong>——央行无法隔空调控实体端利率。</li>
+    </ol>
+
+    <h3>13.2 中美传导机制的根本差异</h3>
+    <ul>
+      <li><strong>中国</strong>：央行只管银行的流动性 → 银行通过放贷/买债向实体传导。所以央行天天搞逆回购、买断式逆回购，对股债资产影响很小（买断式逆回购只是季节性给银行补流动性，对资产完全没影响）。央行只有直接下场买国债、或直接给非银机构钱买股票（如互换便利），才会直接影响资产价格。</li>
+      <li><strong>美国</strong>：融资体系以直接融资为主（股市、债市），银行占比很低。美联储直接下场买卖国债，直接干预终端利率（美国贷款利率=美债收益率）。所以做美国资产必须紧盯美联储流动性操作。</li>
+    </ul>
+
+    <div class="key-point">
+      <p><strong>整个利率框架需要掌握的5个利率：</strong>① 无风险利率；② 政策利率（重点是7天逆回购利率）；③ 三个市场利率（贷款利率、国债收益率/利率债、企业债收益率/信用债）。</p>
+      <p>课后务必从"无风险利率"开始，把政策利率和市场利率三节课串起来复看。看不懂利率，后面的汇率课、股票课都会吃力。</p>
+    </div>
+  </div>
+
+  <!-- 课程总结 -->
+  <div class="section">
+    <h2>课程总结</h2>
+    <p>本节课完成了市场利率的系统讲解，核心收获：</p>
+    <p><strong>第一</strong>，市场利率是供需自由决定的资金价格，分两个独立市场：<strong>金融机构市场（银行间）</strong>和<strong>实体部门市场（实体经济）</strong>。政策利率不能直接传导到实体，必须先经过银行间。</p>
+    <p><strong>第二</strong>，传导的核心机制是<strong>无风险套利</strong>：政策利率（7天逆回购）变动后，银行通过套利行为把银行间利率、国债收益率逐步拉向新的政策利率水平，再通过 LPR 和国债收益率两条线传导到实体贷款利率和企业债收益率。</p>
+    <p><strong>第三</strong>，<strong>LPR</strong> 是银行贷款利率的锚，18家银行每月20日报价，1年期管车贷、5年期管房贷。存量贷款每年重定价一次，新增贷款直接用最新 LPR。</p>
+    <p><strong>第四</strong>，<strong>社融</strong>是金融体系给实体的融资总额，三大项（人民币贷款、政府债券、企业债券）占90%。看社融质量比数量重要——2025年7月社融存量负增长499亿，是20年来首次，反映需求不足。</p>
+    <p><strong>第五</strong>，三个核心市场利率对资产的影响：贷款利率间接影响股价；国债收益率直接影响国债和企业债价格、间接影响股票估值；企业债收益率直接影响企业债价格、间接影响股价。</p>
+  </div>
+
+  <!-- 知识卡片 -->
+  <div class="section">
+    <h2>课程知识卡片（专业版）</h2>
+    <p>以下为课程配套的专业版知识卡片，汇总了本期核心知识点的完整框架。</p>
+    <img src="assets/knowledge-card-pro.jpg" alt="知识卡片专业版" class="slide-img" style="max-width: 100%; height: auto;" title="双击替换图片">
+    <h3>专业版卡片文字摘要</h3>
+    <ul>
+      <li><strong>知识点1 市场利率构成</strong>：定义=金融市场资金供需自由变动形成的资金价格。两大独立市场：金融机构市场（银行间，参与者全是金融机构，注意银行向央行借钱的利率属于政策利率不属于此）；实体部门市场（企业居民融资市场，即实体经济）。</li>
+      <li><strong>知识点2 从政策利率到市场利率</strong>：政策利率通过无风险套利机制锚定银行间利率。两条路径：贷款路径（银行间→LPR→实体贷款利率）；债券路径（银行间→国债收益率→企业债收益率）。中美差异：中国靠银行体系传导，美国美联储直接买卖国债干预终端。</li>
+      <li><strong>知识点3 LPR</strong>：银行体系市场化基准利率。18家代表性银行每月20号报价，剔除最高最低后取算术平均。1年期影响车贷消费贷，5年期以上影响房贷。LPR下调前奏通常是存款端先降息。</li>
+      <li><strong>知识点4 社融</strong>：金融体系向实体经济提供的资金总额。核心构成（约90%）：人民币贷款、政府债券、企业债券。走低=需求不足信心不足（如2025年7月首次负增长）；过高=债务扩张和资产泡沫、脱实向虚。特殊状态"宽货币紧信用"=央行放水但资金在金融体系空转。质量远比数量重要。</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>课程知识卡片（极简版）</h2>
+    <p>以下为极简版知识卡片，用问答形式快速回顾核心概念。</p>
+    <img src="assets/knowledge-card-mini.jpg" alt="知识卡片极简版" class="slide-img" style="max-width: 100%; height: auto;" title="双击替换图片">
+    <h3>极简版卡片文字摘要</h3>
+    <ul>
+      <li><strong>Q：LPR是什么？为什么它降了房贷就可能降？</strong><br>
+      A：LPR=18家大银行共同报出的"贷款参考价"，房贷利率在5年期LPR基础上加减点，基准价降了月供就可能减少。</li>
+      <li><strong>Q：社融是什么？为什么降低是坏消息？</strong><br>
+      A：社融=金融机构总共给社会借了多少钱，是"经济体温计"。社融降低（特别是负增长）说明企业不敢投资、百姓不愿消费，反映对未来信心不足。</li>
+      <li><strong>爆姐金句：</strong>"社融的质量，远比它的数量更重要。"钱流向高科技、先进制造，长期投资才稳；钱在金融体系空转或流向落后产能，再高的社融也是虚胖。</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    小爆姐宏观框架课 · 第7期 · 内部学习资料
+  </div>
+</div>
+</body></html>

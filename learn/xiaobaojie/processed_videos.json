@@ -1,0 +1,67 @@
+[
+  {
+    "episode": 1,
+    "title": "货币政策第1期：货币（1）",
+    "video_file": "",
+    "processed_date": "2026-09-24",
+    "output_path": "learn/xiaobaojie/1/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/1/",
+    "slides_count": 21
+  },
+  {
+    "episode": 2,
+    "title": "货币政策第2期：货币（2）",
+    "video_file": "",
+    "processed_date": "2026-09-24",
+    "output_path": "learn/xiaobaojie/2/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/2/",
+    "slides_count": 20
+  },
+  {
+    "episode": 3,
+    "title": "货币政策第3期：货币（3）",
+    "video_file": "",
+    "processed_date": "2026-09-24",
+    "output_path": "learn/xiaobaojie/3/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/3/",
+    "slides_count": 18
+  },
+  {
+    "episode": 4,
+    "title": "250709货币政策第4期：M2、存款准备金率与无风险利率",
+    "video_file": "",
+    "processed_date": "2026-09-24",
+    "output_path": "learn/xiaobaojie/4/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/4/",
+    "slides_count": 27
+  },
+  {
+    "episode": 5,
+    "title": "250713货币政策第5期：政策利率的构成、传导与利率走廊",
+    "video_file": "",
+    "processed_date": "2026-09-24",
+    "output_path": "learn/xiaobaojie/5/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/5/",
+    "slides_count": 22
+  },
+  {
+    "episode": 6,
+    "title": "250725宏观框架课第六期：货币工具分类与互换便利",
+    "video_file": "",
+    "processed_date": "2026-09-25",
+    "output_path": "learn/xiaobaojie/6/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/6/",
+    "slides_count": 27
+  },
+  {
+    "episode": 7,
+    "title": "250817宏观框架课第七期：政策利率与市场利率",
+    "video_file": "07.20250817宏观框架课第七期政策利率加市场利率 利率(3).mp4",
+    "processed_date": "2026-09-26",
+    "output_path": "learn/xiaobaojie/7/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/7/",
+    "slides_count": 56,
+    "video_duration_min": 83.6,
+    "has_knowledge_card": true
+  }
+]

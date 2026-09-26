@@ -3,20 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>宏观</title>
-<script src="/shared/nav.js" defer></script>
+<title>小邓老师 · 宏观</title>
+<script src="/shared/nav.js?v=5" defer></script>
 <script src="/shared/edit.js?v=20260925a" defer></script>
 <style>
-body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f6f8;color:#1f2329;margin:0;padding:40px 20px}
-.wrap{max-width:800px;margin:0 auto;text-align:center;padding-top:60px}
-h1{font-size:28px;margin-bottom:12px}
-p{color:#888;font-size:15px}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.7;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+.header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+.header p { color: #6b7280; font-size: 15px; }
+.course-list { display: flex; flex-direction: column; gap: 16px; }
+.course-card {
+  background: #fff; border-radius: 12px; padding: 24px 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06); transition: all .2s;
+  text-decoration: none; color: inherit; display: block;
+}
+.course-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); transform: translateY(-2px); }
+.course-card .course-num {
+  display: inline-block; background: #eef4fb; color: #1366d6;
+  font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; margin-bottom: 10px;
+}
+.course-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.course-card p { color: #6b7280; font-size: 14px; line-height: 1.6; }
+.course-card .course-meta { margin-top: 12px; display: flex; gap: 16px; font-size: 13px; color: #9ca3af; }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>宏观</h1>
-  <p>内容准备中，敬请期待...</p>
+<div class="container">
+  <div class="header">
+    <h1>小邓老师 · 宏观策略</h1>
+    <p>首席圈儿 / 行业知识圈儿 · A股宏观与市场策略</p>
+  </div>
+  <div class="course-list">
+
+    <a href="240726/" class="course-card">
+      <span class="course-num">第1期</span>
+      <h2>240726 风格再均衡，增配中下游——下半年A股市场的一些思考展望</h2>
+      <p>市场6月下旬以来调整幅度较大，投资者情绪低迷。从估值水位切入，对比二十届与十八届三中全会改革部署，梳理美国大选与美联储降息两大海外变量；用产出缺口、PPI、地产价量三个关键问题判断下半年基本面修复节奏；通过流动性时钟框架给出"红利+核心资产龙头"的配置建议。</p>
+      <div class="course-meta">
+        <span>2024-07-26</span>
+        <span>约 109 分钟</span>
+        <span>34 张PPT</span>
+      </div>
+    </a>
+
+    <a href="241029/" class="course-card">
+      <span class="course-num">第2期</span>
+      <h2>241029 四季度A股市场展望</h2>
+      <p>9·24政策组合拳后A股快速放量上涨，10月8日单日成交达3.5万亿。回顾30年A股政策宽松周期，判断当前处于第五轮宽松周期起点；从盈利磨底、地产止跌、估值分布、成交规律等维度论证牛市并非结束；给出"金融消费—成长小盘—周期"的轮动顺序，深入剖析红利策略的本质与日本高股息经验。</p>
+      <div class="course-meta">
+        <span>2024-10-29</span>
+        <span>约 106 分钟</span>
+        <span>23 张PPT</span>
+      </div>
+    </a>
+
+    <a href="250228/" class="course-card">
+      <span class="course-num">第3期</span>
+      <h2>250228 近期市场观点：交易拥挤度、两会节奏与2025年风格判断</h2>
+      <p>短期TMT成交占比再破40%看似拥挤，但历史上高位成交后超额收益难赚、绝对收益却无明显规律；两会前后行情通常中断但小盘未必跌更多。中期参照2013年，当前处于"盈利底部回升+宽货币紧信用+供给端收缩"组合，全年风格偏小盘成长，轮动顺序为金融消费→成长小盘→周期。</p>
+      <div class="course-meta">
+        <span>2025-02-28</span>
+        <span>约 123 分钟</span>
+        <span>20 张PPT</span>
+      </div>
+    </a>
+
+    <a href="250516/" class="course-card">
+      <span class="course-num">第4期</span>
+      <h2>250516 二季度市场观点 & 超额收益的一些基本策略</h2>
+      <p>二季度市场核心变量是关税：日内瓦会谈后美国对华实际关税约43.8%，但新征30%为"无差别攻击"。中期看产能持续出清、利润向TMT集中、ETF托底资金托底市场。后半段重点讲超额收益：过往业绩不代表未来、基民操作损耗巨大、α长期为正但β更重要；理论最优解是组合管理。</p>
+      <div class="course-meta">
+        <span>2025-05-16</span>
+        <span>约 127 分钟</span>
+        <span>23 张PPT</span>
+      </div>
+    </a>
+
+    <a href="250718/" class="course-card">
+      <span class="course-num">第5期</span>
+      <h2>250718 市场展望：会是2014、2015年吗？</h2>
+      <p>6月底以来A股超预期走强，指数站上3500点，市场开始讨论是否会重演2014/2015年的杠杆牛。从全球大类资产表现、国内政策定调、关税与海外流动性出发，核心回答一个问题：当前是否具备2015年或2021年那种无基本面支撑的牛市条件？结论是——政策底明确、流动性宽松，但增量资金量级远不及历史两轮牛市，本轮更可能是"低位轮动"。</p>
+      <div class="course-meta">
+        <span>2025-07-18</span>
+        <span>约 103 分钟</span>
+        <span>23 张PPT</span>
+      </div>
+    </a>
+
+    <a href="250905/" class="course-card">
+      <span class="course-num">第6期</span>
+      <h2>250905 站在3800之上</h2>
+      <p>上证指数站上3800点后，市场情绪亢奋。判断：牛市肯定没结束，但已到中段，尚未到"疯狂入市"阶段。核心框架——货币、经济、剩余流动性三因素仍在上行，符合牛市环境；短期情绪过热需要中场休息，但不代表行情结束。结构上小盘+成长风格占优，TMT+新能源/军工/机械是盈利主线。外部看，特朗普关税本质上体现美元霸权衰落。</p>
+      <div class="course-meta">
+        <span>2025-09-05</span>
+        <span>约 130 分钟</span>
+        <span>18 张PPT</span>
+      </div>
+    </a>
+
+    <a href="251107/" class="course-card">
+      <span class="course-num">第7期</span>
+      <h2>251107 站在4000之上</h2>
+      <p>上证指数站上4000点之后，市场接下来怎么走？从全球经济周期、A股盈利周期、产能周期出发，判断明年上半年基本面仍有支撑；同时用证券化率和ERP提醒市场中期估值已不便宜。结构上，科技主线在牛市中难以切换，历史数据显示主线行业超额收益到100%、超额估值到40%才见顶，目前还有空间。</p>
+      <div class="course-meta">
+        <span>2025-11-07</span>
+        <span>约 100 分钟</span>
+        <span>22 张PPT</span>
+      </div>
+    </a>
+
+    <a href="260122/" class="course-card">
+      <span class="course-num">第8期</span>
+      <h2>260122 稳扎稳打，2026年A股展望</h2>
+      <p>开年暴涨之后市场怎么走？判断短期风险有限——情绪虽高但未极端，波动率仍在低位，趋势性慢牛格局未破。但今年要降低预期：估值已从极便宜修复到合理位置，大幅赚估值的钱比较困难，全年赚业绩的钱。春节前后历史规律提示12月启动的春季行情平均持续40个交易日，今年刚好卡在春节附近，可适当兑现一部分。</p>
+      <div class="course-meta">
+        <span>2026-01-22</span>
+        <span>约 145 分钟</span>
+        <span>18 张PPT</span>
+      </div>
+    </a>
+
+    <a href="260308/" class="course-card">
+      <span class="course-num">第9期</span>
+      <h2>260308 动荡中的A股市场展望</h2>
+      <p>两会前夕，中东冲突骤起，A股站上4200点后投资者陷入纠结。从历史复盘中东冲突对全球资产的影响出发，用VIX恐慌指数作为交易锚点，结合AI模型做了三种时间窗口与四种升级情景的推演。随后转入A股本身：关税减让的利好、清明节前后的日历效应、波动率与估值的定位、盈利预期、全球资产相关性、地产周期见底信号和公募持仓结构。</p>
+      <div class="course-meta">
+        <span>2026-03-08</span>
+        <span>约 138 分钟</span>
+        <span>25 张PPT</span>
+      </div>
+    </a>
+
+    <a href="260515/" class="course-card">
+      <span class="course-num">第10期</span>
+      <h2>260515 财报分析和二季度市场展望</h2>
+      <p>AI/科技板块（光模块指数年内翻倍）涨高后是否见顶？市场调整背景下，特朗普访华、美联储新主席上任、中东地缘、通胀数据等大事件集中窗口期。小邓老师从上市公司财报分析切入，结合宏观基本面与产业趋势，展望二季度A股市场方向与结构机会。</p>
+      <div class="course-meta">
+        <span>2026-05-15</span>
+        <span>约 105 分钟</span>
+        <span>15 张PPT</span>
+      </div>
+    </a>
+
+  </div>
 </div>
 </body>
 </html>

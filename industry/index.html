@@ -78,6 +78,12 @@ a{color:var(--acc);text-decoration:none}
 #doc th,#doc td{border:1px solid var(--bd);padding:7px 10px;text-align:left}
 #doc th{background:#1c2129}
 #doc tr:nth-child(even) td{background:#12171d}
+/* ── 表格短单元格不折行（2026-09-28）─────────────────────────────
+   中文没有词边界，单元格的 min-content 宽度只有「1 个字」；auto 表格布局
+   在总宽不够时压缩列宽，会把「天孚通信」折成两行（实测 7371 个单元格里
+   1588 个短文本被折）。解法：给短单元格打 .nw（由 render() 里的
+   nowrapShortCells() 按内容判定），长描述列仍保持自动换行。 */
+#doc th.nw,#doc td.nw{white-space:nowrap}
 #doc code{background:#1c2129;padding:2px 5px;border-radius:4px;font-size:12.5px;
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 #doc pre{background:#161b22;border:1px solid var(--bd);border-radius:8px;padding:12px;
@@ -91,6 +97,16 @@ a{color:var(--acc);text-decoration:none}
 #doc mark{background:#5a4a00;color:#ffd33d;padding:0 2px}
 .mermaid{background:#fff;border-radius:8px;padding:12px;margin:16px 0;text-align:center}
 .mermaid svg{max-width:100%}
+/* ── mermaid 标签裁切修复（2026-09-28）─────────────────────────────
+   mermaid 在 body 下的**临时容器**里量测标签高度，把它写死成
+   foreignObject 的 height；而正式渲染发生在 #doc 内，#doc 的
+   line-height:1.75 会级联进标签，把每行从 22px 撑到 28px →
+   两行标签的第二行被 foreignObject 裁掉一半（实测 253 个标签中 167 个被裁）。
+   解法：把标签字体度量**写成全局规则**（不能只写 .mermaid 下），
+   让「量测环境」与「渲染环境」用同一套 font-size / line-height。
+   改这两条前请先跑 Temp/mermaid_test/gen.py 复核裁切数=0。 */
+.nodeLabel,.edgeLabel,.label,.cluster-label{font-size:16px;line-height:1.4}
+.mermaid foreignObject{overflow:visible}
 
 /* 编辑器 */
 #editor{display:none;width:100%;height:calc(100vh - 210px);background:#0b0f14;color:var(--fg);
@@ -190,10 +206,19 @@ function pre(md){
     .replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,(m,a,b)=>b||a) // 双链
     .replace(/%%[\s\S]*?%%/g,'');                          // 注释
 }
+/* 表格里股票名称/代码/日期/短标签不折行：长度≤18 且不含句读的单元格加 .nw
+   （判定放这里而不是写死在 CSS，是为了让长描述列照常换行、只锁住短字段）。 */
+function nowrapShortCells(d){
+  d.querySelectorAll('th,td').forEach(c=>{
+    const s=(c.textContent||'').trim();
+    if(s && s.length<=18 && !/[，。；]/.test(s)) c.classList.add('nw');
+  });
+}
 function render(md){
   const html=marked.parse(pre(md));
   const d=document.getElementById('doc');
   d.innerHTML=html;
+  nowrapShortCells(d);
   d.querySelectorAll('pre>code.language-mermaid').forEach(c=>{
     const div=document.createElement('div');
     div.className='mermaid'; div.textContent=c.textContent;

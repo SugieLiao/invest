@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盘面全景 9月28日（周一）：节前出金、光通信雪崩、防御独撑</title>
+<script src="./echarts.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #2c3e50; line-height: 1.7; padding: 24px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+  .banner { background: #fff8e6; border-left: 4px solid #e6a700; padding: 10px 14px; font-size: 13px; border-radius: 4px; margin-bottom: 20px; }
+  .tldr { background: #ffffff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .tldr h2 { font-size: 17px; margin-bottom: 10px; color: #1a5276; }
+  .tldr p { font-size: 14px; margin-bottom: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 12px; color: #7f8c8d; }
+  .kpi .val { font-size: 22px; font-weight: 700; margin-top: 2px; }
+  .kpi .note { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+  .kpi-split { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .kpi-split .half { padding: 12px 16px; }
+  .kpi-split .half + .half { border-top: 1px dashed #e3e6ea; background: #f8fbfd; }
+  .kpi-split .val { font-size: 20px; }
+  .kpi .val.est { color: #1a5276; }
+  .up { color: #c0392b; } .down { color: #1e8449; } .flat { color: #2c3e50; }
+  section { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  section h2 { font-size: 17px; margin-bottom: 12px; color: #1a5276; border-bottom: 1px solid #eef1f4; padding-bottom: 8px; }
+  section p { font-size: 14px; margin-bottom: 8px; }
+  .chart { width: 100%; height: 360px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th { background: #f0f3f6; text-align: left; padding: 8px 10px; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f4; }
+  .toggle-btn { background: #eef3f8; border: 1px solid #cfd8e3; border-radius: 4px; padding: 4px 14px; font-size: 12px; cursor: pointer; margin-bottom: 8px; }
+  .toggle-btn:hover { background: #dde7f0; }
+  .src { font-size: 11px; color: #95a5a6; margin-top: 10px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 10px 0; }
+  .chain .node { background: #f4f8fb; border: 1px solid #c9dbe8; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 200px; font-size: 13px; }
+  .chain .node b { color: #1a5276; display: block; margin-bottom: 4px; }
+  .chain .arrow { align-self: center; color: #7f8c8d; font-size: 18px; }
+  ul { padding-left: 20px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  .tag { display: inline-block; background: #fdecea; color: #c0392b; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  
+  
+  
+  
+  
+  
+  .risk { background: #fdf3f3; border-left: 4px solid #c0392b; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+  .foot { font-size: 12px; color: #7f8c8d; border-top: 1px solid #e3e6ea; padding-top: 14px; margin-top: 6px; }
+</style>
+<script src="/shared/nav.js" defer></script></head>
+<body>
+<div class="wrap">
+  
+  <h1>盘面全景 9月28日（周一）：节前出金、光通信雪崩、防御独撑</h1>
+  <div class="sub">2026年9月28日（周一）· 盘面总结（早盘定型，数据截至 10:30 前后）</div>
+
+  <div class="banner">⚠️ 口径提示：本文为<strong>盘中口径（早盘定型版）</strong>——行情与涨跌家数截至 10:28~10:37，资金流向为 11:23 快照，消息面截至约 11:25。午后走势尚未产生，收盘结论以交易所最终披露为准。今日为国庆长假前第三个交易日（本周仅剩三个交易日）。</div>
+
+  <div class="tldr">
+    <h2>30秒结论</h2>
+    <p><strong>节前"黑周一"：放量下杀、普跌格局</strong>。三大指数低开低走且跌幅持续扩大：沪指 <span class="tag">-1.81%</span> 一度跌破 3850 关口（盘中最低 3812.74），深成指 -3.36%，创业板指 -4.19%，科创综指 -4.42%；涨跌家数 <strong>711 涨 : 4768 跌</strong>（上涨占比仅约 13%），跌停 28 家 > 涨停 20 家，赚钱效应阶段性归零。<strong>预估全天成交约 1.7 万亿</strong>（截至 10:28 已成交 8422.87 亿、较上交易日同期放量 2.71%，当前累计 + 昨日同期后段外推，区间 1.6~1.8 万亿）——放量下杀而非缩量阴跌，是真刀真枪的抛压释放。</p>
+    <p><strong>性质判断：季节性 + 交易性抛压，而非系统性风险事件</strong>。三重压力共振：① 国庆长假前融资盘与短线资金降仓出金；② 中美第八轮磋商成果落地 = 利好兑现变出货理由；③ 高位科技多杀多（美 S.5548 法案冲击光模块、亨通光电 66 亿定增摊薄跌停、甲骨文数据中心延期引发算力交付担忧）。盘面呈<strong>权重护盘、个股失血</strong>的割裂结构：银行/电力/汽车整车/黄酒/石油石化逆势飘红，电子+通信主力合计净流出约 378 亿（全市场净流出约 562 亿）。防御方向净流入规模仅 3 亿级——更像<strong>减仓避险，而非新钱建仓</strong>。历史上长假前一周上证下跌概率约 87.5%、节后一周上涨概率约 62.5%（中信建投口径），恐慌盘杀跌后不宜追杀，节前控制仓位为要。</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">上证指数（10:37 盘中）</div><div class="val down">3818.04<br>-1.81%</div><div class="note">低开 0.26%，盘中最低 3812.74</div></div>
+    <div class="kpi"><div class="label">创业板指（10:37 盘中）</div><div class="val down">-4.19%</div><div class="note">科创综指 -4.42%，成长失血</div></div>
+    <div class="kpi kpi-split">
+      <div class="half"><div class="label">两市成交额（截至当前时点）</div><div class="val flat">8422.87亿</div><div class="note">截至 10:28 · 较上交易日同期放量 2.71%</div></div>
+      <div class="half"><div class="label">预估全天成交额</div><div class="val est">≈1.7万亿</div><div class="note">区间 1.6~1.8 万亿 · 当前累计+昨日同期后段外推</div></div>
+    </div>
+    <div class="kpi"><div class="label">涨跌家数</div><div class="val up">711 涨</div><div class="val down">4768 跌</div><div class="note">上涨占比约 13%，普杀格局</div></div>
+    <div class="kpi"><div class="label">涨停 / 跌停</div><div class="val"><span class="up">20 家</span> / <span class="down">28 家</span></div><div class="note">跌停多于涨停，空头占优</div></div>
+  </div>
+
+  <section>
+    <h2>一、指数与广度：低开低走的放量下杀，权重护盘、成长失血</h2>
+    <button class="toggle-btn" onclick="toggleView('idx')">图 / 表切换</button>
+    <div id="idx-chart" class="chart"></div>
+    <div id="idx-table" style="display:none;">
+      <table>
+        <tr><th>指数</th><th>盘中表现（10:37 前后）</th><th>涨跌幅</th><th>备注</th></tr>
+        <tr><td>上证指数</td><td>3818.04（最低 3812.74）</td><td class="down">-1.81%</td><td>低开 0.26% 后一路走低，跌破 3850</td></tr>
+        <tr><td>深证成指</td><td>12869.11</td><td class="down">-3.36%</td><td>跌幅显著大于沪指</td></tr>
+        <tr><td>创业板指</td><td>约 3149</td><td class="down">-4.19%</td><td>新能源/创新药/互联网权重集体走弱</td></tr>
+        <tr><td>科创综指</td><td>—</td><td class="down">-4.42%</td><td>科创板内硬核科技普跌</td></tr>
+        <tr><td>科创50</td><td>1558.51</td><td class="down">-4.04%</td><td>半导体/高端制造拖累</td></tr>
+        <tr><td>北证50</td><td>—</td><td class="down">-2.05%</td><td>万源通 -10.39% 等</td></tr>
+        <tr><td>恒生指数（对照）</td><td>约 24671</td><td class="up">+0.66%~0.73%</td><td>与 A 股走出跷跷板，但恒生科技 -0.29%</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>结构特征：指数与个股严重割裂</strong>。沪市权重（银行、石油石化、"中特估"方向）奋力托底使沪指相对抗跌，但绝大多数中小盘与科技成长股承受流动性挤压——对比外围，韩国 KOSPI 仅跌约 2.1%，而 A 股大量个股跌幅达 3~5%、部分接近 10%。这轮下跌的核心不是外部传导冲击，而是<strong>A 股自身资金结构问题：资金抱团防御赛道虹吸流动性，成长赛道被抽离</strong>。今开集合竞价涨跌比 2084:2450 尚属温和，开盘一小时后恶化至约 607:4877——抛压在盘中持续释放而非一次性。</p>
+    <div class="src">数据来源：证券时报·数据宝（截至 10:28，2026-09-28）；东方财富财富号盘中速递（截至 10:37）；同花顺投顾平台、腾讯新闻早盘综述（盘中口径）</div>
+  </section>
+
+  <section>
+    <h2>二、涨跌分布：普杀格局，跌停家数多于涨停</h2>
+    <div class="chart" id="breadth-chart"></div>
+    <p style="margin-top:10px;">截至 10:28：上涨 711 家 vs 下跌 4768 家（上涨占比约 <strong>13%</strong>），涨停 20 家、跌停 28 家——<strong>跌停多于涨停</strong>，与 9 月下旬此前"涨停 50+ 家"的情绪形成断崖式反差。下跌阵营中高位人气股大面积跳水：大亚圣象、内蒙新华、金健米业、澳弘电子（前期 9 天 7 板）、泰慕士、南华生物、天威视讯跌停，万向德农、华脉科技、华软科技、奥佳华快速跟跌。<strong>这是一个"无差别杀跌 + 高位股补跌"的分布</strong>：跌幅最深的是前期涨幅最大的方向（光通信、PCB、贵金属、农业妖股），而逆势上涨的仅 700 余家、以防御和事件性品种为主。赚钱效应归零的环境下，短线接力胜率极低，观望优于抄底。</p>
+    <div class="src">数据来源：证券时报·数据宝（截至 10:28）；东方财富财富号（开盘 100 分钟涨跌比 607:4877，约 10:40）；同花顺投顾平台（盘中口径）</div>
+  </section>
+
+  <section>
+    <h2>三、热点板块梯队：防御独苗与事件脉冲，没有真主线</h2>
+    <button class="toggle-btn" onclick="toggleView('sec')">图 / 表切换</button>
+    <div id="sec-chart" class="chart"></div>
+    <div id="sec-table" style="display:none;">
+      <table>
+        <tr><th>方向</th><th>盘中表现</th><th>代表个股</th><th>属性判断</th></tr>
+        <tr><td>商用车/汽车整车</td><td class="up">商用车指数 +3.03%</td><td>江淮汽车 +9.99% 涨停、众泰汽车触及涨停</td><td>防御+冲量逻辑，主力净流入板块第一梯队</td></tr>
+        <tr><td>电力</td><td class="up">电力指数 +0.11%（逆势红盘）</td><td>浙江新能 +10.07% 涨停、大连热电等跟涨</td><td>能源局装机数据 + 公用事业避险</td></tr>
+        <tr><td>银行</td><td class="up">板块全线飘红</td><td>农业银行、邮储银行、浦发银行涨超 1%</td><td>低估值高股息避险，权重护盘主力</td></tr>
+        <tr><td>石油石化</td><td class="up">+0.08%（申万涨幅第一）</td><td>—</td><td>防御权重，油价大幅拉升支撑</td></tr>
+        <tr><td>黄酒</td><td class="up">概念反复活跃</td><td>会稽山、古越龙山双双涨停，金枫酒业跟涨</td><td>低位消费 + 量价重构叙事（华泰）</td></tr>
+        <tr><td>玻璃基板</td><td class="up">概念走强</td><td>金辰股份 3 连板</td><td>事件脉冲（英伟达评估采用方案）</td></tr>
+        <tr><td>影视院线 / 网络安全 / 电商</td><td>局部活跃</td><td>博纳影业涨停；中新赛克 4 天 2 板；跨境通涨停</td><td>一日脉冲题材，不构成主线</td></tr>
+        <tr><td>通信（申万）</td><td class="down">-5.86%（领跌两市）</td><td>亨通光电、烽火通信跌停，中际旭创 -6~8%</td><td>前期顶流，三利空共振杀估值</td></tr>
+        <tr><td>贵金属（概念）</td><td class="down">-5.04%</td><td>山东黄金 -9% 以上领跌</td><td>现货黄金跌破 4200 美元</td></tr>
+        <tr><td>电子（申万）</td><td class="down">-3.85%</td><td>兆易创新 -5.94%，PCB 高位股集体跌停</td><td>算力硬件链重挫</td></tr>
+        <tr><td>建筑材料 / 有色金属</td><td class="down">-3.67% / -3.36%</td><td>—</td><td>周期方向跟随回调</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>梯队判断：今日没有"真主线"，只有"防御独苗"</strong>。逆势方向的性质高度一致——低估值、高股息、低位、有事件借口：电力（能源局 1-8 月装机数据：太阳能 +16.3%、风电 +19.6%）、银行（长江证券三季报稳中向好 + 四季度中期分红预期）、汽车整车（9 月以来超 50 款新车密集上市冲量）、黄酒（华泰"量价逻辑重构"）。但这些方向的<strong>主力净流入规模极小（3 亿级）</strong>，本质是避险资金的临时避风港而非进攻性建仓。<strong>次级热点</strong>是玻璃基板、网络安全、院线等事件脉冲；<strong>重灾区</strong>是通信（-5.86%）、电子（-3.85%）、建材、有色、贵金属——前期所有强势方向的集中兑现。指数若要企稳，需先看到电子/通信的抛压衰竭。</p>
+    <div class="src">数据来源：证券时报·数据宝申万行业涨跌（截至 10:28）；NeoData 板块行情（商用车 +3.03%、电力 +0.11%，11:23）；同花顺、腾讯新闻、东方财富盘中报道（个股表现，盘中口径）</div>
+  </section>
+
+  <section>
+    <h2>四、资金行为：电子+通信合计失血约 378 亿，防御流入仅 3 亿级</h2>
+    <div id="flow-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>大盘层面</strong>：全市场主力资金净流出约 <strong>562 亿元</strong>（盘中口径），融资融券板块净流出约 509 亿；两融余额 25995.1 亿、较前一交易日减少约 173 亿——杠杆资金主动降仓。央行当日逆回购"三箭齐发"（7 天 1390 亿 + 隔夜 6610 亿 + 14 天 3000 亿）投放流动性，但<strong>宏观流动性的宽松未能对冲微观资金的节前撤退</strong>。</p>
+    <p><strong>行业层面（申万一级，11:23 快照）</strong>：31 个行业中仅 <strong>5 个</strong>获主力净流入——公用事业 +3.04 亿、美容护理 +1.51 亿、汽车 +1.29 亿、石油石化 +0.87 亿、商贸零售 +0.76 亿；净流出集中于 <strong>电子 -235.95 亿、通信 -142.52 亿</strong>（合计约 -378 亿，占全市场净流出三分之二），其后为有色金属 -49.43 亿、机械设备 -49.00 亿、电力设备 -46.77 亿、基础化工 -37.86 亿、计算机 -31.26 亿。流入行业规模小、流出行业规模大——<strong>典型的"减仓避险"而非"高低切换建仓"</strong>。</p>
+    <p><strong>个股层面（11:23 前后）</strong>：净卖出居首的是中际旭创（-17.78 亿，盘中一度扩大至约 -25.85 亿，跌破万亿市值）；新易盛 -13.53 亿、亨通光电（跌停）、兆易创新净流出居前。净买入居首的是彩虹股份（+6.39 亿，面板方向逆势）；江淮汽车 +4.71 亿（涨停）、有研新材、众泰汽车、京沪高铁 +0.90 亿获净流入；宁德时代 +0.44 亿、京东方A -1.21 亿（相对抗跌）。<strong>信号解读</strong>：抛售是"从最强的门里挤出来"，承接是"往最低的门里躲"，与指数情绪形成负共振——防御流入的量级不足以扭转市场，只说明存量资金的求生方向。</p>
+    <div class="src">数据来源：NeoData/证券时报·数据宝申万一级行业主力资金（11:23 快照）；财联社盯盘、新浪财经主力资金监控（盘中口径）；westock-data 个股资金流（中际旭创 -25.85 亿等，11:23）。注：主力资金流按大中小单拆分属统计推断，与交易所官方口径可能有差异，收盘以官方披露为准。</div>
+  </section>
+
+  <section>
+    <h2>五、消息面归因：三重压力共振，政策/事件 → 板块传导链</h2>
+    <div class="chain">
+      <div class="node"><b>压力① 节前流动性退潮（季节性）</b>国庆 7 天长假仅剩 3 个交易日，外盘/美债/地缘变数下融资盘与短线资金提前降仓留现金；两融余额单日 -173 亿。历史上（2016 年以来，剔除大波动年份）长假前一周上证下跌概率约 87.5%、平均 -1.1% → <strong>今日"倒数第三日"放量下杀符合日历效应剧本</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>压力② 中美利好兑现（预期收敛）</b>第八轮磋商成果会前已充分定价，真落地 = "预期收敛"而非新利好，获利盘借机离场 → <strong>事件窗资金撤退，催化整体降仓</strong></div>
+    </div>
+    <div class="chain">
+      <div class="node"><b>压力③ 高位科技多杀多（三箭齐发砸光通信）</b>美参议员 9-25 提交 S.5548 法案：拟禁止联邦政府为国家安全系统采购中际旭创/新易盛光模块（仅涉国安系统但情绪冲击大）；亨通光电 66.36 亿定增摊薄近三成 + 上半年经营现金流为负，直接封死跌停；甲骨文数据中心供电延期（不可抗力通知）+ 180 亿美元银团贷款折价抛售 → <strong>通信 -5.86% 领跌、光模块三剑客跌 6~8%、PCB 高位股集体跌停</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>外部估值锚抬升</b>美债 10 年期收益率升至约 5.15%（创约 19 年新高），压制高久期、无股息成长资产；现货黄金跌破 4200 美元 → <strong>贵金属 -5.04%、科技成长估值双向受压；资金涌向银行/电力/油气等高股息防御</strong></div>
+    </div>
+    <ul>
+      <li>对冲项：央行逆回购三箭齐发（隔夜 6610 亿 + 7 天 1390 亿 + 14 天 3000 亿）净投放，托底宏观流动性；</li>
+      <li>结构性催化：国家能源局 1-8 月电力数据（发电装机 +11.1%、太阳能 +16.3%、风电 +19.6%）→ 电力板块逆势活跃；</li>
+      <li>外围分化：恒指 +0.66%~0.73% 与 A 股跷跷板（能源/必需消费领涨），日经 +0.59%，但 KOSPI -2.1%、SK 海力士 -2.63%、三星 -2.1%；</li>
+      <li>机构观点：中信证券维持年内震荡市判断（三季报前后是年内最后一波进攻窗口）；中信建投认为调整与缩量为交易性、季节性因素主导，节后有望修复性反弹（节后一周上证上涨概率约 62.5%、平均 +1.3%）；国金证券建议结构性应对（有色金铜铝 + 能化链条）。</li>
+    </ul>
+    <div class="src">来源：腾讯新闻/财联社/格隆汇（S.5548 法案、亨通定增、甲骨文事件，2026-09-28 盘中）；东方财富财富号盘中速递；中信证券/中信建投/国金证券研报观点（媒体转述口径）</div>
+  </section>
+
+  <section>
+    <h2>六、综合研判与下一时段观察清单</h2>
+    <p><strong>行情性质</strong>：这是一次<strong>节前季节性 + 交易性抛压主导的放量普跌</strong>，而非基本面恶化驱动的趋势性下跌——融资盘降仓、利好兑现、高位科技补跌三者共振，且此前机构季末兑现已基本完成、高位科技前期已释放过一轮风险。权重护盘（沪指 -1.81% vs 创业板 -4.19%）说明国家队/长线资金并未撤退，撤退的是杠杆与短线情绪资金。按日历效应，节前一周偏弱是大概率事件，节后一周修复（上涨概率约 62.5%）同样有历史支撑；<strong>恐慌割肉容易卖在阶段低点，但满仓赌长假同样错误——持股不重仓、观望不空仓是当前较优姿态</strong>。</p>
+    <p><strong>主线识别（今日版）</strong>：</p>
+    <ul>
+      <li><strong>无真主线</strong>：防御独苗（银行/电力/汽车/黄酒/油气）净流入仅 3 亿级，是避风港不是进攻线，不宜当作新主线追高；</li>
+      <li><strong>前主线的压力位</strong>：光通信/PCB 逻辑短期被砸出缺口（S.5548 + 定增 + 交付担忧三重利空），即使反弹，缺口位将有套牢盘抛压；</li>
+      <li><strong>脉冲题材</strong>：玻璃基板（金辰股份 3 连板）、网络安全、院线属一日游概率高，追高胜率低。</li>
+    </ul>
+    <p><strong>午后与节前最后三个交易日，盯三个核心变量</strong>：</p>
+    <ul>
+      <li><strong>① 电子/通信主力净流出能否收窄</strong>：当前合计约 -378 亿，若午后收窄至 -250 亿以内且光模块三剑客止跌企稳，抛压释放接近尾声；若继续扩大，则节前每日都可能是"黑周一"剧本重演；</li>
+      <li><strong>② 全天成交额落位</strong>：预估 ≈1.7 万亿（区间 1.6~1.8 万亿）。若收盘放量站上 1.7 万亿，属恐慌一次性释放、节后修复概率提升；若午后急剧缩量跌不动（阴跌），则杀伤力反而更持久；</li>
+      <li><strong>③ 防御方向是"避险"还是"建仓"</strong>：盯银行/电力/整车的主力净流入能否从 3 亿级放大到 10 亿级以上、且在指数企稳后不立刻流出——只有放量承接才证明有新钱，否则防御独撑随时瓦解。</li>
+    </ul>
+    <div class="risk"><strong>风险提示</strong>：① 长假期间海外变数（美债利率、地缘、海外 AI 产业消息）可能放大节后波动；② 高位科技股若三季报不及预期，节前节后有二次下杀风险；③ 本文全部为盘中口径（10:28~11:23 快照），午后与收盘存在变数；④ 光模块 S.5548 法案实际影响仅涉美国联邦国家安全系统采购，情绪冲击大于实质冲击，勿过度外推。</div>
+  </section>
+
+  <div class="foot">
+    数据时点：2026-09-28 10:28~10:37（行情、涨跌家数、行业涨跌）/ 11:23（申万主力资金、个股资金流为盘中快照）· 行情来源：证券时报·数据宝、东方财富、同花顺、NeoData、westock-data；新闻来源：财联社、腾讯新闻、格隆汇、新浪财经 · 免责声明：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+function toggleView(key) {
+  var c = document.getElementById(key + '-chart');
+  var t = document.getElementById(key + '-table');
+  if (c.style.display === 'none') { c.style.display = 'block'; t.style.display = 'none'; }
+  else { c.style.display = 'none'; t.style.display = 'block'; }
+}
+
+var UP = '#c0392b';
+var DOWN = '#1e8449';
+
+var idxNames = ['上证指数', '深证成指', '创业板指', '科创综指', '科创50', '北证50', '恒生指数(对照)'];
+var idxVals = [-1.81, -3.36, -4.19, -4.42, -4.04, -2.05, 0.70];
+echarts.init(document.getElementById('idx-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+  grid: { left: 50, right: 30, top: 30, bottom: 50 },
+  xAxis: { type: 'category', data: idxNames, axisLabel: { interval: 0, rotate: 20 } },
+  yAxis: { type: 'value', name: '涨跌幅(%)' },
+  series: [{ type: 'bar', barWidth: '55%',
+    data: idxVals.map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'bottom', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var bNames = ['上涨', '下跌', '涨停', '跌停'];
+var bVals = [711, 4768, 20, 28];
+var bColors = [UP, DOWN, UP, DOWN];
+echarts.init(document.getElementById('breadth-chart')).setOption({
+  title: { text: '涨跌广度（截至10:28）· 上涨占比约13%', left: 'center', textStyle: { fontSize: 13, color: '#7f8c8d' } },
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 家' },
+  grid: { left: 60, right: 30, top: 50, bottom: 40 },
+  xAxis: { type: 'category', data: bNames },
+  yAxis: { type: 'value', name: '家数' },
+  series: [{ type: 'bar', barWidth: '45%',
+    data: bVals.map(function (v, i) { return { value: v, itemStyle: { color: bColors[i] } }; }),
+    label: { show: true, position: 'top', color: '#2c3e50', formatter: '{c} 家' } }]
+});
+
+var secNames = ['商用车', '电力', '石油石化(申万)', '生物制品(申万)', '互联网电商', '有色·贵金属(概念)', '建筑材料(申万)', '电子(申万)', '通信(申万)'];
+var secVals = [3.03, 0.11, 0.08, -0.18, -0.56, -5.04, -3.67, -3.85, -5.86];
+echarts.init(document.getElementById('sec-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+  grid: { left: 130, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '涨跌幅(%)' },
+  yAxis: { type: 'category', data: secNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: secVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var flowNames = ['公用事业', '美容护理', '汽车', '石油石化', '商贸零售', '计算机', '基础化工', '电力设备', '机械设备', '有色金属', '通信', '电子'];
+var flowVals = [3.04, 1.51, 1.29, 0.87, 0.76, -31.26, -37.86, -46.77, -49.00, -49.43, -142.52, -235.95];
+echarts.init(document.getElementById('flow-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 亿元' },
+  grid: { left: 90, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '主力净流入(亿元)' },
+  yAxis: { type: 'category', data: flowNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: flowVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}', color: '#2c3e50' } }]
+});
+</script>
+</body>
+</html>

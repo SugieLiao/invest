@@ -1,3 +1,4 @@
+/* v5 */
 /*!
  * shared/nav.js — liaohao.cc 投资类应用统一顶部菜单栏
  * 结构：盘面全景 | A股复盘(收盘版/午间版) | 宏观看板
@@ -184,9 +185,9 @@
       ".invest-nav .drop a{font-size:14px;padding:8px 12px;border-radius:7px}",
       ".invest-nav .drop .has-sub{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%}",
       ".invest-nav .drop .has-sub .sub-caret{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:4px solid currentColor;opacity:.55;margin-left:8px}",
-      ".invest-nav .drop .sub-drop{position:absolute;left:100%;top:-6px;min-width:120px;background:" + P.panel + ";",
-      "border:1px solid " + P.bd + ";border-radius:10px;box-shadow:" + P.shadow + ";padding:6px;display:none;flex-direction:column;gap:2px;margin-left:8px}",
-      ".invest-nav .drop .has-sub::before{content:\'\';position:absolute;left:100%;top:0;bottom:0;width:8px;background:transparent}",
+      ".invest-nav .drop .sub-drop{position:absolute;left:calc(100% + 4px);top:-6px;min-width:120px;background:" + P.panel + ";",
+      "border:1px solid " + P.bd + ";border-radius:10px;box-shadow:" + P.shadow + ";padding:6px;display:none;flex-direction:column;gap:2px}",
+      ".invest-nav .drop .has-sub::after{content:'' ;position:absolute;left:100%;top:0;bottom:0;width:4px;background:transparent}",
       ".invest-nav .drop .has-sub:hover .sub-drop{display:flex}",
       "@media(max-width:560px){.invest-nav .nav-inner{height:44px;padding:0 10px;gap:0}",
       ".invest-nav .nav-brand{display:none}.invest-nav a{padding:6px 9px;font-size:13.5px}}"

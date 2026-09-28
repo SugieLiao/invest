@@ -63,5 +63,16 @@
     "slides_count": 56,
     "video_duration_min": 83.6,
     "has_knowledge_card": true
+  },
+  {
+    "episode": 8,
+    "title": "250831宏观框架课第八期：货币政策与汇率",
+    "video_file": "08.20250831直播宏观框架课第八期货币政策汇率(1).mp4",
+    "processed_date": "2026-09-28",
+    "output_path": "learn/xiaobaojie/8/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/8/",
+    "slides_count": 57,
+    "video_duration_min": 84.3,
+    "has_knowledge_card": true
   }
 ]

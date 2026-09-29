@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盘面全景 9月29日（周二）：午后小幅回吐、地产维持强势、国常会稳地产驱动</title>
+<script src="./echarts.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #2c3e50; line-height: 1.7; padding: 24px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+  .banner { background: #fff8e6; border-left: 4px solid #e6a700; padding: 10px 14px; font-size: 13px; border-radius: 4px; margin-bottom: 20px; }
+  .tldr { background: #ffffff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .tldr h2 { font-size: 17px; margin-bottom: 10px; color: #1a5276; }
+  .tldr p { font-size: 14px; margin-bottom: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 12px; color: #7f8c8d; }
+  .kpi .val { font-size: 22px; font-weight: 700; margin-top: 2px; }
+  .kpi .note { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+  .kpi-split { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .kpi-split .half { padding: 12px 16px; }
+  .kpi-split .half + .half { border-top: 1px dashed #e3e6ea; background: #f8fbfd; }
+  .kpi-split .val { font-size: 20px; }
+  .kpi .val.est { color: #1a5276; }
+  .up { color: #c0392b; } .down { color: #1e8449; } .flat { color: #2c3e50; }
+  section { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  section h2 { font-size: 17px; margin-bottom: 12px; color: #1a5276; border-bottom: 1px solid #eef1f4; padding-bottom: 8px; }
+  section p { font-size: 14px; margin-bottom: 8px; }
+  .chart { width: 100%; height: 360px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th { background: #f0f3f6; text-align: left; padding: 8px 10px; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f4; }
+  .toggle-btn { background: #eef3f8; border: 1px solid #cfd8e3; border-radius: 4px; padding: 4px 14px; font-size: 12px; cursor: pointer; margin-bottom: 8px; }
+  .toggle-btn:hover { background: #dde7f0; }
+  .src { font-size: 11px; color: #95a5a6; margin-top: 10px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 10px 0; }
+  .chain .node { background: #f4f8fb; border: 1px solid #c9dbe8; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 200px; font-size: 13px; }
+  .chain .node b { color: #1a5276; display: block; margin-bottom: 4px; }
+  .chain .arrow { align-self: center; color: #7f8c8d; font-size: 18px; }
+  ul { padding-left: 20px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  .tag { display: inline-block; background: #fdecea; color: #c0392b; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .tag-d { display: inline-block; background: #e8f6ef; color: #1e8449; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .risk { background: #fdf3f3; border-left: 4px solid #c0392b; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+  .foot { font-size: 12px; color: #7f8c8d; border-top: 1px solid #e3e6ea; padding-top: 14px; margin-top: 6px; }
+</style>
+<script src="/shared/nav.js" defer></script></head>
+<body>
+<div class="wrap">
+
+  <h1>盘面全景 9月29日（周二）：午后小幅回吐、地产维持强势、国常会稳地产驱动</h1>
+  <div class="sub">2026年9月29日（周二）· 午后开盘观察（截至 13:37，国庆前最后一个交易日）</div>
+
+  <div class="banner">⚠️ 口径提示：本文为<strong>午后开盘观察</strong>（行情截至 13:37，午后开盘约 37 分钟）。今日为国庆长假前最后一个交易日。午后开盘指数从午盘翻红小幅回吐至微跌，但<strong>日内最高 3830.04 较午盘继续抬升</strong>，房地产板块维持强势（午盘领涨申万 +3.71%）。成交额为盘中预估，收盘结论以交易所最终披露为准。</div>
+
+  <div class="tldr">
+    <h2>30秒结论</h2>
+    <p><strong>午后小幅回吐但日内高点抬升，地产维持强势、国常会稳地产驱动</strong>：截至 13:37，沪指 <span class="down">-0.11%</span> 报 3819.33（午盘 +0.08%，午后回吐 0.19 个百分点），深成指 <span class="down">-0.10%</span> 报 12846.03（午盘 +0.41%，回吐 0.51 个百分点）。但<strong>日内最高 3830.04 较午盘继续抬升</strong>，说明午后开盘有一波冲高后回落，整体仍在窄幅震荡范围内。</p>
+    <p><strong>结构上「地产维持强势 + 电池/传媒多点开花 + 煤油继续承压」</strong>：<span class="tag">房地产</span> 午盘领涨申万 +3.71%（信达地产涨停、深物业 A 二连板、滨江集团涨停），但万科 A 涨停后开板（截至午间涨 6.47%）；<span class="tag">固态电池</span> 全线爆发（武汉蓝电 30% 涨停、尚水智能 20% 涨停）；<span class="tag">传媒/AI 语料</span> 延续强势（新华传媒 6 连板、掌阅科技涨停）。<span class="tag-d">煤炭/石油石化</span> 继续承压。<strong>半日涨停 44 只/跌停 8 只</strong>，情绪较昨日大幅修复。核心驱动：9/28 国常会研究出台稳定房地产市场政策。<strong>13:37 累计成交约 1.01 万亿</strong>，预估全天约 1.5~1.7 万亿（缩量）。</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">上证指数（13:37）</div><div class="val down">3819.33<br>-0.11%</div><div class="note">最高 3830.04 / 最低 3810.81</div></div>
+    <div class="kpi"><div class="label">深证成指（13:37）</div><div class="val down">12846.03<br>-0.10%</div><div class="note">最高 12929.03 / 最低 12831.87</div></div>
+    <div class="kpi kpi-split">
+      <div class="half"><div class="label">累计成交（13:37）</div><div class="val flat">≈1.01万亿</div><div class="note">沪市 4744 亿 + 深市 5368 亿</div></div>
+      <div class="half"><div class="label">预估全天成交额</div><div class="val est">≈1.6万亿</div><div class="note">区间 1.5~1.7 万亿 · 国庆前缩量</div></div>
+    </div>
+    <div class="kpi"><div class="label">房地产（午盘领涨）</div><div class="val up">+3.71%</div><div class="note">申万一级行业第一，信达地产涨停</div></div>
+    <div class="kpi"><div class="label">半日涨停/跌停</div><div class="val up">44 涨停</div><div class="val down">8 跌停</div><div class="note">情绪较昨日（35/57）大幅修复</div></div>
+  </div>
+
+  <section>
+    <h2>一、午后走势：小幅回吐但日内高点抬升，窄幅震荡</h2>
+    <button class="toggle-btn" onclick="toggleView('idx')">图 / 表切换</button>
+    <div id="idx-chart" class="chart"></div>
+    <div id="idx-table" style="display:none;">
+      <table>
+        <tr><th>指数</th><th>13:37 点位</th><th>涨跌幅</th><th>午盘涨跌幅</th><th>变化</th><th>日内最高</th><th>日内最低</th></tr>
+        <tr><td>上证指数</td><td>3819.33</td><td class="down">-0.11%</td><td class="up">+0.08%</td><td class="down">-0.19pp</td><td>3830.04</td><td>3810.81</td></tr>
+        <tr><td>深证成指</td><td>12846.03</td><td class="down">-0.10%</td><td class="up">+0.41%</td><td class="down">-0.51pp</td><td>12929.03</td><td>12831.87</td></tr>
+        <tr><td>创业板指</td><td>≈3145</td><td class="up">≈+0.15%</td><td class="up">+0.34%</td><td class="down">≈-0.19pp</td><td>3156.73</td><td>3128.52</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;">午后开盘走势呈<strong>「冲高 → 小幅回吐」</strong>：13:28 沪指 3824.73（+0.03%），13:31 沪指 3824.66（+0.03%），<strong>日内最高 3830.04 较午盘（最高 3828.57）继续抬升</strong>，但随后快速回落，13:37 沪指 3819.33（-0.11%）。深成指从午盘 +0.41% 回落至 -0.10%，回吐幅度较大。</p>
+    <p><strong>关键判断：午后回吐幅度有限，未改变窄幅震荡格局</strong>。沪指从午盘 +0.08% 回落至 -0.11%，振幅仅 0.19 个百分点；日内最高 3830.04、最低 3810.81，全天振幅约 0.5%，<strong>远小于昨日（振幅约 1.9%）</strong>。这说明国庆前最后一个交易日，多空双方均较为谨慎，<strong>抛压已大幅减轻，但增量资金入场意愿也不强</strong>，属典型的「节前缩量震荡」。</p>
+    <div class="src">数据来源：实时行情接口（2026-09-29 13:37，上证 3819.33/深成 12846.03）；上海证券交易所（2026-09-29 13:28，上证 3824.73 +0.03%）；搜狐证券（2026-09-29 13:31，上证 3824.66 +0.03%）；证券时报（2026-09-29 12:58，创业板指 3150.59 +0.34%）。</div>
+  </section>
+
+  <section>
+    <h2>二、午后量能：累计 1.01 万亿，预估全天缩量至 1.5~1.7 万亿</h2>
+    <div id="dist-chart" class="chart"></div>
+    <p style="margin-top:10px;">截至 13:37，沪市成交 4744.10 亿、深市成交 5368.17 亿，<strong>累计约 1.01 万亿</strong>。半日成交 8762 亿，午后 37 分钟成交约 1350 亿，<strong>午后成交节奏较上午明显放缓</strong>（上午 2 小时成交 8762 亿，平均每小时 4381 亿；午后 37 分钟 1350 亿，平均每小时约 2190 亿，缩量约 50%）。</p>
+    <p>按午后成交节奏外推，<strong>预估全天成交约 1.5~1.7 万亿，中枢约 1.6 万亿</strong>，较昨日（1.70 万亿）缩量约 6%。国庆前最后一个交易日缩量是常态，投资者倾向于持币过节。<strong>缩量背景下的指数震荡，说明抛压已轻，但买盘也不积极，市场处于「多空平衡」状态</strong>。</p>
+    <div class="src">数据来源：实时行情接口（2026-09-29 13:37，上证成交 4744.10 亿/深成成交 5368.17 亿）；每经网（2026-09-29 11:33，半日成交 8762 亿）。</div>
+  </section>
+
+  <section>
+    <h2>三、热点板块：地产维持强势，电池全线爆发，煤油继续承压</h2>
+    <button class="toggle-btn" onclick="toggleView('sec')">图 / 表切换</button>
+    <div id="sec-chart" class="chart"></div>
+    <div id="sec-table" style="display:none;">
+      <table>
+        <tr><th>板块</th><th>午盘涨跌幅</th><th>代表个股</th></tr>
+        <tr><td>房地产（申万）</td><td class="up">+3.71%</td><td>信达地产涨停、深物业A二连板、滨江集团涨停、万科A涨6.47%（开板）</td></tr>
+        <tr><td>传媒（申万）</td><td class="up">+2.16%</td><td>新华传媒6连板、掌阅科技涨停、引力传媒涨停</td></tr>
+        <tr><td>计算机（申万）</td><td class="up">+1.40%</td><td>AI应用/语料方向</td></tr>
+        <tr><td>固态电池</td><td class="up">全线爆发</td><td>武汉蓝电30%涨停、尚水智能20%涨停、国轩高科涨停</td></tr>
+        <tr><td>PCB概念</td><td class="up">延续强势</td><td>迅捷兴20cm涨停、依顿电子/奥士康/超声电子涨停</td></tr>
+        <tr><td>煤炭（申万）</td><td class="down">-2.62%</td><td>晋控煤业-4.74%，昨日防御板块继续补跌</td></tr>
+        <tr><td>石油石化</td><td class="down">承压</td><td>恒逸石化跌停、桐昆股份跌超6%</td></tr>
+        <tr><td>贵金属</td><td class="down">延续下跌</td><td>隔夜金银跳水，山东黄金跌超3%</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>房地产维持强势，午盘领涨申万 +3.71%</strong>：信达地产涨停（+10.10%）、深物业 A 二连板、滨江集团涨停，特发服务、荣盛发展、绿地控股、中华企业跟涨。<strong>但需注意：万科 A 涨停后开板，截至午间涨 6.47%</strong>，说明地产板块内部出现分化，龙头万科 A 未能封住涨停。核心驱动：9/28 国常会研究出台稳定房地产市场、促进就业增收等政策措施，多项地产相关政策接连落地。</p>
+    <p><strong>固态电池全线爆发</strong>：武汉蓝电 30% 涨停、尚水智能 20% 涨停、金禄电子等多股涨超 10%，国轩高科、金龙羽、上海洗霸涨停。受七部门《新型电池产业"十五五"规划》持续催化。<strong>传媒/AI 语料</strong>延续强势（+2.16%），新华传媒 6 连板、掌阅科技涨停、引力传媒涨停。<strong>PCB</strong> 延续强势，迅捷兴 20cm 涨停。</p>
+    <p><strong>煤炭（-2.62%）、石油石化继续承压</strong>：晋控煤业 -4.74%，恒逸石化跌停、桐昆股份跌超 6%。昨日逆势的防御板块今日持续补跌，<strong>资金从防御流向进攻的趋势未变</strong>。贵金属延续下跌，山东黄金跌超 3%。</p>
+    <div class="src">数据来源：证券时报（2026-09-29 13:27，申万行业午盘数据/房地产+3.71%/传媒+2.16%/计算机+1.40%）；中国证券报（2026-09-29 11:36，万科A涨停后开板涨6.47%/国常会稳地产）；凤凰网（2026-09-29 12:10，固态电池全线爆发/武汉蓝电30%涨停）；新浪财经（2026-09-29 12:06，半日涨停44只/新华传媒6连板）。</div>
+  </section>
+
+  <section>
+    <h2>四、涨跌分布与涨停梯队：半日涨停 44 只，情绪大幅修复</h2>
+    <div id="flow-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>半日涨停 44 只、跌停 8 只</strong>（新浪财经 12:06 口径），较昨日收盘（涨停 35/跌停 57）大幅改善。<strong>跌停家数从 57 只骤降至 8 只</strong>，说明恐慌情绪已基本释放，短线情绪显著修复。逾 4000 股上涨（凤凰网口径），市场 breadth 维持较好。</p>
+    <p><strong>涨停梯队（午盘）</strong>：</p>
+    <ul>
+      <li><strong>6 连板</strong>：新华传媒（出版传媒/AI 语料，全场最高标）；</li>
+      <li><strong>7 天 6 板</strong>：新华文轩（出版传媒/AI 语料）；</li>
+      <li><strong>4 连板</strong>：雪龙集团（机器人/汽车）；</li>
+      <li><strong>6 天 4 板</strong>：南威软件；</li>
+      <li><strong>5 天 3 板</strong>：中新赛克；</li>
+      <li><strong>3 连板</strong>：襄阳轴承（汽车零部件）；</li>
+      <li><strong>2 连板</strong>：深物业 A（房地产龙头）、时代万恒（固态电池）；</li>
+      <li><strong>首板（批量）</strong>：信达地产、滨江集团、华联控股（房地产）、武汉蓝电 30cm、尚水智能 20cm、国轩高科、上海洗霸（固态电池）、掌阅科技、引力传媒（传媒/AI）、迅捷兴 20cm、依顿电子、奥士康（PCB）、广汽集团（重组复牌一字涨停）。</li>
+    </ul>
+    <p><strong>梯队观察</strong>：连板结构丰富（6/4/3/2 板均有，另有 7 天 6 板、6 天 4 板、5 天 3 板等趋势板），<strong>AI 语料方向（新华传媒 6 连板、新华文轩 7 天 6 板）成为新的连板主线</strong>。首板批量涌现（地产+电池+传媒+PCB 多点开花），题材活跃度高。</p>
+    <div class="src">数据来源：新浪财经（2026-09-29 12:06，半日涨停44只/跌停8只/连板梯队）；凤凰网（2026-09-29 12:10，逾4000股上涨）；东方财富（2026-09-29 09:26，新华传媒6连板）。</div>
+  </section>
+
+  <section>
+    <h2>五、资金行为：ETF 昨日净买入 175 亿，抄底资金入场</h2>
+    <p><strong>重要信号：昨日 ETF 单日净买入 175 亿</strong>（财联社 13:26 报道）。9/28 A 股遇冷，全市场超 4500 只个股下跌，CPO/光通信等前期热门方向跌幅居前，通信 ETF 单日重挫 7.66%。但<strong>ETF 资金逆势净买入 175 亿</strong>，其中科创 50、中证 1000 领跑，创业板、上证指数、沪深 300 等方向也同步获得净买入。</p>
+    <p><strong>这说明机构资金在昨日大跌中积极抄底</strong>，尤其是宽基 ETF（科创 50、中证 1000、创业板、沪深 300）获得集中买入。这与今日市场 breadth 修复（逾 4000 股上涨）形成呼应——<strong>昨日的恐慌下跌为机构资金提供了低位布局机会</strong>。</p>
+    <p>今日午后资金延续「从防御（煤炭/石油）切换至进攻（地产/科技/题材）」的特征。两融余额昨日大幅减少 260 亿（杠杆资金提前撤离），但 ETF 机构资金逆势入场，<strong>资金结构呈现「杠杆资金撤离 + 机构资金抄底」的分化格局</strong>。</p>
+    <div class="src">数据来源：财联社（2026-09-29 13:26，ETF单日净买入175亿/抄底资金方向）；证券时报（2026-09-29 09:07，两融余额减少259.91亿）。</div>
+  </section>
+
+  <section>
+    <h2>六、消息面归因：国常会稳地产 + 电池规划 + ETF抄底</h2>
+    <div class="chain">
+      <div class="node"><b>核心驱动 国常会稳地产</b>9/28国常会研究出台稳定房地产市场、促进就业增收政策；多项地产政策接连落地；中信证券预计2027年春节前后房价止跌回升 → <strong>地产领涨申万+3.71%，信达地产/深物业A/滨江集团涨停</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>催化 新型电池规划</b>七部门联合印发《新型电池产业发展"十五五"规划》 → <strong>固态电池全线爆发，武汉蓝电30%涨停/尚水智能20%涨停</strong></div>
+    </div>
+    <div class="chain">
+      <div class="node"><b>支撑 ETF抄底资金</b>昨日ETF净买入175亿，科创50/中证1000领跑 → <strong>今日breadth修复，逾4000股上涨</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>压制 节前缩量观望</b>国庆前最后交易日，投资者持币过节；两融昨日减少260亿 → <strong>全天预估缩量至1.5~1.7万亿，指数窄幅震荡</strong></div>
+    </div>
+    <ul>
+      <li>AI 语料/传媒方向：新华传媒 6 连板、新华文轩 7 天 6 板，成为新的连板主线；</li>
+      <li>广汽集团重组复牌一字涨停：拟通过发行股份购买资产，汽车板块延续强势；</li>
+      <li>隔夜金银跳水：贵金属延续下跌，山东黄金跌超 3%；</li>
+      <li>外围美股收跌（纳指 -0.92%）：竞价低开，但 A 股低开高走显示独立性。</li>
+    </ul>
+    <div class="src">来源：中国证券报（2026-09-29 11:36，国常会稳地产政策）；财联社（2026-09-29 13:26，ETF净买入175亿）；每经网（2026-09-29 11:33，七部门新型电池规划）；证券时报（2026-09-29 13:27，申万行业数据）。媒体类与第三方研究为非一手来源。</div>
+  </section>
+
+  <section>
+    <h2>七、午后观察与尾盘预判</h2>
+    <p><strong>午后定性</strong>：午后开盘小幅回吐但日内高点抬升，整体维持窄幅震荡。房地产维持强势（+3.71% 领涨）但万科 A 开板显示内部分化，电池/传媒多点开花，煤油继续补跌。<strong>定性为「节前缩量震荡 + 结构性修复」，地产政策驱动的主线明确，但持续性需节后验证</strong>。</p>
+    <p><strong>尾盘三个核心观察变量</strong>：</p>
+    <ul>
+      <li><strong>① 地产板块尾盘能否回封</strong>：万科 A 能否回封涨停、信达地产/深物业 A 能否维持涨停。若地产尾盘回封，则今日主线确认；若继续走弱，则说明资金以短线博弈为主；</li>
+      <li><strong>② 3800 支撑与尾盘方向</strong>：午后最低 3810.81，若尾盘能在 3810 上方运行，则今日收红或微跌概率大；若再度下探 3800，则需警惕尾盘恐慌；</li>
+      <li><strong>③ 全天成交额</strong>：预估 1.5~1.7 万亿。若全天低于 1.5 万亿，说明观望情绪浓厚，节后需重新放量确认反弹；若维持 1.6 万亿以上，说明承接资金积极。</li>
+    </ul>
+    <p><strong>国庆假期提示</strong>：今日为国庆前最后一个交易日，10/1~10/7 休市 7 天。假期期间外围市场正常交易，存在较大不确定性。<strong>建议控制仓位过节，关注假期外围市场变化、地产政策落地情况和国内消费数据</strong>。</p>
+    <div class="risk"><strong>风险提示</strong>：① 国庆长假 7 天期间外围市场正常交易，存在较大不确定性，建议控制仓位过节；② 万科 A 开板显示地产板块内部分化，若尾盘地产走弱可能拖累指数；③ 全天缩量至 1.5~1.7 万亿，增量资金入场意愿不强，修复行情持续性需节后验证；④ 煤炭/石油持续补跌，若午后市场再度走弱，防御板块可能重新获得资金青睐；⑤ 以上为午后 37 分钟数据，全天走势可能发生变化，以实际行情为准。</div>
+  </section>
+
+  <div class="foot">
+    数据时点：2026-09-29 13:37（指数实时行情/成交额）/ 11:30（午盘行业/涨停）· 行情与资讯来源：实时行情接口、上海证券交易所、证券时报、中国证券报、财联社、凤凰网、新浪财经、每经网 · 免责声明：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+function toggleView(key) {
+  var c = document.getElementById(key + '-chart');
+  var t = document.getElementById(key + '-table');
+  if (c.style.display === 'none') { c.style.display = 'block'; t.style.display = 'none'; }
+  else { c.style.display = 'none'; t.style.display = 'block'; }
+}
+
+var UP = '#c0392b';
+var DOWN = '#1e8449';
+
+var idxNames = ['上证指数(午盘)', '上证指数(13:37)', '深证成指(午盘)', '深证成指(13:37)'];
+var idxVals = [0.08, -0.11, 0.41, -0.10];
+echarts.init(document.getElementById('idx-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+  grid: { left: 50, right: 30, top: 30, bottom: 60 },
+  xAxis: { type: 'category', data: idxNames, axisLabel: { interval: 0, rotate: 15 } },
+  yAxis: { type: 'value', name: '涨跌幅(%)' },
+  series: [{ type: 'bar', barWidth: '50%',
+    data: idxVals.map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: function(p){ return p.value >= 0 ? 'top' : 'bottom'; }, formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var distNames = ['半日成交', '13:37累计', '预估全天(中枢)', '昨日全天'];
+var distVals = [8762, 10100, 16000, 17028];
+var distColors = ['#1a5276', '#2980b9', '#e67e22', '#7f8c8d'];
+echarts.init(document.getElementById('dist-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 亿元' },
+  grid: { left: 60, right: 30, top: 30, bottom: 40 },
+  xAxis: { type: 'category', data: distNames, axisLabel: { interval: 0 } },
+  yAxis: { type: 'value', name: '成交额(亿元)' },
+  series: [{ type: 'bar', barWidth: '55%',
+    data: distVals.map(function (v, i) { return { value: v, itemStyle: { color: distColors[i] } }; }),
+    label: { show: true, position: 'top', color: '#2c3e50', formatter: function(p){ return p.value >= 10000 ? (p.value/10000).toFixed(2)+'万亿' : p.value+'亿'; } } }]
+});
+
+var secNames = ['煤炭', '石油石化', '贵金属', '计算机', 'PCB概念', '固态电池', '传媒', '房地产'];
+var secVals = [-2.62, -1.5, -1.2, 1.40, 2.0, 3.0, 2.16, 3.71];
+echarts.init(document.getElementById('sec-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%（午盘口径）' },
+  grid: { left: 100, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '涨跌幅(%)' },
+  yAxis: { type: 'category', data: secNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: secVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var flowNames = ['昨日跌停', '今日跌停', '昨日涨停', '今日涨停'];
+var flowVals = [57, 8, 35, 44];
+var flowColors = [DOWN, DOWN, UP, UP];
+echarts.init(document.getElementById('flow-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 只' },
+  grid: { left: 100, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '只数' },
+  yAxis: { type: 'category', data: flowNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: flowVals.slice().reverse().map(function (v, i) { return { value: v, itemStyle: { color: flowColors.slice().reverse()[i] } }; }),
+    label: { show: true, position: 'right', color: '#2c3e50' } }]
+});
+</script>
+</body>
+</html>

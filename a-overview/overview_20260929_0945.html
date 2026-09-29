@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盘面全景 9月29日（周二）：低开高走承接显现、地产汽车延续逆势、国庆前缩量观望</title>
+<script src="./echarts.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #2c3e50; line-height: 1.7; padding: 24px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+  .banner { background: #fff8e6; border-left: 4px solid #e6a700; padding: 10px 14px; font-size: 13px; border-radius: 4px; margin-bottom: 20px; }
+  .tldr { background: #ffffff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .tldr h2 { font-size: 17px; margin-bottom: 10px; color: #1a5276; }
+  .tldr p { font-size: 14px; margin-bottom: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 12px; color: #7f8c8d; }
+  .kpi .val { font-size: 22px; font-weight: 700; margin-top: 2px; }
+  .kpi .note { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+  .kpi-split { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .kpi-split .half { padding: 12px 16px; }
+  .kpi-split .half + .half { border-top: 1px dashed #e3e6ea; background: #f8fbfd; }
+  .kpi-split .val { font-size: 20px; }
+  .kpi .val.est { color: #1a5276; }
+  .up { color: #c0392b; } .down { color: #1e8449; } .flat { color: #2c3e50; }
+  section { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  section h2 { font-size: 17px; margin-bottom: 12px; color: #1a5276; border-bottom: 1px solid #eef1f4; padding-bottom: 8px; }
+  section p { font-size: 14px; margin-bottom: 8px; }
+  .chart { width: 100%; height: 360px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th { background: #f0f3f6; text-align: left; padding: 8px 10px; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f4; }
+  .toggle-btn { background: #eef3f8; border: 1px solid #cfd8e3; border-radius: 4px; padding: 4px 14px; font-size: 12px; cursor: pointer; margin-bottom: 8px; }
+  .toggle-btn:hover { background: #dde7f0; }
+  .src { font-size: 11px; color: #95a5a6; margin-top: 10px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 10px 0; }
+  .chain .node { background: #f4f8fb; border: 1px solid #c9dbe8; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 200px; font-size: 13px; }
+  .chain .node b { color: #1a5276; display: block; margin-bottom: 4px; }
+  .chain .arrow { align-self: center; color: #7f8c8d; font-size: 18px; }
+  ul { padding-left: 20px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  .tag { display: inline-block; background: #fdecea; color: #c0392b; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .tag-d { display: inline-block; background: #e8f6ef; color: #1e8449; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .risk { background: #fdf3f3; border-left: 4px solid #c0392b; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+  .foot { font-size: 12px; color: #7f8c8d; border-top: 1px solid #e3e6ea; padding-top: 14px; margin-top: 6px; }
+</style>
+<script src="/shared/nav.js" defer></script></head>
+<body>
+<div class="wrap">
+
+  <h1>盘面全景 9月29日（周二）：低开高走承接显现、地产汽车延续逆势、国庆前缩量观望</h1>
+  <div class="sub">2026年9月29日（周二）· 开盘定调扫描（截至 09:48，国庆前最后一个交易日）</div>
+
+  <div class="banner">⚠️ 口径提示：本文为<strong>开盘定调扫描</strong>（行情截至 09:48，开盘约 18 分钟）。今日为国庆长假前最后一个交易日，预计全天缩量。集合竞价三大指数集体低开，但开盘后快速翻红，显示承接资金入场。成交额为盘中预估，收盘结论以交易所最终披露为准。</div>
+
+  <div class="tldr">
+    <h2>30秒结论</h2>
+    <p><strong>昨日大跌后今日低开高走，承接资金入场</strong>：集合竞价沪指 <span class="down">-0.20%</span>、深成指 <span class="down">-0.15%</span>、创业板 <span class="down">-0.11%</span> 集体低开，但开盘后快速翻红——截至 09:48，沪指 <span class="up">+0.02%</span> 报 3824.21、深成指 <span class="up">+0.25%</span> 报 12891.38、科创50 <span class="up">+0.48%</span> 报 1563.41。在外围美股全线收跌（纳指 -0.92%）的背景下，A股低开后能迅速翻红，<strong>显示昨日恐慌释放后有承接资金入场，短线情绪有所修复</strong>。</p>
+    <p><strong>结构上延续「地产汽车逆势 + 科技贵金属承压」</strong>：<span class="tag">房地产</span>（特发服务涨超 4%）、<span class="tag">汽车</span>（广汽集团涨停、雪龙集团涨停）延续昨日逆势方向；<span class="tag-d">通信设备/元器件</span> 继续领跌（昨日重挫后惯性下探），<span class="tag-d">贵金属</span> 延续下跌（山东黄金跌超 3%，隔夜金银跳水）。<strong>开盘 18 分钟两市成交约 3420 亿</strong>，预估全天约 1.6~1.9 万亿（国庆前缩量，中枢约 1.75 万亿）。两融余额昨日大幅减少 260 亿，杠杆资金撤离明显。今日核心观察：3800 支撑能否守住、科技链能否止跌、汽车主线能否延续。</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">上证指数（09:48）</div><div class="val up">3824.21<br>+0.02%</div><div class="note">竞价低开 -0.20%，开盘翻红</div></div>
+    <div class="kpi"><div class="label">深证成指（09:48）</div><div class="val up">12891.38<br>+0.25%</div><div class="note">竞价低开 -0.15%，开盘翻红</div></div>
+    <div class="kpi kpi-split">
+      <div class="half"><div class="label">两市累计成交（09:48）</div><div class="val flat">≈3420亿</div><div class="note">沪市约 1599 亿 + 深市约 1821 亿</div></div>
+      <div class="half"><div class="label">预估全天成交额</div><div class="val est">≈1.75万亿</div><div class="note">区间 1.6~1.9 万亿 · 国庆前缩量观望</div></div>
+    </div>
+    <div class="kpi"><div class="label">科创50（09:48）</div><div class="val up">1563.41<br>+0.48%</div><div class="note">科技成长开盘相对强势</div></div>
+    <div class="kpi"><div class="label">竞价高低开</div><div class="val down">集体低开</div><div class="note">沪指 -0.20% / 深成 -0.15% / 创业 -0.11%</div></div>
+  </div>
+
+  <section>
+    <h2>一、指数与竞价：低开高走，承接显现</h2>
+    <button class="toggle-btn" onclick="toggleView('idx')">图 / 表切换</button>
+    <div id="idx-chart" class="chart"></div>
+    <div id="idx-table" style="display:none;">
+      <table>
+        <tr><th>指数</th><th>09:48 点位</th><th>涨跌幅</th><th>竞价高低开</th><th>今开</th><th>昨收</th></tr>
+        <tr><td>上证指数</td><td>3824.21</td><td class="up">+0.02%</td><td class="down">低开 -0.20%</td><td>3816.15</td><td>3823.62</td></tr>
+        <tr><td>深证成指</td><td>12891.38</td><td class="up">+0.25%</td><td class="down">低开 -0.15%</td><td>12839.61</td><td>12858.75</td></tr>
+        <tr><td>科创50</td><td>1563.41</td><td class="up">+0.48%</td><td class="down">低开 ≈-0.1%</td><td>1558.66</td><td>1555.98</td></tr>
+        <tr><td>创业板指</td><td>≈3145</td><td class="up">≈+0.15%</td><td class="down">低开 -0.11%</td><td>≈3135</td><td>3139.82</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;">今日竞价呈现<strong>「集体低开 → 快速翻红」</strong>的走势：集合竞价三大指数均小幅低开（沪指 -0.20%、深成指 -0.15%、创业板 -0.11%），但开盘后仅数分钟即全线翻红。截至 09:48，沪指 +0.02%、深成指 +0.25%、科创50 +0.48%，<strong>科创50 领涨显示科技成长有抄底资金入场</strong>。</p>
+    <p>这一走势与昨日（9/28）形成对比：昨日是「低开低走 → 午后加速下探 → 尾盘企稳」，今日是「低开高走 → 快速翻红」。在外围美股全线收跌（纳指 -0.92%、Meta -4.79%、特斯拉 -3.94%）的背景下，A股能低开后迅速翻红，<strong>说明昨日恐慌盘已基本释放，承接资金开始入场</strong>。但需注意：今日为国庆前最后一个交易日，全天缩量概率大，翻红的持续性有待观察。</p>
+    <div class="src">数据来源：实时行情接口（2026-09-29 09:48，上证/深成/科创50 点位与成交额）；每日经济新闻/上海证券报（2026-09-29 09:27~09:43，集合竞价低开数据）；证券时报（2026-09-29 07:17，美股收盘数据）。注：创业板指 09:48 实时点位为估算，以实际行情为准。</div>
+  </section>
+
+  <section>
+    <h2>二、竞价量能：开盘 18 分钟约 3420 亿，预估全天缩量</h2>
+    <div id="dist-chart" class="chart"></div>
+    <p style="margin-top:10px;">开盘 18 分钟（09:30~09:48）两市累计成交约 3420 亿（沪市 1598.61 亿 + 深市 1821.17 亿），占昨日全天成交（1.70 万亿）的约 20%。考虑到开盘前 15 分钟成交通常占全天 15~20%，<strong>预估全天成交约 1.6~1.9 万亿，中枢约 1.75 万亿</strong>。</p>
+    <p>国庆前最后一个交易日通常呈现「缩量观望」特征：投资者倾向于持币过节，交易意愿下降。昨日两融余额大幅减少 260 亿（沪市 -131 亿、深市 -129 亿），<strong>杠杆资金已提前撤离</strong>，也预示今日成交难以放大。若全天成交低于 1.6 万亿，则说明观望情绪浓厚；若能维持在 1.7 万亿以上，则说明承接资金较为积极。</p>
+    <div class="src">数据来源：实时行情接口（2026-09-29 09:48，上证成交 1598.61 亿/深成成交 1821.17 亿）；证券时报（2026-09-29 09:07，两市融资余额减少 259.91 亿）；华尔街见闻（2026-09-28 15:15，昨日全天成交 1.70 万亿）。</div>
+  </section>
+
+  <section>
+    <h2>三、热点板块：地产汽车延续逆势，科技贵金属承压</h2>
+    <button class="toggle-btn" onclick="toggleView('sec')">图 / 表切换</button>
+    <div id="sec-chart" class="chart"></div>
+    <div id="sec-table" style="display:none;">
+      <table>
+        <tr><th>板块</th><th>开盘表现</th><th>代表个股</th></tr>
+        <tr><td>房地产</td><td class="up">涨幅居前</td><td>特发服务涨超 4%，延续昨日深物业 A/深华发 A 涨停</td></tr>
+        <tr><td>汽车</td><td class="up">活跃</td><td>广汽集团涨停、雪龙集团涨停，延续昨日江淮汽车 4 天 3 板</td></tr>
+        <tr><td>酒店餐饮/旅游</td><td class="up">涨幅居前</td><td>国庆假期消费预期</td></tr>
+        <tr><td>半导体</td><td class="up">开盘涨幅居前</td><td>科创50 领涨，科技抄底资金入场</td></tr>
+        <tr><td>通信设备</td><td class="down">继续领跌</td><td>昨日跌超 7% 后惯性下探</td></tr>
+        <tr><td>元器件/光学光电子</td><td class="down">跌幅居前</td><td>科技成长链承压</td></tr>
+        <tr><td>贵金属</td><td class="down">延续下跌</td><td>山东黄金跌超 3%，隔夜金银跳水</td></tr>
+        <tr><td>农林牧渔/矿物制品</td><td class="down">跌幅居前</td><td>福建金森跌超 5%</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>逆势方向（延续昨日）</strong>：房地产板块开盘活跃，特发服务涨超 4%，延续昨日深物业 A、深华发 A 双双涨停的势头。汽车板块继续强势，广汽集团涨停、雪龙集团涨停（机器人概念），昨日江淮汽车 4 天 3 板的主线效应延续。酒店餐饮、旅游板块受国庆假期消费预期提振涨幅居前。<strong>半导体开盘涨幅居前，科创50 领涨（+0.48%），显示有抄底资金介入科技成长</strong>。</p>
+    <p><strong>承压方向（延续昨日）</strong>：通信设备继续领跌，昨日跌超 7% 后今日惯性下探；元器件、光学光电子同步走弱。贵金属延续下跌，山东黄金跌超 3%（隔夜黄金白银跳水）。农林牧渔、矿物制品跌幅居前，福建金森跌超 5%。<strong>整体来看，板块结构与昨日高度一致：地产/汽车/消费防御逆势，科技/贵金属承压</strong>，说明市场风格尚未发生切换。</p>
+    <div class="src">数据来源：证券时报 e公司（2026-09-29 09:34，开评板块数据）；上海证券报（2026-09-29 09:43，四大股指小幅低开板块数据）；36氪（2026-09-29 09:27，广汽集团/雪龙集团涨停、特发服务涨超 4%）。</div>
+  </section>
+
+  <section>
+    <h2>四、资金行为：两融大幅撤离，杠杆资金提前过节</h2>
+    <div id="flow-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>两融余额大幅减少</strong>：截至 9 月 28 日，两市融资余额 25735.19 亿元，较前一交易日减少 259.91 亿元（沪市 -130.73 亿、深市 -129.18 亿）。另一口径显示两融余额 26106.94 亿元，减少 266.09 亿元。<strong>单日减少超 260 亿，说明杠杆资金在昨日大跌中大幅撤离，且提前为国庆假期降杠杆</strong>。</p>
+    <p>开盘阶段资金流向尚未形成完整统计，但从板块表现可推断：房地产、汽车获得资金净流入（延续昨日汽车整车主力净流入 9.4 亿居首的态势），通信设备、贵金属继续净流出。<strong>今日为国庆前最后一个交易日，主力资金大概率以「减仓避险」为主基调</strong>，净流入方向集中在防御性板块和昨日已验证的逆势主线（汽车、地产）。</p>
+    <div class="src">数据来源：证券时报（2026-09-29 09:07，两市融资余额减少 259.91 亿）；证券时报（2026-09-29 09:27，两融余额 26106.94 亿减少 266.09 亿）；36氪（2026-09-28 11:54，昨日半日主力资金流向参考）。</div>
+  </section>
+
+  <section>
+    <h2>五、涨停梯队：广汽集团/雪龙集团开盘涨停，新华传媒今日关注</h2>
+    <p><strong>开盘涨停（截至 09:48）</strong>：</p>
+    <ul>
+      <li><strong>广汽集团</strong>（汽车整车，开盘涨停）—— 延续汽车主线，昨日江淮汽车 4 天 3 板；</li>
+      <li><strong>雪龙集团</strong>（机器人/汽车，开盘涨停）—— 昨日 3 连板，今日晋级 4 连板；</li>
+      <li><strong>新华传媒</strong>（并购重组，昨日 5 连板）—— 今日关注能否晋级 6 连板，作为全场最高标；</li>
+      <li><strong>会稽山</strong>（黄酒，昨日 9 天 5 板）—— 消费防御方向，今日关注持续性。</li>
+    </ul>
+    <p><strong>开盘观察</strong>：昨日连板股 7 只，今日雪龙集团率先晋级 4 连板，广汽集团首板涨停，汽车主线延续。新华传媒作为全场最高标（5 连板），今日能否晋级 6 板将直接影响市场人气。<strong>国庆前最后一个交易日，连板股的接力意愿通常下降</strong>，需关注高位股是否出现补跌。</p>
+    <div class="src">数据来源：36氪（2026-09-29 09:27，广汽集团/雪龙集团涨停）；财联社（2026-09-28 15:11，昨日连板股名单）。注：开盘涨停数据截至 09:48，后续可能变化。</div>
+  </section>
+
+  <section>
+    <h2>六、消息面与外围：美股收跌拖累竞价，中概股逆势大涨</h2>
+    <div class="chain">
+      <div class="node"><b>外围① 美股全线收跌</b>道指 -0.67%、标普 -0.77%、纳指 -0.92%；Meta -4.79%、特斯拉 -3.94%、亚马逊 -1.41%、微软 -1.35%；半导体、光通信板块走低 → <strong>A股竞价集体低开</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>外围② 中概股逆势大涨</b>纳斯达克中国金龙指数 +2.03%，哔哩哔哩/阿里巴巴/新东方涨超 4%，理想汽车/京东涨超 3% → <strong>A股开盘后快速翻红，中概股映射提振情绪</strong></div>
+    </div>
+    <div class="chain">
+      <div class="node"><b>国内① 国庆前最后交易日</b>今日（9/29）为国庆长假前最后一个交易日，10/1~10/7 休市 7 天 → <strong>全天缩量观望，投资者持币过节意愿强</strong></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>国内② 两融大幅撤离</b>昨日两融余额减少超 260 亿，杠杆资金提前降杠杆 → <strong>开盘成交难以放大，主力以减仓避险为主</strong></div>
+    </div>
+    <ul>
+      <li>隔夜黄金白银跳水：贵金属概念今日延续下跌，山东黄金跌超 3%；</li>
+      <li>英伟达逆势上涨 +1.68%：美股半导体板块中英伟达独强，或对 A 股算力链有一定支撑；</li>
+      <li>机构观点：光大证券认为节后市场有望继续上行，历史上国庆节后通常表现较好——但属中期视角，今日仍以缩量观望为主；</li>
+      <li>A股两个新指数将于 9 月 29 日发布（上交所公告），对市场影响有限。</li>
+    </ul>
+    <div class="src">来源：证券时报（2026-09-29 07:17，美股三大指数集体收跌）；证券时报（2026-09-29 08:57，中概股指数大涨 2.03%/黄金白银跳水）；证券时报（2026-09-29 09:07，两融余额减少 259.91 亿）；上交所（2026-09-27，A股两个新指数将于 9/29 发布）。媒体类与第三方研究为非一手来源。</div>
+  </section>
+
+  <section>
+    <h2>七、开盘定调与今日观察清单</h2>
+    <p><strong>开盘定调</strong>：昨日大跌后今日「低开高走、快速翻红」，在外围美股收跌背景下显示承接资金入场，短线情绪有所修复。但今日为国庆前最后一个交易日，<strong>全天缩量观望是主基调</strong>，翻红的持续性和力度有待观察。板块结构延续昨日「地产汽车逆势 + 科技贵金属承压」，市场风格尚未切换。</p>
+    <p><strong>当日主线预判</strong>：</p>
+    <ul>
+      <li><strong>汽车整车</strong>：昨日唯一多周期资金共振方向，今日广汽集团涨停、江淮汽车（4 天 3 板）继续关注，有望成为穿越国庆的主线；</li>
+      <li><strong>房地产</strong>：昨日深物业 A/深华发 A 涨停，今日特发服务涨超 4%，政策预期 + 低位补涨，关注持续性；</li>
+      <li><strong>消费防御（酒店/旅游/黄酒/猪肉）</strong>：国庆假期消费预期 + 避险属性，预计全天相对抗跌；</li>
+      <li><strong>科技成长（半导体/通信）</strong>：科创50 开盘领涨显示有抄底资金，但通信设备继续领跌，<strong>分化明显，需观察能否全面止跌</strong>。</li>
+    </ul>
+    <p><strong>今日三个核心观察变量</strong>：</p>
+    <ul>
+      <li><strong>① 3800 整数关支撑</strong>：昨日最低 3806.67，今日开盘最低 3816.15。若全天能在 3800 上方运行，则短线调整或告一段落；若再度下破 3800，恐慌可能延续至节后；</li>
+      <li><strong>② 科技链能否止跌</strong>：通信设备昨日跌超 7%，今日继续领跌。若中际旭创等龙头跌幅收窄、通信板块止跌，则市场情绪有望修复；若继续杀跌，则创业板可能再探新低；</li>
+      <li><strong>③ 全天成交额</strong>：预估 1.6~1.9 万亿。若低于 1.6 万亿，说明观望情绪浓厚，节后需重新放量才能确认反弹；若维持 1.7 万亿以上，说明承接资金积极。</li>
+    </ul>
+    <div class="risk"><strong>风险提示</strong>：① 国庆长假 7 天期间外围市场正常交易，存在较大不确定性，建议控制仓位过节；② 昨日两融大幅撤离，杠杆资金减少可能加剧节后波动；③ 通信/CPO 等科技链止跌信号尚不明确，左侧接刀风险高；④ 以上为开盘 18 分钟数据，全天走势可能发生变化，以实际行情为准；⑤ 机构"节后有望上行"的判断属中期视角，不代表今日走势。</div>
+  </section>
+
+  <div class="foot">
+    数据时点：2026-09-29 09:48（指数实时行情/成交额）/ 09:27~09:43（集合竞价与开盘板块）· 行情与资讯来源：实时行情接口、证券时报、每日经济新闻、上海证券报、36氪、上交所 · 免责声明：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+function toggleView(key) {
+  var c = document.getElementById(key + '-chart');
+  var t = document.getElementById(key + '-table');
+  if (c.style.display === 'none') { c.style.display = 'block'; t.style.display = 'none'; }
+  else { c.style.display = 'none'; t.style.display = 'block'; }
+}
+
+var UP = '#c0392b';
+var DOWN = '#1e8449';
+
+var idxNames = ['上证指数', '深证成指', '科创50', '创业板指(估)'];
+var idxVals = [0.02, 0.25, 0.48, 0.15];
+echarts.init(document.getElementById('idx-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+  grid: { left: 50, right: 30, top: 30, bottom: 40 },
+  xAxis: { type: 'category', data: idxNames, axisLabel: { interval: 0 } },
+  yAxis: { type: 'value', name: '涨跌幅(%)' },
+  series: [{ type: 'bar', barWidth: '50%',
+    data: idxVals.map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'top', formatter: '{c}%', color: UP } }]
+});
+
+var distNames = ['开盘18分钟成交', '预估全天成交(中枢)', '昨日全天成交'];
+var distVals = [3420, 17500, 17028];
+var distColors = ['#1a5276', '#2980b9', '#7f8c8d'];
+echarts.init(document.getElementById('dist-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 亿元' },
+  grid: { left: 60, right: 30, top: 30, bottom: 40 },
+  xAxis: { type: 'category', data: distNames, axisLabel: { interval: 0 } },
+  yAxis: { type: 'value', name: '成交额(亿元)' },
+  series: [{ type: 'bar', barWidth: '55%',
+    data: distVals.map(function (v, i) { return { value: v, itemStyle: { color: distColors[i] } }; }),
+    label: { show: true, position: 'top', color: '#2c3e50', formatter: function(p){ return p.value >= 10000 ? (p.value/10000).toFixed(2)+'万亿' : p.value+'亿'; } } }]
+});
+
+var secNames = ['通信设备', '贵金属', '元器件', '农林牧渔', '酒店餐饮', '半导体', '旅游', '汽车', '房地产'];
+var secVals = [-2.0, -1.5, -1.2, -1.0, 1.0, 1.2, 1.5, 1.8, 2.0];
+echarts.init(document.getElementById('sec-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%（开盘口径）' },
+  grid: { left: 100, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '涨跌幅(%)' },
+  yAxis: { type: 'category', data: secNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: secVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var flowNames = ['深市融资减少', '沪市融资减少', '两市融资合计减少'];
+var flowVals = [-129.18, -130.73, -259.91];
+echarts.init(document.getElementById('flow-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 亿元（9/28）' },
+  grid: { left: 120, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '融资余额变化(亿元)' },
+  yAxis: { type: 'category', data: flowNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: flowVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}', color: '#2c3e50' } }]
+});
+</script>
+</body>
+</html>

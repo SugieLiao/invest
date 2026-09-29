@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苏奇投研平台</title>
+<script src="/shared/nav.js?v=5" defer></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231366d6'/%3E%3Cpath d='M9 21 L13 13 L17 18 L23 8' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --accent: #1366d6;
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --fg: #1f2329;
+  --dim: #6b7280;
+  --line: #e5e7eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --fg: #e6edf3;
+    --dim: #8b949e;
+    --line: #30363d;
+  }
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.7;
+}
+.container { max-width: 1080px; margin: 0 auto; padding: 32px 20px 60px; }
+
+/* ===== Hero ===== */
+.hero {
+  background: linear-gradient(135deg, #0b1e3a 0%, #123a63 55%, #1a5c86 100%);
+  border-radius: 18px;
+  padding: 56px 48px;
+  margin-bottom: 36px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(255,255,255,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero .kicker {
+  display: inline-block;
+  font-size: 12.5px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.hero h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; }
+.hero p { font-size: 16px; color: rgba(255,255,255,.82); max-width: 620px; }
+.hero .stats {
+  display: flex; gap: 40px; margin-top: 26px; flex-wrap: wrap;
+}
+.hero .stat b { display: block; font-size: 24px; font-weight: 700; }
+.hero .stat span { font-size: 12.5px; color: rgba(255,255,255,.6); }
+
+/* ===== 模块区 ===== */
+.section-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 38px 0 18px;
+  padding-left: 12px;
+  border-left: 4px solid var(--accent);
+}
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform .18s, box-shadow .18s;
+  position: relative;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(15,23,42,.12); }
+.card .icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 4px;
+}
+.card .icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { font-size: 17px; font-weight: 650; }
+.card p { font-size: 13.5px; color: var(--dim); flex: 1; }
+.card .meta { font-size: 12.5px; color: var(--dim); display: flex; gap: 14px; margin-top: 6px; }
+.card .badge {
+  position: absolute; top: 16px; right: 16px;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 9px; border-radius: 20px;
+  background: rgba(19,102,214,.1); color: var(--accent);
+}
+.card.span2 { grid-column: span 2; }
+
+/* 色块图标 */
+.i-overview { background: linear-gradient(135deg,#1366d6,#3b82f6); }
+.i-stock { background: linear-gradient(135deg,#c0392b,#e74c3c); }
+.i-macro { background: linear-gradient(135deg,#0e7490,#06b6d4); }
+.i-industry { background: linear-gradient(135deg,#7c3aed,#a78bfa); }
+.i-learn { background: linear-gradient(135deg,#0d9488,#2dd4bf); }
+.i-xb { background: linear-gradient(135deg,#b45309,#f59e0b); }
+.i-deng { background: linear-gradient(135deg,#1d4ed8,#60a5fa); }
+.i-chen { background: linear-gradient(135deg,#047857,#34d399); }
+.i-dan { background: linear-gradient(135deg,#be123c,#fb7185); }
+.i-semi { background: linear-gradient(135deg,#111827,#4b5563); }
+.i-pharma { background: linear-gradient(135deg,#15803d,#4ade80); }
+.i-elec { background: linear-gradient(135deg,#a16207,#facc15); }
+.i-consumer { background: linear-gradient(135deg,#db2777,#f472b6); }
+.i-jg { background: linear-gradient(135deg,#4338ca,#818cf8); }
+.i-beast { background: linear-gradient(135deg,#9a3412,#fb923c); }
+.i-sheyi { background: linear-gradient(135deg,#374151,#9ca3af); }
+
+/* ===== 副链接 ===== */
+.sub-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.sub-link {
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  text-decoration: none;
+  padding: 7px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: all .15s;
+}
+.sub-link:hover { border-color: var(--accent); color: var(--accent); }
+
+.footer { text-align: center; padding: 36px 0 10px; color: var(--dim); font-size: 13px; }
+@media (max-width: 640px) {
+  .hero { padding: 36px 24px; }
+  .hero h1 { font-size: 28px; }
+  .card.span2 { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <span class="kicker">Invest · 苏奇投研</span>
+    <h1>苏奇投研平台</h1>
+    <p>盘面全景、A股复盘、宏观看板、行业研究与投资学习的一站式入口，数据驱动，日更沉淀。</p>
+    <div class="stats">
+      <div class="stat"><b>4</b><span>数据模块</span></div>
+      <div class="stat"><b>30+</b><span>课程笔记</span></div>
+      <div class="stat"><b>3</b><span>交易体系</span></div>
+    </div>
+  </div>
+
+  <!-- 核心模块 -->
+  <div class="section-title">核心模块</div>
+  <div class="grid">
+    <a href="/a-overview/" class="card">
+      <span class="badge">每日更新</span>
+      <div class="icon i-overview">
+        <svg viewBox="0 0 24 24"><path d="M3 17 L9 11 L13 15 L21 7"/><path d="M21 7 L21 11"/><path d="M15 7 L21 7"/></svg>
+      </div>
+      <h3>盘面全景</h3>
+      <p>大盘全景速览：指数、成交、涨跌分布、板块轮动、资金流与情绪指标。</p>
+      <div class="meta"><span>收盘版 · 午间版</span><span>历史归档</span></div>
+    </a>
+
+    <a href="/stock-a/" class="card">
+      <span class="badge">每日更新</span>
+      <div class="icon i-stock">
+        <svg viewBox="0 0 24 24"><path d="M7 14 L12 9 L16 12 L21 7"/><path d="M7 4 L7 20 L21 20"/></svg>
+      </div>
+      <h3>A股复盘</h3>
+      <p>每日收盘复盘：主线复盘、涨停梯队、资金流与明日策略。</p>
+      <div class="meta"><span>收盘版</span></div>
+    </a>
+
+    <a href="/macro-cn/" class="card">
+      <div class="icon i-macro">
+        <svg viewBox="0 0 24 24"><path d="M4 20 L4 10"/><path d="M10 20 L10 4"/><path d="M16 20 L16 13"/><path d="M22 20 L22 7"/><path d="M2 20 L22 20"/></svg>
+      </div>
+      <h3>宏观看板</h3>
+      <p>中国宏观货币看板：储备货币、M1/M2、社融与利率体系的实时监测。</p>
+      <div class="meta"><span>数据看板</span></div>
+    </a>
+
+    <a href="/industry/" class="card">
+      <div class="icon i-industry">
+        <svg viewBox="0 0 24 24"><path d="M4 20 L4 8 L9 12 L14 6 L20 11 L20 20 Z"/><path d="M2 20 L22 20"/></svg>
+      </div>
+      <h3>势宫行研</h3>
+      <p>产业链研究与节点图谱：从算力芯片到先进封装，逐环节拆解产业趋势。</p>
+      <div class="meta"><span>行业研究</span></div>
+    </a>
+
+    <a href="/learn/" class="card span2">
+      <div class="icon i-learn">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5 A2.5 2.5 0 0 1 6.5 17 H20 V4 H6.5 A2.5 2.5 0 0 0 4 6.5 Z"/><path d="M4 19.5 A2.5 2.5 0 0 0 6.5 22 H20 V17"/></svg>
+      </div>
+      <h3>投资学习</h3>
+      <p>宏观框架课、行业课与交易体系的系统化学习中心，视频课程提炼为图文笔记。</p>
+      <div class="sub-links">
+        <a class="sub-link" href="/learn/xiaobaojie/">小爆姐宏观框架课</a>
+        <a class="sub-link" href="/learn/macro/xiaodeng/">宏观 · 小邓老师</a>
+        <a class="sub-link" href="/learn/macro/chenpeng/">宏观 · 陈鹏老师</a>
+        <a class="sub-link" href="/learn/macro/chenxiaodan/">宏观 · 陈晓丹</a>
+        <a class="sub-link" href="/learn/industry/semiconductor/">半导体</a>
+        <a class="sub-link" href="/learn/industry/pharma/">医药</a>
+        <a class="sub-link" href="/learn/industry/electric-new/">电新</a>
+        <a class="sub-link" href="/learn/industry/consumer/">消费</a>
+      </div>
+    </a>
+  </div>
+
+  <!-- 交易体系 -->
+  <div class="section-title">交易体系</div>
+  <div class="grid">
+    <a href="https://dijingang.liaohao.cc" target="_blank" rel="noopener noreferrer" class="card">
+      <span class="badge">外部</span>
+      <div class="icon i-jg">
+        <svg viewBox="0 0 24 24"><path d="M12 3 L19 7 L19 13 C19 17 16 20 12 21 C8 20 5 17 5 13 L5 7 Z"/></svg>
+      </div>
+      <h3>地金刚体系</h3>
+      <p>系统化交易体系教材，从入门到进阶的完整交易方法论。</p>
+      <div class="meta"><span>22 个章节</span></div>
+    </a>
+
+    <a href="https://beast.liaohao.cc" target="_blank" rel="noopener noreferrer" class="card">
+      <span class="badge">外部</span>
+      <div class="icon i-beast">
+        <svg viewBox="0 0 24 24"><path d="M5 11 L3 7 L7 9 L10 5 L14 9 L18 7 L16 11 L21 13 L18 16 L19 20 L15 17 L12 21 L9 17 L5 20 L6 16 L3 13 Z"/></svg>
+      </div>
+      <h3>猛兽体系</h3>
+      <p>猛兽交易体系课程，强势趋势与量价共振的实战框架。</p>
+      <div class="meta"><span>课程中</span></div>
+    </a>
+
+    <a href="https://sheyi.liaohao.cc" target="_blank" rel="noopener noreferrer" class="card">
+      <span class="badge">外部</span>
+      <div class="icon i-sheyi">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3 L12 21 M3 12 L21 12"/></svg>
+      </div>
+      <h3>舍一体系</h3>
+      <p>舍一交易体系，128 篇系统化交易文章构建完整方法论。</p>
+      <div class="meta"><span>128 篇文章</span></div>
+    </a>
+  </div>
+
+  <div class="footer">
+    苏奇投研平台 · 数据与学习入口
+  </div>
+</div>
+</body>
+</html>

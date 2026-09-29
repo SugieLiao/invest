@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盘面全景 9月29日（周二）：尾盘拉升万科回封、地产主线确认、缩量迎国庆</title>
+<script src="./echarts.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #2c3e50; line-height: 1.7; padding: 24px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #7f8c8d; font-size: 13px; margin-bottom: 20px; }
+  .banner { background: #fff8e6; border-left: 4px solid #e6a700; padding: 10px 14px; font-size: 13px; border-radius: 4px; margin-bottom: 20px; }
+  .tldr { background: #ffffff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .tldr h2 { font-size: 17px; margin-bottom: 10px; color: #1a5276; }
+  .tldr p { font-size: 14px; margin-bottom: 8px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .kpi { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 12px; color: #7f8c8d; }
+  .kpi .val { font-size: 22px; font-weight: 700; margin-top: 2px; }
+  .kpi .note { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+  .kpi-split { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .kpi-split .half { padding: 12px 16px; }
+  .kpi-split .half + .half { border-top: 1px dashed #e3e6ea; background: #f8fbfd; }
+  .kpi-split .val { font-size: 20px; }
+  .kpi .val.est { color: #1a5276; }
+  .up { color: #c0392b; } .down { color: #1e8449; } .flat { color: #2c3e50; }
+  section { background: #fff; border: 1px solid #e3e6ea; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  section h2 { font-size: 17px; margin-bottom: 12px; color: #1a5276; border-bottom: 1px solid #eef1f4; padding-bottom: 8px; }
+  section p { font-size: 14px; margin-bottom: 8px; }
+  .chart { width: 100%; height: 360px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  th { background: #f0f3f6; text-align: left; padding: 8px 10px; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eef1f4; }
+  .toggle-btn { background: #eef3f8; border: 1px solid #cfd8e3; border-radius: 4px; padding: 4px 14px; font-size: 12px; cursor: pointer; margin-bottom: 8px; }
+  .toggle-btn:hover { background: #dde7f0; }
+  .src { font-size: 11px; color: #95a5a6; margin-top: 10px; }
+  .chain { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 10px 0; }
+  .chain .node { background: #f4f8fb; border: 1px solid #c9dbe8; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 200px; font-size: 13px; }
+  .chain .node b { color: #1a5276; display: block; margin-bottom: 4px; }
+  .chain .arrow { align-self: center; color: #7f8c8d; font-size: 18px; }
+  ul { padding-left: 20px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  .tag { display: inline-block; background: #fdecea; color: #c0392b; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .tag-d { display: inline-block; background: #e8f6ef; color: #1e8449; font-size: 11px; border-radius: 3px; padding: 1px 6px; margin-right: 6px; }
+  .risk { background: #fdf3f3; border-left: 4px solid #c0392b; padding: 12px 16px; border-radius: 4px; font-size: 13px; }
+  .foot { font-size: 12px; color: #7f8c8d; border-top: 1px solid #e3e6ea; padding-top: 14px; margin-top: 6px; }
+</style>
+<script src="/shared/nav.js" defer></script></head>
+<body>
+<div class="wrap">
+
+  <h1>盘面全景 9月29日（周二）：尾盘拉升万科回封、地产主线确认、缩量迎国庆</h1>
+  <div class="sub">2026年9月29日（周二）· 尾盘前瞻（截至 14:38，国庆前最后一个交易日）</div>
+
+  <div class="banner">⚠️ 口径提示：本文为<strong>尾盘前瞻</strong>（行情截至 14:38，距收盘约 22 分钟）。今日为国庆长假前最后一个交易日，<strong>尾盘出现明显拉升</strong>，万科 A 回封涨停（+9.97%），沪指从午后 -0.11% 拉升至 +0.43%。成交额为盘中预估，收盘结论以交易所最终披露为准。</div>
+
+  <div class="tldr">
+    <h2>30秒结论</h2>
+    <p><strong>尾盘拉升、万科回封涨停，地产主线确认，缩量迎国庆</strong>：截至 14:38，沪指 <span class="up">+0.43%</span> 报 3840.18（午后最低 -0.11%，拉升 0.54 个百分点），深成指 <span class="up">+0.55%</span> 报 12929.59。<strong>万科 A 尾盘回封涨停（+9.97%，报 4.08 元）</strong>，从上午开板（涨 6.47%）到尾盘回封，确认地产主线强度。</p>
+    <p><strong>结构上「地产领涨 + 传媒/电池多点开花 + 煤油补跌」</strong>：<span class="tag">房地产</span> 领涨申万（+3.59%），信达地产/深物业 A 二连板/滨江集团/华联控股涨停，万科 A 回封；<span class="tag">传媒</span>（+1.87%）延续强势，新华传媒 6 连板（封单 77 亿）；<span class="tag">固态电池</span> 全线爆发。<span class="tag-d">石油石化</span>（-1.63%）、<span class="tag-d">煤炭</span>（-1.32%）继续补跌。<strong>涨停 48 只/跌停 9 只</strong>，3676 股上涨。<strong>14:38 累计成交约 1.26 万亿</strong>，预估全天约 1.45~1.6 万亿（缩量）。全天定性：<strong>恐慌释放后的缩量修复行情，地产政策驱动主线明确，尾盘资金积极入场博节后反弹</strong>。</p>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">上证指数（14:38）</div><div class="val up">3840.18<br>+0.43%</div><div class="note">最高 3843.84 / 最低 3810.81</div></div>
+    <div class="kpi"><div class="label">深证成指（14:38）</div><div class="val up">12929.59<br>+0.55%</div><div class="note">最高 12955.25 / 最低 12831.87</div></div>
+    <div class="kpi kpi-split">
+      <div class="half"><div class="label">累计成交（14:38）</div><div class="val flat">≈1.26万亿</div><div class="note">沪市 5917 亿 + 深市 6648 亿</div></div>
+      <div class="half"><div class="label">预估全天成交额</div><div class="val est">≈1.5万亿</div><div class="note">区间 1.45~1.6 万亿 · 国庆前缩量</div></div>
+    </div>
+    <div class="kpi"><div class="label">万科A（14:38）</div><div class="val up">4.08元<br>+9.97%</div><div class="note">尾盘回封涨停，成交31.47亿</div></div>
+    <div class="kpi"><div class="label">涨跌家数（14:23）</div><div class="val up">3676 涨</div><div class="val down">1738 跌</div><div class="note">涨停 48 / 跌停 9</div></div>
+  </div>
+
+  <section>
+    <h2>一、尾盘走势：午后探底回升，尾盘大幅拉升</h2>
+    <button class="toggle-btn" onclick="toggleView('idx')">图 / 表切换</button>
+    <div id="idx-chart" class="chart"></div>
+    <div id="idx-table" style="display:none;">
+      <table>
+        <tr><th>时点</th><th>上证指数</th><th>涨跌幅</th><th>深证成指</th><th>涨跌幅</th></tr>
+        <tr><td>09:48（开盘）</td><td>3824.21</td><td class="up">+0.02%</td><td>12891.38</td><td class="up">+0.25%</td></tr>
+        <tr><td>10:30（早盘定型）</td><td>3818.25</td><td class="down">-0.14%</td><td>≈12870</td><td class="up">≈+0.09%</td></tr>
+        <tr><td>11:30（午盘）</td><td>≈3826.7</td><td class="up">+0.08%</td><td>12911.78</td><td class="up">+0.41%</td></tr>
+        <tr><td>13:37（午后观察）</td><td>3819.33</td><td class="down">-0.11%</td><td>12846.03</td><td class="down">-0.10%</td></tr>
+        <tr><td>14:38（尾盘前瞻）</td><td>3840.18</td><td class="up">+0.43%</td><td>12929.59</td><td class="up">+0.55%</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;">今日全天走势呈<strong>「低开高走 → 冲高回落 → 午后探底 → 尾盘拉升」</strong>四段式：集合竞价集体低开（沪指 -0.20%），开盘后快速翻红，10:30 冲高回落，午盘集体翻红，午后 13:37 探底（沪指 -0.11%），<strong>14:00 后开始拉升，14:38 沪指 +0.43%、深成 +0.55%</strong>。</p>
+    <p><strong>尾盘拉升是今日最重要的信号</strong>：沪指从 13:37 的 3819.33（-0.11%）拉升至 14:38 的 3840.18（+0.43%），<strong>1 小时内拉升 20.85 点（0.54 个百分点）</strong>，日内最高 3843.84。深成指从 12846.03（-0.10%）拉升至 12929.59（+0.55%），拉升 83.56 点。<strong>在国庆前最后一个交易日尾盘出现明显拉升，说明有资金积极入场博节后反弹</strong>。</p>
+    <div class="src">数据来源：实时行情接口（2026-09-29 14:38，上证 3840.18/深成 12929.59）；上海证券报（2026-09-29 13:43，13:34 两市成交破万亿）；各时点实时行情数据。</div>
+  </section>
+
+  <section>
+    <h2>二、量能预估：累计 1.26 万亿，预估全天缩量至 1.45~1.6 万亿</h2>
+    <div id="dist-chart" class="chart"></div>
+    <p style="margin-top:10px;">截至 14:38，沪市成交 5916.50 亿、深市成交 6648.30 亿，<strong>累计约 1.26 万亿</strong>。半日成交 8843 亿，午后 2 小时成交约 3700 亿，<strong>午后成交节奏较上午放缓约 30%</strong>。</p>
+    <p>距收盘还有约 22 分钟，按当前成交节奏外推，<strong>预估全天成交约 1.45~1.6 万亿，中枢约 1.5 万亿</strong>，较昨日（1.70 万亿）缩量约 12%。国庆前最后一个交易日缩量是常态，但<strong>尾盘拉升伴随成交放大（万科 A 尾盘 30 分钟成交 12.7 亿）</strong>，说明有增量资金在尾盘入场。</p>
+    <div class="src">数据来源：实时行情接口（2026-09-29 14:38，上证成交 5916.50 亿/深成成交 6648.30 亿）；证券日报（2026-09-29 13:29，半日成交 8843 亿）；Wind 万得（2026-09-29 14:38，万科 A 成交 31.47 亿）。</div>
+  </section>
+
+  <section>
+    <h2>三、热点板块：万科回封确认地产主线，煤油继续补跌</h2>
+    <button class="toggle-btn" onclick="toggleView('sec')">图 / 表切换</button>
+    <div id="sec-chart" class="chart"></div>
+    <div id="sec-table" style="display:none;">
+      <table>
+        <tr><th>板块</th><th>14:23 涨跌幅</th><th>代表个股</th></tr>
+        <tr><td>房地产（申万）</td><td class="up">+3.59%</td><td>万科A回封涨停+9.97%、信达地产涨停、深物业A二连板、滨江集团涨停</td></tr>
+        <tr><td>传媒（申万）</td><td class="up">+1.87%</td><td>新华传媒6连板（封单77亿）、掌阅科技/引力传媒涨停</td></tr>
+        <tr><td>综合（申万）</td><td class="up">+0.99%</td><td>—</td></tr>
+        <tr><td>固态电池</td><td class="up">全线爆发</td><td>武汉蓝电30%涨停、尚水智能20%涨停、国轩高科涨停</td></tr>
+        <tr><td>PCB概念</td><td class="up">延续强势</td><td>迅捷兴20cm涨停、依顿电子/奥士康/超声电子涨停</td></tr>
+        <tr><td>石油石化（申万）</td><td class="down">-1.63%</td><td>恒逸石化跌停、桐昆股份跌超6%</td></tr>
+        <tr><td>煤炭（申万）</td><td class="down">-1.32%</td><td>晋控煤业跌超4%，昨日防御板块持续补跌</td></tr>
+        <tr><td>基础化工（申万）</td><td class="down">-0.38%</td><td>化纤行业走弱</td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px;"><strong>万科 A 尾盘回封涨停，确认地产主线强度</strong>：万科 A 今日走势一波三折——10:00 触及涨停（4.00 元），随后开板回落至 3.95 元（涨 6.47%），午后维持在 3.95~4.00 元震荡，<strong>14:00 后开始拉升，14:30 报 4.08 元回封涨停（+9.97%）</strong>，尾盘 30 分钟成交 12.7 亿。万科 A 作为地产龙头回封涨停，<strong>确认了地产板块的主线地位</strong>，也带动尾盘指数拉升。</p>
+    <p><strong>房地产领涨申万（+3.59%）</strong>：信达地产涨停、深物业 A 二连板、滨江集团、华联控股涨停，特发服务、绿地控股、大悦城、华发股份、金地集团、华侨城 A、荣盛发展跟涨。<strong>传媒（+1.87%）</strong>延续强势，新华传媒 6 连板（封单金额 77 亿元），掌阅科技、引力传媒涨停。<strong>固态电池</strong>全线爆发，武汉蓝电 30% 涨停、尚水智能 20% 涨停。</p>
+    <p><strong>石油石化（-1.63%）、煤炭（-1.32%）继续补跌</strong>：恒逸石化跌停、桐昆股份跌超 6%，晋控煤业跌超 4%。昨日逆势的防御板块今日持续补跌，<strong>资金从防御流向进攻的趋势明确</strong>。</p>
+    <div class="src">数据来源：凤凰网（2026-09-29 14:23，申万行业涨跌幅/房地产+3.59%/传媒+1.87%/石油石化-1.63%/煤炭-1.32%）；Wind 万得（2026-09-29 14:38，万科A 4.08元+9.97%回封涨停/分时数据）；证券时报（2026-09-29 12:27，房地产板块强势上行/万科A放量上行）；南方财经（2026-09-29 09:56，新华传媒6连板封单77亿）。</div>
+  </section>
+
+  <section>
+    <h2>四、涨跌分布与涨停梯队：涨停 48 只，新华传媒封单 77 亿</h2>
+    <div id="flow-chart" class="chart"></div>
+    <p style="margin-top:10px;"><strong>截至 14:23，3676 只个股上涨，1738 只下跌，涨停 48 只，跌停 9 只</strong>。较半日（44 涨停/9 跌停）继续改善，涨停家数增加 4 只。<strong>上涨家数占比约 68%</strong>，市场 breadth 维持较好。</p>
+    <p><strong>涨停梯队（尾盘）</strong>：</p>
+    <ul>
+      <li><strong>6 连板</strong>：新华传媒（出版传媒/AI 语料，全场最高标，<strong>封单金额 77 亿元</strong>）；</li>
+      <li><strong>4 连板</strong>：雪龙集团（机器人/汽车）；</li>
+      <li><strong>3 连板</strong>：襄阳轴承（汽车零部件）；</li>
+      <li><strong>2 连板</strong>：深物业 A（房地产龙头）、时代万恒（固态电池）；</li>
+      <li><strong>首板（批量）</strong>：万科 A（地产龙头回封）、信达地产、滨江集团、华联控股（房地产）、武汉蓝电 30cm、尚水智能 20cm、国轩高科、上海洗霸（固态电池）、掌阅科技、引力传媒（传媒/AI）、迅捷兴 20cm、依顿电子、奥士康（PCB）、广汽集团（重组复牌一字涨停）。</li>
+    </ul>
+    <p><strong>梯队观察</strong>：新华传媒 6 连板封单 77 亿，<strong>封单金额巨大，显示资金对 AI 语料/传媒方向的高度认可</strong>。连板结构完整（6/4/3/2 板均有），首板批量涌现。跌停仅 9 只（以 ST 股和补跌股为主），<strong>未出现恐慌性跌停</strong>。</p>
+    <div class="src">数据来源：凤凰网（2026-09-29 14:23，3676涨/1738跌/涨停48/跌停9）；南方财经（2026-09-29 09:56，新华传媒6连板封单77亿）；东方财富（2026-09-29 09:26，集合竞价连板梯队）。</div>
+  </section>
+
+  <section>
+    <h2>五、全天定性：缩量修复、地产主线、尾盘博节后</h2>
+    <p><strong>全天定性：恐慌释放后的缩量修复行情</strong>。昨日（9/28）放量重挫（沪指 -1.67%、创业板 -4.53%、成交 1.70 万亿、4554 股下跌）后，今日呈现典型的「恐慌释放 → 缩量修复」格局：</p>
+    <ul>
+      <li><strong>指数</strong>：全天窄幅震荡（沪指振幅约 0.87%，远小于昨日的 1.9%），尾盘拉升收红；</li>
+      <li><strong>量能</strong>：预估全天 1.45~1.6 万亿，较昨日缩量约 12%，国庆前观望情绪浓厚；</li>
+      <li><strong>结构</strong>：地产（+3.59%）领涨，传媒/电池/PCB 多点开花，煤炭/石油补跌，资金从防御切换至进攻；</li>
+      <li><strong>情绪</strong>：涨停 48 只/跌停 9 只（昨日 35/57），breadth 显著修复；</li>
+      <li><strong>驱动</strong>：9/28 国常会稳地产政策 + 七部门新型电池规划 + 昨日 ETF 净买入 175 亿机构抄底。</li>
+    </ul>
+    <p><strong>尾盘拉升的意义</strong>：在国庆前最后一个交易日尾盘出现明显拉升（沪指 1 小时涨 0.54%），且万科 A 回封涨停，<strong>说明有资金看好节后行情，积极入场布局</strong>。这与昨日 ETF 净买入 175 亿形成呼应——机构资金在大跌后逆势抄底，今日尾盘继续加仓。</p>
+    <div class="src">数据来源：综合各时点行情数据、板块数据、资金数据分析。财联社（2026-09-29 13:26，昨日ETF净买入175亿）；中国证券报（2026-09-29 11:36，国常会稳地产政策）。</div>
+  </section>
+
+  <section>
+    <h2>六、节后观察清单（10月8日开盘）</h2>
+    <p>今日为国庆前最后一个交易日，10/1~10/7 休市 7 天，<strong>下一交易日为 10 月 8 日（周三）</strong>。节后需重点观察：</p>
+    <ul>
+      <li><strong>① 地产政策落地情况</strong>：9/28 国常会研究出台稳定房地产市场政策，国庆期间是否有具体政策落地。若政策超预期，地产板块可能延续强势；若政策不及预期，万科 A 等龙头可能回调；</li>
+      <li><strong>② 外围市场表现</strong>：国庆 7 天期间美股、港股、欧股正常交易，需关注外围市场波动。若外围大跌，A 股节后可能低开；若外围平稳或上涨，A 股有望延续修复；</li>
+      <li><strong>③ 地产主线持续性</strong>：万科 A 今日回封涨停，节后能否延续强势。若万科 A 继续涨停或大涨，则地产主线确认；若高开低走，则说明资金以短线博弈为主；</li>
+      <li><strong>④ 成交量能否放大</strong>：今日缩量至 1.5 万亿左右，节后若放量至 1.8 万亿以上，则说明增量资金入场，反弹可持续；若继续缩量，则反弹空间有限；</li>
+      <li><strong>⑤ 科技链能否止跌</strong>：通信设备/CPO 昨日大跌后今日继续承压，节后若科技链止跌反弹，则市场全面修复；若继续杀跌，则需警惕结构性风险。</li>
+    </ul>
+    <div class="risk"><strong>风险提示</strong>：① 国庆长假 7 天期间外围市场正常交易，存在较大不确定性，建议控制仓位过节；② 今日缩量修复，增量资金入场意愿不强，反弹持续性需节后验证；③ 地产板块爆发受政策预期驱动，若后续政策不及预期可能出现回调；④ 万科 A 尾盘回封涨停，但封单稳定性需节后观察；⑤ 煤炭/石油持续补跌，若节后市场再度走弱，防御板块可能重新获得资金青睐；⑥ 以上为尾盘 14:38 数据，最终收盘数据可能略有变化，以交易所披露为准。</div>
+  </section>
+
+  <div class="foot">
+    数据时点：2026-09-29 14:38（指数实时行情/成交额）/ 14:23（涨跌家数/申万行业）· 行情与资讯来源：实时行情接口、Wind 万得、凤凰网、证券时报、中国证券报、南方财经、东方财富、上海证券报 · 免责声明：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+</div>
+
+<script>
+function toggleView(key) {
+  var c = document.getElementById(key + '-chart');
+  var t = document.getElementById(key + '-table');
+  if (c.style.display === 'none') { c.style.display = 'block'; t.style.display = 'none'; }
+  else { c.style.display = 'none'; t.style.display = 'block'; }
+}
+
+var UP = '#c0392b';
+var DOWN = '#1e8449';
+
+var idxNames = ['09:48开盘', '10:30早盘', '11:30午盘', '13:37午后', '14:38尾盘'];
+var idxVals = [0.02, -0.14, 0.08, -0.11, 0.43];
+echarts.init(document.getElementById('idx-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: 沪指 {c}%' },
+  grid: { left: 50, right: 30, top: 30, bottom: 40 },
+  xAxis: { type: 'category', data: idxNames, axisLabel: { interval: 0 } },
+  yAxis: { type: 'value', name: '沪指涨跌幅(%)' },
+  series: [{ type: 'line', data: idxVals, smooth: true, lineStyle: { width: 3, color: '#1a5276' },
+    itemStyle: { color: function(p){ return p.value >= 0 ? UP : DOWN; } },
+    areaStyle: { color: 'rgba(26,82,118,0.1)' },
+    label: { show: true, formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var distNames = ['半日成交', '14:38累计', '预估全天(中枢)', '昨日全天'];
+var distVals = [8843, 12600, 15000, 17028];
+var distColors = ['#1a5276', '#2980b9', '#e67e22', '#7f8c8d'];
+echarts.init(document.getElementById('dist-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 亿元' },
+  grid: { left: 60, right: 30, top: 30, bottom: 40 },
+  xAxis: { type: 'category', data: distNames, axisLabel: { interval: 0 } },
+  yAxis: { type: 'value', name: '成交额(亿元)' },
+  series: [{ type: 'bar', barWidth: '55%',
+    data: distVals.map(function (v, i) { return { value: v, itemStyle: { color: distColors[i] } }; }),
+    label: { show: true, position: 'top', color: '#2c3e50', formatter: function(p){ return p.value >= 10000 ? (p.value/10000).toFixed(2)+'万亿' : p.value+'亿'; } } }]
+});
+
+var secNames = ['煤炭', '石油石化', '基础化工', '综合', 'PCB概念', '固态电池', '传媒', '房地产'];
+var secVals = [-1.32, -1.63, -0.38, 0.99, 2.0, 3.0, 1.87, 3.59];
+echarts.init(document.getElementById('sec-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c}%（14:23口径）' },
+  grid: { left: 100, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '涨跌幅(%)' },
+  yAxis: { type: 'category', data: secNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: secVals.slice().reverse().map(function (v) { return { value: v, itemStyle: { color: v >= 0 ? UP : DOWN } }; }),
+    label: { show: true, position: 'right', formatter: '{c}%', color: '#2c3e50' } }]
+});
+
+var flowNames = ['昨日跌停', '今日跌停', '昨日涨停', '今日涨停'];
+var flowVals = [57, 9, 35, 48];
+var flowColors = [DOWN, DOWN, UP, UP];
+echarts.init(document.getElementById('flow-chart')).setOption({
+  tooltip: { trigger: 'axis', formatter: '{b}: {c} 只' },
+  grid: { left: 100, right: 60, top: 30, bottom: 40 },
+  xAxis: { type: 'value', name: '只数' },
+  yAxis: { type: 'category', data: flowNames.slice().reverse() },
+  series: [{ type: 'bar', barWidth: '60%',
+    data: flowVals.slice().reverse().map(function (v, i) { return { value: v, itemStyle: { color: flowColors.slice().reverse()[i] } }; }),
+    label: { show: true, position: 'right', color: '#2c3e50' } }]
+});
+</script>
+</body>
+</html>

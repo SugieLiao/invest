@@ -74,5 +74,16 @@
     "slides_count": 57,
     "video_duration_min": 84.3,
     "has_knowledge_card": true
+  },
+  {
+    "episode": 9,
+    "title": "250914宏观框架课第九期：数字外汇与汇率",
+    "video_file": "09.20250914 宏观框架课第八期数字外汇 汇率(2).mov",
+    "processed_date": "2026-09-29",
+    "output_path": "learn/xiaobaojie/9/",
+    "deploy_url": "https://www.liaohao.cc/learn/xiaobaojie/9/",
+    "slides_count": 45,
+    "video_duration_min": 66.8,
+    "has_knowledge_card": true
   }
 ]

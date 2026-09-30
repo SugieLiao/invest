@@ -40,6 +40,107 @@
     input.click();
   }
 
+  // ===== 居中弹窗（替代原生 alert/confirm/prompt，原生弹窗固定在屏幕顶部）=====
+
+  let modalCount = 0;
+
+  function showModal(opts) {
+    // opts: {title, message, needInput, inputPlaceholder, inputValue, okText, cancelText, danger, hideCancel}
+    // 返回 Promise<{ok:boolean, value?:string}>  ok=true 表示点击确认
+    return new Promise(resolve => {
+      const id = '__editModal_' + (++modalCount);
+      const mask = document.createElement('div');
+      mask.id = id;
+      mask.style.cssText = `
+        position: fixed; inset: 0; z-index: 100000;
+        background: rgba(15,23,42,.55);
+        display: flex; align-items: center; justify-content: center;
+        padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      `;
+      const box = document.createElement('div');
+      box.style.cssText = `
+        background: #fff; color: #1f2329; border-radius: 14px;
+        box-shadow: 0 20px 60px rgba(0,0,0,.35);
+        width: min(440px, 92vw); max-height: 80vh; overflow: auto;
+        padding: 26px 28px 22px;
+      `;
+      const title = document.createElement('div');
+      title.textContent = opts.title || '提示';
+      title.style.cssText = 'font-size: 17px; font-weight: 700; margin-bottom: 14px;';
+      box.appendChild(title);
+
+      if (opts.message) {
+        const msg = document.createElement('div');
+        msg.textContent = opts.message;
+        msg.style.cssText = 'font-size: 14.5px; line-height: 1.7; color: #4a5568; white-space: pre-wrap; margin-bottom: 16px;';
+        box.appendChild(msg);
+      }
+
+      let inputEl = null;
+      if (opts.needInput) {
+        inputEl = document.createElement('input');
+        inputEl.type = 'text';
+        inputEl.placeholder = opts.inputPlaceholder || '';
+        inputEl.value = opts.inputValue || '';
+        inputEl.style.cssText = `
+          width: 100%; box-sizing: border-box; font-size: 16px;
+          padding: 10px 12px; border: 1px solid #cbd5e0; border-radius: 8px;
+          outline: none; margin-bottom: 16px;
+        `;
+        inputEl.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') { e.preventDefault(); confirmClick(); }
+          if (e.key === 'Escape') { e.preventDefault(); cancelClick(); }
+        });
+        box.appendChild(inputEl);
+      }
+
+      const btnRow = document.createElement('div');
+      btnRow.style.cssText = 'display: flex; justify-content: flex-end; gap: 12px; margin-top: 4px;';
+
+      const cancelBtn = document.createElement('button');
+      cancelBtn.textContent = opts.cancelText || '取消';
+      cancelBtn.style.cssText = `
+        background: #edf2f7; color: #4a5568; border: none; border-radius: 8px;
+        padding: 9px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+      `;
+      const okBtn = document.createElement('button');
+      okBtn.textContent = opts.okText || '确定';
+      const okBg = opts.danger ? '#e53e3e' : '#2b6cb0';
+      okBtn.style.cssText = `
+        background: ${okBg}; color: #fff; border: none; border-radius: 8px;
+        padding: 9px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+      `;
+
+      function done(result) {
+        document.getElementById(id)?.remove();
+        resolve(result);
+      }
+      function cancelClick() { done({ ok: false, value: '' }); }
+      function confirmClick() {
+        if (opts.needInput) {
+          done({ ok: true, value: inputEl.value });
+        } else {
+          done({ ok: true, value: '' });
+        }
+      }
+
+      okBtn.onclick = confirmClick;
+      cancelBtn.onclick = cancelClick;
+      if (opts.hideCancel) {
+        cancelBtn.style.display = 'none';
+      } else {
+        btnRow.appendChild(cancelBtn);
+      }
+      btnRow.appendChild(okBtn);
+      box.appendChild(btnRow);
+      mask.appendChild(box);
+      mask.addEventListener('click', (e) => { if (e.target === mask) cancelClick(); });
+      document.body.appendChild(mask);
+      if (inputEl) setTimeout(() => inputEl.focus(), 50);
+    });
+  }
+
+
   // ===== 主按钮栏 =====
 
   function createWrap() {
@@ -192,7 +293,14 @@
         border-radius: 6px; padding: 4px 10px; font-size: 12px;
         cursor: pointer; z-index: 100;
       `;
-      rb.onclick = (e) => { e.preventDefault(); if (confirm('删除这张图片？')) w.remove(); };
+      rb.onclick = async (e) => {
+        e.preventDefault();
+        const res = await showModal({
+          title: '删除图片', message: '删除这张图片？',
+          okText: '删除', cancelText: '取消', danger: true
+        });
+        if (res.ok) w.remove();
+      };
       w.appendChild(rb);
 
       // 在后插入按钮
@@ -278,54 +386,59 @@
     return p;
   }
 
-  function saveToGithub() {
+  async function saveToGithub() {
     let key = localStorage.getItem('note_edit_key');
     if (!key) {
-      const t = prompt('请输入编辑密钥 EDIT_KEY（只需输入一次，保存在本浏览器）：');
-      if (!t) return;
-      key = t.trim();
+      const res = await showModal({
+        title: '编辑密钥',
+        message: '请输入编辑密钥 EDIT_KEY（只需输入一次，保存在本浏览器）：',
+        needInput: true, inputPlaceholder: 'EDIT_KEY', okText: '确认', cancelText: '取消'
+      });
+      if (!res.ok) return;
+      key = (res.value || '').trim();
       localStorage.setItem('note_edit_key', key);
     }
 
     const path = currentRepoPath();
     if (!/^learn\//.test(path)) {
-      alert('当前页面不在可保存的笔记目录（learn/）内。');
+      await showModal({ title: '提示', message: '当前页面不在可保存的笔记目录（learn/）内。', okText: '知道了', hideCancel: true });
       return;
     }
 
     const btn = document.getElementById('__saveBtn');
     if (btn) { btn.disabled = true; btn.textContent = '⏳ 保存中…'; }
 
-    fetch('/api/note-save', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ key, path, content: buildCleanHtml() })
-    })
-    .then(r => r.json())
-    .then(data => {
+    try {
+      const resp = await fetch('/api/note-save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key, path, content: buildCleanHtml() })
+      });
+      const data = await resp.json();
+
       if (data.unchanged) {
-        alert('内容没有变化，无需保存。');
+        await showModal({ title: '保存', message: '内容没有变化，无需保存。', okText: '知道了', hideCancel: true });
       } else if (data.ok) {
         let msg = '已保存！';
         if (data.images) msg += ' 新上传图片 ' + data.images + ' 张。';
         msg += '\n正在刷新以显示最新内容…';
-        alert(msg);
+        await showModal({ title: '保存成功', message: msg, okText: '确定', hideCancel: true });
         // KV 即时覆盖已写入，刷新后立即展示最新版本，无需等待部署
         setTimeout(() => location.reload(), 500);
       } else {
         if (data.error === '编辑密钥错误') localStorage.removeItem('note_edit_key');
         throw new Error(data.error || '保存失败');
       }
-    })
-    .catch(err => alert('保存失败：' + err.message))
-    .finally(() => {
+    } catch (err) {
+      await showModal({ title: '保存失败', message: '保存失败：' + err.message, okText: '确定', hideCancel: true });
+    } finally {
       if (btn) { btn.disabled = false; btn.textContent = '☁️ 保存到云端'; }
-    });
+    }
   }
 
   // ===== 导出HTML =====
 
-  function exportHTML() {
+  async function exportHTML() {
     document.querySelectorAll('.text-insert-img-btn, .img-remove-btn, .img-insertafter-btn').forEach(el => el.remove());
     const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
     const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
@@ -333,7 +446,7 @@
     const a = document.createElement('a');
     a.href = url; a.download = 'index.html'; a.click();
     URL.revokeObjectURL(url);
-    alert('HTML已导出。');
+    await showModal({ title: '导出', message: 'HTML已导出。', okText: '知道了', hideCancel: true });
   }
 
   // ===== 初始化 =====

@@ -1,0 +1,4 @@
+# 大文件与中间产物排除（Pages deploy）
+learn/xiaobaojie/*/minutes/audio.mp3
+learn/*/*/minutes/audio.mp3
+**/minutes/audio.mp3

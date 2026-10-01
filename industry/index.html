@@ -69,7 +69,7 @@ a{color:var(--acc);text-decoration:none}
 #tip.err{display:block;background:#2b1416;color:var(--err);border:1px solid #f85149}
 
 /* 正文 */
-#doc{max-width:960px;font-size:14.5px;line-height:1.75}
+#doc{max-width:960px;margin:0 auto;font-size:14.5px;line-height:1.75}
 #doc h1{font-size:24px;border-bottom:1px solid var(--bd);padding-bottom:8px;margin-top:6px}
 #doc h2{font-size:19px;margin-top:30px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
 #doc h3{font-size:16px;margin-top:22px;color:#c9d1d9}
@@ -91,6 +91,11 @@ a{color:var(--acc);text-decoration:none}
 #doc pre code{background:none;padding:0}
 #doc blockquote{border-left:3px solid var(--acc);margin:14px 0;padding:4px 14px;
   color:var(--mut);background:#12171d}
+/* ── 图片限宽（2026-10-01）────────────────────────────────────
+   生成的大图（信息图/示意图）原始宽度可到 2364px，超过 #doc 容器
+   960px 会溢出、右侧被裁切。给正文内所有 <img> 限宽 100% 并保持比例，
+   与下方 .mermaid svg 的 max-width:100% 行为一致。 */
+#doc img{max-width:100%;height:auto}
 #doc hr{border:0;border-top:1px solid var(--bd);margin:26px 0}
 #doc ul,#doc ol{padding-left:24px}
 #doc li{margin:4px 0}
@@ -112,7 +117,7 @@ a{color:var(--acc);text-decoration:none}
 #editor{display:none;width:100%;height:calc(100vh - 210px);background:#0b0f14;color:var(--fg);
   border:1px solid var(--bd);border-radius:8px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
   font-size:13px;line-height:1.6;outline:none;resize:vertical}
-#meta{font-size:11.5px;color:var(--mut);margin-bottom:8px}
+#meta{font-size:11.5px;color:var(--mut);margin-bottom:8px;max-width:960px;margin-left:auto;margin-right:auto}
 #mask{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:99}
 #mask .box{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:20px;width:330px}
 #mask .box h3{margin:0 0 8px;font-size:15px}
@@ -124,8 +129,8 @@ a{color:var(--acc);text-decoration:none}
 #app.side-fold #side{display:none}
 #scrim{position:fixed;left:0;right:0;top:52px;bottom:0;background:rgba(0,0,0,.45);
   display:none;z-index:55}
-#app.side-open #scrim{display:block}
 @media(max-width:760px){
+  #app.side-open ~ #scrim{display:block}
   #side{position:fixed;top:52px;left:0;bottom:0;width:272px;z-index:60;flex:none;
     transform:translateX(-102%);transition:transform .18s ease;box-shadow:6px 0 24px rgba(0,0,0,.5)}
   #app.side-open #side{transform:translateX(0)}

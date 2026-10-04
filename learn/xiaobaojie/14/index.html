@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汇率（7）：日元与人民币体系</title>
+<script src="/shared/nav.js?v=5" defer></script>
+<script src="/shared/edit.js?v=20260930a" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header .meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.header .intro {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.header .minutes-link {
+  display: inline-block;
+  margin-top: 14px;
+  background: #eef4fb;
+  color: #2b6cb0;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.header .minutes-link:hover {
+  background: #dbe9f7;
+}
+.toc {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.toc h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2329;
+}
+.toc ol {
+  padding-left: 20px;
+}
+.toc li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.toc a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2329;
+  border-left: 4px solid #2b6cb0;
+  padding-left: 12px;
+}
+.section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #2d3748;
+}
+.section p {
+  margin-bottom: 12px;
+  color: #374151;
+  font-size: 15px;
+}
+.section ul, .section ol {
+  margin: 12px 0 12px 24px;
+}
+.section li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 15px;
+}
+.highlight {
+  background: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+}
+.highlight p {
+  color: #744210;
+  margin-bottom: 0;
+}
+.key-point {
+  background: #eef4fb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.key-point p {
+  color: #2b4c7e;
+  margin-bottom: 0;
+}
+.slide-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.calc {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 12px 0;
+  font-size: 14px;
+  color: #166534;
+}
+.calc p {
+  color: #166534;
+  margin-bottom: 6px;
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+.part-title {
+  background: #2b6cb0;
+  color: #fff;
+  border-radius: 12px;
+  padding: 18px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+.part-title h2 {
+  font-size: 20px;
+  font-weight: 700;
+  border-left: none;
+  padding-left: 0;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.part-title p {
+  color: rgba(255,255,255,.85);
+  font-size: 14px;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>汇率（7）：日元与人民币体系</h1>
+    <div class="meta">小爆姐宏观框架课 · 第14期 · 汇率（7） · 2025-12-14 · 约174分钟 · 13帧</div>
+    <p class="intro">
+      本期是汇率系列的第七讲，用一整期的时间把<strong>日元体系</strong>和<strong>人民币体系</strong>这两套与美元完全不同的框架讲透。
+      前半场从日元被"<strong>三股力量</strong>"推来推去的核心变量讲起，推演日元走弱/走强对日本资产、全球套息交易、美债市场的<strong>一阶与二阶影响</strong>，
+      并剖析日本财务省与央行的<strong>政策反应函数</strong>；后半场从"<strong>不可能三角</strong>"切入人民币体系的地基约束，
+      梳理人民币走强/走弱的<strong>一阶与二阶效应</strong>、人民币与A股/H股的真实相关性，以及央行与财政部"<strong>稳汇率</strong>"的五道防线。
+      最后用一句金句收束：<strong>美元决定全球资本的成本，日元决定全球资本的胆量，人民币折射中国资产在世界眼中的分量</strong>。
+    </p>
+    <a class="minutes-link" href="https://ycnh1a1mbep0.feishu.cn/minutes/obcnfgabr82661b2943kic23" target="_blank">飞书妙记逐字稿</a>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">日元体系的"核心变量"：被三股力量推来推去</a></li>
+      <li><a href="#ch2">"日元走弱"所带来的影响：一阶效应 + 二阶效应</a></li>
+      <li><a href="#ch3">最近10年：日元和日经225的"负相关"</a></li>
+      <li><a href="#ch4">"日元走强"所带来的影响：大拆仓、长钱与通缩心态</a></li>
+      <li><a href="#ch5">日本"政策反应函数"：财务省管汇率，央行管货币政策</a></li>
+      <li><a href="#ch6">总结：日元体系——高度互联的非线性复杂系统</a></li>
+      <li><a href="#ch7">人民币体系"底层约束"——"不可能之三角"</a></li>
+      <li><a href="#ch8">"人民币走强"所带来的影响：一阶效应 + 二阶效应</a></li>
+      <li><a href="#ch9">最近10年：人民币和A/H股——A股弱相关，H股正相关</a></li>
+      <li><a href="#ch10">"人民币走弱"所带来的影响：死亡螺旋与连锁反应</a></li>
+      <li><a href="#ch11">中国"政策反应函数"：央行+财政部的"稳汇率"组合拳</a></li>
+      <li><a href="#ch12">总结：人民币体系——动态、复杂的"生态圈"</a></li>
+      <li><a href="#ch13">本章小结：美元=成本，日元=胆量，人民币=分量</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section" id="ch1">
+    <h2>一、日元体系的"核心变量"：被三股力量推来推去</h2>
+    <img src="assets/slides/slide_01.jpeg" alt="日元体系的核心变量" class="slide-img">
+    <p>要理解日元，先记住一个比喻：日元不是一个"主动的玩家"，而是一个<strong>被三股力量推来推去的"浮标"</strong>。这三股力量分别是：</p>
+    <ul>
+      <li><strong>① 利差（核心变量）：</strong>美日利差是日元最核心的驱动。日本长期维持超低利率（负利率/零利率），日元成了<strong>全球最便宜的融资货币</strong>——全球的投资者借日元（成本几乎为零），换成美元去买美债等高息资产，赚中间的利差。这就是<strong>套息交易（Carry Trade）</strong>。只要美日利差拉大，日元就被系统性抛售、持续走弱。</li>
+      <li><strong>② 风险情绪（调节变量）：</strong>日元有"避险货币"身份。市场<strong>Happy</strong>（风险偏好高）时，套息交易活跃，日元被卖出→弱；市场<strong>恐慌</strong>（风险偏好低）时，套息交易平仓，大家买回日元还债→日元强。口诀：<strong>"happy日元弱、恐慌日元强"</strong>。</li>
+      <li><strong>③ 贸易条件与能源（结构变量）：</strong>日本是<strong>能源进口国</strong>（石油、天然气几乎全靠进口）。油价、气价上涨→进口账单变大→经常账户恶化+对日元前景悲观→中长期贬值压力。这是埋在结构里的慢变量。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>一句话框架：</strong>利差决定日元的<strong>趋势方向</strong>（系统性走弱）；风险情绪决定<strong>短期摆动</strong>（恐慌时急涨）；贸易条件与能源决定<strong>中长期底色</strong>（贬值压力）。三个变量叠加，日元才呈现"长期弱、危机急升"的特征。</p>
+    </div>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section" id="ch2">
+    <h2>二、"日元走弱"所带来的影响：一阶效应 + 二阶效应</h2>
+    <img src="assets/slides/slide_02.jpeg" alt="日元走弱所带来的影响" class="slide-img">
+    <p><strong>发生背景：</strong>日元走弱通常发生在美联储加息周期、全球风险偏好较高（Risk-On）、或日本央行维持超宽松政策的时期——正好是利差拉大、情绪乐观的组合。</p>
+    <h3>一阶效应（直接影响）</h3>
+    <ul>
+      <li><strong>日本股市：利好。</strong>出口型跨国企业（丰田、索尼等）的海外收入以美元计价，换回日元时"账面利润变多"，直接推升盈利和估值——日经225的上涨，相当一部分就是日元贬值"换"来的。</li>
+      <li><strong>日本国债：理论有压力、短期被托住。</strong>日元贬值→进口商品涨价→输入型通胀→长端利率有上行压力（国债价格下跌）；但短期日本央行通过YCC（收益率曲线控制）把长端利率摁住，所以压力被推迟，<strong>长期压力仍然在</strong>。</li>
+      <li><strong>日本房地产与旅游：利好。</strong>日元便宜了→外资购买力增强→海外游客变多、海外资金配置日本房产。</li>
+      <li><strong>日本经济内部：家庭被挤压。</strong>日元贬值→进口能源食品涨价→家庭购买力下降；顺带科普<strong>通胀八分类</strong>（需求拉动/成本推动/货币信贷驱动/输入型/供给冲击/预期自我实现/结构性/税制改革），汇率贬值场景下最常见的是<strong>成本推动+输入型+预期自我实现</strong>三种。</li>
+    </ul>
+    <h3>二阶效应（连锁深远影响）</h3>
+    <ol>
+      <li><strong>全球套息交易繁荣，日元=世界提款机：</strong>日元便宜→全球资金借日元去全世界买风险资产→全球风险资产被推高（波动率长期很低）。但风险全压在"日元融资+高杠杆组合"上——<strong>这是个定时炸弹</strong>。</li>
+      <li><strong>外汇干预的"美债连锁反应"：</strong>日元贬太狠→日本财务省被迫干预（卖外汇储备、买日元）→日本外储里最大头是<strong>美债</strong>→市场预期"日本要卖美债了"→美债继续跌→收益率升→全球折现率升→<strong>美股估值被压制+美国融资成本上升</strong>。</li>
+      <li><strong>日本家庭"资产觉醒"（渡边太太）：</strong>日本家庭终于把躺在银行里的存款（约一半是现金存款）搬出来，买日股、买海外资产→对日元是<strong>持续卖压</strong>、对全球风险资产是<strong>增量买盘</strong>，而且配置习惯一旦形成就回不到从前。</li>
+      <li><strong>"竞争性贬值"：</strong>日元快速贬值→韩国等亚洲竞争对手汇率变贵→被迫跟着贬值→区域汇率价格战，全球贸易环境恶化。</li>
+    </ol>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section" id="ch3">
+    <h2>三、最近10年：日元和日经225的"负相关"</h2>
+    <img src="assets/slides/slide_03.jpeg" alt="最近10年：日元和日经225" class="slide-img">
+    <p>看这张图（MacroMicro，最近10年）：<strong>蓝线=美元兑日元（USD/JPY）</strong>，向上代表日元贬值；<strong>红线=日经225</strong>。两条线长期<strong>同向运动</strong>——因为蓝线向上（日元贬）时，红线也向上（日股涨），所以日元与日经225本质上是<strong>负相关</strong>：<strong>日元贬值→日经225上涨；日元升值→日经225下跌</strong>。</p>
+    <h3>底层是两股力量</h3>
+    <ul>
+      <li><strong>① 经济结构：</strong>日本是出口型经济，跨国公司占比高，日元弱=海外利润折算变厚=股市好，这是结构性因素；</li>
+      <li><strong>② 套息交易+避险情绪：</strong>日元弱=全球风险偏好高=资金涌入日股；日元强=避险=资金撤出风险资产，这是情绪性因素。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>脱敏情形（相关性被打破）：</strong>如果日本出现<strong>财政严重失衡、主权信用被质疑</strong>（比如债务彻底失控），"日元弱→股市好"的负相关会失效，出现<strong>股债汇三杀</strong>，或至少<strong>日债、日元双杀</strong>——就像新兴市场危机一样。别把这个负相关当成铁律。</p>
+    </div>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section" id="ch4">
+    <h2>四、"日元走强"所带来的影响：大拆仓、长钱与通缩心态</h2>
+    <img src="assets/slides/slide_04.jpeg" alt="日元走强所带来的影响" class="slide-img">
+    <p><strong>发生背景：</strong>日元走强通常发生在美联储降息周期、全球性金融危机（Risk-Off）、或日本央行政策正常化（退出负利率/YCC）时期。日元升值对日本的直接影响是负面的，但它的<strong>全球冲击力远超日本本国</strong>：</p>
+    <ol>
+      <li><strong>全球套息交易"大拆仓"——恶性螺旋：</strong>日元升值→借日元的人汇兑损失放大→被迫止损、补保证金→抛售全球股票/债券/大宗商品→换回日元还债→日元更强→更多人爆仓→<strong>全球暴跌、流动性枯竭、VIX飙升</strong>。日元的急剧走强，本质是<strong>全球市场的预警灯</strong>。</li>
+      <li><strong>"长钱"对冲成本上升：</strong>日本保险资金、银行、基金等"长钱"买海外资产要做货币对冲（索汇）；日元强→对冲成本上升→海外配置的收益扣掉对冲成本后不划算→<strong>新钱减少海外配置、旧钱减持美债回流买日债</strong>→美债最大的买家之一变少→美债收益率被推高→<strong>美国融资成本上升</strong>。</li>
+      <li><strong>重回"通缩心态"，带来"产业空心化"：</strong>日元强→出口竞争力下降+海外利润折算缩水→企业不敢加薪→居民收入预期下降→需求疲软→通缩心态固化；同时生产基地加速外迁→高端制造、就业、资本开支外流→空心化。这要从<strong>短（盈利缩水）、中（投资外流）、长（产业竞争力衰退）</strong>三个维度看。</li>
+    </ol>
+  </div>
+
+  <!-- 第5章 -->
+  <div class="section" id="ch5">
+    <h2>五、日本"政策反应函数"：财务省管汇率，央行管货币政策</h2>
+    <img src="assets/slides/slide_05.jpeg" alt="日本政策反应函数" class="slide-img">
+    <p><strong>总纲：</strong>汇率管理是<strong>日本财务省</strong>的职责；货币政策由<strong>日本央行</strong>决定。<strong>（和中国不同，日本央行不直接管汇率。）</strong>而日本国债占GDP超<strong>260%</strong>（美国约120%），财政主导了整个政策框架。</p>
+    <h3>日本财务省（管汇率）</h3>
+    <ul>
+      <li><strong>关注什么：</strong>汇率稳不稳、波动快不快、民生成本（进口物价）高不高、是不是被做空者"围猎"；</li>
+      <li><strong>出手条件：</strong>① 贬值太快（斜率陡，哪怕还没到历史低位）；② 输入型通道引发政治压力；③ 明显被做空者围猎；</li>
+      <li><strong>约束：</strong>大规模干预须先与美国通气（否则被视为操纵）；</li>
+      <li><strong>工具箱：</strong>口头干预→汇率检查（要求市场报价，本身就是干预预警）→直接下场卖美元买日元（专挑亚洲盘冷清、流动性差的时点）；</li>
+      <li><strong>局限：</strong>干预只能<strong>减缓趋势</strong>，不能逆转趋势——根本原因是利差摆在那。</li>
+    </ul>
+    <h3>日本央行（管货币政策）</h3>
+    <ul>
+      <li><strong>核心目标：</strong>核心通胀控制在<strong>2%</strong>（现在已接近3%）+ 金融体系与日债市场稳定；汇率不是目标，但可能被"借"来达成目标；</li>
+      <li><strong>不能加息的两大约束：</strong>① 财政赤字太严重（利息付不起→主权信用崩塌）；② 经济基本面差（加息会打死经济）；</li>
+      <li><strong>必须加息的情形：</strong>① 工资失控（春斗劳资谈判是硬指标）；② 通胀失控；③ 金融市场出问题（日债收益率曲线失真）；</li>
+      <li><strong>工具箱：</strong>调整/退出YCC→退出负利率加息→缩表。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>历史视角：</strong>过去日本最怕"日元升值"（通缩恐惧）；现在最怕"日元快速贬值"（能源高企+民生压力+政治环境）。怕的方向变了，政策反应也跟着变。</p>
+    </div>
+  </div>
+
+  <!-- 第6章 -->
+  <div class="section" id="ch6">
+    <h2>六、总结：日元体系——高度互联的非线性复杂系统</h2>
+    <img src="assets/slides/slide_06.jpeg" alt="总结：日元体系" class="slide-img">
+    <p><strong>日元体系，是一个高度互联、且充满非线性反馈循环的复杂系统。</strong>几个要点收束：</p>
+    <ul>
+      <li><strong>核心矛盾=利差：</strong>美日利差摆死，日元长期系统性贬值压力；</li>
+      <li><strong>最大系统性风险=套息交易大拆仓：</strong>平时日元是"世界提款机"、压低全球波动率；危机时急升，变成全球市场的放大器；</li>
+      <li><strong>二阶效应影响全球：</strong>通过"外储卖美债→美债收益率"和"长钱对冲成本→美债买盘"两条链，日元强弱对美债、全球债券市场影响很大；</li>
+      <li><strong>政策极限：</strong>财政主导（债务260%）+央行加息两难+大规模干预需美国通气——政策空间被锁死，只能"拖"。</li>
+    </ul>
+  </div>
+
+  <!-- 第7章 -->
+  <div class="section" id="ch7">
+    <h2>七、人民币体系"底层约束"——"不可能之三角"</h2>
+    <img src="assets/slides/slide_07.jpeg" alt="人民币体系底层约束：不可能之三角" class="slide-img">
+    <p><strong>不可能三角：</strong>①资本自由进出、②货币政策完全自主、③汇率死死盯住——三者不可兼得，最多选两个。中国选择了：</p>
+    <ul>
+      <li><strong>① 独立的货币政策；</strong></li>
+      <li><strong>② 汇率是"在管理下的浮动"</strong>，而不是死盯美元、任由汇率乱飞。</li>
+    </ul>
+    <p>放弃的是<strong>资本完全自由流动</strong>——所以必须保留<strong>资本账户管制</strong>。这个"底层约束"决定了后面所有的工具（QDII、逆周期因子、外汇风险准备金……）本质都是<strong>"阀门"</strong>，在资本管制的框架内调节流量。</p>
+    <div class="key-point">
+      <p><strong>推演：</strong>如果哪天真放开资本自由流动，就等于"和日本没有两样"——货币政策被外部牵着走，汇率被套息交易推来推去。管制不是要不要的问题，是选了另外两条路的必然结果。</p>
+    </div>
+  </div>
+
+  <!-- 第8章 -->
+  <div class="section" id="ch8">
+    <h2>八、"人民币走强"所带来的影响：一阶效应 + 二阶效应</h2>
+    <img src="assets/slides/slide_08.jpeg" alt="人民币走强所带来的影响" class="slide-img">
+    <p><strong>发生背景：</strong>人民币走强，通常由中国经济基本面强劲、贸易顺差扩大或全球资本积极流入所带来。</p>
+    <h3>一阶效应</h3>
+    <ul>
+      <li><strong>1）估值提升和资本流入：</strong>外资涌入→A股、国债估值抬升；</li>
+      <li><strong>2）企业分化：</strong>进口型企业受益（航空、能源进口、外债多的公司：采购便宜+偿债成本降）；出口型企业受损（尤其低端纺织等薄利行业：产品变贵）；</li>
+      <li><strong>3）"通胀抑制"：</strong>进口商品变便宜→物价被压制→利率上行压力小→债券受益；</li>
+      <li><strong>外溢：</strong>中国是全球最大买家，人民币强→大宗商品购买力增强→资源出口型新兴市场受益→区域风险偏好上升。</li>
+    </ul>
+    <h3>二阶效应</h3>
+    <ol>
+      <li><strong>"升值预期的自我强化"：</strong>热钱涌入→汇率+股市+债市齐涨→正反馈→<strong>泡沫与金融脆弱性一起被养大</strong>；</li>
+      <li><strong>产业结构的长期压力与扭曲：</strong>制造业竞争力下降→供应链外迁；资金涌向金融地产→产业空心化；</li>
+      <li><strong>"倒逼产业升级"：</strong>低价路线走不通→被迫向品牌、服务、高附加值升级——过程痛苦，长远有价值；</li>
+      <li><strong>全球通胀格局被"再平衡"：</strong>中国是全球最大的通缩输出国，人民币升值→输出通缩的能力被削弱→全球通胀中枢抬高；</li>
+      <li><strong>人民币国际化"加速器"：</strong>货币稳+值钱→各国央行愿意配置、贸易伙伴愿意用人民币结算。</li>
+    </ol>
+  </div>
+
+  <!-- 第9章 -->
+  <div class="section" id="ch9">
+    <h2>九、最近10年：人民币和A/H股——A股弱相关，H股正相关</h2>
+    <img src="assets/slides/slide_09.jpeg" alt="最近10年：人民币和A/H股" class="slide-img">
+    <p>这张图分左右两半：<strong>左图（A股）</strong>：红线=沪深300，蓝线=美元兑人民币中间价；<strong>右图（H股）</strong>：红线=恒生指数，蓝线=美元兑人民币中间价（翻转）。结论截然不同：</p>
+    <h3>A股：与人民币相关性<strong>很弱、且漂移</strong></h3>
+    <ul>
+      <li><strong>国内资金为主：</strong>A股是公募、私募、散户自己玩，关心的是政策、货币、信用、新故事，汇率只是"背景板"；</li>
+      <li><strong>外资占比小：</strong>外资有专门团队研究中国政策，汇率在它的决策里只占很小一环；教科书那条"升值→外资流入→股市涨"的传导链太长太弱；</li>
+      <li><strong>指数层面抵消：</strong>升值对进口企业利好、对出口企业利空，在指数层面互相抵消；</li>
+      <li><strong>资本管制=隔音棉：</strong>资金进出不自由，海外情绪传导不进来。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>实践结论：</strong>人民币走势对A股是<strong>宏观背景</strong>，不是<strong>交易信号</strong>——别拿人民币当A股的买卖依据。</p>
+    </div>
+    <h3>H股：与人民币<strong>正相关</strong></h3>
+    <ul>
+      <li><strong>利润折算：</strong>H股公司在内地赚人民币、以港币/美元计价，人民币升值→利润折算增厚→估值加分；</li>
+      <li><strong>外资同向加仓：</strong>全球资本看好中国时，既买人民币（升值），也加仓港股（港股没有管制）；</li>
+      <li><strong>联系汇率：</strong>港币锚定美元，宏观预期最终体现在"人民币对美元"的波动上。</li>
+    </ul>
+    <h3>AH溢价：</h3>
+    <p>A股更贵=更强的风险偏好+更充沛的本地流动性+拥挤性；H股更便宜=全球资金对中国资产的风险定价+对人民币的长期预期+新兴市场横向比较。买H股，本质是买<strong>"中国资产在全球眼中的定价"</strong>，而不是香港本地经济。</p>
+  </div>
+
+  <!-- 第10章 -->
+  <div class="section" id="ch10">
+    <h2>十、"人民币走弱"所带来的影响：死亡螺旋与连锁反应</h2>
+    <img src="assets/slides/slide_10.jpeg" alt="人民币走弱所带来的影响" class="slide-img">
+    <p><strong>发生背景：</strong>人民币走弱，通常是经济增长放缓、资本外流压力增大或中美利差倒挂所引起。</p>
+    <h3>一阶效应</h3>
+    <ul>
+      <li><strong>人民币资产：</strong>① 股市估值下降（外资换美元亏钱→减持）；② 债务负担激增（房企/航空公司美元债→偿债成本上升→违约风险）；③ 有利出口；④ 通胀"利空"（输入型通胀抬头）；</li>
+      <li><strong>全球金融市场：</strong>① 进入避险模式（快速大幅贬值=硬着陆预期→资金撤风险资产，抱美元/日元/美债）；② 大宗商品价格承压（最大买家购买力变弱）；③ 带来"竞争性贬值"→货币战。</li>
+    </ul>
+    <h3>二阶效应</h3>
+    <ol>
+      <li><strong>资本外逃，引发"死亡螺旋"（最关键、最危险）：</strong>贬值→恐慌换汇→央行干预卖美元→外汇储备下降→更恐慌→加速外逃→恶性循环（津巴布韦式警示）；</li>
+      <li><strong>系统性金融风险被放大：</strong>美元债企业集体爆雷→银行坏账→惜贷→信用收缩→连锁违约；</li>
+      <li><strong>国内流动性"被收紧"：</strong>央行卖美元收人民币=回收基础货币→流动性紧→利率飙升→本该宽松时却紧缩→<strong>稳汇率与稳增长打架</strong>；</li>
+      <li><strong>对外输出"通缩"，引发"贸易摩擦"：</strong>世界工厂贬值压低全球物价→贸易伙伴产业受损、失业上升→保护主义抬头；</li>
+      <li><strong>反向影响全球各国央行的政策路径：</strong>输出通缩+金融波动→其他央行（如美联储）被迫跟着调整宽松节奏。</li>
+    </ol>
+  </div>
+
+  <!-- 第11章 -->
+  <div class="section" id="ch11">
+    <h2>十一、中国"政策反应函数"：央行+财政部的"稳汇率"组合拳</h2>
+    <img src="assets/slides/slide_11.jpeg" alt="中国政策反应函数" class="slide-img">
+    <p><strong>总纲：</strong>中国人民银行和中国财政部，共同构成人民币体系的<strong>控制中枢</strong>。核心目标——<strong>"稳汇率"</strong>：防止无序、自我强化的"单边汇率波动"，特别是防止触发<strong>系统性的"无序贬值"</strong>。可以波动，不可单边；更在意贬值。</p>
+    <h3>升值太快时：央行"放水引压力软着陆"</h3>
+    <ul>
+      <li>① <strong>放松资本管制把钱请出去</strong>：提高QDII额度让机构出海（"多利宝"限额变化=汇率承压的观测信号）；</li>
+      <li>② <strong>中间价口风调整</strong>：逆周期因子调弱→公布的中间价低于市场预期→降低升值压力；</li>
+      <li>③ <strong>减少外汇供给</strong>：上调外汇存款准备金率→境内美元变稀缺；</li>
+      <li>④ <strong>宏观审慎收紧</strong>：收紧境内机构境外借款的额度上限；</li>
+      <li>⑤ <strong>远期售汇外汇风险准备金调零</strong>：降低购买美元成本，鼓励企业套保对冲。</li>
+    </ul>
+    <p><strong>财政配合：</strong>出口退税回血、降低进口关税鼓励进口、加大财政支出托内需——让升值"软着陆"。</p>
+    <h3>贬值太快时：五道防线（由软到硬）</h3>
+    <ol>
+      <li><strong>第一道·预期管理：</strong>逆周期因子调强→中间价高于市场预期→打掉单边贬值预期（不是回点位，是释放信号）；</li>
+      <li><strong>第二道·抽干离岸流动性：</strong>在香港发央票，利率定高→收回CNH→离岸拆借利率飙升→做空者借不到钱、成本飙升；</li>
+      <li><strong>第三道·宏观审慎工具：</strong>上调远期售汇风险准备金→银行成本转嫁企业→恐慌购汇、投机做空成本变高；上调宏观审慎参数→鼓励境外发债结汇买入人民币对冲；</li>
+      <li><strong>第四道·资本管制加码：</strong>打击地下钱庄、对敲、飞单换汇（副作用伤信心，只在压力大时用）；</li>
+      <li><strong>第五道·真金白银下场：</strong>动用外汇储备（约3万多亿美元）卖美元买人民币——动用=情况危急。</li>
+    </ol>
+    <p><strong>财政配合（贬值）：</strong>扩大赤字、上项目、搞基建拉内需（汇率支撑的核心=经济基本面）；离岸发人民币国债（抽离岸流动性+给市场好资产）。货币财政配合=央行收流动性+给市场好资产。</p>
+  </div>
+
+  <!-- 第12章 -->
+  <div class="section" id="ch12">
+    <h2>十二、总结：人民币体系——动态、复杂的"生态圈"</h2>
+    <img src="assets/slides/slide_12.jpeg" alt="总结：人民币体系" class="slide-img">
+    <p><strong>人民币体系，是一个动态、复杂的"生态圈"。</strong>不要把它当"价格曲线"看，要当"生态"看：</p>
+    <ul>
+      <li><strong>参与者都在赚钱：</strong>除央行外，出口商、老百姓、银行、投资机构都是为"赚钱效应"而行动——<strong>让他挣不到钱，汇率就稳了</strong>；</li>
+      <li><strong>最脆弱点=信心的阈值：</strong>危险不在<strong>点位</strong>，而在<strong>速度和节奏</strong>——慢慢贬到10没事，一周从7贬到8就是大事；外储3万多亿 vs 基础货币，一旦信心崩了踩踏是拦不住的；</li>
+      <li><strong>体系内两方拉扯：</strong>出口商（囤美元惜售→供给少→更脆弱→自我强化死循环）vs 央行（控节奏）；央行是<strong>"节奏大师"</strong>——防单边扎堆押注、防滚雪球预期失控；</li>
+      <li><strong>核心交换：</strong>用汇率的<strong>空间</strong>换<strong>时间</strong>和政策操作余地（降息稳经济 vs 汇率贬）；<strong>缓慢、有节奏的可控贬值=当前现实的安全次优解</strong>；</li>
+      <li><strong>盯两样东西：</strong>① 市场情绪崩没崩；② 央行是否依然掌握主旋律。长远看汇率还是走贬值——现在适当贬拉经济，经济立起来后汇率自然回升。</li>
+    </ul>
+  </div>
+
+  <!-- 第13章 -->
+  <div class="section" id="ch13">
+    <h2>十三、本章小结：美元=成本，日元=胆量，人民币=分量</h2>
+    <img src="assets/slides/slide_13.jpeg" alt="本章小结" class="slide-img">
+    <p><strong>研究汇率，本质上是在研究"国运"与"全球资本的流向"。</strong></p>
+    <ul>
+      <li><strong>美元</strong>——告诉我们现在全球资金的<strong>"成本"</strong>在哪里；</li>
+      <li><strong>日元</strong>——告诉我们现在全球资金的<strong>"胆量"（风险偏好）</strong>有多大；</li>
+      <li><strong>人民币</strong>——则折射出中国资产在世界眼中的<strong>"吸引力"</strong>变化。</li>
+    </ul>
+    <p>看到汇率跳动时，不要只看数字，要看到背后<strong>央行政策的博弈、贸易流的变迁、全球风险情绪的起伏</strong>。</p>
+    <div class="key-point">
+      <p><strong>方法论：</strong>学宏观的价值不是记结论，而是把离散的知识点串成一个体系。建议从<strong>货币课→利率课→货币政策课→汇率课</strong>整体重搂一遍；下节课预告=美联储与央行工作的区别（汇率系列最后一节），随后进入货币政策总结，然后是宏观、美林时钟、CPI/PPI/PMI。</p>
+    </div>
+  </div>
+
+  <!-- 知识卡片：专业版 -->
+  <div class="section">
+    <h2>课程知识卡片（专业版）</h2>
+    <p>以下为课程配套的专业版知识卡片，标题为"货币政策第14期：汇率（7）——日元与人民币体系：全球资产的联动与博弈"，汇总了本期核心知识点的完整框架。</p>
+    <img src="assets/knowledge-card-pro.jpg" alt="知识卡片专业版" class="slide-img" style="max-width: 100%; height: auto; cursor: pointer;" title="双击替换图片">
+    <h3>专业版卡片文字摘要</h3>
+    <ul>
+      <li><strong>知识点1：驱动日元变化的三大核心力量。</strong><strong>利差与套息（核心变量）</strong>：美日利差拉开，借低息日元买高息美元资产的"套息交易"繁荣，日元被系统性抛售走弱，构成日元的趋势方向。<strong>风险情绪（调节变量）</strong>：日元避险货币属性，Risk-On时日元弱、Risk-Off时套息平仓日元强，构成短期摆动。<strong>贸易条件与能源（结构变量）</strong>：日本是能源进口国，油价气价上涨恶化经常账户，构成中长期贬值压力。<strong>实践运用</strong>：判断日元方向先看美日利差，再看全球风险情绪，最后叠加能源价格，三层变量由主到次。</li>
+      <li><strong>知识点2：日元强弱周期的全球资产映射。</strong><strong>日元走弱</strong>：一阶利好出口型企业（海外利润折算增厚）、理论利空日债（输入型通胀抬长端利率）但短期被YCC托底、利好房地产与旅游；二阶带来全球套息繁荣（日元=世界提款机）、外储干预的美债连锁反应、日本家庭"资产觉醒"（渡边太太搬存款入市）、亚洲竞争性贬值。<strong>日元走强</strong>：一阶利空出口股、压制通胀；二阶触发全球套息大拆仓（抛售全球资产换日元还债的恶性螺旋）、"长钱"对冲成本上升（美债最大买家减持→推高美债收益率→美国融资成本升）、重回通缩心态与产业空心化。<strong>实践运用</strong>：日元与日经225长期负相关（日元贬→日股涨），但若日本财政严重失衡、主权信用受疑，相关性脱敏，可能出现债汇双杀甚至股债汇三杀——不能当铁律。</li>
+      <li><strong>知识点3："不可能之三角"与中国政策选择。</strong>资本自由进出、货币政策独立、汇率固定——三者只能选其二。<strong>中国选择</strong>：独立的货币政策+有管理的浮动汇率，放弃资本完全自由流动，底层约束=资本账户管制。因此QDII额度、逆周期因子、外汇风险准备金等汇率工具，本质都是在资本管制框架内调节流量的"阀门"。<strong>实践运用</strong>：理解"阀门"逻辑，才能看懂央行每次工具操作背后的真实意图（防单边、防无序）。</li>
+      <li><strong>知识点4：人民币贬值周期的风险与应对。</strong>最危险的二阶效应是"<strong>资本外逃-贬值预期</strong>"的死亡螺旋（贬值→恐慌换汇→外储下降→更恐慌）。央行组合拳由软到硬五道防线：<strong>预期管理</strong>（逆周期因子调中间价）→<strong>抽干离岸流动性</strong>（香港发央票抬升拆借利率）→<strong>宏观审慎</strong>（远期售汇风险准备金+宏观审慎参数）→<strong>资本管制加码</strong>（打击地下钱庄/对敲）→<strong>央行下场</strong>（动用外储抛美元买人民币）。<strong>实践运用</strong>：央行核心目标不是守某个点位，而是<strong>管理贬值的速度与节奏</strong>——用"汇率有限空间"换"降息稳经济的政策时间"，缓慢有序的贬值才是当前现实的安全次优解。</li>
+      <li><strong>知识点5：人民币与A股、H股的相关性。</strong><strong>A股弱相关</strong>：A股以内资为主、人民币计价，投资者看国内政策/流动性/监管，汇率只是背景板；外资占比小且专门研究政策；升值对不同企业利弊在指数层面抵消；资本管制是"隔音棉"。<strong>H股正相关</strong>：港币/美元计价，升值①利润折算增厚②外资同时买人民币和H股（港股不管制）；联系汇率锚定美元。<strong>AH溢价</strong>：A股贵=风险偏好强+本地流动性充沛+拥挤；H股便宜=全球资金对中国风险定价+人民币长期预期。<strong>实践运用</strong>：别拿人民币当A股交易信号；买H股看的是"中国资产在全球眼中的定价"。</li>
+      <li><strong>课程总结</strong>：日元是<strong>全球风险偏好的晴雨表与放大器</strong>——套息交易使其顺周期（风险偏好高时弱），危机大拆仓使其逆周期（恐慌时急升）；人民币是<strong>"不可能三角"下以稳定为核心的管理体系</strong>——核心任务不是守点位，而是打破单边贬值预期、防止"信心崩盘"式的死亡螺旋。美元决定全球资本的成本，日元决定全球资本的胆量，人民币折射中国资产在全球眼中的分量。</li>
+    </ul>
+  </div>
+
+  <!-- 知识卡片：极简版 -->
+  <div class="section">
+    <h2>课程知识卡片（极简版）</h2>
+    <p>以下为极简版知识卡片（副标题：拆解日元和人民币，看懂大国博弈的底牌），用问答形式快速回顾核心概念。</p>
+    <img src="assets/knowledge-card-mini.jpg" alt="知识卡片极简版" class="slide-img" style="max-width: 100%; height: auto; cursor: pointer;" title="双击替换图片">
+    <h3>极简版卡片文字摘要</h3>
+    <ul>
+      <li><strong>Q：为什么全世界都爱"借日元"？</strong><br>
+      A：因为日元利息几乎为零，是全球最便宜的"提款机"。借了日元不花，换成美元去买收益更高的资产，赚中间的差价——这招叫"<strong>套息交易</strong>"。借的人越多，日元就越被抛售、越贬值。</li>
+      <li><strong>Q：日元越弱越好吗？</strong><br>
+      A：对日本出口企业、对全球股市短期是好事；但日元贬太狠，全球借日元炒股的人一旦遇到风吹草动，会被迫卖掉股票换回日元还债，日元反而急升、全球踩踏。<strong>日元像一个被压紧的弹簧</strong>，平时压得越狠，弹起来越吓人。</li>
+      <li><strong>Q：中国为什么不放开资本自由进出？</strong><br>
+      A：因为"<strong>不可能三角</strong>"——资本自由进出、货币政策独立、汇率稳定，三者只能要两个。中国要的是"货币政策我说了算+汇率别乱飞"，那就必须把资本流动管起来。放开管制，就等于把自己变成第二个日本。</li>
+      <li><strong>Q：人民币贬值时，央行有什么秘密武器？</strong><br>
+      A：层层加码：<strong>初级</strong>=喊话+调中间价（预期管理）；<strong>进阶</strong>=在香港发央票，把离岸人民币收干，做空的人借不到钱、成本飙升；<strong>终极大招</strong>=动用约3万亿美元外汇储备下场，你卖多少我买多少——"你敢卖，我就敢买"。</li>
+      <li><strong>Q：人民币贬值，A股就一定会跌吗？</strong><br>
+      A：<strong>不是一回事。</strong>A股是"自己人玩"的市场，看国内政策、央行放水；港股才是国际资本的主战场——人民币升值时，外资既买人民币、又买港股，所以人民币和港股更"同频"，和A股关系反而很弱。</li>
+      <li><strong>Q：央行守的是7.2还是7.5？</strong><br>
+      A：<strong>都不是。</strong>央行最怕的不是某个点位，而是"<strong>雪崩式</strong>"的单边下跌预期——慢慢贬没事，一周崩一大截就是大事。它宁愿用"小幅、有序、可预期的贬值"，去换"降息稳经济的操作空间"。这是用汇率的空间换政策的时间。</li>
+      <li><strong>爆姐金句：</strong>"美元决定了全球资本的成本，日元决定了全球资本的胆量，而人民币则折射出中国资产在全球眼中的分量。"看汇率，不要只看数字，要看背后各国央行的博弈、贸易的流向，和全球风险情绪的起伏。</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    小爆姐宏观框架课 · 第14期 · 内部学习资料
+  </div>
+</div>
+</body>
+</html>

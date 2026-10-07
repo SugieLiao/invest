@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>251228中美央行差异（上）</title>
+<script src="/shared/nav.js?v=5" defer></script>
+<script src="/shared/edit.js?v=20260930a" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header .meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.header .intro {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.header .minutes-link {
+  display: inline-block;
+  margin-top: 14px;
+  background: #eef4fb;
+  color: #2b6cb0;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.header .minutes-link:hover {
+  background: #dbe9f7;
+}
+.toc {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.toc h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2329;
+}
+.toc ol {
+  padding-left: 20px;
+}
+.toc li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.toc a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2329;
+  border-left: 4px solid #2b6cb0;
+  padding-left: 12px;
+}
+.section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #2d3748;
+}
+.section p {
+  margin-bottom: 12px;
+  color: #374151;
+  font-size: 15px;
+}
+.section ul, .section ol {
+  margin: 12px 0 12px 24px;
+}
+.section li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 15px;
+}
+.highlight {
+  background: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+}
+.highlight p {
+  color: #744210;
+  margin-bottom: 0;
+}
+.key-point {
+  background: #eef4fb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.key-point p {
+  color: #2b4c7e;
+  margin-bottom: 0;
+}
+.slide-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: top;
+}
+th {
+  background: #f5f5f7;
+  font-weight: 600;
+  color: #1f2329;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>251228中美央行差异（上）</h1>
+    <div class="meta">小爆姐宏观框架课 · 第15期 · 中美央行差异（上） · 2025-12-28 · 约117分钟 · 16帧</div>
+    <p class="intro">
+      本期是货币政策系列的<strong>插播课（上）</strong>，把<strong>美联储</strong>与<strong>中国央行</strong>两套完全不同的制度与行为逻辑并排拆开：
+      从<strong>权力来源（契约 vs 使命）</strong>、<strong>决策风格（数据依赖 vs 跨周期调节）</strong>、<strong>目标函数（线性极值 vs 多维博弈）</strong>、
+      <strong>中性利率（算出来 vs 引导出来）</strong>、<strong>预判眼镜（看数据 vs 看政策底）</strong>、<strong>传导机制（金融市场优先 vs 银行信贷优先）</strong>、
+      到<strong>放水逻辑（牵马到河 vs 水管到田）</strong>与<strong>当前困局（美元潮汐 vs 中国脉冲）</strong>，
+      最后落到一句方法论：<strong>看美国看数据，看中国看"政策底"、抠字眼</strong>。下期讲下半部分，再进入货币政策总结课。
+    </p>
+    <a class="minutes-link" href="https://ycnh1a1mbep0.feishu.cn/minutes/obcnhgown8sg23s3c2x3w53n" target="_blank">飞书妙记逐字稿</a>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">开场：货币政策三块拼图与本节定位</a></li>
+      <li><a href="#ch2">权力来源：美联储的"契约" vs 中国央行的"使命"</a></li>
+      <li><a href="#ch3">决策风格：数据依赖 vs 跨周期调节</a></li>
+      <li><a href="#ch4">中国央行：多目标平衡与"择机行事"</a></li>
+      <li><a href="#ch5">两国各自的"难题"：财政主导 vs 金融供给侧改革</a></li>
+      <li><a href="#ch6">目标函数：线性极值题 vs 多维博弈棋局</a></li>
+      <li><a href="#ch7">美联储解题：数据依赖的"钢铁直男"</a></li>
+      <li><a href="#ch8">中国央行解题：多目标平衡的"平衡大师"</a></li>
+      <li><a href="#ch9">中性利率：算出来的 vs 引导出来的</a></li>
+      <li><a href="#ch10">两副眼镜：看数据 vs 看"政策底"</a></li>
+      <li><a href="#ch11">传导机制：金融市场优先 vs 银行信贷优先</a></li>
+      <li><a href="#ch12">放水逻辑：牵马到河 vs 水管到田</a></li>
+      <li><a href="#ch13">美联储货币传导路径：财富效应的赌局</a></li>
+      <li><a href="#ch14">中国央行货币传导路径：信贷的洪流</a></li>
+      <li><a href="#ch15">美元潮汐 vs 中国脉冲：从黄金搭档到相互掣肘</a></li>
+      <li><a href="#ch16">总结：两套循环系统与收尾</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section" id="ch1">
+    <h2>一、开场：货币政策三块拼图与本节定位</h2>
+    <img src="assets/slides/slide_01.jpeg" alt="货币政策第15期封面" class="slide-img">
+    <p>小爆姐开场说明课程结构：货币政策的内容分三块——<strong>货币、利率、汇率</strong>。汇率系列已经讲完，本节是<strong>插播课</strong>，专门讲"中美央行差异"，分<strong>上下两节</strong>：</p>
+    <ul>
+      <li><strong>本节（上）：</strong>讲清楚两家央行<strong>制度底色、行为模式、目标函数</strong>的根本差异；</li>
+      <li><strong>下节：</strong>继续讲下半部分，随后进入<strong>货币政策总结课</strong>，把三块拼图串成整体。</li>
+    </ul>
+    <p>为什么要专门插播这一课？因为理解了<strong>美联储与中国央行是两种完全不同的"物种"</strong>，才能解释过去十几年里"为什么美国一放水全球资产就涨、中国放水却总要"精准滴灌""这一系列现象。</p>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section" id="ch2">
+    <h2>二、权力来源：美联储的"契约" vs 中国央行的"使命"</h2>
+    <img src="assets/slides/slide_02.jpeg" alt="中美央行：权力来源" class="slide-img">
+    <p>要理解一家央行的行为模式，<strong>首先要问：它的权力从何而来？</strong>两家央行的权力底色完全不同：</p>
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:40%">美联储</th><th style="width:40%">中国央行</th></tr>
+      <tr><td><strong>权力底色</strong></td><td><strong>"契约"</strong>——权力来自法律授权与制度契约</td><td><strong>"使命"</strong>——权力来自国家治理的使命要求</td></tr>
+      <tr><td><strong>法律基础</strong></td><td>《联邦储备法》：法定任务只有两个——<strong>稳就业 + 稳通胀</strong></td><td>国务院组成部委，在<strong>中央金融委员会</strong>顶层设计下运行</td></tr>
+      <tr><td><strong>对谁负责</strong></td><td>对法律负责，<strong>不向总统汇报</strong>（鲍威尔的独立性是公开例证）</td><td>金融是<strong>国家治理工具</strong>，是国家意志在金融体系中的传导执行者</td></tr>
+      <tr><td><strong>卖的是什么</strong></td><td><strong>卖"规则"而不是"政策"</strong>——规则不变，市场就信他</td><td>卖"方向"——阶段性战略目标驱动（出口创汇→去库存稳预期→金融强国/新质生产力）</td></tr>
+    </table>
+    <h3>为什么美联储要"独立"？——时间不一致性问题</h3>
+    <p>经济学里有一个著名的<strong>时间不一致性问题</strong>：如果把印钞权交给政客，政客为了眼前的选票会倾向于"先放水刺激、把通胀留给以后"，长期看信用必然破产。所以货币权力必须交给<strong>不参选、不讲政治、只看数据的经济学家</strong>——这就是央行独立的逻辑起点。</p>
+    <div class="key-point">
+      <p><strong>一句话框架：</strong>美联储是<strong>"政治绝缘体"</strong>，用规则换市场的信仰；中国央行是<strong>"国家治理的金融抓手"</strong>，用使命承接国家战略。权力底色不同，行为逻辑必然不同。</p>
+    </div>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section" id="ch3">
+    <h2>三、决策风格：数据依赖 vs 跨周期调节</h2>
+    <img src="assets/slides/slide_03.jpeg" alt="决策风格差异" class="slide-img">
+    <h3>美联储：数据依赖（Data Dependent）</h3>
+    <ul>
+      <li><strong>契约底色→程序正义：</strong>决策必须<strong>可被审计</strong>，每一步都要讲得出理由；</li>
+      <li><strong>理事任期14年</strong>，远超总统任期，制度上隔绝政治周期；</li>
+      <li><strong>缺点=滞后性：</strong>只认已发生的数据，宽松容易催泡沫、紧缩容易过度；</li>
+      <li><strong>对市场是红利：</strong>透明、可预期、可复制→美元资产获得<strong>"制度溢价"</strong>；</li>
+      <li><strong>行为准则：</strong>可以犯"方向错"，不能犯"越界错"——超出授权范围是最大的错。</li>
+    </ul>
+    <h3>中国央行：跨周期调节</h3>
+    <ul>
+      <li>任务清单很长（增长、物价、汇率、防风险、配合国债、防空转、引导资金入芯片高科技等），<strong>多目标叠加</strong>；</li>
+      <li><strong>"择机行事"：</strong>降准放水与严查资金违规入市可以并存，同一时期既松又紧，看的是结构性；</li>
+      <li><strong>结构化：</strong>从"大水漫灌"转向"精准滴灌"——工具箱里有PSL、科技再贷款、碳减排支持工具等定向工具；</li>
+      <li><strong>前瞻性强、纠错快：</strong>2020年全球放水，中国次年5月就边际收紧防空转，抢跑全球；</li>
+      <li><strong>政策博弈难度指数级：</strong>读政策通稿要抠字眼——<strong>措辞顺序、笔墨多少、是否单列一段、提了几次</strong>，都是信号。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>对比：</strong>美联储是"<strong>不见兔子不撒鹰</strong>"——没看到数据就不动；中国央行是"<strong>平衡大师</strong>"——永远在多目标之间动态找平衡，核心艺术在权衡。</p>
+    </div>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section" id="ch4">
+    <h2>四、中国央行：多目标平衡与"择机行事"</h2>
+    <img src="assets/slides/slide_04.jpeg" alt="中国央行多目标" class="slide-img">
+    <p>这一页把中国央行的任务清单完整展开：</p>
+    <ul>
+      <li><strong>增长、物价、汇率</strong>——传统三大目标；</li>
+      <li><strong>防风险、配合国债发行、防空转</strong>——金融稳定与财政配合目标；</li>
+      <li><strong>引导资金进入硬科技（芯片、高科技）</strong>——结构性/产业政策目标。</li>
+    </ul>
+    <h3>"择机行事"的含义</h3>
+    <p>目标太多且互相冲突时，就没有"教科书最优解"，只能<strong>择机</strong>：根据当下最紧迫的矛盾选择发力方向。例如同一时期可以"降准放水"的同时"严查资金违规入市"——这不是自相矛盾，而是<strong>总量宽松+结构管控</strong>的组合拳。</p>
+    <h3>为什么读政策要抠字眼？</h3>
+    <p>因为目标多、工具杂，<strong>措辞本身就是政策信号</strong>：</p>
+    <ol>
+      <li><strong>措辞顺序</strong>：把"稳汇率"放在"稳增长"前面还是后面，说明当期优先级；</li>
+      <li><strong>笔墨多少</strong>：哪个目标用了更多字数展开，哪个就是重点；</li>
+      <li><strong>是否单列一段</strong>：单列=升级，并入其他段落=降级；</li>
+      <li><strong>提的次数</strong>：同一表述反复出现，是在向市场"重复强调"。</li>
+    </ol>
+    <div class="key-point">
+      <p><strong>方法论：</strong>看中国央行，第一件事是<strong>数清楚他手里现在有几个目标、谁排在最前面</strong>——目标顺序变了，行为就变了。</p>
+    </div>
+  </div>
+
+  <!-- 第5章 -->
+  <div class="section" id="ch5">
+    <h2>五、两国各自的"难题"：财政主导 vs 金融供给侧改革</h2>
+    <img src="assets/slides/slide_05.jpeg" alt="中美央行各自面临的难题" class="slide-img">
+    <h3>美国的难题：正在进入"财政主导"，美联储"被动政治化"</h3>
+    <ul>
+      <li><strong>美国国债/GDP &gt; 120%</strong>，高利率下利息支出正在压垮财政；</li>
+      <li>财政赤字巨大→必须靠发债→利率不能太高（否则利息爆炸）→<strong>美联储被迫配合财政</strong>；</li>
+      <li>独立性被逐步蚕食：不是被法律剥夺，而是被<strong>现实约束"被动政治化"</strong>。</li>
+    </ul>
+    <h3>中国的难题：正在进行"金融供给侧改革"</h3>
+    <ul>
+      <li>旧体系依赖两条腿：<strong>房地产=信用扩张</strong>、<strong>外汇=资产锚定</strong>；现在两条腿都在换；</li>
+      <li>改革方向：从锚定房地产/外汇，转向<strong>锚定国债 + 实体产业信用</strong>；</li>
+      <li>金融资源被主动引导向<strong>产业升级、新质生产力、硬科技</strong>——中国央行是"主动把金融工具纳入国家治理工程"。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>宏观研究的本质：</strong>研究最有权力的那些人——<strong>想守住什么、怕失去什么</strong>。美国的权力中心现在怕财政爆炸，中国的权力中心现在想换引擎。</p>
+    </div>
+  </div>
+
+  <!-- 第6章 -->
+  <div class="section" id="ch6">
+    <h2>六、目标函数：线性极值题 vs 多维博弈棋局</h2>
+    <img src="assets/slides/slide_06.jpeg" alt="目标函数差异" class="slide-img">
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:40%">美联储</th><th style="width:40%">中国央行</th></tr>
+      <tr><td><strong>目标函数</strong></td><td><strong>线性极值题</strong>：就业 vs 通胀，找最优解</td><td><strong>多维博弈棋局</strong>：增长/物价/汇率/金融稳定/结构转型/财政配合互相冲突</td></tr>
+      <tr><td><strong>解题方式</strong></td><td>教科书式"大开大合"：加息一路加、降息一路降，直到通胀受控或衰退出现</td><td>无最优解，<strong>动态平衡=权衡的艺术</strong>，走走停停、细碎调整</td></tr>
+      <tr><td><strong>比喻</strong></td><td>钢铁直男看仪表盘开车</td><td>拿手术刀的医生</td></tr>
+      <tr><td><strong>利率形态</strong></td><td>大起大落，方向明确</td><td>细碎调整（降0.1个点都要预期很久）</td></tr>
+    </table>
+    <p><strong>现实约束：</strong>美国利率仍处于高位（3.5/3.75），<strong>锁死了中国的降息空间</strong>——利差倒挂下，中国不敢大幅降息，否则资本外流压力陡增。</p>
+    <p><strong>中国阶段目标会变：</strong>2015-16稳汇率 → 2017-18防风险 → 2020保就业 → 现在高质量发展、调结构、防空转。目标顺序一直在变，行为也随之切换。</p>
+  </div>
+
+  <!-- 第7章 -->
+  <div class="section" id="ch7">
+    <h2>七、美联储解题：数据依赖的"钢铁直男"</h2>
+    <img src="assets/slides/slide_07.jpeg" alt="美联储解题：钢铁直男" class="slide-img">
+    <p>美联储的DNA里写着一句话：<strong>失业率和通胀率此消彼长</strong>。解题思路非常"直男"：</p>
+    <ul>
+      <li><strong>只认数据：</strong>非农、CPI、PCE通胀率，数据到了才动；</li>
+      <li><strong>开卷考试：</strong>规则透明、路径可预期，市场几乎可以抄作业；</li>
+      <li><strong>大开大合：</strong>通胀高就一路加息（哪怕美股跌20%也不停），衰退来了就一路降息；</li>
+      <li><strong>滞后性风险：</strong>因为只盯已发生的数据，宽松容易吹泡沫、紧缩容易下重手——2021-2022年的通胀就是"太晚行动"的代价。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>实操口诀：</strong>预测美联储=盯数据（非农、CPI、PCE），<strong>不要盯政客表演</strong>。通胀高位时，美股跌20%也可能继续加息——数据说了算，市场情绪不算。</p>
+    </div>
+  </div>
+
+  <!-- 第8章 -->
+  <div class="section" id="ch8">
+    <h2>八、中国央行解题：多目标平衡的"平衡大师"</h2>
+    <img src="assets/slides/slide_08.jpeg" alt="中国央行解题：平衡大师" class="slide-img">
+    <p>中国央行没有"单一最优解"，它的解题动作是<strong>在所有目标之间找平衡</strong>：</p>
+    <ul>
+      <li><strong>总量工具+结构工具并用：</strong>降准降息（总量）与PSL、科技再贷款、碳减排工具（结构）同时在场；</li>
+      <li><strong>动态再平衡：</strong>今天保增长、明天防风险、后天防空转，优先级随形势切换；</li>
+      <li><strong>跨周期调节：</strong>不只看当下，还看下一个周期的"后遗症"——所以2020年全球放水时，中国次年就边际收紧防空转；</li>
+      <li><strong>政策底思维：</strong>防风险优先时，经济下滑也不会无条件强刺激——"不刺激"本身就是一种态度。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>政策底什么时候出现？</strong>当<strong>多目标极端冲突、系统性风险即将爆发</strong>时，政策会来得<strong>非常快、非常重</strong>——案例：2024年"924"那一波。政策底出现之前，市场只能熬。</p>
+    </div>
+  </div>
+
+  <!-- 第9章 -->
+  <div class="section" id="ch9">
+    <h2>九、中性利率：算出来的 vs 引导出来的</h2>
+    <img src="assets/slides/slide_09.jpeg" alt="中性利率R-star" class="slide-img">
+    <p>中性利率（R-star）——既不让经济过热、也不让经济过冷的利率水平。两家央行对它的态度截然相反：</p>
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:40%">美联储</th><th style="width:40%">中国央行</th></tr>
+      <tr><td><strong>中性利率是什么</strong></td><td><strong>算出来的</strong>：由人口结构、生产率等长期变量决定，客观存在</td><td><strong>引导出来的</strong>：利率是资源配置的指挥棒，可以主动塑造</td></tr>
+      <tr><td><strong>对市场的态度</strong></td><td>顺应市场，中性利率只能<strong>发现、寻找</strong>，不能对抗</td><td><strong>改造市场</strong>：不满足于接受中性利率，用利率数量、价格双轨控制改变经济结构</td></tr>
+      <tr><td><strong>操作逻辑</strong></td><td>把政策利率调到中性利率附近</td><td>先定5%增长目标，货币配合——<strong>目标定利率，而不是利率定目标</strong></td></tr>
+      <tr><td><strong>微观体现</strong></td><td>—</td><td>不想要的方向借不到钱（实际利率≈无限大）；想要的方向用定向工具压成本</td></tr>
+    </table>
+    <div class="key-point">
+      <p><strong>本质差异：</strong>美联储把利率当<strong>"结果"</strong>（经济状态的反映）；中国央行把利率当<strong>"工具"</strong>（引导资源流向的指挥棒）。一个顺应市场，一个改造市场。</p>
+    </div>
+  </div>
+
+  <!-- 第10章 -->
+  <div class="section" id="ch10">
+    <h2>十、两副眼镜：看数据 vs 看"政策底"</h2>
+    <img src="assets/slides/slide_10.jpeg" alt="两副不同的眼镜" class="slide-img">
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:40%">预判美联储</th><th style="width:40%">预判中国央行</th></tr>
+      <tr><td><strong>目标函数</strong></td><td>做"<strong>复位</strong>"——让经济回归均值（钟摆）</td><td>做"<strong>换代</strong>"——对经济体系进行换代（外科手术）</td></tr>
+      <tr><td><strong>预判核心</strong></td><td><strong>看数据</strong></td><td><strong>看最不能失守的底线</strong></td></tr>
+      <tr><td><strong>紧盯指标</strong></td><td>非农、CPI、PCE通胀率</td><td>"<strong>政策底</strong>"</td></tr>
+    </table>
+    <h3>看美联储：核心看数据，不看政客表演</h3>
+    <ul>
+      <li>通胀高位时，美股跌20%也可能加息——<strong>数据决定，情绪不算</strong>；</li>
+      <li>美联储的每一步都写在数据里，跟着数据走就是跟着美联储走。</li>
+    </ul>
+    <h3>看中国央行：核心看"底线"和"政策底"</h3>
+    <ul>
+      <li><strong>看最不能失守的底线</strong>：防风险优先时，经济下滑也不无条件强刺激；</li>
+      <li><strong>政策底出现=多目标极端冲突/系统性风险即将爆发</strong>，此时政策会非常快、非常重（2024年924案例）；</li>
+      <li>政策底之前：市场只能熬，别急着抄底。</li>
+    </ul>
+  </div>
+
+  <!-- 第11章 -->
+  <div class="section" id="ch11">
+    <h2>十一、传导机制：金融市场优先 vs 银行信贷优先</h2>
+    <img src="assets/slides/slide_11.jpeg" alt="货币传导机制差异" class="slide-img">
+    <p>钱走的是完全不同的路——这是两家央行最"技术"也最本质的差异：</p>
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:40%">美联储</th><th style="width:40%">中国央行</th></tr>
+      <tr><td><strong>传导核心</strong></td><td><strong>"金融市场"优先</strong></td><td><strong>"银行体系"传导</strong></td></tr>
+      <tr><td><strong>机制</strong></td><td>用"<strong>资产的价格</strong>"拉动经济</td><td>用"<strong>信贷的方向</strong>"塑造经济</td></tr>
+      <tr><td><strong>路径</strong></td><td>降息→钱直接进股市债市→资产价格↑→账面财富↑→消费信心→需求→企业盈利→就业（<strong>财富效应</strong>）</td><td>基础货币经"金融机构再贷款"进银行体系→按指导方向放贷→信贷方向塑造经济结构</td></tr>
+      <tr><td><strong>特点</strong></td><td><strong>情绪先动、市场先嗨</strong>（羊群效应）</td><td><strong>结构先行、效果滞后</strong>（链条长）</td></tr>
+      <tr><td><strong>危机形态</strong></td><td>金融市场崩盘（财富链条断裂）</td><td>债务违约/信用断裂（风险积累在银行资产负债表）</td></tr>
+    </table>
+    <div class="key-point">
+      <p><strong>一句话：</strong>美国降息先富"持有资产的人"（账面富贵再外溢）；中国放水先走"银行信贷管道"，按方向放贷、效果慢但能调结构。看美国盯股市，看中国盯社融。</p>
+    </div>
+  </div>
+
+  <!-- 第12章 -->
+  <div class="section" id="ch12">
+    <h2>十二、放水逻辑：牵马到河 vs 水管到田</h2>
+    <img src="assets/slides/slide_12.jpeg" alt="中美央行截然不同的印钞观" class="slide-img">
+    <p>关于"放水"，两家截然不同：</p>
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:40%">美联储——"牵马到河边"</th><th style="width:40%">中国央行——"水管子直插田头"</th></tr>
+      <tr><td><strong>生意模式</strong></td><td><strong>批发商生意</strong>：买国债投放基础货币、压住拆借利率后收工</td><td><strong>管到零售端</strong>：批发价、批发量、货送给谁都要管</td></tr>
+      <tr><td><strong>核心控制</strong></td><td>货币的"<strong>价格</strong>"</td><td>信贷的"<strong>数量</strong>"和"<strong>方向</strong>"</td></tr>
+      <tr><td><strong>押注/依靠</strong></td><td>押注市场的<strong>贪婪、情绪与"自发配置"能力</strong>——完全市场化</td><td>依靠<strong>体制执行力 + 行政协调</strong>（窗口指导、MPA考核、定向再贷款/再贴现、信贷占比要求）</td></tr>
+      <tr><td><strong>效果</strong></td><td>效率高、易催泡沫</td><td>见效慢，但能调结构</td></tr>
+    </table>
+    <div class="highlight">
+      <p><strong>本质：</strong>美联储只控制"价格"（利率），把资金去向交给市场自己配置；中国央行连"方向"都要管——这是两种完全不同的<strong>国家-市场关系</strong>。</p>
+    </div>
+  </div>
+
+  <!-- 第13章 -->
+  <div class="section" id="ch13">
+    <h2>十三、美联储货币传导路径：财富效应的赌局</h2>
+    <img src="assets/slides/slide_13.jpeg" alt="美国传导路径：财富效应链条" class="slide-img">
+    <p>把美联储的传导链条展开：</p>
+    <ol>
+      <li><strong>降息 → 美债收益率↓ → 折现率↓</strong> → 风险资产估值↑（股票、房子）</li>
+      <li><strong>资产价格↑ → 账面财富↑</strong> → 有钱人敢花 → 消费↑</li>
+      <li><strong>消费↑ → 企业盈利↑ → 就业↑</strong> → 经济循环继续</li>
+    </ol>
+    <h3>三个关键判断</h3>
+    <ul>
+      <li><strong>股市楼市是必经之路，不是副产品：</strong>美联储的宽松必须先把资产价格打上去，财富效应才启动——所以<strong>美联储对美股高度敏感</strong>；</li>
+      <li><strong>前置条件=资产价格不能塌：</strong>如果股市系统性崩盘（财富效应被掐断），利率降到0也带不起经济；</li>
+      <li><strong>美股不只是晴雨表，是发动机本身。</strong></li>
+    </ul>
+    <h3>副作用：财富分配</h3>
+    <p>放水→<strong>先到持有资产的有钱人，再通过溢出效应到穷人</strong>→基尼系数被放大。"先制造账面富贵、再等它外溢"是美联储放水的标准路径。</p>
+  </div>
+
+  <!-- 第14章 -->
+  <div class="section" id="ch14">
+    <h2>十四、中国央行货币传导路径：信贷的洪流</h2>
+    <img src="assets/slides/slide_14.jpeg" alt="中国旧模式与当前困境" class="slide-img">
+    <h3>旧模式：信用驱动、投资拉动</h3>
+    <ol>
+      <li>央行投放 → 窗口指导 → <strong>地方/国企/开发商</strong>拿到钱；</li>
+      <li>投向<strong>基建、地产</strong> → 工资+物料 → GDP快速拉升；</li>
+      <li><strong>核心观测指标=社融</strong>（增量信用）：社融增速同比拐头 → 周期股提前动。</li>
+    </ol>
+    <p>央行财政手拉手能迅速拉GDP，但<strong>饮鸩止渴</strong>。</p>
+    <h3>致命伤：必须有人愿意借钱、且还得起</h3>
+    <ul>
+      <li>现在<strong>房地产见顶 + 地方平台空间锁死</strong> → 没人借 → <strong>宽货币、紧信用</strong>；</li>
+      <li>钱在体系里<strong>空转</strong> → 银行买国债 → 前两年国债火爆（机构是大头）；</li>
+      <li>现状= <strong>资产荒 + 流动性陷阱</strong>：钱多，但没有能产生回报的资产、也没有愿意加杠杆的主体。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>为什么"放水没用"？</strong>美国放水靠市场自己找去处（牵马到河）；中国放水要靠"水管到田"，但田里没人要水——信用创造不出来，流动性就困在银行体系里。</p>
+    </div>
+  </div>
+
+  <!-- 第15章 -->
+  <div class="section" id="ch15">
+    <h2>十五、美元潮汐 vs 中国脉冲：从黄金搭档到相互掣肘</h2>
+    <img src="assets/slides/slide_15.jpeg" alt="碰撞和撕裂：美元潮汐遇见中国脉冲" class="slide-img">
+    <h3>以前：顺周期共振——黄金搭档</h3>
+    <p><strong>美国负责输出"流动性"，中国负责输出"增长"。</strong>2002-2012年左右，两家配合默契：美国放水提供全球资本，中国承接产能与需求，共同做大蛋糕。</p>
+    <h3>现在：结构性错位——碰撞、摩擦、相互掣肘</h3>
+    <ul>
+      <li><strong>卡住1：美元高息，锁住了中国降息空间</strong>——利差倒挂，中国货币政策施展不开；</li>
+      <li><strong>卡住2：中国自己的"老引擎"（地产）熄火了</strong>——旧的增长动能消失，新引擎还没长成；</li>
+      <li><strong>应对：</strong>用"降息 + 资本管制"，去硬顶美国的"货币紧缩"。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>投资含义：</strong>中美现在是"水和面"的关系——深度绑定又互相拉扯。<strong>不能单看一国</strong>：看美国的数据，看中国的政策底，两边合起来才是完整拼图。</p>
+    </div>
+  </div>
+
+  <!-- 第16章 -->
+  <div class="section" id="ch16">
+    <h2>十六、总结：两套循环系统与收尾</h2>
+    <img src="assets/slides/slide_16.jpeg" alt="课程总结" class="slide-img">
+    <h3>两套循环系统</h3>
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:40%">美国</th><th style="width:40%">中国</th></tr>
+      <tr><td><strong>系统核心</strong></td><td><strong>资本市场是心脏</strong>：心跳强→血液到全身；系统性风险=心脏骤停</td><td><strong>银行信贷体系是血管网络</strong></td></tr>
+      <tr><td><strong>慢性病</strong></td><td>—</td><td>血管硬化=银行惜贷；血管堵塞=钱在机构间空转；末端坏死=没人愿意借、没人消费</td></tr>
+      <tr><td><strong>信仰</strong></td><td>笃信<strong>财富效应</strong>：先制造账面富贵，再外溢</td><td>笃信<strong>筑巢引凤</strong>：先修路修厂搭产业链基建，再等回报</td></tr>
+      <tr><td><strong>时间观</strong></td><td>透支未来（先花钱后还）</td><td>挤压当下（内卷、先苦后甜）</td></tr>
+    </table>
+    <h3>收尾金句</h3>
+    <ul>
+      <li>中美是水和面的关系，<strong>深度绑定，投资不能单看一国</strong>；</li>
+      <li><strong>看美国看数据，看中国看"政策底"、抠字眼</strong>；</li>
+      <li>下节课讲<strong>中美央行差异（下）</strong>，随后进入<strong>货币政策总结课</strong>。</li>
+    </ul>
+  </div>
+
+  <!-- 知识卡片：专业版 -->
+  <div class="section">
+    <h2>课程知识卡片（专业版）</h2>
+    <p>以下为课程配套的专业版知识卡片，标题为"货币政策第15期：中美央行差异（上）——契约vs使命、财富效应vs结构引导"，汇总了本期核心知识点的完整框架。</p>
+    <img src="assets/knowledge-card-pro.jpg" alt="知识卡片专业版" class="slide-img" style="max-width: 100%; height: auto; cursor: pointer;" title="双击替换图片">
+    <h3>专业版卡片文字摘要</h3>
+    <ul>
+      <li><strong>知识点1：权力底色——契约 vs 使命。</strong><strong>美联储=契约</strong>：权力来自《联邦储备法》，法定任务仅稳就业+稳通胀，不向总统汇报，卖的是规则而非政策，规则不变市场就信他。<strong>中国央行=使命</strong>：国务院组成部委、在中央金融委员会顶层设计下运行，金融是国家治理工具，是国家意志在金融体系中的传导执行者，阶段性战略目标（出口创汇→去库存稳预期→金融强国/新质生产力）。<strong>实践运用</strong>：理解央行行为先问权力从何而来——美联储看法律边界，中国央行看国家战略方向。</li>
+      <li><strong>知识点2：决策风格——数据依赖 vs 跨周期调节。</strong><strong>美联储（不见兔子不撒鹰）</strong>：决策可被审计、程序正义，理事任期14年；缺点滞后性（宽松催泡沫、紧缩过度）；对市场是红利——透明可预期可复制，美元资产获制度溢价；可以犯方向错不能犯越界错。<strong>中国央行（平衡大师）</strong>：任务清单长且互相冲突，择机行事，结构化精准滴灌（PSL/科技再贷款/碳减排），前瞻性强纠错快（2020年全球放水、中国次年5月边际收紧防空转）；读政策通稿要抠字眼（措辞顺序/笔墨/是否单段/提的次数）。<strong>实践运用</strong>：美联储看数据到点才动，中国央行看目标优先级动态权衡。</li>
+      <li><strong>知识点3：传导机制——金融优先 vs 银行信贷优先。</strong><strong>美联储=金融市场优先</strong>：用资产价格拉动经济，情绪先动市场先嗨；<strong>中国央行=银行体系传导</strong>：用信贷方向塑造经济，结构先行效果滞后。美国危机=金融市场崩盘（财富链条断），中国风险=债务违约/信用断裂（风险积累在银行资产负债表）。<strong>实践运用</strong>：看美国盯股市（财富效应发动机），看中国盯社融（信用创造方向）。</li>
+      <li><strong>知识点4：放水逻辑——牵马到河 vs 水管到田。</strong><strong>美联储=牵马到河边</strong>：批发商生意，买国债投放基础货币压拆借利率后收工，完全市场化，押注市场贪婪与自发配置；<strong>中国央行=水管子直插田头</strong>：批发价/批发量/货送给谁都管（窗口指导+MPA考核+定向再贷款+信贷占比要求）。美联储控制价格、中国控制方向数量；效率高易泡沫 vs 见效慢能调结构。<strong>实践运用</strong>：市场化放水先富资产持有者，结构性放水慢但能换引擎。</li>
+      <li><strong>当前困境——美元潮汐 vs 中国脉冲（结构性错位）。</strong>过去<strong>顺周期共振</strong>：美国输出流动性、中国输出增长（黄金搭档2002-2012）；现在<strong>结构性错位</strong>：卡住1=美元高息锁住中国降息空间，卡住2=中国老引擎（地产）熄火；应对=降息+资本管制硬顶美国货币紧缩。<strong>资产荒+流动性陷阱</strong>：钱多但没有能产生回报的资产、没有愿意加杠杆的主体；政策"拧巴克制"，夹缝中求平衡。<strong>实践运用</strong>：别套美国大水漫灌资产普涨逻辑，核心是中国在换引擎、精准滴灌，钱流向硬科技/先进制造。</li>
+      <li><strong>课程总结</strong>：美联储=钢铁直男看仪表盘开车（数据依赖、大开大合、复位回归均值）；中国央行=拿手术刀的医生（多维权衡、换代手术、结构先行）。过去黄金十年（共振），现在掣肘困局（错位）。<strong>两副眼镜</strong>：看美联储看数据（非农/CPI/PCE），看中国央行看政策底、抠字眼（多目标极端冲突/系统性风险将至时政策会非常快非常重——2024年924案例）。</li>
+    </ul>
+  </div>
+
+  <!-- 知识卡片：极简版 -->
+  <div class="section">
+    <h2>课程知识卡片（极简版）</h2>
+    <p>以下为极简版知识卡片（副标题：扒一扒中美"央妈"的心思有何不同），用问答形式快速回顾核心概念。</p>
+    <img src="assets/knowledge-card-mini.jpg" alt="知识卡片极简版" class="slide-img" style="max-width: 100%; height: auto; cursor: pointer;" title="双击替换图片">
+    <h3>极简版卡片文字摘要</h3>
+    <ul>
+      <li><strong>Q：中美央行，权力性质有什么不同？</strong><br>
+      A：美联储像<strong>"六亲不认的裁判"</strong>——权力来自法律契约，只认稳就业、稳通胀两个任务，不向总统汇报；中国央行像<strong>"全能队长"</strong>——使命驱动，是国家意志的金融抓手，要管增长、物价、汇率、防风险、引导资金进硬科技，目标一大堆。</li>
+      <li><strong>Q：两家央行，谁更"稳"？</strong><br>
+      A：美联储是<strong>"数据控"</strong>——不见兔子不撒鹰，数据到了才动，大开大合（加息一路加、降息一路降）；中国央行是<strong>"平衡大师"</strong>——多目标之间动态权衡，走走停停、细碎调整，核心艺术在权衡。</li>
+      <li><strong>Q：放水之后，钱都去哪了？</strong><br>
+      A：美国走<strong>金融市场</strong>——降息→资产涨价→有钱人账面富贵→消费外溢（财富效应），所以美股是发动机本身；中国走<strong>银行信贷</strong>——水管到田，按指导方向放贷（基建、硬科技），结构先行、效果滞后，看社融。</li>
+      <li><strong>Q：为什么中国的刺激看起来这么"拧巴"？</strong><br>
+      A：因为<strong>被卡脖子</strong>——美元高息锁死降息空间、地产老引擎熄火，钱多但没人借（资产荒+流动性陷阱）。不是不想大水漫灌，是"水管到田但田里没人要水"。</li>
+      <li><strong>Q：怎么预测美联储和中国央行？</strong><br>
+      A：预测美联储<strong>盯非农、CPI、PCE</strong>，数据说了算、政客表演不算；预测中国央行<strong>读政府工作报告、抠字眼</strong>——措辞顺序、笔墨多少、是否单列一段、提了几次都是信号，还要盯"<strong>政策底</strong>"（多目标极端冲突、系统性风险将至时政策会来得非常快非常重）。</li>
+      <li><strong>爆姐金句：</strong>"美联储玩的是<strong>钟摆游戏</strong>（复位），中国央行做的是<strong>换代手术</strong>（换引擎）。"别把美国"放水→资产普涨"的逻辑套到中国——中国现在干的是精准滴灌、换引擎，钱流向硬科技和先进制造。</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    小爆姐宏观框架课 · 第15期 · 内部学习资料
+  </div>
+</div>
+</body>
+</html>

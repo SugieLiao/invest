@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>260201货币政策课程总结</title>
+<script src="/shared/nav.js?v=5" defer></script>
+<script src="/shared/edit.js?v=20260930a" defer></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2329;
+}
+.header .meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.header .intro {
+  color: #4b5563;
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.header .minutes-link {
+  display: inline-block;
+  margin-top: 14px;
+  background: #eef4fb;
+  color: #2b6cb0;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.header .minutes-link:hover {
+  background: #dbe9f7;
+}
+.toc {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.toc h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1f2329;
+}
+.toc ol {
+  padding-left: 20px;
+}
+.toc li {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.toc a {
+  color: #2b6cb0;
+  text-decoration: none;
+}
+.toc a:hover {
+  text-decoration: underline;
+}
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #1f2329;
+  border-left: 4px solid #2b6cb0;
+  padding-left: 12px;
+}
+.section .time {
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 12px;
+  color: #2d3748;
+}
+.section p {
+  margin-bottom: 12px;
+  color: #374151;
+  font-size: 15px;
+}
+.section ul, .section ol {
+  margin: 12px 0 12px 24px;
+}
+.section li {
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 15px;
+}
+.highlight {
+  background: #fffaf0;
+  border-left: 4px solid #ed8936;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+}
+.highlight p {
+  color: #744210;
+  margin-bottom: 0;
+}
+.key-point {
+  background: #eef4fb;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.key-point p {
+  color: #2b4c7e;
+  margin-bottom: 0;
+}
+.slide-img {
+  width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.card-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  display: block;
+}
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: top;
+}
+th {
+  background: #f5f5f7;
+  font-weight: 600;
+  color: #1f2329;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>260201货币政策课程总结</h1>
+    <div class="meta">小爆姐宏观框架课 · 第17期 · 货币政策总结 · 2026-02-01 · 约135分钟</div>
+    <p class="intro">
+      本期是货币政策系列的<strong>收官总结课</strong>。不讲复习，而是用一把"万能钥匙"——<strong>戈登增长模型（资产定价公式）</strong>，
+      把前16节课讲的货币政策全部串起来：资产价格由<strong>四大因子</strong>（当前现金流、增长率、无风险利率、风险溢价）共同决定，
+      货币政策正是通过同时影响这四个因子来调控资产价格。课程先用<strong>数字代入</strong>让你直观感受每个因子变化对资产价格的剧烈影响，
+      再复盘<strong>PSL（2015-2018）</strong>与<strong>924新政（2024）</strong>两个经典案例如何引发"分子分母共振"，
+      最后给出读货币政策的方法论：<strong>先判级别（决心+配套），再评效率（作用点+传导链）</strong>。
+      终极心法：<strong>分母定生死，分子定高低</strong>——识别并抓住分子分母共振的"王炸时刻"。
+    </p>
+    <a class="minutes-link" href="https://ycnh1a1mbep0.feishu.cn/minutes/obcniyt5n238s95vr99p7e9p" target="_blank">飞书妙记逐字稿</a>
+  </div>
+
+  <div class="toc">
+    <h3>课程目录</h3>
+    <ol>
+      <li><a href="#ch1">开场：为什么要学货币政策</a></li>
+      <li><a href="#ch2">核心定价工具：戈登增长模型与四大因子</a></li>
+      <li><a href="#ch3">数字代入：一个公式看懂资产价格</a></li>
+      <li><a href="#ch4">因子一：增长率——影响最剧烈，也最难改变</a></li>
+      <li><a href="#ch5">货币政策如何影响增长率</a></li>
+      <li><a href="#ch6">因子二：无风险利率——传导、极限与估值泡沫</a></li>
+      <li><a href="#ch7">因子三：风险溢价——主观与客观的八种风险</a></li>
+      <li><a href="#ch8">货币政策如何影响风险溢价（三种方式）</a></li>
+      <li><a href="#ch9">案例一：PSL棚改核动力——三因子共振</a></li>
+      <li><a href="#ch10">案例二：924新政——四因子全面共振</a></li>
+      <li><a href="#ch11">读政策方法论：先判级别，再评效率</a></li>
+      <li><a href="#ch12">终极心法：分母定生死，分子定高低</a></li>
+      <li><a href="#ch13">课程知识卡片（专业版）</a></li>
+      <li><a href="#ch14">课程知识卡片（极简版）</a></li>
+    </ol>
+  </div>
+
+  <!-- 第1章 -->
+  <div class="section" id="ch1">
+    <h2>一、开场：为什么要学货币政策</h2>
+    <div class="time">00:00 - 04:24</div>
+    <img src="assets/cards/pro_00.jpg" alt="货币政策第17期课程总结标题屏" class="card-img">
+    <p>小爆姐开场说明：今天是宏观框架课<strong>货币政策的最后一节总结课</strong>，前边已讲了<strong>16节、300多页PPT</strong>。总结课不讲复习，而是要用一个<strong>最简单、最直观的方法帮大家捅破窗户纸</strong>——回答"为什么要学货币政策、学货币政策到底有什么用"。</p>
+    <h3>课程目标</h3>
+    <ul>
+      <li>核心观点：<strong>货币政策对资产的影响非常大</strong>，做宏观配置、宏观大周期类配置，货币政策是必须啃下的硬骨头。</li>
+      <li>两种讲法：以前是"阐述+讲解"（逻辑型），今天是<strong>资产定价公式+代入数字</strong>（直观型），让你从数字变化上真实感受货币政策对资产价格的影响有多大。</li>
+      <li>课程纪律：讲解过程中不答疑（避免打断节奏），课后周一上午会员接龙提问，讲师在小黑板点对点答疑；要求学员跟上节奏、先听后问。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>本节定位：</strong>货币政策总结课 = 用"戈登增长模型"把前16节串成一个可执行的框架，掌握"货币政策 → 资产价格"的完整传导链路。</p>
+    </div>
+  </div>
+
+  <!-- 第2章 -->
+  <div class="section" id="ch2">
+    <h2>二、核心定价工具：戈登增长模型与四大因子</h2>
+    <div class="time">04:24 - 11:45</div>
+    <img src="assets/cards/pro_01.jpg" alt="知识点1：戈登增长模型及其四大因子" class="card-img">
+    <p>今天用的公式是<strong>戈登增长模型</strong>——专业说法是"恒定增长的股利贴现模型"，主要给"能稳定分红且分红增速稳定"的权益类资产做估值。</p>
+    <p><strong>特别提醒：</strong>这是一个为理解宏观传导逻辑而<strong>简化的"魔改版"模型</strong>，只能用来理解逻辑，<strong>千万不能在现实中直接套用公式给资产做绝对数值定价</strong>。</p>
+    <h3>核心公式</h3>
+    <div class="highlight">
+      <p><strong>资产价格 = [ 当前现金流 × (1 + 增长率) ] ÷ [ (无风险利率 + 风险溢价) − 增长率 ]</strong></p>
+    </div>
+    <h3>四大因子</h3>
+    <table>
+      <tr><th style="width:22%">因子</th><th style="width:18%">位置</th><th style="width:60%">含义</th></tr>
+      <tr><td><strong>当前现金流</strong></td><td>分子</td><td>资产当年的实际收益：股息、债券利息、房租租金。股价价差、房价涨幅等<strong>价差不属于现金流</strong>。</td></tr>
+      <tr><td><strong>增长率</strong></td><td>分子+分母</td><td>现金流的预期年化增长率。<strong>最重要</strong>：同时影响分子和分母（分子乘它变大，分母减它变小）。</td></tr>
+      <tr><td><strong>无风险利率</strong></td><td>分母</td><td>通常指<strong>十年期国债收益率</strong>。</td></tr>
+      <tr><td><strong>风险溢价</strong></td><td>分母</td><td>对风险资产所要求的额外补偿（如股票、房产、信用债存在本金亏损风险，需给补偿）。</td></tr>
+    </table>
+    <div class="key-point">
+      <p><strong>通俗理解：</strong>资产价格由这四个因子"共振"产生。记两个口诀——<strong>分子变大（现金流↑、增长率↑）= 涨基本面；分母变小（无风险利率↓、风险溢价↓）= 涨估值</strong>。</p>
+    </div>
+  </div>
+
+  <!-- 第3章 -->
+  <div class="section" id="ch3">
+    <h2>三、数字代入：一个公式看懂资产价格</h2>
+    <div class="time">11:45 - 14:53</div>
+    <img src="assets/cards/pro_02.jpg" alt="核心公式与四大因子详解" class="card-img">
+    <p>用"房子"举例，把数字带进公式感受每个因子的作用。基准情景：</p>
+    <table>
+      <tr><th style="width:30%">参数</th><th style="width:20%">数值</th><th style="width:50%">代入公式位置</th></tr>
+      <tr><td>房租（当前现金流）</td><td>12 万/年</td><td>分子 → 当前现金流</td></tr>
+      <tr><td>增长率</td><td>3%</td><td>分子+分母 → 增长率</td></tr>
+      <tr><td>无风险利率</td><td>2%</td><td>分母 → 无风险利率</td></tr>
+      <tr><td>风险溢价</td><td>4%</td><td>分母 → 风险溢价</td></tr>
+      <tr><td><strong>房价（结果）</strong></td><td><strong>412 万</strong></td><td>——</td></tr>
+    </table>
+    <p>由此可得：一个资产的价格，是<strong>四大因子共同共振</strong>的结果。接下来逐个因子讲：每个因子怎么影响价格，货币政策又怎么影响这个因子——完整传导链路就此打通。</p>
+    <div class="highlight">
+      <p><strong>价格驱动拆解：</strong>分子端（现金流变大、增长率放大分子）= <strong>基本面驱动</strong>；分母端（无风险利率/风险溢价变小、增长率缩小分母）= <strong>估值驱动</strong>。增长率最特别——它<strong>同时贡献两端</strong>。</p>
+    </div>
+  </div>
+
+  <!-- 第4章 -->
+  <div class="section" id="ch4">
+    <h2>四、因子一：增长率——影响最剧烈，也最难改变</h2>
+    <div class="time">14:53 - 20:56</div>
+    <img src="assets/cards/pro_03.jpg" alt="分子端与分母端：增长率同时贡献两端" class="card-img">
+    <p>其他条件不变，只改增长率，看房价变化：</p>
+    <table>
+      <tr><th style="width:34%">情景</th><th style="width:22%">增长率</th><th style="width:22%">房价</th><th style="width:22%">对比 412 万</th></tr>
+      <tr><td>经济走强</td><td>3% → <strong>5%</strong></td><td><strong>1260 万</strong></td><td>约 <strong>+200%</strong>（翻近3倍）</td></tr>
+      <tr><td>经济衰退</td><td>3% → <strong>-1%</strong></td><td><strong>170 万</strong></td><td>约 <strong>-60%</strong></td></tr>
+    </table>
+    <h3>为什么增长率影响最明显</h3>
+    <ul>
+      <li>公式里增长率<strong>既在分子又在分母</strong>：分子上"加上"增长率放大分子；分母上"减去"增长率缩小分母——上面变大、下面变小，除出来的数字被双重放大。</li>
+      <li>结论：增长率和资产价格<strong>正相关</strong>（同向变化）。经济基本面哪怕只有一个小小的变化，对资产价格的影响都是巨大的。</li>
+    </ul>
+    <h3>但增长率最难改变</h3>
+    <p>想提升增长率，必须改变<strong>经济本身</strong>——而降息等货币政策对经济只是<strong>间接推动</strong>。所以：<strong>基本面起来很难，但一旦起来，对整个资产价格的影响剧烈而长远</strong>。</p>
+    <div class="key-point">
+      <p><strong>一句话：</strong>增长率=分子分母双引擎，撬动价格最猛；但它是"慢变量"，要靠经济基本面的真实回升。</p>
+    </div>
+  </div>
+
+  <!-- 第5章 -->
+  <div class="section" id="ch5">
+    <h2>五、货币政策如何影响增长率</h2>
+    <div class="time">20:56 - 24:47</div>
+    <img src="assets/cards/pro_04.jpg" alt="货币政策影响四大因子（核心内容）" class="card-img">
+    <p>货币政策能否影响增长率？能，但走的是<strong>间接传导链</strong>。以房子为例：</p>
+    <h3>宽松（降息/降准/QE）的传导链</h3>
+    <ul>
+      <li>量化宽松 → <strong>基础货币供给增加</strong> → 借贷成本下降 → 促进投资和消费；</li>
+      <li>投资消费转好 → 企业收入增加 → 给员工发工资 → 居民收入增加；</li>
+      <li>收入增加 → <strong>间接推升房租增长率</strong> → 套进公式 → 资产价格上涨。</li>
+    </ul>
+    <h3>紧缩（加息/升准）的传导链</h3>
+    <ul>
+      <li>量化紧缩 → 基础货币供给减少 → 信贷成本上升 → 抑制投资和消费；</li>
+      <li>企业收入减少 → 居民收入减少 → <strong>降低房租增长率</strong> → 套进公式 → 资产价格下跌。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>核心：</strong>宽松的货币政策容易导致资产上涨、紧缩导致资产下跌——背后是完整的传导链路，不是市场情绪那么简单。货币政策直接影响现金流的增长率，而增长率在分子分母上都有，直接作用到资产价格。</p>
+    </div>
+  </div>
+
+  <!-- 第6章 -->
+  <div class="section" id="ch6">
+    <h2>六、因子二：无风险利率——传导、极限与估值泡沫</h2>
+    <div class="time">24:47 - 36:32</div>
+    <p>其他条件不变，只改无风险利率（10年期国债收益率）：</p>
+    <table>
+      <tr><th style="width:34%">情景</th><th style="width:22%">无风险利率</th><th style="width:22%">房价</th><th style="width:22%">对比 412 万</th></tr>
+      <tr><td>央行降息</td><td>2% → <strong>1%</strong></td><td><strong>618 万</strong></td><td>约 <strong>+50%</strong></td></tr>
+      <tr><td>央行加息</td><td>2% → <strong>5%</strong></td><td><strong>206 万</strong></td><td>约 <strong>-50%</strong>（腰斩）</td></tr>
+    </table>
+    <p>结论：无风险利率和资产价格<strong>负相关</strong>——加息资产跌、降息资产涨。</p>
+    <h3>降息如何传导到10年期国债收益率</h3>
+    <ul>
+      <li>央行降政策利率（<strong>7天逆回购利率</strong>）→ 银行间利率跟着下降；</li>
+      <li>银行拿到便宜钱 → 跑到国债市场<strong>套利</strong>（资金成本低、国债不违约，价差=无风险套利）；</li>
+      <li>买国债的银行增多 → <strong>国债价格抬升</strong> → 倒算回来国债收益率下降；</li>
+      <li>银行从短期限套到长期限（1年→3年→5年→10年），逐级传导，直到利差被"套平"——<strong>政策利率最终与10年期国债收益率基本拉平</strong>。</li>
+    </ul>
+    <h3>降息的极限：分母不能无限小</h3>
+    <ul>
+      <li>政策利率理论上最低到 <strong>0 或接近 0</strong>，再往下没有空间（日本负利率是"储蓄端"为负，政策利率从未为负）；</li>
+      <li>单靠降息缩小分母<strong>有限</strong>——降不动了，纯靠估值拉动就会形成<strong>估值泡沫</strong>；</li>
+      <li>要等<strong>长牛</strong>，必须等<strong>基本面（增长率）回升</strong>；降息降不动时，只能靠另外两个因子——增长率和风险溢价——动起来。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>推论：</strong>这就是全球资本市场如此关注央行降息/加息的原因——它直接决定资产价格的方向。但"单边降息"的力量有天花板，真正的行情需要分子（基本面）跟上。</p>
+    </div>
+  </div>
+
+  <!-- 第7章 -->
+  <div class="section" id="ch7">
+    <h2>七、因子三：风险溢价——主观与客观的八种风险</h2>
+    <div class="time">36:32 - 44:38</div>
+    <p>风险溢价是<strong>各种风险的集合</strong>，是四个因子中最复杂、最难量化的一个（涉及人性和市场情绪）。它<strong>不是算出来的</strong>——只有资产价格出来之后倒推，才知道里面包含了多少风险溢价，因此它是<strong>市场非理性波动的主要来源</strong>。</p>
+    <h3>主观类（我主观认为有风险）</h3>
+    <table>
+      <tr><th style="width:22%">类型</th><th style="width:78%">含义</th></tr>
+      <tr><td><strong>不确定性</strong></td><td>明确知道有风险，但不知道何时何地以何种方式发生（"知道自己不知道"）。</td></tr>
+      <tr><td><strong>风险偏好</strong></td><td>知道风险、知道承受能力，权衡后仍选择承受（"知道自己知道"）。</td></tr>
+      <tr><td><strong>认知偏差</strong></td><td>如"黄金永远涨""房子永远不跌"——不知道自己不知道（缺乏常识）。</td></tr>
+      <tr><td><strong>情绪偏差</strong></td><td>知道有风险仍管不住手、追涨杀跌——非理性行为，被情绪控制。</td></tr>
+    </table>
+    <h3>客观类（机制与市场结构）</h3>
+    <table>
+      <tr><th style="width:22%">类型</th><th style="width:78%">含义</th></tr>
+      <tr><td><strong>流动性</strong></td><td>变现的难易程度。钱多、好卖 → 流动性好 → 风险溢价低；钱少、卖不掉 → 风险溢价高。</td></tr>
+      <tr><td><strong>制度</strong></td><td>机构考核/机制影响行为：公募年底考核减仓；开放式指数基金完全按申赎驱动买卖。</td></tr>
+      <tr><td><strong>算法</strong></td><td>量化交易（趋势跟随）放大市场波动：涨时追涨、跌时杀跌。</td></tr>
+      <tr><td><strong>期限</strong></td><td>风险的放大器：时间越长、不确定性越高、风险溢价越高。</td></tr>
+    </table>
+    <div class="highlight">
+      <p><strong>关键：</strong>风险溢价=主观×客观多因素共振，无法预先量化 → 市场"没道理的涨跌"多源于此（如美债长期风险溢价上升 → 美债价格下跌、收益率上涨）。</p>
+    </div>
+  </div>
+
+  <!-- 第8章 -->
+  <div class="section" id="ch8">
+    <h2>八、货币政策如何影响风险溢价（三种方式）</h2>
+    <div class="time">44:38 - 1:08:14</div>
+    <p>先看数字：其他条件不变，只改风险偏好（风险溢价）。</p>
+    <table>
+      <tr><th style="width:34%">情景</th><th style="width:24%">风险溢价</th><th style="width:22%">房价</th><th style="width:20%">对比 412 万</th></tr>
+      <tr><td>大家更爱冒险</td><td>4% → <strong>3%</strong></td><td><strong>618 万</strong></td><td>约 <strong>+50%</strong></td></tr>
+      <tr><td>大家更保守</td><td>4% → <strong>8%</strong></td><td><strong>177 万</strong></td><td>约 <strong>-57%</strong></td></tr>
+    </table>
+    <p>结论：风险溢价和资产价格<strong>负相关</strong>。风险偏好越高（更爱冒险）→ 需要补偿越小 → 溢价越低 → 资产越贵。</p>
+    <h3>央行拿捏风险溢价的三种方式</h3>
+    <table>
+      <tr><th style="width:24%">方式</th><th style="width:42%">机制</th><th style="width:34%">特点</th></tr>
+      <tr><td><strong>①注入流动性</strong></td><td>QE/降准/逆回购把钱灌进市场 → 接盘的人变多 → 变现难度降低 → 解决"市场缺钱的焦虑" → 风险溢价下降</td><td><strong>立竿见影</strong>：喊大放水，资产立刻爆拉</td></tr>
+      <tr><td><strong>②降低不确定性</strong></td><td>央行喊话/预期管理/前瞻指引 → 把底牌亮出来 → 市场怕的是"不知道明天发生什么" → 信心像"手电筒"：路没变、坑没变，但恐惧减少 → 风险溢价下降</td><td>给的是<strong>预期和信心</strong>（信心比金坚）</td></tr>
+      <tr><td><strong>③压低无风险利率</strong></td><td>低利率/下场买国债 → 无风险收益太低 → 资金从安全区"挤"向风险区 → 风险资产价格被顶上去 → 风险溢价<strong>被动</strong>下降</td><td><strong>慢慢发酵</strong>：需逐级传导，动作不快</td></tr>
+    </table>
+    <h3>总结：宽松 vs 紧缩</h3>
+    <ul>
+      <li><strong>宽松</strong>（放水、降息、QE）→ 压低风险溢价 → 分母变小 → 资产价格容易上涨；</li>
+      <li><strong>紧缩</strong>（加息、抽水、QT）→ 风险溢价走扩 → 分母变大 → 资产价格下跌。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>典型案例：</strong>沃什上台主张紧缩（QT）→ 资产价格暴跌——理解了定价链路，就能对政策效果<strong>提前预判</strong>。更关键的一条：<strong>经济基本面差（分子差）时，只要央行疯狂放水压低分母，依旧能让资产"由熊转牛"</strong>——只是这是"分母端的红利吃掉分子端的利空"驱动的<strong>水牛/估值牛</strong>。</p>
+    </div>
+  </div>
+
+  <!-- 第9章 -->
+  <div class="section" id="ch9">
+    <h2>九、案例一：PSL棚改核动力——三因子共振</h2>
+    <div class="time">1:08:14 - 1:22:00</div>
+    <img src="assets/cards/pro_05.jpg" alt="实践运用：戴维斯双击" class="card-img">
+    <p><strong>PSL（抵押补充贷款）</strong>，江湖外号"<strong>棚改核动力</strong>"——结构性货币政策工具。2015-2018年，它推动三四线城市房价暴涨。用定价公式复盘：PSL让<strong>三个因子共振</strong>（只有无风险利率没变——因为它是结构性工具，不是全面降息）。</p>
+    <table>
+      <tr><th style="width:20%">因子</th><th style="width:80%">PSL 的传导</th></tr>
+      <tr><td><strong>当前现金流 ↑</strong></td><td>拆房子（真拆）→ 低价房源减少 → 但租房需求还在 → 净需求上升 → 租金底座上移 → 房租整体上涨 → 现金流变大</td></tr>
+      <tr><td><strong>增长率 ↑</strong></td><td>拆迁户手握几百万 → 抢房大军入市 → 房价房租有了进一步上涨的预期 → 增长率预期抬高</td></tr>
+      <tr><td><strong>风险溢价 ↓</strong></td><td>①不确定性降：国家队（超级买家）下场，大家有了"国家都来买"的底气；②风险偏好升：手里钱多"输得起"，求富心态；③情绪偏差升：踏空焦虑战胜理智，不管给不给补偿都要买</td></tr>
+    </table>
+    <p>结果：分子（现金流、增长率）与分母（风险溢价）<strong>全面共振</strong>，房价像飞了一样。连一个结构性工具都能对资产产生如此深远的影响——这正是货币政策威力的缩影。</p>
+    <div class="key-point">
+      <p><strong>复盘逻辑：</strong>PSL=国家给钱 → 拆迁户带钱入市买库存房 → 低端房源减少租金涨 + 上涨预期 + 国家队兜底信心 → 现金流↑、增长率↑、风险溢价↓，三箭齐发。</p>
+    </div>
+  </div>
+
+  <!-- 第10章 -->
+  <div class="section" id="ch10">
+    <h2>十、案例二：924新政——四因子全面共振</h2>
+    <div class="time">1:22:00 - 1:44:08</div>
+    <p>2024年9月24日，央行推出一揽子货币政策，让股市<strong>由熊转牛</strong>。它超越传统降息降准——让定价模型中的<strong>所有四个因子同步改变并共振</strong>。</p>
+    <table>
+      <tr><th style="width:20%">因子</th><th style="width:80%">924 的传导</th></tr>
+      <tr><td><strong>当前现金流 ↑</strong></td><td><strong>股票回购增持再贷款</strong>（央行低息给商行 → 商行借给上市公司/股东 → 回购+注销股票）→ 总股本减少 → 净利润不变但 EPS 被动升高 → 每股现金流上升</td></tr>
+      <tr><td><strong>增长率 ↑</strong></td><td>降准 0.5pct + 政策利率下调 → 引导 LPR/贷款利率下行 → 企业<strong>财务费用下降</strong> → 净利润被动上升 → 分红能力变强、可投资资金变多 → 市场对增长率的认知从悲观修正到中性甚至乐观</td></tr>
+      <tr><td><strong>无风险利率 ↓</strong></td><td>7天逆回购降 20BP（1.7%→1.5%）→ 带动10年期国债收益率中枢下移</td></tr>
+      <tr><td><strong>风险溢价 ↓</strong></td><td>①流动性：<strong>互换便利</strong>——机构用股票/ETF 换央行国债/央票，随时可质押融资 → 不再被迫砸盘卖股票 → 流动性焦虑解除；②不确定性：政治局会议把"稳股市"写入定调文件 + 配套工具 → 尾部风险消失；③风险偏好：明牌（回购增持再贷款 2.25% 成本 < 股息率 → 套利机会，激发贪婪）+ 暗牌（国家队兜底预期，压制恐惧）→ 风险偏好迅速翻转</td></tr>
+    </table>
+    <h3>为什么威力如此之大</h3>
+    <ul>
+      <li>回购注销直接抬升<strong>每股现金流</strong>（分子）；降息降准释放利润、抬高<strong>增长预期</strong>（分子+分母）；7天逆回购带动<strong>无风险利率下行</strong>（分母）；互换便利+政治局定调+明暗两张牌压缩<strong>风险溢价</strong>（分母）。</li>
+      <li>四因子全部共振 → <strong>分子分母同向利好</strong> → 股价脉冲式上涨（戴维斯双击：既涨估值也涨基本面）。</li>
+      <li>货币政策的威力不是三五天的情绪影响，而是<strong>改变定价因子的方向与强弱</strong>。</li>
+    </ul>
+    <div class="highlight">
+      <p><strong>核心认知：</strong>股市反转不是"谁喊了个口号"，而是一系列政策推动，根源在上游的货币政策——它是资产涨跌最重要的上游因素。</p>
+    </div>
+  </div>
+
+  <!-- 第11章 -->
+  <div class="section" id="ch11">
+    <h2>十一、读政策方法论：先判级别，再评效率</h2>
+    <div class="time">1:44:08 - 2:04:07</div>
+    <img src="assets/cards/pro_06.jpg" alt="判断级别与评估效率" class="card-img">
+    <p>面对庞杂的货币政策，读法分两步：<strong>先判断级别，再评估效力</strong>。</p>
+    <h3>第一步：判断级别——看决心 + 看配套</h3>
+    <table>
+      <tr><th style="width:20%">维度</th><th style="width:80%">判断要点</th></tr>
+      <tr><td><strong>决心</strong></td><td>"尽力而为"（常规喊话，如"保持流动性合理充裕"=正确的废话，市场无反应）vs "<strong>不惜一切代价</strong>"（央行行长亲自站台、拿出超常规工具、给出具体数字，如潘行长"首期5000亿，不够再5000亿，再不够第三个5000亿"=上不封顶的承诺）→ 超常规操作才能消灭不确定性风险溢价。</td></tr>
+      <tr><td><strong>配套</strong></td><td>央行"<strong>独角戏</strong>"（仅降息）vs "<strong>大合唱</strong>"（最高领导定调 + 央行降分母 + 财政拉分子）。央行单打独斗只能降分母（有限），解决不了分子（实体盈利能力）问题；多方协同才能把短暂反弹变成长期反转。</td></tr>
+    </table>
+    <h3>第二步：评估效率——看作用点 + 看传导链</h3>
+    <ul>
+      <li><strong>政策在动利率还是动流动性？</strong>动利率 → 压无风险利率 → 估值抬升；动流动性 → 压风险溢价。结构性工具只改善企业成本 → 偏分子端。</li>
+      <li><strong>资金流向生产端还是需求端？</strong>效果差的：流向生产端（间接）；效果好的：<strong>直达需求端</strong>（直接给到会马上买资产的人手里）——如 PSL 给拆迁户买房、924 给上市公司回购。</li>
+      <li><strong>传导链越短越好</strong>：链路长则摩擦大、力度打折；"精准投喂"式直达（最短链路）威力最大——形成<strong>真实买盘</strong>，还能间接改善分子端。</li>
+    </ul>
+    <h3>推绳子理论：为什么降息没效果</h3>
+    <p>现在绝大多数政策几乎都是单边（只降息），分母变小但<strong>分子端经济预期差、增长率被往下修</strong>——分子的悲观吃掉分母的利好，所以降息效果不大。<strong>拉绳子一拉就直，推绳子怎么都推不动</strong>。分子（基本面）和分母（流动性）一起向好，才会出现真正的"戴维斯双击"。</p>
+    <div class="key-point">
+      <p><strong>未来方向：</strong>结构性货币政策成为主流（中央经济工作会议、十五规划后仍是结构性工具）——必须<strong>追踪钱的最终流向</strong>，流向资产端才有效。</p>
+    </div>
+  </div>
+
+  <!-- 第12章 -->
+  <div class="section" id="ch12">
+    <h2>十二、终极心法：分母定生死，分子定高低</h2>
+    <div class="time">2:04:07 - 2:14:05</div>
+    <img src="assets/slides/cover.jpg" alt="课程课件：最后总结PPT画面" class="slide-img">
+    <p>为什么花这么大精力拆解货币政策？<strong>不是为了预判央行（那是神仙干的事），而是央行"出牌"时能第一时间看懂桌上的局势</strong>。</p>
+    <div class="highlight">
+      <p><strong>心法：分母定生死，分子定高低。</strong></p>
+    </div>
+    <ul>
+      <li><strong>分母定生死</strong>：流动性环境决定市场"有没有行情"。央行舍得放水、利率下降、风险溢价压缩，价格就可能起飞。</li>
+      <li><strong>分子定高低</strong>：经济基本面决定行情"走多高、走多远"。只有基本面跟上、增长率起来，才能涨得久、涨得多，成为长牛。</li>
+      <li><strong>大牛市 = 基本面和流动性共振</strong>（分子分母同向共振）——这就是"王炸时刻"。</li>
+    </ul>
+    <h3>投资动作</h3>
+    <ul>
+      <li><strong>识别它，抓住它</strong>——王炸时刻不会每天都来，人生抓住关键几次就足够（行情周期长）；</li>
+      <li><strong>躺平不下车</strong>——不要做短线、不要上蹿下跳，短期的波动根本不看；</li>
+      <li><strong>耐心等风停</strong>——何时结束？当公式里影响价格的关键指标发生<strong>逆转</strong>，行情就结束了。</li>
+    </ul>
+    <div class="key-point">
+      <p><strong>定位：</strong>这套框架通用、结论不通用——每项政策用了几成效率取决于微观传导路径，需一事一议。但有了框架就不会像无头苍蝇。货币政策系列至此讲完，下次课进入第二趴：宏观经济（会与货币政策勾稽起来讲）。</p>
+    </div>
+  </div>
+
+  <!-- 第13章 -->
+  <div class="section" id="ch13">
+    <h2>课程知识卡片（专业版）</h2>
+    <p>以下为课程配套的专业版知识卡片，标题为"货币政策第17期：课程总结——资产定价、货币政策与戈登增长模型"，汇总了本期核心知识点的完整框架。</p>
+    <img src="assets/knowledge-card-pro.jpg" alt="知识卡片专业版" class="card-img" style="max-width: 100%; height: auto; cursor: pointer;" title="双击替换图片">
+    <h3>专业版卡片文字摘要</h3>
+    <ul>
+      <li><strong>一、核心定价工具：戈登增长模型。</strong>知识点1：戈登增长模型及其四大因子。核心公式：资产价格=[当前现金流×(1+增长率)]÷[(无风险利率+风险溢价)-增长率]。四大因子：当前现金流（当年的实际收益，如股息/房租）、增长率（预期年化增长率，<strong>最重要</strong>——同时影响分子和分母）、无风险利率（十年期国债收益率）、风险溢价（对风险资产的额外补偿）。<strong>特别注意：这是简化魔改版，不可直接套用公式做资产绝对定价。</strong></li>
+      <li><strong>二、货币政策如何通过四大因子影响资产价格。</strong>知识点2：货币政策对各因子的影响路径。价格上涨驱动力=分子端（现金流变大、增长率放大分子="基本面驱动"）+分母端（无风险利率/风险溢价变小、增长率缩小分母="估值驱动"）。宽松政策：①影响增长率（分子/分母）——降低借贷成本，推动投资消费、降低财务费用，抬升增长率预期；②影响无风险利率（分母）——降息经银行间套利压低十年期国债收益率；③影响风险溢价（分母）——注入流动性缓解"钱荒"、预期管理消除不确定性、压低无风险利率把资金从安全区"挤"向风险区。<strong>实践运用</strong>：一次成功的宽松同时作用于分子分母，形成"戴维斯双击"，引发资产价格剧烈上涨。</li>
+      <li><strong>三、历史复盘与心法总结。</strong>知识点3：如何判断货币政策的级别与效率。判断级别：看决心（"尽力而为"常规喊话 vs "不惜一切代价"央行行长站台+超常规工具）与配套（央行"独角戏" vs 最高领导定调+央行降分母+财政拉分子的"大合唱"）。评估效率：看作用点（资金流向生产端=间接 vs 需求端=直接给资产购买方）与传导链（链路越短效果越好；PSL、924新政是资金直达需求端的典范）。<strong>课程总结：真正的"王炸"级政策=最高层定调、多部门协同、资金直达需求端的组合拳，同时引爆基本面和估值，创造趋势性行情。</strong></li>
+    </ul>
+  </div>
+
+  <!-- 第14章 -->
+  <div class="section" id="ch14">
+    <h2>课程知识卡片（极简版）</h2>
+    <p>以下为课程配套的极简版知识卡片，标题为"货币政策第17期：课程总结——看懂资产价格的终极密码"。</p>
+    <img src="assets/knowledge-card-mini.jpg" alt="知识卡片极简版" class="card-img" style="max-width: 100%; height: auto; cursor: pointer;" title="双击替换图片">
+    <h3>极简版卡片文字摘要</h3>
+    <ul>
+      <li><strong>第一部分：课程核心知识点。</strong>戈登增长模型=给资产估价的"计算器"（魔改版，只用于理解逻辑，不能直接给股票定价）。四大因素：①当前现金流（分子）：今年能收多少房租/股息；②增长率（分子/分母）：预计明年的房租/股息能涨多少——最厉害，同时让分子变大、分母变小；③无风险利率（分母）：十年期国债收益率；④风险溢价（分母）：冒风险投资所要求的"多给的那部分钱"。央行=同时操控四个按钮的"大玩家"：降息/降准时 1)直接降低无风险利率 2)让企业借钱成本变低、提高增长率预期 3)向市场放水、降低风险溢价——分子变大、分母变小，资产价格"坐上火箭"。</li>
+      <li><strong>第二部分：资产配置实战心法。</strong>为什么央行降息市场没反应？"推绳子"——经济差（分子端增长率悲观）时，即使央行努力降息缩小分母，分子的悲观也会把分母的利好抵消；只有分子（基本面）和分母（流动性）一起向好，才有真正的"戴维斯双击"。怎么判断货币政策"含金量"？看决心（常规喊话 vs 央行行长亲自站台+前所未有的新工具）+看配套（央行独角戏 vs 最高领导定调+央行降估值+财政部拉经济的"大合唱"）。什么样的政策最能推动资产价格上涨？看钱流向哪里——效果差：流向"生产端"；效果好：直接流向"需求端"（PSL棚改直接给拆迁户发钱买房、924新政给上市公司低息贷款回购股票）——"精准投喂"传导链路最短，形成真实买盘，威力最大。</li>
+      <li><strong>爆姐金句："分母定生死，分子定高低。"</strong>分母=市场的流动性环境，决定市场"有没有行情"（央行肯放水，市场就不会太差）；分子=经济的基本面，决定行情"走多高、走多远"。一轮真正的大牛市，一定是基本面和流动性共振的结果。学习宏观，就是要努力识别那个分子、分母同向共振的"王炸时刻"！</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    小爆姐宏观框架课 · 货币政策第17期 · 课程总结 | 仅供会员学习自用
+  </div>
+</div>
+</body></html>

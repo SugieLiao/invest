@@ -34,6 +34,7 @@
       match: ["/learn"],
       children: [
         { label: "小爆姐宏观框架课", href: "/learn/xiaobaojie/", match: ["/learn/xiaobaojie"] },
+        { label: "老雷财经", href: "/learn/laolei/", match: ["/learn/laolei"] },
         {
           label: "宏观",
           href: "/learn/macro/",

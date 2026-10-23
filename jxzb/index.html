@@ -136,7 +136,7 @@
   </div>
   <div class="sync-bar">
     <label><input type="checkbox" id="syncCharts"> 图表同步</label>
-    <span class="sync-hint">勾选后，拖动任意一个选取框，两个图表的时间范围同步生效；点击图表区域出现贯穿两图的十字线（再点同一点取消）</span>
+    <span class="sync-hint">勾选后，拖动任意一个选取框，两个图表的时间范围同步生效；点击图表出现十字线，随后随鼠标移动（再点同一点取消）</span>
   </div>
 
   <!-- 占比曲线 -->
@@ -263,7 +263,8 @@ let chartRatio = null, chartIndex = null;
 let ratioSlider = null, indexSlider = null;
 
 // ============ 联动十字线（勾选「图表同步」后，点击图表出现贯穿两图的竖线） ============
-let crosshairIdx = null;   // 全量 series 的索引；null 表示不显示
+let crosshairIdx = null;      // 全量 series 的索引；null 表示不显示
+let crosshairActive = false;  // 是否处于「点击激活、跟随鼠标」状态
 const crosshairPlugin = {
   id: 'crosshair',
   afterDatasetsDraw(chart) {
@@ -302,44 +303,74 @@ const crosshairPlugin = {
   }
 };
 
-// 在某个图表上点击：设置/清除十字线，并联动另一图显示 tooltip
-function handleChartClick(chart, other, e) {
-  if (!syncEnabled) return;
-  const rect = chart.canvas.getBoundingClientRect();
-  const mx = e.clientX - rect.left;
-  const xs = chart.scales.x;
-  const chartArea = chart.chartArea;
-  if (mx < chartArea.left || mx > chartArea.right) return;
-  const start = chart.__sliceStart || 0;
-  // 类目轴：像素 → 本地索引（四舍五入到最近数据点）
-  let localIdx = Math.round(xs.getValueForPixel(mx));
-  const n = chart.data.labels.length;
-  localIdx = Math.max(0, Math.min(n - 1, localIdx));
-  const fullIdx = start + localIdx;
-  // 再次点击同一点 → 清除
-  if (crosshairIdx === fullIdx) {
-    crosshairIdx = null;
-    [chart, other].forEach(c => {
-      c.setActiveElements([]);
-      c.tooltip.setActiveElements([], { x: 0, y: 0 });
-      c.update('none');
-    });
-    return;
-  }
+// 根据全量索引更新十字线 + 两图 tooltip
+function updateCrosshair(fullIdx) {
   crosshairIdx = fullIdx;
-  // 两图分别在自己的可见范围内显示 tooltip
-  [chart, other].forEach(c => {
+  [chartRatio, chartIndex].forEach(c => {
     const s = c.__sliceStart || 0;
     const en = c.__sliceEnd !== undefined ? c.__sliceEnd : c.data.labels.length;
-    if (fullIdx < s || fullIdx >= en) return;
-    const li = fullIdx - s;
-    const elements = [{ datasetIndex: 0, index: li }];
-    c.setActiveElements(elements);
-    const px = c.scales.x.getPixelForValue(li);
-    const py = (c.chartArea.top + c.chartArea.bottom) / 2;
-    c.tooltip.setActiveElements(elements, { x: px, y: py });
+    if (fullIdx < s || fullIdx >= en) {
+      // 超出该图可见范围则隐藏该图的激活态
+      c.setActiveElements([]);
+      c.tooltip.setActiveElements([], { x: 0, y: 0 });
+    } else {
+      const li = fullIdx - s;
+      const elements = [{ datasetIndex: 0, index: li }];
+      c.setActiveElements(elements);
+      const px = c.scales.x.getPixelForValue(li);
+      const py = (c.chartArea.top + c.chartArea.bottom) / 2;
+      c.tooltip.setActiveElements(elements, { x: px, y: py });
+    }
     c.update('none');
   });
+}
+
+// 清除十字线
+function clearCrosshair() {
+  crosshairIdx = null;
+  [chartRatio, chartIndex].forEach(c => {
+    c.setActiveElements([]);
+    c.tooltip.setActiveElements([], { x: 0, y: 0 });
+    c.update('none');
+  });
+}
+
+// 鼠标事件 → 全量索引（类目轴像素转最近数据点）
+function mouseToFullIdx(chart, e) {
+  const rect = chart.canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const chartArea = chart.chartArea;
+  if (!chartArea || mx < chartArea.left || mx > chartArea.right) return null;
+  const xs = chart.scales.x;
+  const start = chart.__sliceStart || 0;
+  const n = chart.data.labels.length;
+  let localIdx = Math.round(xs.getValueForPixel(mx));
+  localIdx = Math.max(0, Math.min(n - 1, localIdx));
+  return start + localIdx;
+}
+
+// 在某个图表上点击：激活/取消十字线
+function handleChartClick(chart, other, e) {
+  if (!syncEnabled) return;
+  const fullIdx = mouseToFullIdx(chart, e);
+  if (fullIdx === null) return;
+  // 再次点击同一点 → 取消跟随
+  if (crosshairActive && crosshairIdx === fullIdx) {
+    crosshairActive = false;
+    clearCrosshair();
+    return;
+  }
+  // 激活并定位
+  crosshairActive = true;
+  updateCrosshair(fullIdx);
+}
+
+// 鼠标在图表上移动：十字线激活时跟随移动
+function handleChartMove(chart, e) {
+  if (!syncEnabled || !crosshairActive) return;
+  const fullIdx = mouseToFullIdx(chart, e);
+  if (fullIdx === null) return;
+  updateCrosshair(fullIdx);
 }
 
 // 区间分隔参考线（占比图）：90/75/50/25/10 五档彩色虚线
@@ -689,12 +720,8 @@ document.getElementById('syncCharts').addEventListener('change', function() {
     indexSlider.setRange(r.min, r.max);
   } else {
     // 取消同步时清除十字线
-    crosshairIdx = null;
-    [chartRatio, chartIndex].forEach(c => {
-      c.setActiveElements([]);
-      c.tooltip.setActiveElements([], { x: 0, y: 0 });
-      c.update('none');
-    });
+    crosshairActive = false;
+    clearCrosshair();
   }
 });
 
@@ -709,9 +736,11 @@ document.querySelectorAll('#ratioLegend span').forEach(span => {
   });
 });
 
-// ============ 图表点击：联动十字线（需勾选「图表同步」） ============
+// ============ 图表点击/移动：联动十字线（需勾选「图表同步」） ============
 document.getElementById('chartRatio').addEventListener('click', e => handleChartClick(chartRatio, chartIndex, e));
 document.getElementById('chartIndex').addEventListener('click', e => handleChartClick(chartIndex, chartRatio, e));
+document.getElementById('chartRatio').addEventListener('mousemove', e => handleChartMove(chartRatio, e));
+document.getElementById('chartIndex').addEventListener('mousemove', e => handleChartMove(chartIndex, e));
 
 // ============ 平滑切换（重算数据源后刷新占比图 + 缩影） ============
 function applySmooth() {

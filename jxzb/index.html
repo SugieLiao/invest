@@ -130,7 +130,7 @@
 <div class="container">
   <header>
     <h1>均线占比曲线 × 平均股价指数（通达信 880003）</h1>
-    <div class="sub">研究均线占比与 A 股平均股价的相关性，揭示顶底判断与中期行情识别 · 数据截至 <span id="dataDate"></span> · <a href="RESEARCH.md" style="color:#58a6ff;">📊 深度研究报告（2011-2026 四遍研究结论）</a></div>
+    <div class="sub">研究均线占比与 A 股平均股价的相关性，揭示顶底判断与中期行情识别 · 数据截至 <span id="dataDate"></span> · <a href="report.html" style="color:#58a6ff;">📊 深度研究报告（图文版）</a></div>
   </header>
 
   <!-- 最新占比卡片 -->
@@ -186,7 +186,7 @@
 
   <!-- 重要研究结论（2011-2026 四遍概率统计） -->
   <div class="explain" id="conclusion">
-    <h3>📊 重要研究结论（2011–2026 全样本概率统计 · 完整报告见 RESEARCH.md）</h3>
+    <h3>📊 重要研究结论（2011–2026 全样本概率统计 · 完整报告见 <a href="report.html" style="color:#58a6ff;">report.html（图文版）</a>）</h3>
     <div class="concl-grid">
       <div class="concl-card hot"><div class="cc-tag">中期行情发令枪</div><b>50冰后13过热</b>：MA50占比在≤25冰点区后，MA13首次升破75 → <b>40日胜率70%</b>；叠加价格站上120日线 → <b>胜率80%</b>（66次样本）</div>
       <div class="concl-card hot"><div class="cc-tag">终极大底信号</div><b>50冰区+价新低+占比拐头</b>：MA50≤25且价格创40日新低，但占比回升5点 → <b>40日胜率83%</b>（12次全命中历史大底）</div>
@@ -197,7 +197,7 @@
       <div class="concl-card gray"><div class="cc-tag">反直觉②</div><b>市场级周期</b>：牛市快涨慢跌（升20天/降36天，高位钝化是肥美期）；熊市慢弹快跌（弹31天/跌17天，回落要第一时间减仓）</div>
       <div class="concl-card gray"><div class="cc-tag">牛中预警</div><b>牛中5/13双冰点(50仍&gt;40)</b>：牛市中期调整开始标志，40日胜率仅30%</div>
     </div>
-    <p style="margin-top:10px;color:var(--text-dim);font-size:.8rem;">回测：仅用「50冰后13过热入场+120线定仓位」规则，15年36笔、<b>胜率67%</b>、累计+62%。完整方法论与数据见 <a href="RESEARCH.md" style="color:#58a6ff;">RESEARCH.md</a>。</p>
+    <p style="margin-top:10px;color:var(--text-dim);font-size:.8rem;">回测：仅用「50冰后13过热入场+120线定仓位」规则，15年36笔、<b>胜率67%</b>、累计+62%。完整方法论与数据见 <a href="report.html" style="color:#58a6ff;">RESEARCH.md</a>。</p>
   </div>
 </div>
 
@@ -311,39 +311,82 @@ function computeSignals() {
 }
 const SIGNALS = computeSignals();
 
-// 信号标注插件：在图表顶部用符号标记信号日期
+// 信号标注插件：在图表顶部用符号标记信号日期，并支持 hover 显示原因
+const SIGNAL_DEFS = [
+  { key: 'sigLaunch', color: '#22c55e', label: '▲', y0: 4, size: 12,
+    reason: (i) => `中期发令枪：MA50占比近期处于≤25冰点区，MA13占比首次升破75。历史66次，40日后胜率70%（叠加价格站上120日线→80%）。` },
+  { key: 'sigBottom', color: '#4ade80', label: '★', y0: 16, size: 13,
+    reason: (i) => `终极大底：MA50≤25冰区内，价格创40日新低，但MA50占比先于价格拐头回升5点。历史12次全命中大级别底部，40日胜率83%。` },
+  { key: 'sigCrash', color: '#ef4444', label: '▼', y0: 4, size: 12,
+    reason: (i) => `崩盘警报（大小背离）：MA120占比创20日新低、MA50贴近低位，但MA5占比曾逆势冲高≥55后回落。历史3次全对（2015.4、2015.6.15=5178顶、2023.4），10日平均-9.9%。` },
+];
+const signalHitboxes = [];  // 记录当前渲染的标记屏幕坐标 {x, y, reason, date}
+
 const signalPlugin = {
   id: 'signalMark',
   afterDatasetsDraw(chart) {
     const id = chart.canvas.id;
-    const isRatio = id === 'chartRatio';
     const start = chart.__sliceStart || 0;
     const end = chart.__sliceEnd !== undefined ? chart.__sliceEnd : chart.data.labels.length;
     const { ctx, chartArea } = chart;
     const xs = chart.scales.x;
-    const marks = [
-      { arr: SIGNALS.sigLaunch, color: '#22c55e', label: '▲', y0: 4, size: 12, type: '发令枪' },
-      { arr: SIGNALS.sigBottom, color: '#4ade80', label: '★', y0: 16, size: 13, type: '大底' },
-      { arr: SIGNALS.sigCrash, color: '#ef4444', label: '▼', y0: 4, size: 12, type: '崩盘' },
-    ];
+    // 只在该图重绘时刷新 hitbox（避免重复）
+    if (chart === chartRatio) signalHitboxes.length = 0;
     ctx.save();
     ctx.textAlign = 'center';
     ctx.font = 'bold 12px sans-serif';
-    for (const mk of marks) {
-      for (const i of mk.arr) {
+    for (const def of SIGNAL_DEFS) {
+      const arr = SIGNALS[def.key];
+      for (const i of arr) {
         if (i < start || i >= end) continue;
         const li = i - start;
         const p0 = xs.getPixelForValue(li);
         const p1 = li + 1 < end - start ? xs.getPixelForValue(li + 1) : p0;
         const x = (p0 + p1) / 2;
-        const y = chartArea.top + mk.y0 + mk.size / 2;
-        ctx.fillStyle = mk.color;
-        ctx.fillText(mk.label, x, y);
+        const y = chartArea.top + def.y0 + def.size / 2;
+        ctx.fillStyle = def.color;
+        ctx.fillText(def.label, x, y);
+        if (chart === chartRatio) {
+          signalHitboxes.push({ x, y, reason: def.reason(i), date: dates[i] });
+        }
       }
     }
     ctx.restore();
   }
 };
+
+// 信号标记 hover 提示浮层
+let sigTooltip = null;
+function ensureSigTooltip() {
+  if (!sigTooltip) {
+    sigTooltip = document.createElement('div');
+    sigTooltip.style.cssText = 'position:fixed;z-index:999;background:#1c2129;border:1px solid #30363d;border-radius:8px;padding:10px 12px;font-size:12px;line-height:1.6;color:#e6edf3;max-width:360px;pointer-events:none;display:none;box-shadow:0 4px 16px rgba(0,0,0,.4);';
+    document.body.appendChild(sigTooltip);
+  }
+  return sigTooltip;
+}
+function attachSignalHover(canvasId, chart) {
+  const cv = document.getElementById(canvasId);
+  cv.addEventListener('mousemove', (e) => {
+    if (chart !== chartRatio) return;  // 只在占比图上检测（标记绘制在占比图）
+    const rect = cv.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    let hit = null;
+    for (const h of signalHitboxes) {
+      if (Math.abs(mx - h.x) < 8 && Math.abs(my - h.y) < 8) { hit = h; break; }
+    }
+    const tip = ensureSigTooltip();
+    if (hit) {
+      tip.innerHTML = `<div style="color:#e3b341;font-weight:600;margin-bottom:4px;">${fmtDate(hit.date)}</div>${hit.reason}`;
+      tip.style.display = 'block';
+      tip.style.left = (e.clientX + 14) + 'px';
+      tip.style.top = (e.clientY + 14) + 'px';
+    } else {
+      tip.style.display = 'none';
+    }
+  });
+  cv.addEventListener('mouseleave', () => { ensureSigTooltip().style.display = 'none'; });
+}
 
 // 构建最新指标卡片
 function buildCards() {
@@ -894,6 +937,9 @@ document.getElementById('chartRatio').addEventListener('click', e => handleChart
 document.getElementById('chartIndex').addEventListener('click', e => handleChartClick(chartIndex, chartRatio, e));
 document.getElementById('chartRatio').addEventListener('mousemove', e => handleChartMove(chartRatio, e));
 document.getElementById('chartIndex').addEventListener('mousemove', e => handleChartMove(chartIndex, e));
+
+// ============ 信号标记 hover 提示 ============
+attachSignalHover('chartRatio', chartRatio);
 
 // ============ 平滑切换（重算数据源后刷新占比图 + 缩影） ============
 function applySmooth() {

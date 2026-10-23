@@ -164,9 +164,39 @@ function renderCharts(key){
   const labels = dates.slice(lo,hi+1);
   const cc = close.slice(lo,hi+1);
   const o = idxO.slice(lo,hi+1), h = idxH.slice(lo,hi+1), l = idxL.slice(lo,hi+1);
+  // 本案例独立的十字线状态（每个案例各自独立，互不影响）
+  let crossIdx = null;  // 本地索引（0..labels.length-1）
+  // 十字线插件：在 K线图 和 均占图 上画竖线 + 日期标签
+  const crossPlugin = { id:'cross_'+key, afterDatasetsDraw(ch){ if(crossIdx===null)return; if(ch.canvas.id!=='k_'+key && ch.canvas.id!=='r_'+key)return; const xs=ch.scales.x; const n=labels.length; if(crossIdx<0||crossIdx>=n)return; const p0=xs.getPixelForValue(crossIdx); const p1=crossIdx+1<n?xs.getPixelForValue(crossIdx+1):p0; const x=(p0+p1)/2; const ctx=ch.ctx, ca=ch.chartArea; ctx.save(); ctx.setLineDash([4,3]); ctx.lineWidth=1.2; ctx.strokeStyle='#e3b341'; ctx.beginPath(); ctx.moveTo(x,ca.top); ctx.lineTo(x,ca.bottom); ctx.stroke(); ctx.setLineDash([]); ctx.font='10px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='top'; const lb=labels[crossIdx]||''; const tw=ctx.measureText(lb).width; ctx.fillStyle='#e3b341'; ctx.globalAlpha=.9; ctx.fillRect(x-tw/2-3,ca.top,tw+6,14); ctx.globalAlpha=1; ctx.fillStyle='#0d1117'; ctx.fillText(lb,x,ca.top+2); ctx.restore(); } };
   const candleP = {id:'candle_'+key, afterDatasetsDraw(ch){ if(ch.canvas.id!=='k_'+key)return; const xs=ch.scales.x,ys=ch.scales.y,n=labels.length; if(!n)return; const step=Math.abs(xs.getPixelForValue(1)-xs.getPixelForValue(0)); const w=Math.max(1.5,step*0.6); const ctx=ch.ctx; for(let i=0;i<n;i++){const x=xs.getPixelForValue(i),yO=ys.getPixelForValue(o[i]),yC=ys.getPixelForValue(cc[i]),yH=ys.getPixelForValue(h[i]),yL=ys.getPixelForValue(l[i]);const up=cc[i]>=o[i];ctx.strokeStyle=ctx.fillStyle=up?'#ef4444':'#22c55e';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,yH);ctx.lineTo(x,yL);ctx.stroke();const top=Math.min(yO,yC),hgt=Math.max(1,Math.abs(yC-yO));ctx.fillRect(x-w/2,top,w,hgt);} }};
-  new Chart(document.getElementById('k_'+key), {type:'line',data:{labels,datasets:[{data:cc,pointRadius:0,borderColor:'rgba(0,0,0,0)',showLine:false}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{offset:true,ticks:{...TICK,maxTicksLimit:10},grid:{display:false}},y:{position:'right',ticks:TICK,grid:GRID}}},plugins:[candleP]});
-  const rchart = new Chart(document.getElementById('r_'+key), {type:'line',data:{labels,datasets:[5,13,50,120].map(p=>({label:'MA'+p,data:ma[p].slice(lo,hi+1),borderColor:COLORS[p],borderWidth:p===50?2:1.3,pointRadius:0,tension:.15}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false}},scales:{x:{ticks:{...TICK,maxTicksLimit:10},grid:GRID},y:{min:0,max:100,ticks:{...TICK,callback:v=>v+'%'},grid:GRID}}}});
+  const kchart = new Chart(document.getElementById('k_'+key), {type:'line',data:{labels,datasets:[{data:cc,pointRadius:0,borderColor:'rgba(0,0,0,0)',showLine:false}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:true,callbacks:{title:items=>items[0]?.label||'',label:ctx=>{const i=ctx.dataIndex;const chg=((cc[i]-o[i])/o[i]*100);return ['开:'+o[i].toFixed(2),'高:'+h[i].toFixed(2),'低:'+l[i].toFixed(2),'收:'+cc[i].toFixed(2),'涨跌:'+(chg>=0?'+':'')+chg.toFixed(2)+'%'];}}}},scales:{x:{offset:true,ticks:{...TICK,maxTicksLimit:10},grid:{display:false}},y:{position:'right',ticks:TICK,grid:GRID}}},plugins:[candleP,crossPlugin]});
+  const rchart = new Chart(document.getElementById('r_'+key), {type:'line',data:{labels,datasets:[5,13,50,120].map(p=>({label:'MA'+p,data:ma[p].slice(lo,hi+1),borderColor:COLORS[p],borderWidth:p===50?2:1.3,pointRadius:0,tension:.15}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:true,callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},scales:{x:{ticks:{...TICK,maxTicksLimit:10},grid:GRID},y:{min:0,max:100,ticks:{...TICK,callback:v=>v+'%'},grid:GRID}}},plugins:[crossPlugin]});
+  // 同步十字线：点击任一图，两图在对应日期同时显示十字线 + tooltip
+  function mouseToIdx(chart, e){
+    const rect = chart.canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const ca = chart.chartArea;
+    if(!ca || mx<ca.left || mx>ca.right) return null;
+    let li = Math.round(chart.scales.x.getValueForPixel(mx));
+    li = Math.max(0, Math.min(labels.length-1, li));
+    return li;
+  }
+  function setCross(li, chart, e){
+    if(li===null)return;
+    // 再点同一点取消
+    if(crossIdx===li){ crossIdx=null; [kchart,rchart].forEach(ch=>{ch.setActiveElements([]);ch.tooltip.setActiveElements([],{x:0,y:0});ch.update('none');}); return; }
+    crossIdx = li;
+    [kchart,rchart].forEach(ch=>{
+      const els = ch.data.datasets.map((ds,di)=>ds.data[li]!==null?{datasetIndex:di,index:li}:null).filter(Boolean);
+      ch.setActiveElements(els.slice(0,1));
+      const px = ch.scales.x.getPixelForValue(li);
+      const py = (ch.chartArea.top+ch.chartArea.bottom)/2;
+      ch.tooltip.setActiveElements(els.slice(0,1), {x:px,y:py});
+      ch.update('none');
+    });
+  }
+  document.getElementById('k_'+key).addEventListener('click', e=>setCross(mouseToIdx(kchart,e), kchart, e));
+  document.getElementById('r_'+key).addEventListener('click', e=>setCross(mouseToIdx(rchart,e), rchart, e));
   // 可点击图例：显示/隐藏对应曲线
   const legBox = document.getElementById('leg_'+key);
   if (legBox) {
@@ -185,7 +215,7 @@ function renderCharts(key){
 
 function mountCases(containerId, keys){
   const el = document.getElementById(containerId);
-  el.innerHTML = keys.map(k => { const c=CASES[k]; return '<div class="case" id="case_'+k+'"><h4>'+c.title+'</h4><div class="sub">'+c.sub+'</div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线</div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div></div>'; }).join('');
+  el.innerHTML = keys.map(k => { const c=CASES[k]; return '<div class="case" id="case_'+k+'"><h4>'+c.title+'</h4><div class="sub">'+c.sub+' · 点击图表出现双图同步十字线（再点取消）</div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线</div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div></div>'; }).join('');
   keys.forEach(k => renderCharts(k));
 }
 

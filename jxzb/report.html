@@ -177,6 +177,9 @@ const close = series.map(r => r.index);
 const idxO = series.map(r => r.io), idxH = series.map(r => r.ih), idxL = series.map(r => r.il);
 const ma = {5:series.map(r=>r.ma5),13:series.map(r=>r.ma13),50:series.map(r=>r.ma50),120:series.map(r=>r.ma120)};
 const COLORS = {5:'#9ca3af',13:'#eab308',50:'#e6edf3',120:'#3b82f6'};
+// 价格均线（收盘价的 N 日简单移动平均，供 K线图「显示均线」勾选用）
+function calcSMA(arr, n){ return arr.map((_, i)=>{ if(i<n-1) return null; let s=0; for(let k=i-n+1;k<=i;k++) s+=arr[k]; return +(s/n).toFixed(2); }); }
+const priceMA = { 5:calcSMA(close,5), 13:calcSMA(close,13), 50:calcSMA(close,50), 120:calcSMA(close,120) };
 const TICK={color:'#8b949e'}, GRID={color:'#21262d'};
 const CASES = {"seg_bull2015": {"title": "2014-2015 杠杆牛（+196%）", "sub": "2014年4月启动，四线占比从冰点一路冲到全面高潮，5178见顶", "lo": 592, "hi": 886}, "seg_bear2018": {"title": "2018 慢熊（-40%）", "sub": "全年阴跌，10-18 四线全冰，随后48%反弹", "lo": 1522, "hi": 1882}, "seg_924": {"title": "2024 924行情（9天+46%）", "sub": "占比一日穿越全程，10-08 高潮钝化后回落", "lo": 3028, "hi": 3268}, "case924": {"title": "924行情复盘（聚焦 2024-09 ~ 2025-01）", "sub": "关注 MA5 单日20→95跳跃、10-11 极端劈叉、25-01-06 牛中双冰点", "lo": 3123, "hi": 3223}, "seg_shock2025": {"title": "2025-2026 震荡牛", "sub": "中枢抬升，2026-05 见高点后调整", "lo": 3173, "hi": 3413}, "launch2012": {"title": "发令枪案例① 2012-12-10", "sub": "50冰后13过热，40日+20%", "lo": 160, "hi": 400}, "launch2019": {"title": "发令枪案例② 2019-02-22", "sub": "50冰后13过热，40日+25%", "lo": 1666, "hi": 1906}, "launch2025": {"title": "发令枪案例③ 2025-01-20", "sub": "50冰后13过热，40日+9.4%", "lo": 3102, "hi": 3342}, "bottom2018": {"title": "终极大底案例① 2018-10-09", "sub": "50冰区+价新低+占比拐头，40日+9%", "lo": 1575, "hi": 1815}, "bottom2024": {"title": "终极大底案例② 2024-04-29（失败）", "sub": "注意：这是失败案例（40日-12.7%）", "lo": 2924, "hi": 3164}, "ice2012": {"title": "四线极冰案例① 2012-12-04", "sub": "20日+16.6%，40日+26.9%", "lo": 156, "hi": 396}, "ice2024": {"title": "四线极冰案例② 2024-02-05", "sub": "20日+28.5%，40日+23.2%", "lo": 2872, "hi": 3112}, "heat5178": {"title": "四线高潮钝化 → 5178大顶", "sub": "唯一持续2周的四线高潮，40日-30%", "lo": 766, "hi": 1006}, "div_top2021": {"title": "顶背离假信号 2021-11-11", "sub": "价新高但50占比回落，之后仍创新高", "lo": 2327, "hi": 2567}, "div_crash2015": {"title": "5178崩盘 2015-06-15", "sub": "见顶当周，20日-32.6%", "lo": 767, "hi": 1007}, "div_crash2023": {"title": "2023-04-18 大小背离", "sub": "之后6个月-23%", "lo": 2675, "hi": 2915}, "concl_launch": {"title": "结论① 中期发令枪（2019-02）", "sub": "50冰后13过热+站上120日线=80%胜率起点", "lo": 1696, "hi": 1876}, "concl_bottom": {"title": "结论② 终极大底（2018-10）", "sub": "四线极冰→占比拐头→站回120日线", "lo": 1595, "hi": 1795}, "concl_crash": {"title": "结论③ 顶部风险（2015-06）", "sub": "四线高潮钝化+大小背离=5178大顶", "lo": 786, "hi": 986}};
 let FIG_NO = 0;  // 图例全局编号，按页面渲染顺序递增
@@ -205,7 +208,7 @@ function renderCharts(key){
   // 十字线插件：在 K线图 和 均占图 上画竖线 + 日期标签
   const crossPlugin = { id:'cross_'+key, afterDatasetsDraw(ch){ if(crossIdx===null)return; if(ch.canvas.id!=='k_'+key && ch.canvas.id!=='r_'+key)return; const xs=ch.scales.x; const n=labels.length; if(crossIdx<0||crossIdx>=n)return; const p0=xs.getPixelForValue(crossIdx); const p1=crossIdx+1<n?xs.getPixelForValue(crossIdx+1):p0; const x=(p0+p1)/2; const ctx=ch.ctx, ca=ch.chartArea; ctx.save(); ctx.setLineDash([4,3]); ctx.lineWidth=1.2; ctx.strokeStyle='#e3b341'; ctx.beginPath(); ctx.moveTo(x,ca.top); ctx.lineTo(x,ca.bottom); ctx.stroke(); ctx.setLineDash([]); ctx.font='10px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='top'; const lb=labels[crossIdx]||''; const tw=ctx.measureText(lb).width; ctx.fillStyle='#e3b341'; ctx.globalAlpha=.9; ctx.fillRect(x-tw/2-3,ca.top,tw+6,14); ctx.globalAlpha=1; ctx.fillStyle='#0d1117'; ctx.fillText(lb,x,ca.top+2); ctx.restore(); } };
   const candleP = {id:'candle_'+key, afterDatasetsDraw(ch){ if(ch.canvas.id!=='k_'+key)return; const xs=ch.scales.x,ys=ch.scales.y,n=labels.length; if(!n)return; const step=Math.abs(xs.getPixelForValue(1)-xs.getPixelForValue(0)); const w=Math.max(1.5,step*0.6); const ctx=ch.ctx; for(let i=0;i<n;i++){const x=xs.getPixelForValue(i),yO=ys.getPixelForValue(o[i]),yC=ys.getPixelForValue(cc[i]),yH=ys.getPixelForValue(h[i]),yL=ys.getPixelForValue(l[i]);const up=cc[i]>=o[i];ctx.strokeStyle=ctx.fillStyle=up?'#ef4444':'#22c55e';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,yH);ctx.lineTo(x,yL);ctx.stroke();const top=Math.min(yO,yC),hgt=Math.max(1,Math.abs(yC-yO));ctx.fillRect(x-w/2,top,w,hgt);} }};
-  const kchart = new Chart(document.getElementById('k_'+key), {type:'line',data:{labels,datasets:[{data:cc,pointRadius:0,borderColor:'rgba(0,0,0,0)',showLine:false}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{offset:true,ticks:{...TICK,maxTicksLimit:10},grid:{display:false}},y:{position:'right',ticks:TICK,grid:GRID}}},plugins:[candleP,crossPlugin]});
+  const kchart = new Chart(document.getElementById('k_'+key), {type:'line',data:{labels,datasets:[{data:cc,pointRadius:0,borderColor:'rgba(0,0,0,0)',showLine:false}].concat([5,13,50,120].map(p=>({label:'MA'+p,data:priceMA[p].slice(sIdx,eIdx),borderColor:COLORS[p],borderWidth:p===50?1.6:1.2,pointRadius:0,tension:0,hidden:true})))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{offset:true,ticks:{...TICK,maxTicksLimit:10},grid:{display:false}},y:{position:'right',ticks:TICK,grid:GRID}}},plugins:[candleP,crossPlugin]});
   const rchart = new Chart(document.getElementById('r_'+key), {type:'line',data:{labels,datasets:[5,13,50,120].map(p=>({label:'MA'+p,data:ma[p].slice(sIdx,eIdx),borderColor:COLORS[p],borderWidth:p===50?2:1.3,pointRadius:0,tension:.15}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{ticks:{...TICK,maxTicksLimit:10},grid:GRID},y:{min:0,max:100,ticks:{...TICK,callback:v=>v+'%'},grid:GRID}}},plugins:[thresholdP,crossPlugin]});
   // 同步十字线：点击任一图激活，两图在对应日期同时显示十字线 + tooltip；激活后跟随鼠标移动
   let crossActive = false;  // 是否处于「点击激活、跟随鼠标」状态
@@ -286,6 +289,16 @@ function renderCharts(key){
     });
   }
   // ===== 缩放滑动条：控制本案例窗口在全量数据中的范围 =====
+  // 「显示均线」勾选：切换 K线图 4 条价格均线的可见性（默认隐藏）
+  const maChk = document.getElementById('maChk_'+key);
+  if (maChk) {
+    maChk.addEventListener('change', function() {
+      const show = this.checked;
+      // 均线数据集索引 1~4（0 是蜡烛）
+      for(let i=1;i<=4;i++) kchart.setDatasetVisibility(i, show);
+      kchart.update();
+    });
+  }
   const rsBox = document.getElementById('rs_'+key);
   if (rsBox) {
     rsBox.innerHTML = '<div class="rs-labels"><span class="rs-start"></span><span class="rs-end"></span></div>' +
@@ -317,7 +330,7 @@ function renderCharts(key){
       sIdx = st; eIdx = en;
       labels = dates.slice(st,en); cc = close.slice(st,en); o = idxO.slice(st,en); h = idxH.slice(st,en); l = idxL.slice(st,en);
       sLbl.textContent = dates[st]; eLbl.textContent = dates[en-1];
-      kchart.data.labels = labels; kchart.data.datasets[0].data = cc;
+      kchart.data.labels = labels; kchart.data.datasets[0].data = cc; [5,13,50,120].forEach((p,i)=>kchart.data.datasets[i+1].data = priceMA[p].slice(sIdx,eIdx));
       rchart.data.labels = labels;
       rchart.data.datasets.forEach((ds,i)=>{ ds.data = ma[[5,13,50,120][i]].slice(st,en); });
       crossIdx = null;  // 缩放后清十字线，避免越界
@@ -329,7 +342,7 @@ function renderCharts(key){
     function initExact(lo, hi){
       sIdx = lo; eIdx = hi + 1;
       labels = dates.slice(sIdx, eIdx); cc = close.slice(sIdx, eIdx); o = idxO.slice(sIdx, eIdx); h = idxH.slice(sIdx, eIdx); l = idxL.slice(sIdx, eIdx);
-      kchart.data.labels = labels; kchart.data.datasets[0].data = cc;
+      kchart.data.labels = labels; kchart.data.datasets[0].data = cc; [5,13,50,120].forEach((p,i)=>kchart.data.datasets[i+1].data = priceMA[p].slice(sIdx,eIdx));
       rchart.data.labels = labels;
       rchart.data.datasets.forEach((ds,i)=>{ ds.data = ma[[5,13,50,120][i]].slice(sIdx, eIdx); });
       sLbl.textContent = dates[sIdx]; eLbl.textContent = dates[eIdx-1];
@@ -372,7 +385,7 @@ function renderCharts(key){
 
 function mountCases(containerId, keys){
   const el = document.getElementById(containerId);
-  el.innerHTML = keys.map(k => { const c=CASES[k]; FIG_NO++; return '<div class="case" id="case_'+k+'"><h4><span class="figno">图'+FIG_NO+'</span>'+c.title+'</h4><div class="sub">'+c.sub+' · 点击出十字线后随鼠标移动，也可用 ←→ 键逐日移动（再点同一点取消）</div><div class="cinfo" id="info_'+k+'"></div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线</div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线，MA5/13默认隐藏）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div><div class="rs-wrap" id="rs_'+k+'"></div></div>'; }).join('');
+  el.innerHTML = keys.map(k => { const c=CASES[k]; FIG_NO++; return '<div class="case" id="case_'+k+'"><h4><span class="figno">图'+FIG_NO+'</span>'+c.title+'</h4><div class="sub">'+c.sub+' · 点击出十字线后随鼠标移动，也可用 ←→ 键逐日移动（再点同一点取消）</div><div class="cinfo" id="info_'+k+'"></div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线 <label style="margin-left:8px;cursor:pointer"><input type="checkbox" id="maChk_'+k+'" style="vertical-align:-1px"> 显示均线</label></div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线，MA5/13默认隐藏）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div><div class="rs-wrap" id="rs_'+k+'"></div></div>'; }).join('');
   keys.forEach(k => renderCharts(k));
 }
 

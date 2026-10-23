@@ -60,6 +60,24 @@ td{color:#c9d1d9}
 .cinfo{min-height:22px;margin-bottom:6px;font-size:.78rem;color:#e3b341;line-height:1.6}
 .cinfo b{color:var(--text)}
 .cinfo .up{color:var(--red)}.cinfo .dn{color:var(--green)}
+/* 报告页滑动条（精简版，复用主站风格） */
+.rs-wrap{margin:10px 0 4px}
+.rs-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);margin-bottom:3px}
+.rs-quick{display:flex;gap:6px;margin-bottom:5px}
+.rs-quick button{padding:2px 9px;font-size:11px;background:var(--panel2);border:1px solid var(--border);border-radius:4px;color:var(--dim);cursor:pointer}
+.rs-quick button.active{background:#1f6feb;border-color:#1f6feb;color:#fff}
+.rs{position:relative;height:32px;border:1px solid var(--border);border-radius:6px;background:var(--panel2);overflow:hidden}
+.rs .mini{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
+.rs .mini svg{width:100%;height:100%;display:block}
+.rs .mask-l{position:absolute;top:0;left:0;height:100%;background:rgba(13,17,23,.62);z-index:2;pointer-events:none}
+.rs .mask-r{position:absolute;top:0;right:0;height:100%;background:rgba(13,17,23,.62);z-index:2;pointer-events:none}
+.rs .sel{position:absolute;top:0;height:100%;z-index:4;background:rgba(88,166,255,.15);border:1px solid #58a6ff;box-sizing:border-box;cursor:grab}
+.rs input[type=range]{position:absolute;width:100%;height:32px;top:0;left:0;background:none;pointer-events:none;-webkit-appearance:none;appearance:none;z-index:3;margin:0;padding:0}
+.rs input.rs-min{z-index:5}
+.rs input[type=range]::-webkit-slider-runnable-track{width:100%;height:100%;background:transparent;border:none}
+.rs input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:6px;height:22px;margin:5px 0;border-radius:3px;background:linear-gradient(180deg,#7cb8ff,#3b82f6);cursor:pointer;pointer-events:auto;border:1px solid rgba(255,255,255,.3)}
+.rs input.rs-min::-webkit-slider-thumb{transform:translateX(-50%)}
+.rs input.rs-max::-webkit-slider-thumb{transform:translateX(50%)}
 .warn{border-color:rgba(239,68,68,.4)!important}
 .warn2{border-color:rgba(234,179,8,.4)!important}
 .ok{border-color:rgba(34,197,94,.4)!important}
@@ -163,17 +181,30 @@ const CASES = {"seg_bull2015": {"title": "2014-2015 杠杆牛（+196%）", "sub"
 
 function renderCharts(key){
   const c = CASES[key];
-  const lo=c.lo, hi=c.hi;
-  const labels = dates.slice(lo,hi+1);
-  const cc = close.slice(lo,hi+1);
-  const o = idxO.slice(lo,hi+1), h = idxH.slice(lo,hi+1), l = idxL.slice(lo,hi+1);
+  // 可变窗口（初始 = 案例定义窗口，可被滑动条改变）
+  let sIdx = c.lo, eIdx = c.hi + 1;
+  let labels = dates.slice(sIdx, eIdx);
+  let cc = close.slice(sIdx, eIdx);
+  let o = idxO.slice(sIdx, eIdx), h = idxH.slice(sIdx, eIdx), l = idxL.slice(sIdx, eIdx);
   // 本案例独立的十字线状态（每个案例各自独立，互不影响）
   let crossIdx = null;  // 本地索引（0..labels.length-1）
+  // 五档阈值参考线
+  const LEVELS = [
+    { v:90, label:'高潮', color:'#ef4444' },
+    { v:75, label:'过热', color:'#f97316' },
+    { v:50, label:'中枢', color:'#eab308' },
+    { v:25, label:'冰点', color:'#3b82f6' },
+    { v:10, label:'极冰', color:'#22c55e' },
+  ];
+  function levelOf(v){ if(v>=90)return '高潮'; if(v>=75)return '过热'; if(v>=50)return '中枢'; if(v>=25)return '冰点'; return '极冰'; }
+  function levelColor(v){ const lv = LEVELS.find(x=>v>=x.v); return lv ? lv.color : '#22c55e'; }
+  // 阈值线插件（均占图）
+  const thresholdP = { id:'thr_'+key, beforeDatasetsDraw(ch){ if(ch.canvas.id!=='r_'+key)return; const ctx=ch.ctx, ca=ch.chartArea, sc=ch.scales; ctx.save(); ctx.lineWidth=1; ctx.font='9px sans-serif'; ctx.textAlign='left'; ctx.textBaseline='bottom'; LEVELS.forEach(lv=>{ const y=sc.y.getPixelForValue(lv.v); if(y<ca.top||y>ca.bottom)return; ctx.setLineDash([5,4]); ctx.strokeStyle=lv.color; ctx.globalAlpha=.5; ctx.beginPath(); ctx.moveTo(ca.left,y); ctx.lineTo(ca.right,y); ctx.stroke(); ctx.globalAlpha=.85; ctx.fillStyle=lv.color; ctx.fillText(lv.v+'% '+lv.label, ca.left+3, y-1); }); ctx.restore(); } };
   // 十字线插件：在 K线图 和 均占图 上画竖线 + 日期标签
   const crossPlugin = { id:'cross_'+key, afterDatasetsDraw(ch){ if(crossIdx===null)return; if(ch.canvas.id!=='k_'+key && ch.canvas.id!=='r_'+key)return; const xs=ch.scales.x; const n=labels.length; if(crossIdx<0||crossIdx>=n)return; const p0=xs.getPixelForValue(crossIdx); const p1=crossIdx+1<n?xs.getPixelForValue(crossIdx+1):p0; const x=(p0+p1)/2; const ctx=ch.ctx, ca=ch.chartArea; ctx.save(); ctx.setLineDash([4,3]); ctx.lineWidth=1.2; ctx.strokeStyle='#e3b341'; ctx.beginPath(); ctx.moveTo(x,ca.top); ctx.lineTo(x,ca.bottom); ctx.stroke(); ctx.setLineDash([]); ctx.font='10px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='top'; const lb=labels[crossIdx]||''; const tw=ctx.measureText(lb).width; ctx.fillStyle='#e3b341'; ctx.globalAlpha=.9; ctx.fillRect(x-tw/2-3,ca.top,tw+6,14); ctx.globalAlpha=1; ctx.fillStyle='#0d1117'; ctx.fillText(lb,x,ca.top+2); ctx.restore(); } };
   const candleP = {id:'candle_'+key, afterDatasetsDraw(ch){ if(ch.canvas.id!=='k_'+key)return; const xs=ch.scales.x,ys=ch.scales.y,n=labels.length; if(!n)return; const step=Math.abs(xs.getPixelForValue(1)-xs.getPixelForValue(0)); const w=Math.max(1.5,step*0.6); const ctx=ch.ctx; for(let i=0;i<n;i++){const x=xs.getPixelForValue(i),yO=ys.getPixelForValue(o[i]),yC=ys.getPixelForValue(cc[i]),yH=ys.getPixelForValue(h[i]),yL=ys.getPixelForValue(l[i]);const up=cc[i]>=o[i];ctx.strokeStyle=ctx.fillStyle=up?'#ef4444':'#22c55e';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,yH);ctx.lineTo(x,yL);ctx.stroke();const top=Math.min(yO,yC),hgt=Math.max(1,Math.abs(yC-yO));ctx.fillRect(x-w/2,top,w,hgt);} }};
   const kchart = new Chart(document.getElementById('k_'+key), {type:'line',data:{labels,datasets:[{data:cc,pointRadius:0,borderColor:'rgba(0,0,0,0)',showLine:false}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{offset:true,ticks:{...TICK,maxTicksLimit:10},grid:{display:false}},y:{position:'right',ticks:TICK,grid:GRID}}},plugins:[candleP,crossPlugin]});
-  const rchart = new Chart(document.getElementById('r_'+key), {type:'line',data:{labels,datasets:[5,13,50,120].map(p=>({label:'MA'+p,data:ma[p].slice(lo,hi+1),borderColor:COLORS[p],borderWidth:p===50?2:1.3,pointRadius:0,tension:.15}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{ticks:{...TICK,maxTicksLimit:10},grid:GRID},y:{min:0,max:100,ticks:{...TICK,callback:v=>v+'%'},grid:GRID}}},plugins:[crossPlugin]});
+  const rchart = new Chart(document.getElementById('r_'+key), {type:'line',data:{labels,datasets:[5,13,50,120].map(p=>({label:'MA'+p,data:ma[p].slice(sIdx,eIdx),borderColor:COLORS[p],borderWidth:p===50?2:1.3,pointRadius:0,tension:.15}))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{ticks:{...TICK,maxTicksLimit:10},grid:GRID},y:{min:0,max:100,ticks:{...TICK,callback:v=>v+'%'},grid:GRID}}},plugins:[thresholdP,crossPlugin]});
   // 同步十字线：点击任一图激活，两图在对应日期同时显示十字线 + tooltip；激活后跟随鼠标移动
   let crossActive = false;  // 是否处于「点击激活、跟随鼠标」状态
   function mouseToIdx(chart, e){
@@ -194,8 +225,13 @@ function renderCharts(key){
     if(infoEl){
       const chg = (cc[li]-o[li])/o[li]*100;
       const upCls = chg>=0 ? 'up' : 'dn';
-      // 只显示当前可见曲线的占比读数（与图例开关一致）
-      const maTxt = [5,13,50,120].filter(p=>rchart.isDatasetVisible([5,13,50,120].indexOf(p))).map(p=>'<b>MA'+p+'</b> '+((ma[p][lo+li]!=null)?ma[p][lo+li].toFixed(1)+'%':'−')).join(' · ');
+      // 只显示当前可见曲线的占比读数（与图例开关一致），数值用所属阈值区间颜色
+      const maTxt = [5,13,50,120].filter(p=>rchart.isDatasetVisible([5,13,50,120].indexOf(p))).map(p=>{
+        const v = ma[p][sIdx+li];
+        const val = (v!=null) ? v.toFixed(1)+'%' : '−';
+        const lc = (v!=null) ? levelColor(v) : '#8b949e';
+        return '<b style="color:'+COLORS[p]+'">MA'+p+'</b> <span style="color:'+lc+'">'+val+'</span>';
+      }).join(' · ');
       infoEl.innerHTML = '<b>'+labels[li]+'</b> &nbsp; 开 '+o[li].toFixed(2)+' · 高 '+h[li].toFixed(2)+' · 低 '+l[li].toFixed(2)+' · 收 '+cc[li].toFixed(2)+' · <span class="'+upCls+'">'+(chg>=0?'+':'')+chg.toFixed(2)+'%</span>'+(maTxt?' &nbsp;｜&nbsp; '+maTxt:'');
     }
   }
@@ -247,11 +283,80 @@ function renderCharts(key){
       });
     });
   }
+  // ===== 缩放滑动条：控制本案例窗口在全量数据中的范围 =====
+  const rsBox = document.getElementById('rs_'+key);
+  if (rsBox) {
+    rsBox.innerHTML = '<div class="rs-labels"><span class="rs-start"></span><span class="rs-end"></span></div>' +
+      '<div class="rs-quick"><button data-w="'+c.hi+'-'+c.lo+'">案例窗口</button><button data-w="0">全部</button><button data-w="60">60天</button><button data-w="250">一年</button></div>' +
+      '<div class="rs"><div class="mini"></div><div class="mask-l"></div><div class="sel"></div><div class="mask-r"></div>' +
+      '<input type="range" class="rs-min" min="0" max="100" value="0"><input type="range" class="rs-max" min="0" max="100" value="100"></div>';
+    const N = dates.length;
+    const minIn = rsBox.querySelector('.rs-min'), maxIn = rsBox.querySelector('.rs-max');
+    const slider = rsBox.querySelector('.rs'), mini = rsBox.querySelector('.mini');
+    const maskL = rsBox.querySelector('.mask-l'), maskR = rsBox.querySelector('.mask-r'), sel = rsBox.querySelector('.sel');
+    const sLbl = rsBox.querySelector('.rs-start'), eLbl = rsBox.querySelector('.rs-end');
+    // 缩影：用 MA50 占比全量画
+    (function drawMini(){
+      const d = ma[50]; const valid = d.filter(v=>v!=null); if(!valid.length) return;
+      const mn = Math.min(...valid), mx = Math.max(...valid), rg = mx-mn||1;
+      const W=1000,H=40;
+      const pts = d.map((v,i)=>{ if(v==null)return null; const x=(i/(N-1))*W; const y=H-((v-mn)/rg)*(H-6)-3; return x+','+y; }).filter(Boolean);
+      if(!pts.length) return;
+      mini.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none"><polyline points="'+pts.join(' ')+'" fill="none" stroke="#e6edf3" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+    })();
+    function setRange(minV, maxV){
+      if(minV > maxV-2){ maxV = minV+2; }
+      const W = slider.clientWidth, tw = 6;
+      const minX = minV/100*(W-tw), maxX = maxV/100*(W-tw)+tw;
+      maskL.style.width = minX+'px'; maskR.style.width = (W-maxX)+'px';
+      sel.style.left = minX+'px'; sel.style.width = (maxX-minX)+'px';
+      const st = Math.floor(minV/100*N), en = Math.min(N, Math.ceil(maxV/100*N));
+      if(en-st < 5) return;  // 过窄不响应
+      sIdx = st; eIdx = en;
+      labels = dates.slice(st,en); cc = close.slice(st,en); o = idxO.slice(st,en); h = idxH.slice(st,en); l = idxL.slice(st,en);
+      sLbl.textContent = dates[st]; eLbl.textContent = dates[en-1];
+      kchart.data.labels = labels; kchart.data.datasets[0].data = cc;
+      rchart.data.labels = labels;
+      rchart.data.datasets.forEach((ds,i)=>{ ds.data = ma[[5,13,50,120][i]].slice(st,en); });
+      crossIdx = null;  // 缩放后清十字线，避免越界
+      clearCross();
+      kchart.update(); rchart.update();
+    }
+    function getRange(){ return {min:parseInt(minIn.value), max:parseInt(maxIn.value)}; }
+    // 初始化：默认案例窗口
+    minIn.value = Math.round(c.lo/N*100);
+    maxIn.value = Math.round(c.hi/N*100);
+    minIn.addEventListener('input', ()=>setRange(parseInt(minIn.value), parseInt(maxIn.value)));
+    maxIn.addEventListener('input', ()=>setRange(parseInt(minIn.value), parseInt(maxIn.value)));
+    sel.addEventListener('mousedown', (ev)=>{
+      ev.preventDefault(); ev.stopPropagation();
+      const startX = ev.clientX, sMin = parseInt(minIn.value), sMax = parseInt(maxIn.value);
+      const onMove = (e)=>{
+        const dx = (e.clientX-startX)/slider.clientWidth*100;
+        let nm = sMin+dx, nx = sMax+dx;
+        if(nm<0){nx-=nm;nm=0;} if(nx>100){nm-=(nx-100);nx=100;} if(nm<0)nm=0;
+        minIn.value = Math.round(nm); maxIn.value = Math.round(nx);
+        setRange(parseInt(minIn.value), parseInt(maxIn.value));
+      };
+      const onUp = ()=>{ window.removeEventListener('mousemove',onMove); window.removeEventListener('mouseup',onUp); };
+      window.addEventListener('mousemove',onMove); window.addEventListener('mouseup',onUp);
+    });
+    rsBox.querySelectorAll('.rs-quick button').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const w = parseInt(b.dataset.w);
+        if(w===0){ minIn.value=0; maxIn.value=100; }
+        else if(N>w){ minIn.value = Math.round((1-w/N)*100); maxIn.value=100; }
+        else{ minIn.value=0; maxIn.value=100; }
+        setRange(parseInt(minIn.value), parseInt(maxIn.value));
+      });
+    });
+    setRange(parseInt(minIn.value), parseInt(maxIn.value));
+  }
 }
 
 function mountCases(containerId, keys){
   const el = document.getElementById(containerId);
-  el.innerHTML = keys.map(k => { const c=CASES[k]; return '<div class="case" id="case_'+k+'"><h4>'+c.title+'</h4><div class="sub">'+c.sub+' · 点击出十字线后随鼠标移动，也可用 ←→ 键逐日移动（再点同一点取消）</div><div class="cinfo" id="info_'+k+'"></div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线</div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线，MA5/13默认隐藏）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div></div>'; }).join('');
+  el.innerHTML = keys.map(k => { const c=CASES[k]; return '<div class="case" id="case_'+k+'"><h4>'+c.title+'</h4><div class="sub">'+c.sub+' · 点击出十字线后随鼠标移动，也可用 ←→ 键逐日移动（再点同一点取消）</div><div class="cinfo" id="info_'+k+'"></div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线</div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线，MA5/13默认隐藏）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div><div class="rs-wrap" id="rs_'+k+'"></div></div>'; }).join('');
   keys.forEach(k => renderCharts(k));
 }
 

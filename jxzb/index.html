@@ -144,8 +144,8 @@
     <button data-smooth="10">10日</button>
   </div>
   <div class="sync-bar">
-    <label><input type="checkbox" id="syncCharts"> 图表同步</label>
-    <span class="sync-hint">勾选后，拖动任意一个选取框，两个图表的时间范围同步生效；点击图表出现十字线，随后随鼠标移动（再点同一点取消）</span>
+    <label><input type="checkbox" id="syncCharts" checked> 图表同步</label>
+    <span class="sync-hint">默认开启：拖动选区两图联动，点击图表出现十字线并随鼠标移动（再点同一点取消）；取消勾选后十字线只在所点图内显示</span>
   </div>
 
   <!-- 占比曲线 -->
@@ -393,14 +393,17 @@ function getRatioSmooth(p) { return smooth(ratioRaw[p], currentSmooth); }
 let chartRatio = null, chartIndex = null;
 let ratioSlider = null, indexSlider = null;
 
-// ============ 联动十字线（勾选「图表同步」后，点击图表出现贯穿两图的竖线） ============
+// ============ 十字线（点击图表出现；同步时两图联动，未同步时仅在点击图显示） ============
 let crosshairIdx = null;      // 全量 series 的索引；null 表示不显示
 let crosshairActive = false;  // 是否处于「点击激活、跟随鼠标」状态
+let crosshairOwner = null;    // 十字线归属图 id：'chartRatio' / 'chartIndex' / 'both'
 const crosshairPlugin = {
   id: 'crosshair',
   afterDatasetsDraw(chart) {
     if (crosshairIdx === null) return;
     if (chart.canvas.id !== 'chartRatio' && chart.canvas.id !== 'chartIndex') return;
+    // 未同步时：只在归属图上画
+    if (crosshairOwner !== 'both' && crosshairOwner !== chart.canvas.id) return;
     const start = chart.__sliceStart || 0;
     const end = chart.__sliceEnd !== undefined ? chart.__sliceEnd : chart.data.labels.length;
     if (crosshairIdx < start || crosshairIdx >= end) return;
@@ -434,31 +437,41 @@ const crosshairPlugin = {
   }
 };
 
-// 根据全量索引更新十字线 + 两图 tooltip
+// 更新单个图表的十字线 + tooltip（fullIdx 为全量索引）
+function applyCrosshairToChart(c, fullIdx) {
+  const s = c.__sliceStart || 0;
+  const en = c.__sliceEnd !== undefined ? c.__sliceEnd : c.data.labels.length;
+  if (fullIdx < s || fullIdx >= en) {
+    c.setActiveElements([]);
+    c.tooltip.setActiveElements([], { x: 0, y: 0 });
+  } else {
+    const li = fullIdx - s;
+    const elements = [{ datasetIndex: 0, index: li }];
+    c.setActiveElements(elements);
+    const px = c.scales.x.getPixelForValue(li);
+    const py = (c.chartArea.top + c.chartArea.bottom) / 2;
+    c.tooltip.setActiveElements(elements, { x: px, y: py });
+  }
+  c.update('none');
+}
+
+// 根据全量索引更新十字线（同步时双图，未同步时只更新 owner 图）
 function updateCrosshair(fullIdx) {
   crosshairIdx = fullIdx;
-  [chartRatio, chartIndex].forEach(c => {
-    const s = c.__sliceStart || 0;
-    const en = c.__sliceEnd !== undefined ? c.__sliceEnd : c.data.labels.length;
-    if (fullIdx < s || fullIdx >= en) {
-      // 超出该图可见范围则隐藏该图的激活态
-      c.setActiveElements([]);
-      c.tooltip.setActiveElements([], { x: 0, y: 0 });
-    } else {
-      const li = fullIdx - s;
-      const elements = [{ datasetIndex: 0, index: li }];
-      c.setActiveElements(elements);
-      const px = c.scales.x.getPixelForValue(li);
-      const py = (c.chartArea.top + c.chartArea.bottom) / 2;
-      c.tooltip.setActiveElements(elements, { x: px, y: py });
-    }
-    c.update('none');
-  });
+  if (crosshairOwner === 'both') {
+    applyCrosshairToChart(chartRatio, fullIdx);
+    applyCrosshairToChart(chartIndex, fullIdx);
+  } else if (crosshairOwner === 'chartRatio') {
+    applyCrosshairToChart(chartRatio, fullIdx);
+  } else if (crosshairOwner === 'chartIndex') {
+    applyCrosshairToChart(chartIndex, fullIdx);
+  }
 }
 
 // 清除十字线
 function clearCrosshair() {
   crosshairIdx = null;
+  crosshairOwner = null;
   [chartRatio, chartIndex].forEach(c => {
     c.setActiveElements([]);
     c.tooltip.setActiveElements([], { x: 0, y: 0 });
@@ -482,23 +495,25 @@ function mouseToFullIdx(chart, e) {
 
 // 在某个图表上点击：激活/取消十字线
 function handleChartClick(chart, other, e) {
-  if (!syncEnabled) return;
   const fullIdx = mouseToFullIdx(chart, e);
   if (fullIdx === null) return;
   // 再次点击同一点 → 取消跟随
-  if (crosshairActive && crosshairIdx === fullIdx) {
+  if (crosshairActive && crosshairOwner === chart.canvas.id && crosshairIdx === fullIdx) {
     crosshairActive = false;
     clearCrosshair();
     return;
   }
-  // 激活并定位
+  // 激活并定位：同步则双图，否则仅当前图
   crosshairActive = true;
+  crosshairOwner = syncEnabled ? 'both' : chart.canvas.id;
   updateCrosshair(fullIdx);
 }
 
-// 鼠标在图表上移动：十字线激活时跟随移动
+// 鼠标在图表上移动：十字线激活时跟随移动（仅当鼠标在当前归属图或同步模式）
 function handleChartMove(chart, e) {
-  if (!syncEnabled || !crosshairActive) return;
+  if (!crosshairActive) return;
+  // 未同步时，只有鼠标在 owner 图内才跟随
+  if (!syncEnabled && crosshairOwner !== chart.canvas.id) return;
   const fullIdx = mouseToFullIdx(chart, e);
   if (fullIdx === null) return;
   updateCrosshair(fullIdx);
@@ -815,7 +830,7 @@ function attachRangeSlider(chartId, chart, origLabels, getDataArrays, miniColor,
 }
 
 // 挂载滑动条
-let syncEnabled = false;    // 图表同步开关状态（供 update() 内部读取）
+let syncEnabled = true;     // 图表同步开关状态（默认开启，与 HTML checked 一致）
 
 ratioSlider = attachRangeSlider(
   'chartRatio', chartRatio, dates,
@@ -849,10 +864,17 @@ document.getElementById('syncCharts').addEventListener('change', function() {
     // 勾选时：以占比图当前范围为准，同步到指数图
     const r = ratioSlider.getRange();
     indexSlider.setRange(r.min, r.max);
+    // 若已有单图十字线，升级为双图
+    if (crosshairActive && crosshairOwner !== null && crosshairOwner !== 'both') {
+      crosshairOwner = 'both';
+      updateCrosshair(crosshairIdx);
+    }
   } else {
-    // 取消同步时清除十字线
-    crosshairActive = false;
-    clearCrosshair();
+    // 取消同步时：若十字线是双图，转成"仅占比图"单图模式（保留十字线）
+    if (crosshairActive && crosshairOwner === 'both') {
+      crosshairOwner = 'chartRatio';
+      updateCrosshair(crosshairIdx);
+    }
   }
 });
 

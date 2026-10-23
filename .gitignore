@@ -19,6 +19,7 @@ data/
 .wrangler/
 .pipeline.lock
 .workbuddy/
+.playwright-cli/
 
 # 临时/中间文件
 name_map.json

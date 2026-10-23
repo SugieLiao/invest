@@ -54,10 +54,15 @@
   .chart-panel .desc { color: var(--text-dim); font-size: 0.82rem; margin-bottom: 10px; }
   .chart-wrap { position: relative; height: 340px; }
 
-  /* 图例说明 */
+  /* 图例说明（可点击开关曲线） */
   .legend-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 10px; font-size: 0.82rem; color: var(--text-dim); }
-  .legend-row span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend-row span { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; transition: opacity .15s; }
+  .legend-row span:hover { opacity: .75; }
+  .legend-row span.leg-off { opacity: .32; text-decoration: line-through; }
   .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  /* 联动十字线提示 */
+  .crosshair-hint { font-size: .74rem; color: var(--text-dim); margin-top: 4px; }
 
   /* 说明区块 */
   .explain {
@@ -131,20 +136,20 @@
   </div>
   <div class="sync-bar">
     <label><input type="checkbox" id="syncCharts"> 图表同步</label>
-    <span class="sync-hint">勾选后，拖动任意一个选取框，两个图表的时间范围同步生效</span>
+    <span class="sync-hint">勾选后，拖动任意一个选取框，两个图表的时间范围同步生效；点击图表区域出现贯穿两图的十字线（再点同一点取消）</span>
   </div>
 
   <!-- 占比曲线 -->
   <div class="chart-panel">
     <h2>① 均线占比曲线（全市场个股收盘价站上 N 日均线的百分比）</h2>
-    <div class="desc">四条曲线分别代表全 A 股中「收盘价 &gt; MA5/13/50/120」的个股占比。0–100%，五档区间参考线：90 高潮 / 75 过热 / 50 中枢 / 25 冰点 / 10 极冰。</div>
-    <div class="chart-wrap"><canvas id="chartRatio"></canvas></div>
-    <div class="legend-row">
-      <span><i class="dot" style="background:var(--ma5)"></i>MA5 占比（短期动能）</span>
-      <span><i class="dot" style="background:var(--ma13)"></i>MA13 占比（中短期）</span>
-      <span><i class="dot" style="background:var(--ma50)"></i>MA50 占比（中期趋势）</span>
-      <span><i class="dot" style="background:var(--ma120)"></i>MA120 占比（长期/牛熊）</span>
+    <div class="desc">四条曲线分别代表全 A 股中「收盘价 &gt; MA5/13/50/120」的个股占比。0–100%，五档区间参考线：90 高潮 / 75 过热 / 50 中枢 / 25 冰点 / 10 极冰。点击下方图例可显示/隐藏对应曲线。</div>
+    <div class="legend-row" id="ratioLegend">
+      <span data-ds="0" class="leg-on"><i class="dot" style="background:var(--ma5)"></i>MA5 占比（短期动能）</span>
+      <span data-ds="1" class="leg-on"><i class="dot" style="background:var(--ma13)"></i>MA13 占比（中短期）</span>
+      <span data-ds="2" class="leg-on"><i class="dot" style="background:var(--ma50)"></i>MA50 占比（中期趋势）</span>
+      <span data-ds="3" class="leg-on"><i class="dot" style="background:var(--ma120)"></i>MA120 占比（长期/牛熊）</span>
     </div>
+    <div class="chart-wrap"><canvas id="chartRatio"></canvas></div>
   </div>
 
   <!-- 平均股价指数 -->
@@ -257,6 +262,86 @@ function getRatioSmooth(p) { return smooth(ratioRaw[p], currentSmooth); }
 let chartRatio = null, chartIndex = null;
 let ratioSlider = null, indexSlider = null;
 
+// ============ 联动十字线（勾选「图表同步」后，点击图表出现贯穿两图的竖线） ============
+let crosshairIdx = null;   // 全量 series 的索引；null 表示不显示
+const crosshairPlugin = {
+  id: 'crosshair',
+  afterDatasetsDraw(chart) {
+    if (crosshairIdx === null) return;
+    if (chart.canvas.id !== 'chartRatio' && chart.canvas.id !== 'chartIndex') return;
+    const start = chart.__sliceStart || 0;
+    const end = chart.__sliceEnd !== undefined ? chart.__sliceEnd : chart.data.labels.length;
+    if (crosshairIdx < start || crosshairIdx >= end) return;
+    const localIdx = crosshairIdx - start;
+    const xs = chart.scales.x, ys = chart.scales.y;
+    if (!xs || !ys) return;
+    // 类目轴：取相邻两点的中点更精确
+    const p0 = xs.getPixelForValue(localIdx);
+    const p1 = localIdx + 1 < end - start ? xs.getPixelForValue(localIdx + 1) : p0;
+    const x = (p0 + p1) / 2;
+    const { ctx, chartArea } = chart;
+    ctx.save();
+    ctx.setLineDash([4, 3]);
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = '#e3b341';
+    ctx.beginPath(); ctx.moveTo(x, chartArea.top); ctx.lineTo(x, chartArea.bottom); ctx.stroke();
+    // 顶部日期标签
+    ctx.setLineDash([]);
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    const label = chart.data.labels[localIdx] || '';
+    const tw2 = ctx.measureText(label).width;
+    ctx.fillStyle = '#e3b341';
+    ctx.globalAlpha = 0.9;
+    ctx.fillRect(x - tw2 / 2 - 3, chartArea.top, tw2 + 6, 14);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#0d1117';
+    ctx.fillText(label, x, chartArea.top + 2);
+    ctx.restore();
+  }
+};
+
+// 在某个图表上点击：设置/清除十字线，并联动另一图显示 tooltip
+function handleChartClick(chart, other, e) {
+  if (!syncEnabled) return;
+  const rect = chart.canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const xs = chart.scales.x;
+  const chartArea = chart.chartArea;
+  if (mx < chartArea.left || mx > chartArea.right) return;
+  const start = chart.__sliceStart || 0;
+  // 类目轴：像素 → 本地索引（四舍五入到最近数据点）
+  let localIdx = Math.round(xs.getValueForPixel(mx));
+  const n = chart.data.labels.length;
+  localIdx = Math.max(0, Math.min(n - 1, localIdx));
+  const fullIdx = start + localIdx;
+  // 再次点击同一点 → 清除
+  if (crosshairIdx === fullIdx) {
+    crosshairIdx = null;
+    [chart, other].forEach(c => {
+      c.setActiveElements([]);
+      c.tooltip.setActiveElements([], { x: 0, y: 0 });
+      c.update('none');
+    });
+    return;
+  }
+  crosshairIdx = fullIdx;
+  // 两图分别在自己的可见范围内显示 tooltip
+  [chart, other].forEach(c => {
+    const s = c.__sliceStart || 0;
+    const en = c.__sliceEnd !== undefined ? c.__sliceEnd : c.data.labels.length;
+    if (fullIdx < s || fullIdx >= en) return;
+    const li = fullIdx - s;
+    const elements = [{ datasetIndex: 0, index: li }];
+    c.setActiveElements(elements);
+    const px = c.scales.x.getPixelForValue(li);
+    const py = (c.chartArea.top + c.chartArea.bottom) / 2;
+    c.tooltip.setActiveElements(elements, { x: px, y: py });
+    c.update('none');
+  });
+}
+
 // 区间分隔参考线（占比图）：90/75/50/25/10 五档彩色虚线
 const thresholdPlugin = {
   id: 'threshold',
@@ -323,7 +408,7 @@ chartRatio = new Chart(document.getElementById('chartRatio'), {
            title: { display: true, text: '占比 %', color: '#8b949e' } },
     },
   },
-  plugins: [thresholdPlugin],
+  plugins: [thresholdPlugin, crosshairPlugin],
 });
 
 // ============ 创建指数图（K线：candlePlugin 绘制，Y轴按可见范围自适应） ============
@@ -396,7 +481,7 @@ chartIndex = new Chart(document.getElementById('chartIndex'), {
            title: { display: true, text: '元', color: '#8b949e' } },
     },
   },
-  plugins: [candlePlugin],
+  plugins: [candlePlugin, crosshairPlugin],
 });
 
 // ============ 时间范围双滑块（复用 stock-a 方案） ============
@@ -602,8 +687,31 @@ document.getElementById('syncCharts').addEventListener('change', function() {
     // 勾选时：以占比图当前范围为准，同步到指数图
     const r = ratioSlider.getRange();
     indexSlider.setRange(r.min, r.max);
+  } else {
+    // 取消同步时清除十字线
+    crosshairIdx = null;
+    [chartRatio, chartIndex].forEach(c => {
+      c.setActiveElements([]);
+      c.tooltip.setActiveElements([], { x: 0, y: 0 });
+      c.update('none');
+    });
   }
 });
+
+// ============ 图例点击：显示/隐藏对应曲线 ============
+document.querySelectorAll('#ratioLegend span').forEach(span => {
+  span.addEventListener('click', () => {
+    const i = parseInt(span.dataset.ds);
+    const visible = chartRatio.isDatasetVisible(i);
+    chartRatio.setDatasetVisibility(i, !visible);
+    chartRatio.update();
+    span.classList.toggle('leg-off', visible);  // 刚隐藏 → 加删除线样式
+  });
+});
+
+// ============ 图表点击：联动十字线（需勾选「图表同步」） ============
+document.getElementById('chartRatio').addEventListener('click', e => handleChartClick(chartRatio, chartIndex, e));
+document.getElementById('chartIndex').addEventListener('click', e => handleChartClick(chartIndex, chartRatio, e));
 
 // ============ 平滑切换（重算数据源后刷新占比图 + 缩影） ============
 function applySmooth() {

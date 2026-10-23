@@ -194,8 +194,9 @@ function renderCharts(key){
     if(infoEl){
       const chg = (cc[li]-o[li])/o[li]*100;
       const upCls = chg>=0 ? 'up' : 'dn';
-      const maTxt = [5,13,50,120].map(p=>'<b>MA'+p+'</b> '+((ma[p][lo+li]!=null)?ma[p][lo+li].toFixed(1)+'%':'−')).join(' · ');
-      infoEl.innerHTML = '<b>'+labels[li]+'</b> &nbsp; 开 '+o[li].toFixed(2)+' · 高 '+h[li].toFixed(2)+' · 低 '+l[li].toFixed(2)+' · 收 '+cc[li].toFixed(2)+' · <span class="'+upCls+'">'+(chg>=0?'+':'')+chg.toFixed(2)+'%</span> &nbsp;｜&nbsp; '+maTxt;
+      // 只显示当前可见曲线的占比读数（与图例开关一致）
+      const maTxt = [5,13,50,120].filter(p=>rchart.isDatasetVisible([5,13,50,120].indexOf(p))).map(p=>'<b>MA'+p+'</b> '+((ma[p][lo+li]!=null)?ma[p][lo+li].toFixed(1)+'%':'−')).join(' · ');
+      infoEl.innerHTML = '<b>'+labels[li]+'</b> &nbsp; 开 '+o[li].toFixed(2)+' · 高 '+h[li].toFixed(2)+' · 低 '+l[li].toFixed(2)+' · 收 '+cc[li].toFixed(2)+' · <span class="'+upCls+'">'+(chg>=0?'+':'')+chg.toFixed(2)+'%</span>'+(maTxt?' &nbsp;｜&nbsp; '+maTxt:'');
     }
   }
   function clearCross(){
@@ -228,10 +229,14 @@ function renderCharts(key){
     if(e.key==='ArrowLeft'){ e.preventDefault(); crossIdx = Math.max(0, crossIdx-1); applyCross(crossIdx); }
     else if(e.key==='ArrowRight'){ e.preventDefault(); crossIdx = Math.min(labels.length-1, crossIdx+1); applyCross(crossIdx); }
   });
-  // 可点击图例：显示/隐藏对应曲线
+  // 可点击图例：显示/隐藏对应曲线（MA5/MA13 默认隐藏，用户点击打开）
   const legBox = document.getElementById('leg_'+key);
   if (legBox) {
-    legBox.innerHTML = [5,13,50,120].map((p,i) => '<span data-i="'+i+'"><i class="dot" style="background:'+COLORS[p]+'"></i>MA'+p+'</span>').join('');
+    // 默认隐藏 MA5(datasetIndex 0) 和 MA13(datasetIndex 1)
+    rchart.setDatasetVisibility(0, false);
+    rchart.setDatasetVisibility(1, false);
+    rchart.update();
+    legBox.innerHTML = [5,13,50,120].map((p,i) => '<span data-i="'+i+'" class="'+(i<2?'off':'')+'"><i class="dot" style="background:'+COLORS[p]+'"></i>MA'+p+'</span>').join('');
     legBox.querySelectorAll('span').forEach(sp => {
       sp.addEventListener('click', () => {
         const i = parseInt(sp.dataset.i);
@@ -246,7 +251,7 @@ function renderCharts(key){
 
 function mountCases(containerId, keys){
   const el = document.getElementById(containerId);
-  el.innerHTML = keys.map(k => { const c=CASES[k]; return '<div class="case" id="case_'+k+'"><h4>'+c.title+'</h4><div class="sub">'+c.sub+' · 点击出十字线后随鼠标移动，也可用 ←→ 键逐日移动（再点同一点取消）</div><div class="cinfo" id="info_'+k+'"></div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线</div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div></div>'; }).join('');
+  el.innerHTML = keys.map(k => { const c=CASES[k]; return '<div class="case" id="case_'+k+'"><h4>'+c.title+'</h4><div class="sub">'+c.sub+' · 点击出十字线后随鼠标移动，也可用 ←→ 键逐日移动（再点同一点取消）</div><div class="cinfo" id="info_'+k+'"></div><div class="dual"><div class="p"><div class="pl">平均股价指数 K线</div><canvas id="k_'+k+'"></canvas></div><div class="p"><div class="pl">四线均线占比（点击图例开关曲线，MA5/13默认隐藏）</div><canvas id="r_'+k+'"></canvas><div class="rleg" id="leg_'+k+'"></div></div></div></div>'; }).join('');
   keys.forEach(k => renderCharts(k));
 }
 

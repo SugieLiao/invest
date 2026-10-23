@@ -73,6 +73,15 @@
   .explain p, .explain li { font-size: 0.88rem; color: #c9d1d9; }
   .explain ul { padding-left: 20px; }
   .explain li { margin-bottom: 6px; }
+
+  /* 研究结论卡片 */
+  .concl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; margin-top: 12px; }
+  .concl-card { background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: .84rem; line-height: 1.55; color: #c9d1d9; }
+  .concl-card b { color: var(--text); }
+  .concl-card .cc-tag { display: inline-block; font-size: .7rem; padding: 1px 8px; border-radius: 4px; margin-bottom: 6px; font-weight: 600; }
+  .concl-card.hot .cc-tag { background: rgba(34,197,94,.15); color: var(--green); }
+  .concl-card.warn .cc-tag { background: rgba(239,68,68,.15); color: var(--red); }
+  .concl-card.gray .cc-tag { background: rgba(139,148,158,.15); color: var(--text-dim); }
   .tag { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 0.72rem; margin-right: 4px; }
   .tag-hot { background: rgba(239,68,68,.15); color: var(--red); }
   .tag-cold { background: rgba(34,197,94,.15); color: var(--green); }
@@ -143,6 +152,7 @@
   <div class="chart-panel">
     <h2>① 均线占比曲线（全市场个股收盘价站上 N 日均线的百分比）</h2>
     <div class="desc">四条曲线分别代表全 A 股中「收盘价 &gt; MA5/13/50/120」的个股占比。0–100%，五档区间参考线：90 高潮 / 75 过热 / 50 中枢 / 25 冰点 / 10 极冰。点击下方图例可显示/隐藏对应曲线。</div>
+    <div class="desc" style="margin-bottom:6px;">信号标注：<span style="color:#22c55e;">▲</span>中期发令枪(50冰后13过热) <span style="color:#4ade80;">★</span>终极大底 <span style="color:#ef4444;">▼</span>崩盘警报 —— 均来自 2011-2026 全样本概率研究</div>
     <div class="legend-row" id="ratioLegend">
       <span data-ds="0" class="leg-on"><i class="dot" style="background:var(--ma5)"></i>MA5 占比（短期动能）</span>
       <span data-ds="1" class="leg-on"><i class="dot" style="background:var(--ma13)"></i>MA13 占比（中短期）</span>
@@ -172,6 +182,22 @@
       <li><b>中期行情识别</b>：一轮扎实的中期上涨，通常伴随 MA50/MA120 占比从冰点/极冰区（&lt;25%）持续抬升，越过中枢（50%）并站稳，向过热/高潮区推进；反之从高潮回落跌破中枢，中期行情转弱。</li>
     </ul>
     <p style="margin-top:10px;color:var(--text-dim);font-size:0.78rem;">说明：本页数据来自本地通达信全 A 股日线（沪深北，剔除退市），由脚本每日重算。均线占比反映市场宽度，是辅助判断工具，不构成投资建议。</p>
+  </div>
+
+  <!-- 重要研究结论（2011-2026 四遍概率统计） -->
+  <div class="explain" id="conclusion">
+    <h3>📊 重要研究结论（2011–2026 全样本概率统计 · 完整报告见 RESEARCH.md）</h3>
+    <div class="concl-grid">
+      <div class="concl-card hot"><div class="cc-tag">中期行情发令枪</div><b>50冰后13过热</b>：MA50占比在≤25冰点区后，MA13首次升破75 → <b>40日胜率70%</b>；叠加价格站上120日线 → <b>胜率80%</b>（66次样本）</div>
+      <div class="concl-card hot"><div class="cc-tag">终极大底信号</div><b>50冰区+价新低+占比拐头</b>：MA50≤25且价格创40日新低，但占比回升5点 → <b>40日胜率83%</b>（12次全命中历史大底）</div>
+      <div class="concl-card hot"><div class="cc-tag">历史抄底窗口</div><b>四线同时极冰(≤10)</b>：仅14次出现，<b>20日后上涨79%</b>，平均约+10%（如2024.2.5→+28.5%）</div>
+      <div class="concl-card warn"><div class="cc-tag">崩盘警报</div><b>大小背离</b>：120/50占比创新低+5日占比冲高≥55后回落 → 3次全对（2015.4、<b>2015.6.15=5178顶</b>、2023.4），10日平均-9.9%</div>
+      <div class="concl-card warn"><div class="cc-tag">大顶画像</div><b>四线高潮钝化</b>：四线同时≥90仅7次，<b>持续≥5天的那次=5178大顶</b>；首次冲入≠顶，钝化才是</div>
+      <div class="concl-card gray"><div class="cc-tag">反直觉①</div><b>顶背离是假信号</b>：价新高+50占比不新高（36次），20日后<b>64%反而上涨</b>——是牛市分化特征，别用来清仓做空</div>
+      <div class="concl-card gray"><div class="cc-tag">反直觉②</div><b>市场级周期</b>：牛市快涨慢跌（升20天/降36天，高位钝化是肥美期）；熊市慢弹快跌（弹31天/跌17天，回落要第一时间减仓）</div>
+      <div class="concl-card gray"><div class="cc-tag">牛中预警</div><b>牛中5/13双冰点(50仍&gt;40)</b>：牛市中期调整开始标志，40日胜率仅30%</div>
+    </div>
+    <p style="margin-top:10px;color:var(--text-dim);font-size:.8rem;">回测：仅用「50冰后13过热入场+120线定仓位」规则，15年36笔、<b>胜率67%</b>、累计+62%。完整方法论与数据见 <a href="RESEARCH.md" style="color:#58a6ff;">RESEARCH.md</a>。</p>
   </div>
 </div>
 
@@ -213,6 +239,111 @@ function levelOf(v) {
   return '极冰';
 }
 const LEVEL_CLS = { '高潮': 'tag-hot', '过热': 'tag-hot', '中枢': 'tag-mid', '冰点': 'tag-cold', '极冰': 'tag-cold' };
+
+// ============ 研究信号自动标注 ============
+// 基于 2011-2026 四遍研究结论，在图表上标注关键信号
+function computeSignals() {
+  const n = series.length;
+  const c = series.map(r => r.index);
+  const m = { 5: series.map(r => r.ma5), 13: series.map(r => r.ma13), 50: series.map(r => r.ma50), 120: series.map(r => r.ma120) };
+  const sma120 = [];
+  for (let i = 0; i < n; i++) {
+    if (i < 120) { sma120.push(null); continue; }
+    let s = 0; for (let k = i - 119; k <= i; k++) s += c[k];
+    sma120.push(s / 120);
+  }
+  // 50冰区间（用于判断"近期在冰点区"）
+  const in50ice = new Array(n).fill(false);
+  let cur = null;
+  for (let i = 120; i < n; i++) {
+    const v = m[50][i];
+    if (v !== null && v <= 25) { if (cur === null) cur = i; }
+    else { if (cur !== null) { for (let k = cur; k < i; k++) in50ice[k] = true; cur = null; } }
+  }
+
+  const sigLaunch = [];   // 中期行情发令枪：50冰后13首次过热
+  const sigBottom = [];   // 终极大底：50冰区+价新低+占比拐头5点
+  const sigCrash = [];    // 崩盘警报：120/50新低+5冲高回落
+  const sigAllIce = [];   // 四线极冰
+  const sigAllHeat = [];  // 四线高潮
+
+  // 发令枪
+  let prev13hot = false;
+  for (let i = 120; i < n; i++) {
+    const v13 = m[13][i];
+    const curHot = v13 !== null && v13 >= 75;
+    if (curHot && !prev13hot) {
+      let nearIce = false;
+      for (let k = 0; k < 10; k++) if (in50ice[i - k]) { nearIce = true; break; }
+      if (nearIce) sigLaunch.push(i);
+    }
+    prev13hot = curHot;
+  }
+  // 终极大底
+  let lastB = -999;
+  for (let i = 160; i < n - 45; i++) {
+    const v50 = m[50][i];
+    if (v50 === null || v50 > 25) continue;
+    let priceLo = Infinity, maLo = Infinity;
+    for (let k = i - 40; k < i; k++) { priceLo = Math.min(priceLo, c[k]); if (m[50][k] !== null) maLo = Math.min(maLo, m[50][k]); }
+    if (c[i] <= priceLo * 1.005 && v50 > maLo + 5 && i - lastB > 40) { sigBottom.push(i); lastB = i; }
+  }
+  // 崩盘警报
+  let lastC = -999;
+  for (let i = 140; i < n - 45; i++) {
+    const v120 = m[120][i];
+    if (v120 === null) continue;
+    let lo120 = Infinity;
+    for (let k = i - 20; k < i; k++) if (m[120][k] !== null) lo120 = Math.min(lo120, m[120][k]);
+    if (v120 <= lo120 * 1.05) {
+      let hi5 = 0;
+      for (let k = Math.max(0, i - 15); k < i; k++) if (m[5][k] !== null) hi5 = Math.max(hi5, m[5][k]);
+      if (hi5 >= 55 && m[5][i] !== null && m[5][i] < 40 && i - lastC > 20) { sigCrash.push(i); lastC = i; }
+    }
+  }
+  // 四线极冰/高潮
+  for (let i = 120; i < n; i++) {
+    const vals = [m[5][i], m[13][i], m[50][i], m[120][i]];
+    if (vals.every(v => v !== null && v <= 10)) sigAllIce.push(i);
+    if (vals.every(v => v !== null && v >= 90)) sigAllHeat.push(i);
+  }
+  return { sigLaunch, sigBottom, sigCrash, sigAllIce, sigAllHeat, in50ice, sma120 };
+}
+const SIGNALS = computeSignals();
+
+// 信号标注插件：在图表顶部用符号标记信号日期
+const signalPlugin = {
+  id: 'signalMark',
+  afterDatasetsDraw(chart) {
+    const id = chart.canvas.id;
+    const isRatio = id === 'chartRatio';
+    const start = chart.__sliceStart || 0;
+    const end = chart.__sliceEnd !== undefined ? chart.__sliceEnd : chart.data.labels.length;
+    const { ctx, chartArea } = chart;
+    const xs = chart.scales.x;
+    const marks = [
+      { arr: SIGNALS.sigLaunch, color: '#22c55e', label: '▲', y0: 4, size: 12, type: '发令枪' },
+      { arr: SIGNALS.sigBottom, color: '#4ade80', label: '★', y0: 16, size: 13, type: '大底' },
+      { arr: SIGNALS.sigCrash, color: '#ef4444', label: '▼', y0: 4, size: 12, type: '崩盘' },
+    ];
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 12px sans-serif';
+    for (const mk of marks) {
+      for (const i of mk.arr) {
+        if (i < start || i >= end) continue;
+        const li = i - start;
+        const p0 = xs.getPixelForValue(li);
+        const p1 = li + 1 < end - start ? xs.getPixelForValue(li + 1) : p0;
+        const x = (p0 + p1) / 2;
+        const y = chartArea.top + mk.y0 + mk.size / 2;
+        ctx.fillStyle = mk.color;
+        ctx.fillText(mk.label, x, y);
+      }
+    }
+    ctx.restore();
+  }
+};
 
 // 构建最新指标卡片
 function buildCards() {
@@ -439,7 +570,7 @@ chartRatio = new Chart(document.getElementById('chartRatio'), {
            title: { display: true, text: '占比 %', color: '#8b949e' } },
     },
   },
-  plugins: [thresholdPlugin, crosshairPlugin],
+  plugins: [thresholdPlugin, crosshairPlugin, signalPlugin],
 });
 
 // ============ 创建指数图（K线：candlePlugin 绘制，Y轴按可见范围自适应） ============
@@ -512,7 +643,7 @@ chartIndex = new Chart(document.getElementById('chartIndex'), {
            title: { display: true, text: '元', color: '#8b949e' } },
     },
   },
-  plugins: [candlePlugin, crosshairPlugin],
+  plugins: [candlePlugin, crosshairPlugin, signalPlugin],
 });
 
 // ============ 时间范围双滑块（复用 stock-a 方案） ============

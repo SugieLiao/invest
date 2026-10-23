@@ -367,6 +367,7 @@ function ensureSigTooltip() {
 }
 function attachSignalHover(canvasId, chart) {
   const cv = document.getElementById(canvasId);
+  let sigHovering = false;  // 是否正悬停在信号标记上
   cv.addEventListener('mousemove', (e) => {
     if (chart !== chartRatio) return;  // 只在占比图上检测（标记绘制在占比图）
     const rect = cv.getBoundingClientRect();
@@ -381,11 +382,31 @@ function attachSignalHover(canvasId, chart) {
       tip.style.display = 'block';
       tip.style.left = (e.clientX + 14) + 'px';
       tip.style.top = (e.clientY + 14) + 'px';
+      // 悬停标记时隐藏图表原生tooltip（避免两个tooltip同时显示）
+      if (!sigHovering) {
+        sigHovering = true;
+        chartRatio.options.plugins.tooltip.enabled = false;
+        chartRatio.tooltip.setActiveElements([], { x: 0, y: 0 });
+        chartRatio.update('none');
+      }
     } else {
       tip.style.display = 'none';
+      // 离开标记后恢复原生tooltip
+      if (sigHovering) {
+        sigHovering = false;
+        chartRatio.options.plugins.tooltip.enabled = true;
+        chartRatio.update('none');
+      }
     }
   });
-  cv.addEventListener('mouseleave', () => { ensureSigTooltip().style.display = 'none'; });
+  cv.addEventListener('mouseleave', () => {
+    ensureSigTooltip().style.display = 'none';
+    if (sigHovering) {
+      sigHovering = false;
+      chartRatio.options.plugins.tooltip.enabled = true;
+      chartRatio.update('none');
+    }
+  });
 }
 
 // 构建最新指标卡片

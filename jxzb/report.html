@@ -340,11 +340,12 @@ function renderCharts(key){
     // 统一视觉同步：按当前 sIdx/eIdx 更新选中框/遮罩/标签/滑块value（含 thumbWidth 补偿，thumb与框永远一致）
     function syncVisual(){
       const W = slider.clientWidth, tw = 6;
-      const minV = sIdx/N*100, maxV = eIdx/N*100;
-      const minX = minV/100*(W-tw), maxX = maxV/100*(W-tw)+tw;
+      // 框缘与 thumb 完全同源：用写回滑块的整数百分比计算，框缘精确对准 thumb 中心
+      const rMin = Math.round(sIdx/N*100), rMax = Math.round(eIdx/N*100);
+      minIn.value = rMin; maxIn.value = rMax;
+      const minX = tw/2 + rMin/100*(W-tw), maxX = tw/2 + rMax/100*(W-tw);
       maskL.style.width = minX+'px'; maskR.style.width = (W-maxX)+'px';
       sel.style.left = minX+'px'; sel.style.width = (maxX-minX)+'px';
-      minIn.value = Math.round(minV); maxIn.value = Math.round(maxV);
     }
     // 按当前 sIdx/eIdx 重建两图数据
     function applyData(){

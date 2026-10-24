@@ -231,6 +231,12 @@ function renderCharts(key){
       let si=-1, ei=-1; const sd = String(z.s).replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3'); const ed = String(z.e).replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3');
       for(let i=0;i<n;i++){ if(si<0 && labels[i]>=sd) si=i; if(labels[i]<=ed) ei=i; }
       if(si<0||ei<si) return;
+      // 若下一段与本段交叠（拐点月共用），本段右边缘截到下一段起点前一格，避免红绿混成黄色
+      const nz = zones[zones.indexOf(z)+1];
+      if(nz){
+        const ns = String(nz.s).replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3');
+        for(let i=si;i<n;i++){ if(labels[i]>=ns){ ei=Math.max(si,i-1); break; } }
+      }
       const x0 = xs.getPixelForValue(si) - step/2, x1 = xs.getPixelForValue(ei) + step/2;
       const isUp = z.dir==='up';
       ctx.fillStyle = isUp?colUp:colDown;

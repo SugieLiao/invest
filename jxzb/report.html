@@ -320,7 +320,7 @@ function renderCharts(key){
   const rsBox = document.getElementById('rs_'+key);
   if (rsBox) {
     rsBox.innerHTML = '<div class="rs-labels"><span class="rs-start"></span><span class="rs-end"></span></div>' +
-      '<div class="rs-quick"><button data-w="'+c.hi+'-'+c.lo+'">案例窗口</button><button data-w="0">全部</button><button data-w="60">60天</button><button data-w="250">一年</button></div>' +
+      '<div class="rs-quick"><button data-w="case">案例窗口</button><button data-w="0">全部</button><button data-w="60">60天</button><button data-w="250">一年</button></div>' +
       '<div class="rs"><div class="mini"></div><div class="mask-l"></div><div class="sel"></div><div class="mask-r"></div>' +
       '<input type="range" class="rs-min" min="0" max="100" value="0"><input type="range" class="rs-max" min="0" max="100" value="100"></div>';
     const N = dates.length;
@@ -337,45 +337,44 @@ function renderCharts(key){
       if(!pts.length) return;
       mini.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none"><polyline points="'+pts.join(' ')+'" fill="none" stroke="#e6edf3" stroke-width="1.6" stroke-linejoin="round"/></svg>';
     })();
-    function setRange(minV, maxV){
-      if(minV > maxV-2){ maxV = minV+2; }
+    // 统一视觉同步：按当前 sIdx/eIdx 更新选中框/遮罩/标签/滑块value（含 thumbWidth 补偿，thumb与框永远一致）
+    function syncVisual(){
       const W = slider.clientWidth, tw = 6;
+      const minV = sIdx/N*100, maxV = eIdx/N*100;
       const minX = minV/100*(W-tw), maxX = maxV/100*(W-tw)+tw;
       maskL.style.width = minX+'px'; maskR.style.width = (W-maxX)+'px';
       sel.style.left = minX+'px'; sel.style.width = (maxX-minX)+'px';
-      const st = Math.floor(minV/100*N), en = Math.min(N, Math.ceil(maxV/100*N));
-      if(en-st < 5) return;  // 过窄不响应
-      sIdx = st; eIdx = en;
-      labels = dates.slice(st,en); cc = close.slice(st,en); o = idxO.slice(st,en); h = idxH.slice(st,en); l = idxL.slice(st,en);
-      sLbl.textContent = dates[st]; eLbl.textContent = dates[en-1];
+      minIn.value = Math.round(minV); maxIn.value = Math.round(maxV);
+    }
+    // 按当前 sIdx/eIdx 重建两图数据
+    function applyData(){
+      labels = dates.slice(sIdx,eIdx); cc = close.slice(sIdx,eIdx); o = idxO.slice(sIdx,eIdx); h = idxH.slice(sIdx,eIdx); l = idxL.slice(sIdx,eIdx);
+      sLbl.textContent = dates[sIdx]; eLbl.textContent = dates[eIdx-1];
       kchart.data.labels = labels; kchart.data.datasets[0].data = cc; [5,13,50,120].forEach((p,i)=>kchart.data.datasets[i+1].data = priceMA[p].slice(sIdx,eIdx));
       rchart.data.labels = labels;
-      rchart.data.datasets.forEach((ds,i)=>{ ds.data = ma[[5,13,50,120][i]].slice(st,en); });
+      rchart.data.datasets.forEach((ds,i)=>{ ds.data = ma[[5,13,50,120][i]].slice(sIdx, eIdx); });
       crossIdx = null;  // 缩放后清十字线，避免越界
       clearCross();
       kchart.update(); rchart.update();
     }
-    function getRange(){ return {min:parseInt(minIn.value), max:parseInt(maxIn.value)}; }
-    // 精确按索引设置窗口（用于初始化，避免百分比取整偏移）
+    function setRange(minV, maxV){
+      if(minV > maxV-2){ maxV = minV+2; }
+      const st = Math.floor(minV/100*N), en = Math.min(N, Math.ceil(maxV/100*N));
+      if(en-st < 5) return;  // 过窄不响应
+      sIdx = st; eIdx = en;
+      applyData();
+      syncVisual();  // 把钳制后的范围写回滑块，thumb与框保持一致
+    }
     function initExact(lo, hi){
       sIdx = lo; eIdx = hi + 1;
-      labels = dates.slice(sIdx, eIdx); cc = close.slice(sIdx, eIdx); o = idxO.slice(sIdx, eIdx); h = idxH.slice(sIdx, eIdx); l = idxL.slice(sIdx, eIdx);
-      kchart.data.labels = labels; kchart.data.datasets[0].data = cc; [5,13,50,120].forEach((p,i)=>kchart.data.datasets[i+1].data = priceMA[p].slice(sIdx,eIdx));
-      rchart.data.labels = labels;
-      rchart.data.datasets.forEach((ds,i)=>{ ds.data = ma[[5,13,50,120][i]].slice(sIdx, eIdx); });
-      sLbl.textContent = dates[sIdx]; eLbl.textContent = dates[eIdx-1];
-      // 同步滑块视觉位置（近似百分比）
-      const W = slider.clientWidth, tw = 6;
-      const minX = (sIdx/N)*W, maxX = (eIdx/N)*W;
-      maskL.style.width = minX+'px'; maskR.style.width = (W-maxX)+'px';
-      sel.style.left = minX+'px'; sel.style.width = (maxX-minX)+'px';
-      minIn.value = Math.round(sIdx/N*100); maxIn.value = Math.round(eIdx/N*100);
-      kchart.update(); rchart.update();
+      applyData(); syncVisual();
     }
     // 初始化：默认案例窗口（精确索引）
     initExact(c.lo, c.hi);
     minIn.addEventListener('input', ()=>setRange(parseInt(minIn.value), parseInt(maxIn.value)));
     maxIn.addEventListener('input', ()=>setRange(parseInt(minIn.value), parseInt(maxIn.value)));
+    // 窗口宽度变化时重排视觉（否则 px 固定的选中框与百分比自适应的滑块错位）
+    window.addEventListener('resize', ()=>syncVisual());
     sel.addEventListener('mousedown', (ev)=>{
       ev.preventDefault(); ev.stopPropagation();
       const startX = ev.clientX, sMin = parseInt(minIn.value), sMax = parseInt(maxIn.value);
@@ -383,19 +382,21 @@ function renderCharts(key){
         const dx = (e.clientX-startX)/slider.clientWidth*100;
         let nm = sMin+dx, nx = sMax+dx;
         if(nm<0){nx-=nm;nm=0;} if(nx>100){nm-=(nx-100);nx=100;} if(nm<0)nm=0;
-        minIn.value = Math.round(nm); maxIn.value = Math.round(nx);
-        setRange(parseInt(minIn.value), parseInt(maxIn.value));
+        setRange(nm, nx);
       };
       const onUp = ()=>{ window.removeEventListener('mousemove',onMove); window.removeEventListener('mouseup',onUp); };
       window.addEventListener('mousemove',onMove); window.addEventListener('mouseup',onUp);
     });
     rsBox.querySelectorAll('.rs-quick button').forEach(b=>{
       b.addEventListener('click', ()=>{
+        if(b.dataset.w==='case'){
+          initExact(c.lo, c.hi);  // 案例窗口：恢复原始精确窗口
+          return;
+        }
         const w = parseInt(b.dataset.w);
-        if(w===0){ minIn.value=0; maxIn.value=100; }
-        else if(N>w){ minIn.value = Math.round((1-w/N)*100); maxIn.value=100; }
-        else{ minIn.value=0; maxIn.value=100; }
-        setRange(parseInt(minIn.value), parseInt(maxIn.value));
+        if(w===0){ setRange(0, 100); }
+        else if(N>w){ setRange(Math.round((1-w/N)*100), 100); }
+        else{ setRange(0, 100); }
       });
     });
   }

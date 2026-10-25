@@ -126,6 +126,9 @@ td{color:#c9d1d9}
 .cmt-composer-btns button.primary{background:#1f6feb;border-color:#1f6feb;color:#fff}
 /* 评论与图表锁定的高亮 */
 .cmt-item.locked{border-color:#58a6ff;box-shadow:0 0 0 1px #58a6ff inset}
+.cmt-item.folded{display:none}
+.cmt-more{position:absolute;left:10px;right:10px;z-index:2;text-align:center;font-size:.75rem;color:#58a6ff;cursor:pointer;padding:6px 0;border:1px dashed #58a6ff;border-radius:6px;background:var(--panel)}
+.cmt-more:hover{background:var(--panel2)}
 .cmt-item .cmt-fig{cursor:pointer}
 .cmt-item .cmt-fig:hover{text-decoration:underline}
 /* 主内容右移留出评论面板空间 */
@@ -514,26 +517,6 @@ document.addEventListener('contextmenu', (e) => {
   setTimeout(()=>document.getElementById('cmtInput').focus(), 50);
 });
 
-// composer 定位到「目标图例所有评论的最下面」（保存后评论应在的位置）
-function positionComposer(caseKey) {
-  const comp = document.getElementById('cmtComposer');
-  if(!comp) return;
-  const caseEl = document.getElementById('case_' + caseKey);
-  if(!caseEl) return;
-  const baseY = caseEl.getBoundingClientRect().top + window.scrollY;
-  // 该图例已有评论（按正序）最后一条的底部
-  let maxBottom = baseY;
-  const group = [...document.querySelectorAll('.cmt-item')].filter(it => {
-    const c = cmts.find(x => x.id === it.dataset.id);
-    return c && c.caseKey === caseKey;
-  });
-  if(group.length) {
-    const last = group[group.length - 1];
-    maxBottom = (parseFloat(last.style.top) || baseY) + last.offsetHeight;
-  }
-  comp.style.top = (maxBottom + 8) + 'px';
-}
-
 // 面板开关
 document.getElementById('cmtToggle').addEventListener('click', ()=>{ document.getElementById('cmtPanel').classList.add('open'); positionComments(); });
 document.getElementById('cmtClose').addEventListener('click', ()=>document.getElementById('cmtPanel').classList.remove('open'));
@@ -565,33 +548,123 @@ function jumpToCase(caseKey) {
   document.querySelectorAll('.cmt-item').forEach(it => it.classList.toggle('locked', it.dataset.id && cmts.find(c=>c.id===it.dataset.id)?.caseKey===caseKey));
 }
 
-// 锚点定位：每条评论的 top = 对应图例在文档中的 offsetTop（评论跟随图例滚动）
-// 同一图例的多条评论按时间正序依次向下堆叠
+// 锚点定位 + 折叠/展开/下推：
+// - 每条评论 top 跟随其图例（同一图例组内时间正序堆叠）
+// - 默认「能放就放」：图例评论堆叠到下一图例起始位置即折叠，显示「+N 显示全部」
+// - 手动展开后：该图例评论全显示，后续图例整体下推（margin-top）
+let expandedCases = {};  // caseKey -> true，手动展开的图例
+const CMT_GAP = 8;  // 评论间距
+
 function positionComments() {
   const panel = document.getElementById('cmtPanel');
   if(!panel) return;
-  // 面板高度 = 文档总高度，确保评论能定位到任意深度的图例
   const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
   panel.style.height = docH + 'px';
-  // 按 caseKey 分组，组内按时间正序堆叠
-  const sorted = [...cmts].sort((a,b) => a.time - b.time);
-  const caseY = {};  // caseKey -> 当前堆叠到的 Y
-  const els = [...document.querySelectorAll('.cmt-item')];
-  // 先按正序处理，记录每个 caseKey 的累计偏移
-  els.forEach(it => {
-    const c = cmts.find(x => x.id === it.dataset.id);
-    if(!c) return;
-    const caseEl = document.getElementById('case_' + c.caseKey);
-    if(!caseEl) return;
-    const baseY = caseEl.getBoundingClientRect().top + window.scrollY;
-    // 该 caseKey 的第一条用 baseY，后续依次下移（用已设 top + 高度）
-    if(caseY[c.caseKey] === undefined) {
-      caseY[c.caseKey] = baseY;
-    }
-    it.style.top = caseY[c.caseKey] + 'px';
-    // 为下一条预留：当前 top + 当前高度 + 8 间距
-    caseY[c.caseKey] = caseY[c.caseKey] + it.offsetHeight + 8;
+
+  // 清除旧的折叠按钮和 margin-top
+  document.querySelectorAll('.cmt-more').forEach(m => m.remove());
+  document.querySelectorAll('.case').forEach(el => el.style.marginTop = '');
+
+  // 1) 先确定每个 caseKey 的评论组（时间正序）和「原始文档 Y」
+  const order = Object.keys(CASES).filter(k => document.getElementById('case_' + k));  // 按 CASES 定义顺序（即页面顺序）
+  const groups = {};
+  cmts.forEach(c => {
+    (groups[c.caseKey] = groups[c.caseKey] || []).push(c);
   });
+  Object.keys(groups).forEach(k => groups[k].sort((a,b) => a.time - b.time));
+
+  // 2) 逐个图例处理，维护「累计下推量」
+  let push = 0;  // 前面展开图例累积的下推像素
+  order.forEach((key, idx) => {
+    const caseEl = document.getElementById('case_' + key);
+    if(!caseEl) return;
+    const baseY = caseEl.getBoundingClientRect().top + window.scrollY - push;  // 图例原始 Y（去掉已有 push）
+    // 下一图例的原始 Y（作为本图例评论能铺满的下限）
+    let nextBaseY = null;
+    for(let j = idx+1; j < order.length; j++) {
+      const ne = document.getElementById('case_' + order[j]);
+      if(ne) { nextBaseY = ne.getBoundingClientRect().top + window.scrollY - push; break; }
+    }
+
+    const g = groups[key];
+    if(!g) { return; }  // 无评论，继续
+
+    const expanded = !!expandedCases[key];
+    let curY = baseY;
+    let overflow = 0;  // 需要折叠的条数
+
+    g.forEach((c, i) => {
+      const it = document.querySelector('.cmt-item[data-id="' + c.id + '"]');
+      if(!it) return;
+      it.classList.remove('folded');
+      // 计算本条高度（先显示才能测高度）
+      const h = it.offsetHeight || 80;
+      // 未展开且超出下一图例下限 → 折叠
+      if(!expanded && nextBaseY != null && curY + h > nextBaseY) {
+        overflow++;
+        it.classList.add('folded');
+        return;
+      }
+      it.style.top = (curY) + 'px';
+      curY += h + CMT_GAP;
+    });
+
+    // 折叠按钮
+    if(overflow > 0) {
+      const btn = document.createElement('div');
+      btn.className = 'cmt-more';
+      btn.style.top = (curY) + 'px';
+      btn.textContent = '+'+overflow+' 条 · 显示全部';
+      btn.addEventListener('click', () => {
+        expandedCases[key] = true;
+        positionComments();
+      });
+      document.getElementById('cmtList').appendChild(btn);
+      // 折叠态不下推（curY 已到下限附近，但为安全不额外 push）
+    } else if(expanded) {
+      // 展开态：提供「折叠评论」按钮，点击回到原位
+      const btn = document.createElement('div');
+      btn.className = 'cmt-more';
+      btn.style.top = (curY) + 'px';
+      btn.textContent = '折叠评论';
+      btn.addEventListener('click', () => {
+        delete expandedCases[key];
+        positionComments();
+      });
+      document.getElementById('cmtList').appendChild(btn);
+    }
+
+    // 展开态：本图例评论全显示，溢出部分向下推后续图例
+    if(expanded && nextBaseY != null && curY > nextBaseY) {
+      const overflowPx = curY - nextBaseY;
+      push += overflowPx;
+      // 给本图例后面的所有图例加 margin-top（下推）
+      for(let j = idx+1; j < order.length; j++) {
+        const ne = document.getElementById('case_' + order[j]);
+        if(ne) ne.style.marginTop = (push) + 'px';
+      }
+    }
+  });
+}
+
+// composer 定位（锚定到目标图例评论列表末尾，未展开时若折叠则放在折叠按钮后）
+function positionComposer(caseKey) {
+  const comp = document.getElementById('cmtComposer');
+  if(!comp) return;
+  const caseEl = document.getElementById('case_' + caseKey);
+  if(!caseEl) return;
+  const baseY = caseEl.getBoundingClientRect().top + window.scrollY;
+  const group = [...document.querySelectorAll('.cmt-item[data-id]')].filter(it => {
+    const c = cmts.find(x => x.id === it.dataset.id);
+    return c && c.caseKey === caseKey;
+  });
+  const visible = group.filter(it => !it.classList.contains('folded'));
+  let maxBottom = baseY;
+  if(visible.length) {
+    const last = visible[visible.length - 1];
+    maxBottom = (parseFloat(last.style.top) || baseY) + last.offsetHeight;
+  }
+  comp.style.top = (maxBottom + CMT_GAP) + 'px';
 }
 window.addEventListener('scroll', () => positionComments(), {passive:true});
 window.addEventListener('resize', () => positionComments());

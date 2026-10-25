@@ -118,7 +118,7 @@ td{color:#c9d1d9}
 /* 评论提示点 */
 .cmt-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e3b341;margin-left:6px;vertical-align:2px;box-shadow:0 0 6px #e3b341}
 /* 内嵌评论编辑框 */
-.cmt-composer{position:sticky;top:48px;z-index:2;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel2)}
+.cmt-composer{position:absolute;left:10px;right:10px;z-index:3;padding:10px 12px;background:var(--panel2);border:1px solid #58a6ff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.35)}
 .cmt-composer-target{font-size:.74rem;color:#58a6ff;font-weight:600;margin-bottom:6px}
 .cmt-composer textarea{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:.85rem;font-family:inherit;resize:vertical;min-height:64px;box-sizing:border-box}
 .cmt-composer-btns{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
@@ -509,11 +509,33 @@ document.addEventListener('contextmenu', (e) => {
   document.getElementById('cmtInput').value = '';
   document.getElementById('cmtComposer').style.display = 'block';
   document.getElementById('cmtPanel').classList.add('open');
+  positionComments();
+  positionComposer(cmtTarget);
   setTimeout(()=>document.getElementById('cmtInput').focus(), 50);
 });
 
+// composer 定位到「目标图例所有评论的最下面」（保存后评论应在的位置）
+function positionComposer(caseKey) {
+  const comp = document.getElementById('cmtComposer');
+  if(!comp) return;
+  const caseEl = document.getElementById('case_' + caseKey);
+  if(!caseEl) return;
+  const baseY = caseEl.getBoundingClientRect().top + window.scrollY;
+  // 该图例已有评论（按正序）最后一条的底部
+  let maxBottom = baseY;
+  const group = [...document.querySelectorAll('.cmt-item')].filter(it => {
+    const c = cmts.find(x => x.id === it.dataset.id);
+    return c && c.caseKey === caseKey;
+  });
+  if(group.length) {
+    const last = group[group.length - 1];
+    maxBottom = (parseFloat(last.style.top) || baseY) + last.offsetHeight;
+  }
+  comp.style.top = (maxBottom + 8) + 'px';
+}
+
 // 面板开关
-document.getElementById('cmtToggle').addEventListener('click', ()=>document.getElementById('cmtPanel').classList.add('open'));
+document.getElementById('cmtToggle').addEventListener('click', ()=>{ document.getElementById('cmtPanel').classList.add('open'); positionComments(); });
 document.getElementById('cmtClose').addEventListener('click', ()=>document.getElementById('cmtPanel').classList.remove('open'));
 
 // 内嵌编辑框 保存/取消
@@ -523,6 +545,7 @@ document.getElementById('cmtSave').addEventListener('click', () => {
   cmts.push({ id: Date.now()+'_'+Math.random().toString(36).slice(2,6), caseKey: cmtTarget, text: txt, time: Date.now() });
   saveCmts();
   document.getElementById('cmtComposer').style.display = 'none';
+  positionComments();
 });
 document.getElementById('cmtCancel').addEventListener('click', ()=>document.getElementById('cmtComposer').style.display = 'none');
 
@@ -543,22 +566,31 @@ function jumpToCase(caseKey) {
 }
 
 // 锚点定位：每条评论的 top = 对应图例在文档中的 offsetTop（评论跟随图例滚动）
+// 同一图例的多条评论按时间正序依次向下堆叠
 function positionComments() {
   const panel = document.getElementById('cmtPanel');
   if(!panel) return;
   // 面板高度 = 文档总高度，确保评论能定位到任意深度的图例
   const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
   panel.style.height = docH + 'px';
-  document.querySelectorAll('.cmt-item').forEach(it => {
-    const id = it.dataset.id;
-    const c = cmts.find(x => x.id === id);
+  // 按 caseKey 分组，组内按时间正序堆叠
+  const sorted = [...cmts].sort((a,b) => a.time - b.time);
+  const caseY = {};  // caseKey -> 当前堆叠到的 Y
+  const els = [...document.querySelectorAll('.cmt-item')];
+  // 先按正序处理，记录每个 caseKey 的累计偏移
+  els.forEach(it => {
+    const c = cmts.find(x => x.id === it.dataset.id);
     if(!c) return;
     const caseEl = document.getElementById('case_' + c.caseKey);
-    if(caseEl) {
-      // 图例标题相对文档的 Y（用 getBoundingClientRect + scrollY，兼容隐藏 Tab）
-      const y = caseEl.getBoundingClientRect().top + window.scrollY;
-      it.style.top = y + 'px';
+    if(!caseEl) return;
+    const baseY = caseEl.getBoundingClientRect().top + window.scrollY;
+    // 该 caseKey 的第一条用 baseY，后续依次下移（用已设 top + 高度）
+    if(caseY[c.caseKey] === undefined) {
+      caseY[c.caseKey] = baseY;
     }
+    it.style.top = caseY[c.caseKey] + 'px';
+    // 为下一条预留：当前 top + 当前高度 + 8 间距
+    caseY[c.caseKey] = caseY[c.caseKey] + it.offsetHeight + 8;
   });
 }
 window.addEventListener('scroll', () => positionComments(), {passive:true});

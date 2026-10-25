@@ -461,17 +461,24 @@ document.querySelectorAll('.tabbar .tab').forEach(t => t.addEventListener('click
 // 默认激活第一个周期（调用移到脚本末尾，避免 TDZ）
 
 // ============ 评论区 ============
-const CMT_KEY = 'jxzb_report_comments_v1';
-let cmts = [];
-try { cmts = JSON.parse(localStorage.getItem(CMT_KEY) || '[]'); } catch(e) { cmts = []; }
-if(!Array.isArray(cmts)) cmts = [];
+const CMT_API = 'https://jxzhan.liaohao.cc/comments';
+const CMT_NAME_KEY = 'jxzb_report_author';
+let cmts = [];      // 云评论（跨设备同步）
+let cmtAuthor = localStorage.getItem(CMT_NAME_KEY) || '';  // 昵称（本地）
 
 function fmtTime(t) {
   const d = new Date(t);
   const p = n => (n<10?'0':'')+n;
   return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
 }
-function saveCmts() { localStorage.setItem(CMT_KEY, JSON.stringify(cmts)); renderCmts(); refreshDots(); }
+function saveCmts() { renderCmts(); refreshDots(); positionComments(); }
+function cmtApi(method, path, body) {
+  return fetch(CMT_API + path, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined,
+  }).then(r => r.json());
+}
 function figLabel(key) { const c = CASES[key]; return c ? c.title : key; }
 
 function renderCmts() {
@@ -482,7 +489,7 @@ function renderCmts() {
   list.innerHTML = sorted.map(c => {
     const editing = c._editing;
     return '<div class="cmt-item'+(editing?' editing':'')+'" data-id="'+c.id+'">'
-      + '<div class="cmt-fig">'+figLabel(c.caseKey)+'</div>'
+      + '<div class="cmt-fig">'+figLabel(c.caseKey)+' · <span style="color:#c084fc">'+((c.author||'匿名').replace(/</g,'&lt;'))+'</span></div>'
       + (editing
           ? '<textarea class="cmt-edit-ta">'+c.text.replace(/</g,'&lt;')+'</textarea>'
           : '<div class="cmt-text">'+c.text.replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</div>')
@@ -502,8 +509,8 @@ function renderCmts() {
     item.querySelector('.edit')?.addEventListener('click', () => { c._editing = true; renderCmts(); const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); if(ta){ autoGrow(ta); ta.focus(); } });
     item.querySelector('.cmt-edit-ta')?.addEventListener('input', e => autoGrow(e.target));
     item.querySelector('.cancel')?.addEventListener('click', () => { c._editing = false; renderCmts(); });
-    item.querySelector('.save')?.addEventListener('click', () => { const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); if(ta){ c.text = ta.value.trim(); } c._editing = false; if(!c.text) cmts = cmts.filter(x=>x.id!==id); saveCmts(); });
-    item.querySelector('.del')?.addEventListener('click', () => { if(confirm('删除这条评论？')){ cmts = cmts.filter(x => x.id !== id); saveCmts(); } });
+    item.querySelector('.save')?.addEventListener('click', () => { const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); if(ta){ c.text = ta.value.trim(); } c._editing = false; if(!c.text){ cmts = cmts.filter(x=>x.id!==id); cmtApi('DELETE', '/'+id); } else { cmtApi('PUT', '/'+id, { text: c.text }); } saveCmts(); });
+    item.querySelector('.del')?.addEventListener('click', () => { if(confirm('删除这条评论？')){ cmts = cmts.filter(x => x.id !== id); cmtApi('DELETE', '/'+id); saveCmts(); } });
   });
   positionComments();
 }
@@ -557,10 +564,16 @@ document.getElementById('cmtClose').addEventListener('click', closePanel);
 document.getElementById('cmtSave').addEventListener('click', () => {
   const txt = document.getElementById('cmtInput').value.trim();
   if(!txt) return;
-  cmts.push({ id: Date.now()+'_'+Math.random().toString(36).slice(2,6), caseKey: cmtTarget, text: txt, time: Date.now() });
-  saveCmts();
-  document.getElementById('cmtComposer').style.display = 'none';
-  positionComments();
+  ensureAuthor(() => {
+    cmtApi('POST', '', { author: cmtAuthor, caseKey: cmtTarget, text: txt }).then(rec => {
+      if(rec && rec.id) {
+        cmts.push(rec);
+        saveCmts();
+      }
+      document.getElementById('cmtComposer').style.display = 'none';
+      positionComments();
+    });
+  });
 });
 document.getElementById('cmtCancel').addEventListener('click', ()=>document.getElementById('cmtComposer').style.display = 'none');
 
@@ -701,8 +714,26 @@ function positionComposer(caseKey) {
 window.addEventListener('scroll', () => positionComments(), {passive:true});
 window.addEventListener('resize', () => positionComments());
 
-renderCmts();
-refreshDots();
+// 昵称：首次询问，存本地；之后直接使用
+function ensureAuthor(cb) {
+  if(cmtAuthor) { cb(); return; }
+  const name = prompt('请输入你的昵称（用于区分评论作者，之后会记住）：', '');
+  if(name && name.trim()) {
+    cmtAuthor = name.trim().slice(0, 20);
+    localStorage.setItem(CMT_NAME_KEY, cmtAuthor);
+    cb();
+  }
+}
+
+// 从云加载评论（跨设备同步）
+cmtApi('GET', '').then(data => {
+  cmts = (data && data.comments) || [];
+  renderCmts();
+  refreshDots();
+}).catch(() => {
+  // 网络失败：提示但不静默
+  document.getElementById('cmtList').innerHTML = '<div class="cmt-empty">评论加载失败（需联网）</div>';
+});
 
 // 默认激活第一个周期 Tab（此时评论模块已初始化）
 if(CYCLES_JS.length) activateCycle(CYCLES_JS[0].id);

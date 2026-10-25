@@ -136,6 +136,8 @@ td{color:#c9d1d9}
 /* 内嵌评论编辑框 */
 .cmt-composer{position:absolute;left:10px;right:10px;z-index:3;padding:10px 12px;background:var(--panel2);border:1px solid #58a6ff;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.35)}
 .cmt-composer-target{font-size:.74rem;color:#58a6ff;font-weight:600;margin-bottom:6px}
+.cmt-author-input{display:block;width:100%;box-sizing:border-box;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:.8rem;font-family:inherit;margin-bottom:8px}
+.cmt-author-input:focus{border-color:#58a6ff;outline:none}
 .cmt-composer textarea{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:.85rem;font-family:inherit;resize:vertical;min-height:64px;box-sizing:border-box}
 .cmt-composer-btns{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
 .cmt-composer-btns button{padding:5px 14px;border-radius:6px;border:1px solid var(--border);background:var(--panel);color:var(--text);cursor:pointer;font-size:.8rem}
@@ -182,6 +184,7 @@ td{color:#c9d1d9}
   <!-- 内嵌编辑框（不弹窗，可边看图边写） -->
   <div class="cmt-composer" id="cmtComposer" style="display:none">
     <div class="cmt-composer-target" id="cmtComposerTarget">评论：</div>
+    <input type="text" id="cmtAuthor" class="cmt-author-input" placeholder="昵称" maxlength="20">
     <textarea id="cmtInput" placeholder="输入评论内容…（可拖动查看图表、点出十字线）"></textarea>
     <div class="cmt-composer-btns"><button id="cmtCancel">取消</button><button class="primary" id="cmtSave">保存</button></div>
   </div>
@@ -548,6 +551,7 @@ document.addEventListener('contextmenu', (e) => {
   cmtTarget = caseEl.id.replace('case_','');
   document.getElementById('cmtComposerTarget').textContent = '评论：'+figLabel(cmtTarget);
   document.getElementById('cmtInput').value = '';
+  document.getElementById('cmtAuthor').value = cmtAuthor;  // 预填上次昵称
   document.getElementById('cmtComposer').style.display = 'block';
   openPanel();
   positionComposer(cmtTarget);
@@ -564,15 +568,17 @@ document.getElementById('cmtClose').addEventListener('click', closePanel);
 document.getElementById('cmtSave').addEventListener('click', () => {
   const txt = document.getElementById('cmtInput').value.trim();
   if(!txt) return;
-  ensureAuthor(() => {
-    cmtApi('POST', '', { author: cmtAuthor, caseKey: cmtTarget, text: txt }).then(rec => {
-      if(rec && rec.id) {
-        cmts.push(rec);
-        saveCmts();
-      }
-      document.getElementById('cmtComposer').style.display = 'none';
-      positionComments();
-    });
+  // 昵称与评论同时输入，保存时一起记录
+  const name = document.getElementById('cmtAuthor').value.trim();
+  cmtAuthor = name || '匿名';
+  localStorage.setItem(CMT_NAME_KEY, cmtAuthor);
+  cmtApi('POST', '', { author: cmtAuthor, caseKey: cmtTarget, text: txt }).then(rec => {
+    if(rec && rec.id) {
+      cmts.push(rec);
+      saveCmts();
+    }
+    document.getElementById('cmtComposer').style.display = 'none';
+    positionComments();
   });
 });
 document.getElementById('cmtCancel').addEventListener('click', ()=>document.getElementById('cmtComposer').style.display = 'none');
@@ -713,17 +719,6 @@ function positionComposer(caseKey) {
 }
 window.addEventListener('scroll', () => positionComments(), {passive:true});
 window.addEventListener('resize', () => positionComments());
-
-// 昵称：首次询问，存本地；之后直接使用
-function ensureAuthor(cb) {
-  if(cmtAuthor) { cb(); return; }
-  const name = prompt('请输入你的昵称（用于区分评论作者，之后会记住）：', '');
-  if(name && name.trim()) {
-    cmtAuthor = name.trim().slice(0, 20);
-    localStorage.setItem(CMT_NAME_KEY, cmtAuthor);
-    cb();
-  }
-}
 
 // 从云加载评论（跨设备同步）
 cmtApi('GET', '').then(data => {

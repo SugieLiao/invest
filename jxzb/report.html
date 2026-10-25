@@ -107,14 +107,14 @@ td{color:#c9d1d9}
 .cmt-head .x:hover{color:var(--text)}
 .cmt-list{position:relative;padding:0}
 .cmt-empty{color:var(--dim);font-size:.82rem;text-align:center;margin-top:30px}
-.cmt-item{position:absolute;left:10px;right:10px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.cmt-item{position:absolute;left:10px;width:calc(100% - 20px);box-sizing:border-box;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
 .cmt-item .cmt-fig{font-size:.7rem;color:#58a6ff;font-weight:600;margin-bottom:4px}
 .cmt-item .cmt-text{font-size:.85rem;line-height:1.6;white-space:pre-wrap;word-break:break-word}
 .cmt-item .cmt-meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:.7rem;color:var(--dim)}
 .cmt-item .cmt-ops button{background:none;border:none;color:#58a6ff;font-size:.7rem;cursor:pointer;padding:0 2px;margin-left:6px}
 .cmt-item .cmt-ops button.del{color:#ef4444}
 .cmt-item .cmt-ops button:hover{text-decoration:underline}
-.cmt-item.editing textarea{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:.85rem;font-family:inherit;resize:vertical;min-height:60px}
+.cmt-item.editing textarea{display:block;width:100%;box-sizing:border-box;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:.85rem;line-height:1.6;font-family:inherit;resize:none;overflow:hidden}
 /* 评论提示点 */
 .cmt-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e3b341;margin-left:6px;vertical-align:2px;box-shadow:0 0 6px #e3b341}
 /* 内嵌评论编辑框 */
@@ -457,7 +457,7 @@ function renderCmts() {
   if(!sorted.length) { list.innerHTML = '<div class="cmt-empty">暂无评论<br>右键任意图表添加</div>'; return; }
   list.innerHTML = sorted.map(c => {
     const editing = c._editing;
-    return '<div class="cmt-item" data-id="'+c.id+'">'
+    return '<div class="cmt-item'+(editing?' editing':'')+'" data-id="'+c.id+'">'
       + '<div class="cmt-fig">'+figLabel(c.caseKey)+'</div>'
       + (editing
           ? '<textarea class="cmt-edit-ta">'+c.text.replace(/</g,'&lt;')+'</textarea>'
@@ -475,12 +475,19 @@ function renderCmts() {
     const id = item.dataset.id;
     const c = cmts.find(x => x.id === id);
     item.querySelector('.cmt-fig')?.addEventListener('click', () => jumpToCase(c.caseKey));
-    item.querySelector('.edit')?.addEventListener('click', () => { c._editing = true; renderCmts(); const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); ta.focus(); });
+    item.querySelector('.edit')?.addEventListener('click', () => { c._editing = true; renderCmts(); const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); if(ta){ autoGrow(ta); ta.focus(); } });
+    item.querySelector('.cmt-edit-ta')?.addEventListener('input', e => autoGrow(e.target));
     item.querySelector('.cancel')?.addEventListener('click', () => { c._editing = false; renderCmts(); });
     item.querySelector('.save')?.addEventListener('click', () => { const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); if(ta){ c.text = ta.value.trim(); } c._editing = false; if(!c.text) cmts = cmts.filter(x=>x.id!==id); saveCmts(); });
     item.querySelector('.del')?.addEventListener('click', () => { if(confirm('删除这条评论？')){ cmts = cmts.filter(x => x.id !== id); saveCmts(); } });
   });
   positionComments();
+}
+
+// textarea 高度自适应（初始=内容高度，输入时自动增高）
+function autoGrow(ta) {
+  ta.style.height = 'auto';
+  ta.style.height = (ta.scrollHeight + 2) + 'px';
 }
 
 function refreshDots() {

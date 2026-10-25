@@ -133,6 +133,7 @@ td{color:#c9d1d9}
 .cmt-item .cmt-fig:hover{text-decoration:underline}
 /* 主内容右移留出评论面板空间 */
 .cmt-open-toggle{position:fixed;top:120px;right:0;z-index:998;background:#1f6feb;color:#fff;border:none;border-radius:8px 0 0 8px;padding:10px 8px;cursor:pointer;font-size:.8rem;writing-mode:vertical-lr;letter-spacing:2px;box-shadow:-2px 0 10px rgba(0,0,0,.3)}
+.cmt-open-toggle.hide{display:none}
 @media(max-width:760px){.dual .p{height:240px}.cmt-panel{width:100%}}
 </style>
 </head>
@@ -519,15 +520,16 @@ document.addEventListener('contextmenu', (e) => {
   document.getElementById('cmtComposerTarget').textContent = '评论：'+figLabel(cmtTarget);
   document.getElementById('cmtInput').value = '';
   document.getElementById('cmtComposer').style.display = 'block';
-  document.getElementById('cmtPanel').classList.add('open');
-  positionComments();
+  openPanel();
   positionComposer(cmtTarget);
   setTimeout(()=>document.getElementById('cmtInput').focus(), 50);
 });
 
 // 面板开关
-document.getElementById('cmtToggle').addEventListener('click', ()=>{ document.getElementById('cmtPanel').classList.add('open'); positionComments(); });
-document.getElementById('cmtClose').addEventListener('click', ()=>document.getElementById('cmtPanel').classList.remove('open'));
+function openPanel(){ document.getElementById('cmtPanel').classList.add('open'); document.getElementById('cmtToggle').classList.add('hide'); positionComments(); }
+function closePanel(){ document.getElementById('cmtPanel').classList.remove('open'); document.getElementById('cmtToggle').classList.remove('hide'); }
+document.getElementById('cmtToggle').addEventListener('click', openPanel);
+document.getElementById('cmtClose').addEventListener('click', closePanel);
 
 // 内嵌编辑框 保存/取消
 document.getElementById('cmtSave').addEventListener('click', () => {

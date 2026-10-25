@@ -99,15 +99,15 @@ td{color:#c9d1d9}
 .tab-pane{display:none}
 .tab-pane.active{display:block}
 /* ===== 右侧评论区 ===== */
-.cmt-panel{position:fixed;top:0;right:0;width:320px;height:100vh;background:var(--panel);border-left:1px solid var(--border);z-index:999;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;box-shadow:-4px 0 20px rgba(0,0,0,.4)}
-.cmt-panel.open{transform:translateX(0)}
-.cmt-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cmt-panel{position:absolute;top:0;right:0;width:320px;background:var(--panel);border-left:1px solid var(--border);z-index:900;display:none;box-shadow:-4px 0 20px rgba(0,0,0,.35)}
+.cmt-panel.open{display:block}
+.cmt-head{position:sticky;top:0;z-index:2;background:var(--panel);padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .cmt-head b{font-size:.9rem}
 .cmt-head .x{cursor:pointer;color:var(--dim);font-size:1.1rem;padding:0 6px}
 .cmt-head .x:hover{color:var(--text)}
-.cmt-list{flex:1;overflow-y:auto;padding:12px 14px}
+.cmt-list{position:relative;padding:0}
 .cmt-empty{color:var(--dim);font-size:.82rem;text-align:center;margin-top:30px}
-.cmt-item{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:10px}
+.cmt-item{position:absolute;left:10px;right:10px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
 .cmt-item .cmt-fig{font-size:.7rem;color:#58a6ff;font-weight:600;margin-bottom:4px}
 .cmt-item .cmt-text{font-size:.85rem;line-height:1.6;white-space:pre-wrap;word-break:break-word}
 .cmt-item .cmt-meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:.7rem;color:var(--dim)}
@@ -118,7 +118,7 @@ td{color:#c9d1d9}
 /* 评论提示点 */
 .cmt-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e3b341;margin-left:6px;vertical-align:2px;box-shadow:0 0 6px #e3b341}
 /* 内嵌评论编辑框 */
-.cmt-composer{padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel2);flex-shrink:0}
+.cmt-composer{position:sticky;top:48px;z-index:2;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel2)}
 .cmt-composer-target{font-size:.74rem;color:#58a6ff;font-weight:600;margin-bottom:6px}
 .cmt-composer textarea{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:.85rem;font-family:inherit;resize:vertical;min-height:64px;box-sizing:border-box}
 .cmt-composer-btns{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
@@ -428,6 +428,7 @@ function activateCycle(cycId) {
   }
   // 渲染后若评论提示点需要刷新（已有评论的图）
   refreshDots();
+  positionComments();
 }
 document.querySelectorAll('.tabbar .tab').forEach(t => t.addEventListener('click', () => activateCycle(t.dataset.cyc)));
 // 默认激活第一个周期（调用移到脚本末尾，避免 TDZ）
@@ -476,6 +477,7 @@ function renderCmts() {
     item.querySelector('.save')?.addEventListener('click', () => { const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); if(ta){ c.text = ta.value.trim(); } c._editing = false; if(!c.text) cmts = cmts.filter(x=>x.id!==id); saveCmts(); });
     item.querySelector('.del')?.addEventListener('click', () => { if(confirm('删除这条评论？')){ cmts = cmts.filter(x => x.id !== id); saveCmts(); } });
   });
+  positionComments();
 }
 
 function refreshDots() {
@@ -540,28 +542,27 @@ function jumpToCase(caseKey) {
   document.querySelectorAll('.cmt-item').forEach(it => it.classList.toggle('locked', it.dataset.id && cmts.find(c=>c.id===it.dataset.id)?.caseKey===caseKey));
 }
 
-// 滚动时：右侧面板锁定高亮当前视野最靠上的图例对应的评论
-function syncLock() {
-  const cases = [...document.querySelectorAll('.case')];
-  if(!cases.length) return;
-  let current = null;
-  for(const c of cases) {
-    const r = c.getBoundingClientRect();
-    if(r.top < window.innerHeight*0.5) current = c.id.replace('case_','');
-    else break;
-  }
-  if(!current) return;
-  const activeCmt = [...document.querySelectorAll('.cmt-item')].find(it => {
-    const cc = cmts.find(x=>x.id===it.dataset.id);
-    return cc && cc.caseKey === current;
+// 锚点定位：每条评论的 top = 对应图例在文档中的 offsetTop（评论跟随图例滚动）
+function positionComments() {
+  const panel = document.getElementById('cmtPanel');
+  if(!panel) return;
+  // 面板高度 = 文档总高度，确保评论能定位到任意深度的图例
+  const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+  panel.style.height = docH + 'px';
+  document.querySelectorAll('.cmt-item').forEach(it => {
+    const id = it.dataset.id;
+    const c = cmts.find(x => x.id === id);
+    if(!c) return;
+    const caseEl = document.getElementById('case_' + c.caseKey);
+    if(caseEl) {
+      // 图例标题相对文档的 Y（用 getBoundingClientRect + scrollY，兼容隐藏 Tab）
+      const y = caseEl.getBoundingClientRect().top + window.scrollY;
+      it.style.top = y + 'px';
+    }
   });
-  document.querySelectorAll('.cmt-item').forEach(it => it.classList.remove('locked'));
-  if(activeCmt) {
-    activeCmt.classList.add('locked');
-    activeCmt.scrollIntoView({block:'nearest'});
-  }
 }
-window.addEventListener('scroll', () => syncLock(), {passive:true});
+window.addEventListener('scroll', () => positionComments(), {passive:true});
+window.addEventListener('resize', () => positionComments());
 
 renderCmts();
 refreshDots();

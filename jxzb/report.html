@@ -117,15 +117,17 @@ td{color:#c9d1d9}
 .cmt-item.editing textarea{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:.85rem;font-family:inherit;resize:vertical;min-height:60px}
 /* 评论提示点 */
 .cmt-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#e3b341;margin-left:6px;vertical-align:2px;box-shadow:0 0 6px #e3b341}
-/* 评论输入弹窗 */
-.cmt-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1001;display:none;align-items:center;justify-content:center}
-.cmt-modal.show{display:flex}
-.cmt-modal .box{background:var(--panel);border:1px solid var(--border);border-radius:10px;width:420px;max-width:90vw;padding:18px}
-.cmt-modal .box h3{font-size:.95rem;margin-bottom:10px}
-.cmt-modal textarea{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:.88rem;font-family:inherit;resize:vertical;min-height:90px}
-.cmt-modal .btns{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
-.cmt-modal .btns button{padding:6px 16px;border-radius:6px;border:1px solid var(--border);background:var(--panel2);color:var(--text);cursor:pointer;font-size:.85rem}
-.cmt-modal .btns button.primary{background:#1f6feb;border-color:#1f6feb;color:#fff}
+/* 内嵌评论编辑框 */
+.cmt-composer{padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel2);flex-shrink:0}
+.cmt-composer-target{font-size:.74rem;color:#58a6ff;font-weight:600;margin-bottom:6px}
+.cmt-composer textarea{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font-size:.85rem;font-family:inherit;resize:vertical;min-height:64px;box-sizing:border-box}
+.cmt-composer-btns{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+.cmt-composer-btns button{padding:5px 14px;border-radius:6px;border:1px solid var(--border);background:var(--panel);color:var(--text);cursor:pointer;font-size:.8rem}
+.cmt-composer-btns button.primary{background:#1f6feb;border-color:#1f6feb;color:#fff}
+/* 评论与图表锁定的高亮 */
+.cmt-item.locked{border-color:#58a6ff;box-shadow:0 0 0 1px #58a6ff inset}
+.cmt-item .cmt-fig{cursor:pointer}
+.cmt-item .cmt-fig:hover{text-decoration:underline}
 /* 主内容右移留出评论面板空间 */
 .cmt-open-toggle{position:fixed;top:120px;right:0;z-index:998;background:#1f6feb;color:#fff;border:none;border-radius:8px 0 0 8px;padding:10px 8px;cursor:pointer;font-size:.8rem;writing-mode:vertical-lr;letter-spacing:2px;box-shadow:-2px 0 10px rgba(0,0,0,.3)}
 @media(max-width:760px){.dual .p{height:240px}.cmt-panel{width:100%}}
@@ -151,15 +153,13 @@ td{color:#c9d1d9}
 <button class="cmt-open-toggle" id="cmtToggle">评论</button>
 <div class="cmt-panel" id="cmtPanel">
   <div class="cmt-head"><b>评论</b><span class="x" id="cmtClose">✕</span></div>
-  <div class="cmt-list" id="cmtList"></div>
-</div>
-<!-- 评论输入弹窗 -->
-<div class="cmt-modal" id="cmtModal">
-  <div class="box">
-    <h3 id="cmtModalTitle">添加评论</h3>
-    <textarea id="cmtInput" placeholder="输入评论内容…"></textarea>
-    <div class="btns"><button id="cmtCancel">取消</button><button class="primary" id="cmtSave">保存</button></div>
+  <!-- 内嵌编辑框（不弹窗，可边看图边写） -->
+  <div class="cmt-composer" id="cmtComposer" style="display:none">
+    <div class="cmt-composer-target" id="cmtComposerTarget">评论：</div>
+    <textarea id="cmtInput" placeholder="输入评论内容…（可拖动查看图表、点出十字线）"></textarea>
+    <div class="cmt-composer-btns"><button id="cmtCancel">取消</button><button class="primary" id="cmtSave">保存</button></div>
   </div>
+  <div class="cmt-list" id="cmtList"></div>
 </div>
 
 <script>
@@ -449,7 +449,7 @@ function figLabel(key) { const c = CASES[key]; return c ? c.title : key; }
 function renderCmts() {
   const list = document.getElementById('cmtList');
   if(!list) return;
-  const sorted = [...cmts].sort((a,b) => b.time - a.time);
+  const sorted = [...cmts].sort((a,b) => a.time - b.time);  // 时间正序
   if(!sorted.length) { list.innerHTML = '<div class="cmt-empty">暂无评论<br>右键任意图表添加</div>'; return; }
   list.innerHTML = sorted.map(c => {
     const editing = c._editing;
@@ -470,6 +470,7 @@ function renderCmts() {
   list.querySelectorAll('.cmt-item').forEach(item => {
     const id = item.dataset.id;
     const c = cmts.find(x => x.id === id);
+    item.querySelector('.cmt-fig')?.addEventListener('click', () => jumpToCase(c.caseKey));
     item.querySelector('.edit')?.addEventListener('click', () => { c._editing = true; renderCmts(); const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); ta.focus(); });
     item.querySelector('.cancel')?.addEventListener('click', () => { c._editing = false; renderCmts(); });
     item.querySelector('.save')?.addEventListener('click', () => { const ta = list.querySelector('[data-id="'+id+'"] .cmt-edit-ta'); if(ta){ c.text = ta.value.trim(); } c._editing = false; if(!c.text) cmts = cmts.filter(x=>x.id!==id); saveCmts(); });
@@ -493,8 +494,8 @@ function refreshDots() {
   });
 }
 
-// 右键图表 → 添加评论
-let cmtTarget = null;  // 当前右键的 caseKey
+// 右键图表 → 在右侧面板顶部打开内嵌编辑框（不弹窗，可边看图边写）
+let cmtTarget = null;  // 当前评论的 caseKey
 document.addEventListener('contextmenu', (e) => {
   const cv = e.target.closest('canvas');
   if(!cv) return;
@@ -502,9 +503,10 @@ document.addEventListener('contextmenu', (e) => {
   if(!caseEl) return;
   e.preventDefault();
   cmtTarget = caseEl.id.replace('case_','');
-  document.getElementById('cmtModalTitle').textContent = '评论：'+figLabel(cmtTarget);
+  document.getElementById('cmtComposerTarget').textContent = '评论：'+figLabel(cmtTarget);
   document.getElementById('cmtInput').value = '';
-  document.getElementById('cmtModal').classList.add('show');
+  document.getElementById('cmtComposer').style.display = 'block';
+  document.getElementById('cmtPanel').classList.add('open');
   setTimeout(()=>document.getElementById('cmtInput').focus(), 50);
 });
 
@@ -512,17 +514,54 @@ document.addEventListener('contextmenu', (e) => {
 document.getElementById('cmtToggle').addEventListener('click', ()=>document.getElementById('cmtPanel').classList.add('open'));
 document.getElementById('cmtClose').addEventListener('click', ()=>document.getElementById('cmtPanel').classList.remove('open'));
 
-// 弹窗保存/取消
+// 内嵌编辑框 保存/取消
 document.getElementById('cmtSave').addEventListener('click', () => {
   const txt = document.getElementById('cmtInput').value.trim();
   if(!txt) return;
   cmts.push({ id: Date.now()+'_'+Math.random().toString(36).slice(2,6), caseKey: cmtTarget, text: txt, time: Date.now() });
   saveCmts();
-  document.getElementById('cmtModal').classList.remove('show');
-  document.getElementById('cmtPanel').classList.add('open');
+  document.getElementById('cmtComposer').style.display = 'none';
 });
-document.getElementById('cmtCancel').addEventListener('click', ()=>document.getElementById('cmtModal').classList.remove('show'));
-document.getElementById('cmtModal').addEventListener('click', (e)=>{ if(e.target.id==='cmtModal') e.currentTarget.classList.remove('show'); });
+document.getElementById('cmtCancel').addEventListener('click', ()=>document.getElementById('cmtComposer').style.display = 'none');
+
+// 跳转到评论对应的图例（先切 Tab 再滚动）
+function jumpToCase(caseKey) {
+  const caseEl = document.getElementById('case_' + caseKey);
+  if(!caseEl) return;
+  // 找到该 case 所属周期，激活对应 Tab
+  const cyc = CYCLES_JS.find(c => c.keys.includes(caseKey));
+  if(cyc && !document.getElementById('pane_'+cyc.id).classList.contains('active')) {
+    activateCycle(cyc.id);
+    setTimeout(() => { document.getElementById('case_'+caseKey)?.scrollIntoView({behavior:'smooth', block:'start'}); }, 300);
+  } else {
+    caseEl.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  // 高亮对应评论
+  document.querySelectorAll('.cmt-item').forEach(it => it.classList.toggle('locked', it.dataset.id && cmts.find(c=>c.id===it.dataset.id)?.caseKey===caseKey));
+}
+
+// 滚动时：右侧面板锁定高亮当前视野最靠上的图例对应的评论
+function syncLock() {
+  const cases = [...document.querySelectorAll('.case')];
+  if(!cases.length) return;
+  let current = null;
+  for(const c of cases) {
+    const r = c.getBoundingClientRect();
+    if(r.top < window.innerHeight*0.5) current = c.id.replace('case_','');
+    else break;
+  }
+  if(!current) return;
+  const activeCmt = [...document.querySelectorAll('.cmt-item')].find(it => {
+    const cc = cmts.find(x=>x.id===it.dataset.id);
+    return cc && cc.caseKey === current;
+  });
+  document.querySelectorAll('.cmt-item').forEach(it => it.classList.remove('locked'));
+  if(activeCmt) {
+    activeCmt.classList.add('locked');
+    activeCmt.scrollIntoView({block:'nearest'});
+  }
+}
+window.addEventListener('scroll', () => syncLock(), {passive:true});
 
 renderCmts();
 refreshDots();

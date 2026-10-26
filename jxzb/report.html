@@ -447,6 +447,7 @@ function mountCases(containerId, keys){
 
 // ===== Tab 切换 + 懒渲染 =====
 const _rendered = {};  // 已渲染的周期 pane
+let activeCycId = null;  // 当前激活的周期，用于评论按周期过滤
 function activateCycle(cycId) {
   document.querySelectorAll('.tabbar .tab').forEach(t => t.classList.toggle('active', t.dataset.cyc === cycId));
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.id === 'pane_' + cycId));
@@ -456,8 +457,10 @@ function activateCycle(cycId) {
     _rendered[cycId] = true;
     mountCases(cycId + 'Cases', cyc.keys);
   }
-  // 渲染后若评论提示点需要刷新（已有评论的图）
+  activeCycId = cycId;
+  // 渲染后若评论提示点需要刷新（已有评论的图），并重渲染评论（按周期过滤）
   refreshDots();
+  renderCmts();
   positionComments();
 }
 document.querySelectorAll('.tabbar .tab').forEach(t => t.addEventListener('click', () => activateCycle(t.dataset.cyc)));
@@ -487,8 +490,11 @@ function figLabel(key) { const c = CASES[key]; return c ? c.title : key; }
 function renderCmts() {
   const list = document.getElementById('cmtList');
   if(!list) return;
-  const sorted = [...cmts].sort((a,b) => a.time - b.time);  // 时间正序
-  if(!sorted.length) { list.innerHTML = '<div class="cmt-empty">暂无评论<br>右键任意图表添加</div>'; return; }
+  // 按当前周期过滤：只显示属于 activeCycId 的评论
+  const cyc = CYCLES_JS.find(x => x.id === activeCycId);
+  const inCycle = c => { return !cyc || cyc.keys.includes(c.caseKey); };
+  const sorted = [...cmts].filter(inCycle).sort((a,b) => a.time - b.time);  // 时间正序
+  if(!sorted.length) { list.innerHTML = '<div class="cmt-empty">本周期暂无评论<br>右键本周期图表添加</div>'; return; }
   list.innerHTML = sorted.map(c => {
     const editing = c._editing;
     return '<div class="cmt-item'+(editing?' editing':'')+'" data-id="'+c.id+'">'
@@ -526,8 +532,10 @@ function autoGrow(ta) {
 
 function refreshDots() {
   document.querySelectorAll('.cmt-dot').forEach(d => d.remove());
+  const cyc = CYCLES_JS.find(x => x.id === activeCycId);
+  const inCycle = k => { return !cyc || cyc.keys.includes(k); };
   const byCase = {};
-  cmts.forEach(c => byCase[c.caseKey] = (byCase[c.caseKey]||0)+1);
+  cmts.forEach(c => { if(inCycle(c.caseKey)) byCase[c.caseKey] = (byCase[c.caseKey]||0)+1; });
   Object.keys(byCase).forEach(k => {
     const el = document.getElementById('case_'+k);
     const h4 = el ? el.querySelector('h4') : null;
@@ -616,10 +624,13 @@ function positionComments() {
   document.querySelectorAll('.cmt-more').forEach(m => m.remove());
   document.querySelectorAll('.case').forEach(el => el.style.marginTop = '');
 
-  // 1) 先确定每个 caseKey 的评论组（时间正序）和「原始文档 Y」
+  // 1) 先确定每个 caseKey 的评论组（时间正序）和「原始文档 Y」，且只处理当前周期的评论
   const order = Object.keys(CASES).filter(k => document.getElementById('case_' + k));  // 按 CASES 定义顺序（即页面顺序）
+  const cyc = CYCLES_JS.find(x => x.id === activeCycId);
+  const inCycle = k => { return !cyc || cyc.keys.includes(k); };
   const groups = {};
   cmts.forEach(c => {
+    if(!inCycle(c.caseKey)) return;
     (groups[c.caseKey] = groups[c.caseKey] || []).push(c);
   });
   Object.keys(groups).forEach(k => groups[k].sort((a,b) => a.time - b.time));

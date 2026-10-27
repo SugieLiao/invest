@@ -219,6 +219,7 @@ function renderCharts(key){
   let crossIdx = null;  // 本地索引（0..labels.length-1）
   let crossY = null;    // 鼠标在当前图 canvas 内的 Y 像素（横线位置）
   let crossOwner = null; // 鼠标悬停的图（kchart/rchart），横线只画在该图
+  let mouseInChart = false;  // 鼠标是否悬停在本案例的图表范围内（键盘左右键只在鼠标在图表内时响应）
   // 五档阈值参考线
   const LEVELS = [
     { v:90, label:'高潮', color:'#ef4444' },
@@ -318,9 +319,19 @@ function renderCharts(key){
   document.getElementById('r_'+key).addEventListener('click', e=>onChartClick(rchart, e));
   document.getElementById('k_'+key).addEventListener('mousemove', e=>onChartMove(kchart, e));
   document.getElementById('r_'+key).addEventListener('mousemove', e=>onChartMove(rchart, e));
+  // 跟踪鼠标是否悬停在图表内：进入置 true，离开置 false（用于键盘左右键的门控）
+  document.getElementById('k_'+key).addEventListener('mouseenter', ()=>mouseInChart=true);
+  document.getElementById('r_'+key).addEventListener('mouseenter', ()=>mouseInChart=true);
+  document.getElementById('k_'+key).addEventListener('mouseleave', ()=>mouseInChart=false);
+  document.getElementById('r_'+key).addEventListener('mouseleave', ()=>mouseInChart=false);
   // 键盘左右键：十字线激活时，逐日前移/后移（只有 crossActive 的案例会响应）
   document.addEventListener('keydown', e=>{
     if(!crossActive || crossIdx===null) return;
+    // 焦点在输入框/文本域/可编辑元素里时，不拦截左右键（让文字光标正常移动）
+    const ae = document.activeElement;
+    if(ae && (ae.tagName==='INPUT' || ae.tagName==='TEXTAREA' || ae.isContentEditable)) return;
+    // 鼠标必须悬停在本案例图表范围内，左右键才移动十字线
+    if(!mouseInChart) return;
     if(e.key==='ArrowLeft'){ e.preventDefault(); crossIdx = Math.max(0, crossIdx-1); applyCross(crossIdx); }
     else if(e.key==='ArrowRight'){ e.preventDefault(); crossIdx = Math.min(labels.length-1, crossIdx+1); applyCross(crossIdx); }
   });

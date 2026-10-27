@@ -251,7 +251,8 @@ function renderCharts(key){
       ctx.fillRect(x0, ca.top, x1-x0, ca.bottom-ca.top);
       // 顶部标签（居中，带色）
       ctx.fillStyle = isUp?bUp:bDown; ctx.font='bold 10px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='top';
-      ctx.fillText(z.name, (x0+x1)/2, ca.top+2);
+      const spanDays = ei - si + 1;
+      ctx.fillText(z.name + ' ' + spanDays + '天', (x0+x1)/2, ca.top+2);
     }); ctx.restore(); } };
 
   const kchart = new Chart(document.getElementById('k_'+key), {type:'line',data:{labels,datasets:[{data:cc,pointRadius:0,borderColor:'rgba(0,0,0,0)',showLine:false}].concat([5,13,50,120].map(p=>({label:'MA'+p,data:priceMA[p].slice(sIdx,eIdx),borderColor:COLORS[p],borderWidth:p===50?1.6:1.2,pointRadius:0,tension:0,hidden:true})))},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{offset:true,ticks:{...TICK,maxTicksLimit:10},grid:{display:false}},y:{position:'right',ticks:TICK,grid:GRID}}},plugins:[zonePlugin,candleP,crossPlugin]});

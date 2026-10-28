@@ -667,6 +667,20 @@ function positionComments() {
     let curY = baseY;
     let overflow = 0;  // 需要折叠的条数
 
+    // 先计算：未展开状态下，这个图例会溢出多少条（即"需要折叠"的条数）
+    // 用一条临时游标模拟"能放就放"的堆叠，不真正改 DOM
+    let needFold = 0;
+    {
+      let tmpY = baseY;
+      g.forEach((c) => {
+        const it = document.querySelector('.cmt-item[data-id="' + c.id + '"]');
+        if(!it) return;
+        const h = it.offsetHeight || 80;
+        if(nextBaseY != null && tmpY + h > nextBaseY) { needFold++; }
+        else { tmpY += h + CMT_GAP; }
+      });
+    }
+
     g.forEach((c, i) => {
       const it = document.querySelector('.cmt-item[data-id="' + c.id + '"]');
       if(!it) return;
@@ -683,28 +697,27 @@ function positionComments() {
       curY += h + CMT_GAP;
     });
 
-    // 折叠按钮
-    if(overflow > 0) {
+    // 折叠按钮：只有"确实有评论需要折叠"（needFold>0）时才出现
+    if(needFold > 0) {
       const btn = document.createElement('div');
       btn.className = 'cmt-more';
+      btn.dataset.case = key;
       btn.style.top = (curY) + 'px';
-      btn.textContent = '+'+overflow+' 条 · 显示全部';
-      btn.addEventListener('click', () => {
-        expandedCases[key] = true;
-        positionComments();
-      });
-      document.getElementById('cmtList').appendChild(btn);
-      // 折叠态不下推（curY 已到下限附近，但为安全不额外 push）
-    } else if(expanded) {
-      // 展开态：提供「折叠评论」按钮，点击回到原位
-      const btn = document.createElement('div');
-      btn.className = 'cmt-more';
-      btn.style.top = (curY) + 'px';
-      btn.textContent = '折叠评论';
-      btn.addEventListener('click', () => {
-        delete expandedCases[key];
-        positionComments();
-      });
+      if(expanded) {
+        // 展开态：提供「折叠评论」按钮，点击回到折叠态
+        btn.textContent = '折叠评论';
+        btn.addEventListener('click', () => {
+          delete expandedCases[key];
+          positionComments();
+        });
+      } else {
+        // 折叠态：显示「+N 显示全部」
+        btn.textContent = '+'+needFold+' 条 · 显示全部';
+        btn.addEventListener('click', () => {
+          expandedCases[key] = true;
+          positionComments();
+        });
+      }
       document.getElementById('cmtList').appendChild(btn);
     }
 
@@ -737,6 +750,12 @@ function positionComposer(caseKey) {
   if(visible.length) {
     const last = visible[visible.length - 1];
     maxBottom = (parseFloat(last.style.top) || baseY) + last.offsetHeight;
+  }
+  // 若有折叠按钮（该图例需要折叠），编辑框应排在折叠按钮之后，避免重叠
+  const moreBtn = document.querySelector('.cmt-more[data-case="' + caseKey + '"]');
+  if(moreBtn) {
+    const btnBottom = (parseFloat(moreBtn.style.top) || 0) + moreBtn.offsetHeight;
+    if(btnBottom > maxBottom) maxBottom = btnBottom;
   }
   comp.style.top = (maxBottom + CMT_GAP) + 'px';
 }
